@@ -20,9 +20,9 @@ Its a custom ReactiveTextFormField component. It can be used within ReactForms f
 
 Pre-Requisites:
 In pubspec.yaml add in your dependencies
-custom_text_field : 1.0.0
+custom_reactive_text_field : 1.0.0
 Import the package
-'package:custom_text_field/custom_text_field.dart';
+'package:custom_reactive_text_field/custom_reactive_text_field.dart';
 
 ## Usage
 CustomTextFormField(
