@@ -32,7 +32,6 @@ class ProjectBeneficiaryLocalRepository
 
     select.watch().listen((event) {
       final data = event.map((e) {
-        // TODO[Need to added the scanned tag]
         return ProjectBeneficiaryModel(
           clientReferenceId: e.clientReferenceId,
           dateOfRegistration: e.dateOfRegistration,
@@ -40,7 +39,7 @@ class ProjectBeneficiaryLocalRepository
           tenantId: e.tenantId,
           beneficiaryClientReferenceId: e.beneficiaryClientReferenceId,
           id: e.id,
-          tag: '',
+          tag: e.tag,
           rowVersion: e.rowVersion,
           isDeleted: e.isDeleted,
           beneficiaryId: e.beneficiaryId,
@@ -62,8 +61,6 @@ class ProjectBeneficiaryLocalRepository
     ProjectBeneficiarySearchModel query, [
     String? userId,
   ]) async {
-    print(query.tag);
-    print("QUERY TAG");
     final selectQuery = sql.select(sql.projectBeneficiary).join([]);
     final results = await (selectQuery
           ..where(
