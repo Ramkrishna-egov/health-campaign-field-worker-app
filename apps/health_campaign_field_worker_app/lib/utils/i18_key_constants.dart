@@ -104,6 +104,7 @@ class Common {
   String get coreCommonWarning => 'CORE_COMMON_WARNING';
 
   String get coreQuantityWasted => 'CORE_QUANTITY_WASTED';
+  String get coreCommonDownload => 'CORE_COMMON_DOWNLOAD';
 }
 
 class AdverseEvents {
@@ -292,6 +293,37 @@ class BeneficiaryDetails {
   String get currentCycleLabel => 'BENEFICIARY_DETAILS_CURRENT_CYCLE_LABEL';
   String get fromCurrentLocation => 'FROM_CURRENT_LOCATION';
   String get beneficiary => 'BENEFICIARY';
+  String get unableToScan => 'UNABLE_TO_SCAN';
+
+  String get scanValidResource => 'SCAN_VALID_RESOURCE';
+
+  String get scannedResourceCountMisMatch => 'SCANNED_RESOURCE_COUNT_MISMATCH';
+
+  String get resourceAlreadyScanned => 'RESOURCE_ALREADY_SCANNED';
+
+  String get scannerLabel => 'SCANNER_LABEL';
+
+  String get noOfResourceScanned => 'NO_OF_RESOURCE_SCANNED';
+
+  String get resourcesScanned => 'RESOURCES_SCANNED';
+
+  String get saveScannedResource => 'SAVE_SCANNED_RESOURCE';
+
+  String get flashOn => 'FLASH_ON';
+
+  String get flashOff => 'FLASH_OFF';
+
+  String get scannerDialogTitle => 'SCANNER_DIALOG_TITLE';
+
+  String get scannerDialogContent => 'SCANNER_DIALOG_CONTENT';
+
+  String get scannerDialogPrimaryAction => 'SCANNER_DIALOG_PRIMARY_ACTION';
+
+  String get scannerDialogSecondaryAction => 'SCANNER_DIALOG_SECONDARY_ACTION';
+  String get beneficiaryHeader => 'BENEFICIARY_HEADER';
+  String get deliveryHeader => 'DELIVERY_TABLE_HEADER';
+
+  String get proceedWithoutDownloading => 'PROCEED_WITHOUT_DOWNLOADING';
 }
 
 class IndividualDetails {
