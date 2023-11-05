@@ -104,6 +104,7 @@ class Common {
   String get coreCommonWarning => 'CORE_COMMON_WARNING';
 
   String get coreQuantityWasted => 'CORE_QUANTITY_WASTED';
+  String get coreCommonDownload => 'CORE_COMMON_DOWNLOAD';
 }
 
 class AdverseEvents {
@@ -322,6 +323,10 @@ class BeneficiaryDetails {
 
   String get scannerDialogSecondaryAction => 'SCANNER_DIALOG_SECONDARY_ACTION';
   String get beneficiary => 'BENEFICIARY';
+  String get beneficiaryHeader => 'BENEFICIARY_HEADER';
+  String get deliveryHeader => 'DELIVERY_TABLE_HEADER';
+
+  String get proceedWithoutDownloading => 'PROCEED_WITHOUT_DOWNLOADING';
 }
 
 class IndividualDetails {
