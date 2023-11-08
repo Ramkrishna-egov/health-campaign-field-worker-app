@@ -149,6 +149,7 @@ class _$AppRouter extends RootStackRouter {
         child: AcknowledgementPage(
           key: args.key,
           appLocalizations: args.appLocalizations,
+          isDataRecordSuccess: args.isDataRecordSuccess,
         ),
       );
     },
@@ -1326,12 +1327,14 @@ class AcknowledgementRoute extends PageRouteInfo<AcknowledgementRouteArgs> {
   AcknowledgementRoute({
     Key? key,
     AppLocalizations? appLocalizations,
+    bool isDataRecordSuccess = false,
   }) : super(
           AcknowledgementRoute.name,
           path: 'acknowledgement',
           args: AcknowledgementRouteArgs(
             key: key,
             appLocalizations: appLocalizations,
+            isDataRecordSuccess: isDataRecordSuccess,
           ),
         );
 
@@ -1342,15 +1345,18 @@ class AcknowledgementRouteArgs {
   const AcknowledgementRouteArgs({
     this.key,
     this.appLocalizations,
+    this.isDataRecordSuccess = false,
   });
 
   final Key? key;
 
   final AppLocalizations? appLocalizations;
 
+  final bool isDataRecordSuccess;
+
   @override
   String toString() {
-    return 'AcknowledgementRouteArgs{key: $key, appLocalizations: $appLocalizations}';
+    return 'AcknowledgementRouteArgs{key: $key, appLocalizations: $appLocalizations, isDataRecordSuccess: $isDataRecordSuccess}';
   }
 }
 
