@@ -18,7 +18,6 @@ import '../utils/i18_key_constants.dart' as i18;
 import '../utils/utils.dart';
 import '../widgets/localized.dart';
 import '../widgets/progress_indicator/progress_indicator.dart';
-import 'acknowledgement.dart';
 
 class BoundarySelectionPage extends LocalizedStatefulWidget {
   const BoundarySelectionPage({
@@ -197,6 +196,10 @@ class _BoundarySelectionPageState
                                     value: totalCount == 0
                                         ? 0
                                         : min(syncCount / totalCount, 1),
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                      DigitTheme.instance.colorScheme.secondary,
+                                    ),
+                                    subLabel: 'Data is being downloaded',
                                   ),
                                 ),
                               );
@@ -218,7 +221,6 @@ class _BoundarySelectionPageState
                                     i18.syncDialog.retryButtonLabel,
                                   ),
                                   action: (ctx) {
-                                    Navigator.pop(ctx);
                                     context.read<BeneficiaryDownSyncBloc>().add(
                                           DownSyncCheckTotalCountEvent(
                                             projectId: context.projectId,
@@ -227,6 +229,8 @@ class _BoundarySelectionPageState
                                                 .toString(),
                                           ),
                                         );
+                                    Navigator.of(context, rootNavigator: true)
+                                        .pop();
                                   },
                                 ),
                                 secondaryAction: DigitDialogActions(
@@ -241,6 +245,37 @@ class _BoundarySelectionPageState
                                 ),
                               );
                             },
+                            totalCountCheckFailed: () => DigitSyncDialog.show(
+                              context,
+                              type: DigitSyncDialogType.failed,
+                              label: 'Unable to check records in server',
+                              primaryAction: DigitDialogActions(
+                                label: localizations.translate(
+                                  i18.syncDialog.retryButtonLabel,
+                                ),
+                                action: (ctx) {
+                                  context.read<BeneficiaryDownSyncBloc>().add(
+                                        DownSyncCheckTotalCountEvent(
+                                          projectId: context.projectId,
+                                          boundaryCode: selectedBoundary!
+                                              .value!.code
+                                              .toString(),
+                                        ),
+                                      );
+                                  Navigator.pop(ctx);
+                                },
+                              ),
+                              secondaryAction: DigitDialogActions(
+                                label: localizations.translate(
+                                  i18.beneficiaryDetails
+                                      .proceedWithoutDownloading,
+                                ),
+                                action: (ctx) {
+                                  Navigator.pop(ctx);
+                                  context.router.pop();
+                                },
+                              ),
+                            ),
                             insufficientStorage: () => DigitSyncDialog.show(
                               context,
                               type: DigitSyncDialogType.failed,
