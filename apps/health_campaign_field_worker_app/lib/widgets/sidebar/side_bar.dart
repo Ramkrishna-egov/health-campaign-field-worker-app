@@ -62,6 +62,16 @@ class SideBar extends StatelessWidget {
             },
           ),
           DigitIconTile(
+            title: AppLocalizations.of(context).translate(
+              i18.common.coreCommonViewDownloadedData,
+            ),
+            icon: Icons.folder,
+            onPressed: () {
+              Navigator.of(context, rootNavigator: true).pop();
+              context.router.replace(const BeneficariesReportRoute());
+            },
+          ),
+          DigitIconTile(
             title: AppLocalizations.of(context)
                 .translate(i18.common.coreCommonLogout),
             icon: Icons.logout,
