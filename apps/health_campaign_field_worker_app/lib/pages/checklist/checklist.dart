@@ -97,7 +97,7 @@ class _ChecklistPageState extends LocalizedState<ChecklistPage> {
                                                   label:
                                                       localizations.translate(
                                                     i18.checklist
-                                                        .checklistCreateActionLabel,
+                                                        .checklistFillActionLabel,
                                                   ),
                                                   action: () {
                                                     context.router.push(
