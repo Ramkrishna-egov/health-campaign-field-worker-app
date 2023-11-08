@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:collection/collection.dart';
+import 'package:digit_components/widgets/digit_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -74,11 +75,13 @@ class _BeneficiaryProgressBarState extends State<BeneficiaryProgressBar> {
   Widget build(BuildContext context) {
     final target = 40;
 
-    return ProgressIndicatorContainer(
-      label: '${max(target - current, 0).round()} ${widget.label}',
-      prefixLabel: '$current ${widget.prefixLabel}',
-      suffixLabel: target.toStringAsFixed(0),
-      value: target == 0 ? 0 : min(current / target, 1),
+    return DigitCard(
+      child: ProgressIndicatorContainer(
+        label: '${max(target - current, 0).round()} ${widget.label}',
+        prefixLabel: '$current ${widget.prefixLabel}',
+        suffixLabel: target.toStringAsFixed(0),
+        value: target == 0 ? 0 : min(current / target, 1),
+      ),
     );
   }
 }
