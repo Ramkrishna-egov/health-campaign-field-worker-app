@@ -18,6 +18,7 @@ import '../utils/i18_key_constants.dart' as i18;
 import '../utils/utils.dart';
 import '../widgets/localized.dart';
 import '../widgets/progress_indicator/progress_indicator.dart';
+import 'acknowledgement.dart';
 
 class BoundarySelectionPage extends LocalizedStatefulWidget {
   const BoundarySelectionPage({
@@ -202,22 +203,9 @@ class _BoundarySelectionPageState
                             },
                             success: () {
                               Navigator.of(context, rootNavigator: true).pop();
-                              context.router.pop();
-                              DigitSyncDialog.show(
-                                context,
-                                type: DigitSyncDialogType.complete,
-                                label: localizations.translate(
-                                  i18.syncDialog.dataSyncedTitle,
-                                ),
-                                primaryAction: DigitDialogActions(
-                                  label: localizations.translate(
-                                    i18.syncDialog.closeButtonLabel,
-                                  ),
-                                  action: (ctx) {
-                                    Navigator.pop(ctx);
-                                  },
-                                ),
-                              );
+                              context.router.popAndPush((AcknowledgementRoute(
+                                  isDataRecordSuccess: true,
+                              )));
                             },
                             failed: () {
                               Navigator.of(context, rootNavigator: true).pop();
