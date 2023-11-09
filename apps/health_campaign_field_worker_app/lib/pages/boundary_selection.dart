@@ -166,6 +166,25 @@ class _BoundarySelectionPageState extends State<BoundarySelectionPage> {
         value: state.selectedBoundaryMap[label],
       );
     }
+    
+    if(formControls[labelList.first]?.value == null){
+      final value = state.boundaryList.where((element) {
+        if (element.label == labelList.first) return true;
+        
+        return false;
+      }).toList().first;
+      
+      formControls[labelList.first] = FormControl<BoundaryModel>(
+        validators: [Validators.required],
+        value: value,
+      );
+      context.read<BoundaryBloc>().add(
+        BoundarySelectEvent(
+          label: labelList.first,
+          selectedBoundary: value,
+        ),
+      );
+    }
 
     return fb.group(formControls);
   }
