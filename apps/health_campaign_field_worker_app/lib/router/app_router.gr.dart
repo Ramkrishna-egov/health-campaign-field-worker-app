@@ -89,10 +89,10 @@ class _$AppRouter extends RootStackRouter {
         ),
       );
     },
-    BeneficariesReportRoute.name: (routeData) {
+    BeneficiariesReportRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const BeneficariesReportPage(),
+        child: const BeneficiariesReportPage(),
       );
     },
     BeneficiaryRegistrationWrapperRoute.name: (routeData) {
@@ -139,6 +139,7 @@ class _$AppRouter extends RootStackRouter {
           key: args.key,
           appLocalizations: args.appLocalizations,
           isDataRecordSuccess: args.isDataRecordSuccess,
+          description: args.description,
         ),
       );
     },
@@ -631,7 +632,7 @@ class _$AppRouter extends RootStackRouter {
               parent: AuthenticatedRouteWrapper.name,
             ),
             RouteConfig(
-              BeneficariesReportRoute.name,
+              BeneficiariesReportRoute.name,
               path: 'beneficiary-downsync-report',
               parent: AuthenticatedRouteWrapper.name,
             ),
@@ -1139,15 +1140,15 @@ class QRScannerRouteArgs {
 }
 
 /// generated route for
-/// [BeneficariesReportPage]
-class BeneficariesReportRoute extends PageRouteInfo<void> {
-  const BeneficariesReportRoute()
+/// [BeneficiariesReportPage]
+class BeneficiariesReportRoute extends PageRouteInfo<void> {
+  const BeneficiariesReportRoute()
       : super(
-          BeneficariesReportRoute.name,
+          BeneficiariesReportRoute.name,
           path: 'beneficiary-downsync-report',
         );
 
-  static const String name = 'BeneficariesReportRoute';
+  static const String name = 'BeneficiariesReportRoute';
 }
 
 /// generated route for
@@ -1277,6 +1278,7 @@ class AcknowledgementRoute extends PageRouteInfo<AcknowledgementRouteArgs> {
     Key? key,
     AppLocalizations? appLocalizations,
     bool isDataRecordSuccess = false,
+    String? description,
   }) : super(
           AcknowledgementRoute.name,
           path: 'acknowledgement',
@@ -1284,6 +1286,7 @@ class AcknowledgementRoute extends PageRouteInfo<AcknowledgementRouteArgs> {
             key: key,
             appLocalizations: appLocalizations,
             isDataRecordSuccess: isDataRecordSuccess,
+            description: description,
           ),
         );
 
@@ -1295,6 +1298,7 @@ class AcknowledgementRouteArgs {
     this.key,
     this.appLocalizations,
     this.isDataRecordSuccess = false,
+    this.description,
   });
 
   final Key? key;
@@ -1303,9 +1307,11 @@ class AcknowledgementRouteArgs {
 
   final bool isDataRecordSuccess;
 
+  final String? description;
+
   @override
   String toString() {
-    return 'AcknowledgementRouteArgs{key: $key, appLocalizations: $appLocalizations, isDataRecordSuccess: $isDataRecordSuccess}';
+    return 'AcknowledgementRouteArgs{key: $key, appLocalizations: $appLocalizations, isDataRecordSuccess: $isDataRecordSuccess, description: $description}';
   }
 }
 
