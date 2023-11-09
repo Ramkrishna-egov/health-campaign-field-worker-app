@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:digit_components/digit_components.dart';
 import 'package:digit_components/utils/date_utils.dart';
+import 'package:digit_components/widgets/atoms/digit_toaster.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -117,8 +118,14 @@ class _BoundarySelectionPageState
                                     ),
                                     child: DigitDropdown<BoundaryModel>(
                                       initialValue: formControls[label]?.value,
-                                      label: label,
+                                      label: '$label*',
                                       menuItems: filteredItems,
+                                      validationMessages: {
+                                        'required': (object) =>
+                                            localizations.translate(
+                                              i18.common.corecommonRequired,
+                                            ),
+                                      },
                                       onChanged: (value) {
                                         if (value == null) return;
 
@@ -394,47 +401,63 @@ class _BoundarySelectionPageState
                                       onPressed: selectedBoundary == null
                                           ? null
                                           : () async {
-                                              setState(() {
-                                                shouldPop = true;
-                                              });
+                                              if (!form.valid) {
+                                                await DigitToast.show(
+                                                  context,
+                                                  options: DigitToastOptions(
+                                                    localizations.translate(i18
+                                                        .common
+                                                        .corecommonRequired),
+                                                    true,
+                                                    Theme.of(context),
+                                                  ),
+                                                );
+                                              } else {
+                                                setState(() {
+                                                  shouldPop = true;
+                                                });
 
-                                              context.read<BoundaryBloc>().add(
-                                                    const BoundarySubmitEvent(),
-                                                  );
-                                              bool isOnline =
-                                                  await getIsConnected();
+                                                context
+                                                    .read<BoundaryBloc>()
+                                                    .add(
+                                                      const BoundarySubmitEvent(),
+                                                    );
+                                                bool isOnline =
+                                                    await getIsConnected();
 
-                                              if (context.mounted) {
-                                                if (isOnline) {
-                                                  context
-                                                      .read<
-                                                          BeneficiaryDownSyncBloc>()
-                                                      .add(
-                                                        DownSyncGetBatchSizeEvent(
-                                                          appConfiguration: [
-                                                            appConfiguration,
-                                                          ],
-                                                          projectId:
-                                                              context.projectId,
-                                                          boundaryCode:
-                                                              selectedBoundary
-                                                                  .value!.code
-                                                                  .toString(),
-                                                          pendingSyncCount:
-                                                              pendingSyncCount,
-                                                          boundaryName:
-                                                              selectedBoundary
-                                                                  .value!.name
-                                                                  .toString(),
-                                                        ),
-                                                      );
-                                                } else {
-                                                  Future.delayed(
-                                                    const Duration(
-                                                      milliseconds: 100,
-                                                    ),
-                                                    () => context.router.pop(),
-                                                  );
+                                                if (context.mounted) {
+                                                  if (isOnline) {
+                                                    context
+                                                        .read<
+                                                            BeneficiaryDownSyncBloc>()
+                                                        .add(
+                                                          DownSyncGetBatchSizeEvent(
+                                                            appConfiguration: [
+                                                              appConfiguration,
+                                                            ],
+                                                            projectId: context
+                                                                .projectId,
+                                                            boundaryCode:
+                                                                selectedBoundary
+                                                                    .value!.code
+                                                                    .toString(),
+                                                            pendingSyncCount:
+                                                                pendingSyncCount,
+                                                            boundaryName:
+                                                                selectedBoundary
+                                                                    .value!.name
+                                                                    .toString(),
+                                                          ),
+                                                        );
+                                                  } else {
+                                                    Future.delayed(
+                                                      const Duration(
+                                                        milliseconds: 100,
+                                                      ),
+                                                      () =>
+                                                          context.router.pop(),
+                                                    );
+                                                  }
                                                 }
                                               }
                                             },
@@ -474,7 +497,7 @@ class _BoundarySelectionPageState
 
     for (final label in labelList) {
       formControls[label] = FormControl<BoundaryModel>(
-        validators: [],
+        validators: [Validators.required],
         value: state.selectedBoundaryMap[label],
       );
     }
