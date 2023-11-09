@@ -559,7 +559,7 @@ void showDownloadDialog(
         options: DigitDialogOptions(
           titleText: model.title,
           titleIcon: Icon(
-            Icons.info,
+            Icons.info_outline_rounded,
             color: DigitTheme.instance.colorScheme.surfaceTint,
           ),
           contentText: model.content,
