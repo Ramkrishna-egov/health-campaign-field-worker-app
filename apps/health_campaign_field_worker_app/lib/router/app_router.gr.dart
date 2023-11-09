@@ -139,6 +139,7 @@ class _$AppRouter extends RootStackRouter {
           key: args.key,
           appLocalizations: args.appLocalizations,
           isDataRecordSuccess: args.isDataRecordSuccess,
+          label: args.label,
           description: args.description,
         ),
       );
@@ -1278,6 +1279,7 @@ class AcknowledgementRoute extends PageRouteInfo<AcknowledgementRouteArgs> {
     Key? key,
     AppLocalizations? appLocalizations,
     bool isDataRecordSuccess = false,
+    String? label,
     String? description,
   }) : super(
           AcknowledgementRoute.name,
@@ -1286,6 +1288,7 @@ class AcknowledgementRoute extends PageRouteInfo<AcknowledgementRouteArgs> {
             key: key,
             appLocalizations: appLocalizations,
             isDataRecordSuccess: isDataRecordSuccess,
+            label: label,
             description: description,
           ),
         );
@@ -1298,6 +1301,7 @@ class AcknowledgementRouteArgs {
     this.key,
     this.appLocalizations,
     this.isDataRecordSuccess = false,
+    this.label,
     this.description,
   });
 
@@ -1307,11 +1311,13 @@ class AcknowledgementRouteArgs {
 
   final bool isDataRecordSuccess;
 
+  final String? label;
+
   final String? description;
 
   @override
   String toString() {
-    return 'AcknowledgementRouteArgs{key: $key, appLocalizations: $appLocalizations, isDataRecordSuccess: $isDataRecordSuccess, description: $description}';
+    return 'AcknowledgementRouteArgs{key: $key, appLocalizations: $appLocalizations, isDataRecordSuccess: $isDataRecordSuccess, label: $label, description: $description}';
   }
 }
 

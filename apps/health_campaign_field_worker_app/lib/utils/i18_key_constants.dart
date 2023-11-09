@@ -348,6 +348,8 @@ class BeneficiaryDetails {
   String get partialdownloaded => 'PARTIAL_DOWNLOAD';
   String get downloadtime => 'DOWNLOAD_TIME';
   String get totalrecorddownload => 'TOTAL_RECORD_DOWNLOAD';
+  String get insufficientStorageContent =>
+      'INSUFFICIENT_STORAGE_WARNING_CONTENT';
 }
 
 class IndividualDetails {
@@ -443,6 +445,7 @@ class AcknowledgementSuccess {
 
   String get goToHome => 'GO_TO_HOME_SCREEN';
   String get downloadmoredata => 'DOWNLOAD_MORE_DATA';
+  String get dataDownloadedSuccessLabel => 'DATA_DOWNLOADED_SUCCESS_LABEL';
 }
 
 class HouseholdDetails {
