@@ -269,19 +269,6 @@ class IndividualLocalRepository extends IndividualLocalBaseRepository {
     List<IndividualModel> entities,
   ) async {
     final individualCompanions = entities.map((e) => e.companion).toList();
-    final addressList = entities
-        .map((e) =>
-            e.address?.map((a) {
-              return a
-                  .copyWith(
-                    relatedClientReferenceId: e.clientReferenceId,
-                    clientAuditDetails: e.clientAuditDetails,
-                  )
-                  .companion;
-            }).toList() ??
-            [])
-        .toList();
-    final addressCompanions = addressList.expand((e) => [e[0]]).toList();
 
     final identifiersList = entities
         .map((e) => e.identifiers!.map((a) {
@@ -289,6 +276,7 @@ class IndividualLocalRepository extends IndividualLocalBaseRepository {
                   .copyWith(
                     clientReferenceId: e.clientReferenceId,
                     clientAuditDetails: e.clientAuditDetails,
+                    auditDetails: e.auditDetails,
                   )
                   .companion;
             }).toList())
@@ -297,8 +285,33 @@ class IndividualLocalRepository extends IndividualLocalBaseRepository {
     final identifierCompanions = identifiersList.expand((e) => [e[0]]).toList();
 
     await sql.batch((batch) async {
+      final addressList = entities
+          .map((e) =>
+              e.address?.map((a) {
+                batch.deleteWhere(
+                  sql.address,
+                  (tbl) => tbl.relatedClientReferenceId
+                      .contains(e.clientReferenceId),
+                );
+
+                return a
+                    .copyWith(
+                      relatedClientReferenceId: e.clientReferenceId,
+                      clientAuditDetails: e.clientAuditDetails,
+                      auditDetails: e.auditDetails,
+                    )
+                    .companion;
+              }).toList() ??
+              [])
+          .toList();
+      final addressCompanions = addressList.expand((e) => [e[0]]).toList();
       final nameCompanions = entities.map((e) {
         if (e.name != null) {
+          batch.deleteWhere(
+              sql.name,
+              (tbl) => tbl.individualClientReferenceId
+                  .contains(e.clientReferenceId));
+
           return e.name!
               .copyWith(
                 individualClientReferenceId: e.clientReferenceId,
