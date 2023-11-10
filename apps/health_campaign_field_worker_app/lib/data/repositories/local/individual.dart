@@ -38,6 +38,8 @@ class IndividualLocalRepository extends IndividualLocalBaseRepository {
         ),
       ],
     );
+    final r = await selectQuery.get();
+    print(r.length);
 
     final results = await (selectQuery
           ..where(
@@ -298,7 +300,9 @@ class IndividualLocalRepository extends IndividualLocalBaseRepository {
     await sql.batch((batch) async {
       final nameCompanions = entities.map((e) {
         if (e.name != null) {
-          return e.name!.companion;
+          return e.name!
+              .copyWith(individualClientReferenceId: e.clientReferenceId)
+              .companion;
         }
       }).toList();
       if (nameCompanions.isNotEmpty) {
