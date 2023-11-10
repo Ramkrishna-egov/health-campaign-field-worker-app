@@ -301,7 +301,11 @@ class IndividualLocalRepository extends IndividualLocalBaseRepository {
       final nameCompanions = entities.map((e) {
         if (e.name != null) {
           return e.name!
-              .copyWith(individualClientReferenceId: e.clientReferenceId)
+              .copyWith(
+                individualClientReferenceId: e.clientReferenceId,
+                clientAuditDetails: e.clientAuditDetails,
+                auditDetails: e.auditDetails,
+              )
               .companion;
         }
       }).toList();
