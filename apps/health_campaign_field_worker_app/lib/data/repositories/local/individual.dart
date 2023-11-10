@@ -6,7 +6,6 @@ import '../../../models/data_model.dart';
 import '../../../utils/utils.dart';
 import 'base/individual_base.dart';
 import '../../data_repository.dart';
-import '../../local_store/sql_store/sql_store.dart';
 
 class IndividualLocalRepository extends IndividualLocalBaseRepository {
   const IndividualLocalRepository(super.sql, super.opLogManager);
@@ -270,7 +269,7 @@ class IndividualLocalRepository extends IndividualLocalBaseRepository {
     List<IndividualModel> entities,
   ) async {
     final individualCompanions = entities.map((e) => e.companion).toList();
-    final addressCompanions = entities
+    final addressList = entities
         .map((e) =>
             e.address?.map((a) {
               return a
@@ -281,8 +280,8 @@ class IndividualLocalRepository extends IndividualLocalBaseRepository {
                   .companion;
             }).toList() ??
             [])
-        .whereType<AddressCompanion>()
         .toList();
+    final addressCompanions = addressList.expand((e) => [e[0]]).toList();
 
     final identifiersList = entities
         .map((e) => e.identifiers!.map((a) {
