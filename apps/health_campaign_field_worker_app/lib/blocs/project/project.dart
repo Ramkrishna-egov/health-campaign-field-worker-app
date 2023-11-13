@@ -147,9 +147,10 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
         ProjectStaffSearchModel(staffId: uuid),
       );
     } on DioError catch (error) {
-      if (error.response!.data['Errors'][0]['message']
-          .toString()
-          .contains(Constants.invalidAccessTokenKey)) {
+      if (error.response != null &&
+          error.response!.data['Errors'][0]['message']
+              .toString()
+              .contains(Constants.invalidAccessTokenKey)) {
         emit(
           state.copyWith(
             loading: false,
@@ -565,6 +566,7 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
         await localSecureStore.setSelectedProject(event.model);
         await localSecureStore.setSelectedProjectType(reqProjectType);
       }
+      await localSecureStore.setProjectSetUpComplete(event.model.id, true);
     } catch (_) {
       emit(state.copyWith(
         loading: false,
