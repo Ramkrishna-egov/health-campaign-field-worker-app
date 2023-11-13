@@ -566,6 +566,10 @@ class DeliverIntervention {
   String get resourceDeliveredValidation => 'RESOURCE_DELIVERED_VALIDATION';
 
   String get deliveryCommentRequired => 'DELIVERY_COMMENT_REQUIRED';
+
+  String get deliveryNoOfMembersLable => 'DELIVERY_NO_OF_MEMBERS_LABEL';
+
+  String get deliveryNoOfResourcesLable => 'DELIVERY_NO_OF_RESOURCES_LABEL';
 }
 
 class ProjectSelection {

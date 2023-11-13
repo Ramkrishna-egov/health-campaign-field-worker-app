@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:collection/collection.dart';
 import 'package:digit_components/digit_components.dart';
 import 'package:digit_components/widgets/atoms/digit_stepper.dart';
@@ -42,24 +44,18 @@ class _DeliverInterventionPageState
   // Constants for form control keys
   static const _resourceDeliveredKey = 'resourceDelivered';
   static const _quantityDistributedKey = 'quantityDistributed';
-  static const _quantityWastedKey = 'quantityWasted';
   static const _deliveryCommentKey = 'deliveryComment';
   static const _doseAdministrationKey = 'doseAdministered';
   static const _dateOfAdministrationKey = 'dateOfAdministration';
-  static const _defaultQuantity = 1;
-  static const _administeredQuantity = 2;
+
   // Variable to track dose administration status
   bool doseAdministered = false;
 
   // List of controllers for form elements
   final List _controllers = [];
 
-  // toggle doseAdministered
-  void checkDoseAdministration(bool newValue) {
-    setState(() {
-      doseAdministered = newValue;
-    });
-  }
+  int calculatedCount = 1;
+  int memberCount = 1;
 
 // Initialize the currentStep variable to keep track of the current step in a process.
   int currentStep = 0;
@@ -82,6 +78,12 @@ class _DeliverInterventionPageState
       child: BlocBuilder<HouseholdOverviewBloc, HouseholdOverviewState>(
         builder: (context, state) {
           final householdMemberWrapper = state.householdMemberWrapper;
+          memberCount = (householdMemberWrapper.household.memberCount ??
+              householdMemberWrapper.members.length);
+          calculatedCount = min(
+            memberCount / 1.8,
+            3,
+          ).round();
 
           final projectBeneficiary =
               context.beneficiaryType != BeneficiaryType.individual
@@ -192,19 +194,18 @@ class _DeliverInterventionPageState
                                                       theme,
                                                     ),
                                                   );
-                                                } else if (doseAdministered &&
-                                                    form
-                                                            .control(
-                                                              _deliveryCommentKey,
-                                                            )
-                                                            .value ==
-                                                        null) {
+                                                } else if ((((form.control(
+                                                          _quantityDistributedKey,
+                                                        ) as FormArray)
+                                                            .value) ??
+                                                        [])
+                                                    .any((e) => e == null)) {
                                                   await DigitToast.show(
                                                     context,
                                                     options: DigitToastOptions(
                                                       localizations.translate(i18
                                                           .deliverIntervention
-                                                          .deliveryCommentRequired),
+                                                          .resourceCannotBeZero),
                                                       true,
                                                       theme,
                                                     ),
@@ -343,67 +344,118 @@ class _DeliverInterventionPageState
                                     children: [
                                       Column(
                                         children: [
-                                          DigitCard(
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                Text(
-                                                  localizations.translate(
-                                                    i18.deliverIntervention
-                                                        .deliverInterventionLabel,
+                                          projectState.projectType?.cycles
+                                                      ?.isNotEmpty ==
+                                                  true
+                                              ? DigitCard(
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    children: [
+                                                      Text(
+                                                        localizations.translate(
+                                                          i18.deliverIntervention
+                                                              .deliverInterventionLabel,
+                                                        ),
+                                                        style: theme.textTheme
+                                                            .displayMedium,
+                                                      ),
+                                                      DigitTextFormField(
+                                                        readOnly: true,
+                                                        formControlName:
+                                                            _doseAdministrationKey,
+                                                        keyboardType:
+                                                            TextInputType
+                                                                .number,
+                                                        label: localizations
+                                                            .translate(i18
+                                                                .deliverIntervention
+                                                                .currentCycle),
+                                                      ),
+                                                      DigitStepper(
+                                                        activeStep:
+                                                            deliveryInterventionstate
+                                                                    .dose -
+                                                                1,
+                                                        stepRadius: 12.5,
+                                                        steps: steps,
+                                                        maxStepReached: 3,
+                                                        lineLength:
+                                                            MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width /
+                                                                steps.length,
+                                                      ),
+                                                      DigitDateFormPicker(
+                                                        isEnabled: false,
+                                                        formControlName:
+                                                            _dateOfAdministrationKey,
+                                                        label: localizations
+                                                            .translate(
+                                                          i18.householdDetails
+                                                              .dateOfRegistrationLabel,
+                                                        ),
+                                                        confirmText:
+                                                            localizations
+                                                                .translate(
+                                                          i18.common
+                                                              .coreCommonOk,
+                                                        ),
+                                                        cancelText:
+                                                            localizations
+                                                                .translate(
+                                                          i18.common
+                                                              .coreCommonCancel,
+                                                        ),
+                                                        isRequired: false,
+                                                      ),
+                                                    ],
                                                   ),
-                                                  style: theme
-                                                      .textTheme.displayMedium,
-                                                ),
-                                                DigitTextFormField(
-                                                  readOnly: true,
-                                                  formControlName:
-                                                      _doseAdministrationKey,
-                                                  keyboardType:
-                                                      TextInputType.number,
-                                                  label: localizations
-                                                      .translate(i18
-                                                          .deliverIntervention
-                                                          .currentCycle),
-                                                ),
-                                                DigitStepper(
-                                                  activeStep:
-                                                      deliveryInterventionstate
-                                                              .dose -
-                                                          1,
-                                                  stepRadius: 12.5,
-                                                  steps: steps,
-                                                  maxStepReached: 3,
-                                                  lineLength:
-                                                      MediaQuery.of(context)
-                                                              .size
-                                                              .width /
-                                                          steps.length,
-                                                ),
-                                                DigitDateFormPicker(
-                                                  isEnabled: false,
-                                                  formControlName:
-                                                      _dateOfAdministrationKey,
-                                                  label:
-                                                      localizations.translate(
-                                                    i18.householdDetails
-                                                        .dateOfRegistrationLabel,
+                                                )
+                                              : DigitCard(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                    left: 16.0,
+                                                    top: 16,
+                                                    bottom: 4,
+                                                    right: 4,
                                                   ),
-                                                  confirmText:
-                                                      localizations.translate(
-                                                    i18.common.coreCommonOk,
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    children: [
+                                                      Text(
+                                                        localizations.translate(
+                                                          i18.deliverIntervention
+                                                              .deliverInterventionLabel,
+                                                        ),
+                                                        style: theme.textTheme
+                                                            .displayMedium,
+                                                      ),
+                                                      DigitTableCard(
+                                                        element: {
+                                                          localizations
+                                                              .translate(
+                                                            i18.deliverIntervention
+                                                                .deliveryNoOfMembersLable,
+                                                          ): memberCount,
+                                                          localizations
+                                                              .translate(
+                                                            i18.deliverIntervention
+                                                                .deliveryNoOfResourcesLable,
+                                                          ): memberCount,
+                                                        },
+                                                      ),
+                                                    ],
                                                   ),
-                                                  cancelText:
-                                                      localizations.translate(
-                                                    i18.common.coreCommonCancel,
-                                                  ),
-                                                  isRequired: false,
                                                 ),
-                                              ],
-                                            ),
-                                          ),
                                           DigitCard(
                                             child: Column(
                                               crossAxisAlignment:
@@ -428,10 +480,6 @@ class _DeliverInterventionPageState
                                                           totalItems:
                                                               _controllers
                                                                   .length,
-                                                          isAdministered:
-                                                              doseAdministered,
-                                                          checkDoseAdministration:
-                                                              checkDoseAdministration,
                                                           onDelete: (index) {
                                                             (form.control(
                                                               _resourceDeliveredKey,
@@ -441,12 +489,6 @@ class _DeliverInterventionPageState
                                                             );
                                                             (form.control(
                                                               _quantityDistributedKey,
-                                                            ) as FormArray)
-                                                                .removeAt(
-                                                              index,
-                                                            );
-                                                            (form.control(
-                                                              _quantityWastedKey,
                                                             ) as FormArray)
                                                                 .removeAt(
                                                               index,
@@ -489,7 +531,7 @@ class _DeliverInterventionPageState
 
                                                     final deliveryCommentOptions = state
                                                             .appConfiguration
-                                                            .deliveryCommentOptionsSmc ??
+                                                            .deliveryCommentOptions ??
                                                         <DeliveryCommentOptions>[];
 
                                                     return DigitReactiveDropdown<
@@ -542,8 +584,6 @@ class _DeliverInterventionPageState
         .add(FormControl<ProductVariantModel>());
     (form.control(_quantityDistributedKey) as FormArray)
         .add(FormControl<String>(validators: [Validators.required]));
-    (form.control(_quantityWastedKey) as FormArray)
-        .add(FormControl<String>(validators: [Validators.required]));
   }
 
   // ignore: long-parameter-list
@@ -593,9 +633,9 @@ class _DeliverInterventionPageState
                 taskId: task?.id,
                 tenantId: envConfig.variables.tenantId,
                 rowVersion: oldTask?.rowVersion ?? 1,
-                quantity: doseAdministered
-                    ? _administeredQuantity.toString()
-                    : _defaultQuantity.toString(),
+                quantity: (((form.control(_quantityDistributedKey) as FormArray)
+                        .value)?[productvariantList.indexOf(e)])
+                    .toString(),
                 clientAuditDetails: ClientAuditDetails(
                   createdBy: context.loggedInUserUuid,
                   createdTime: context.millisecondsSinceEpoch(),
@@ -604,15 +644,6 @@ class _DeliverInterventionPageState
                   createdBy: context.loggedInUserUuid,
                   createdTime: context.millisecondsSinceEpoch(),
                 ),
-                additionalFields:
-                    TaskResourceAdditionalFields(version: 1, fields: [
-                  AdditionalField(
-                    _quantityWastedKey,
-                    (((form.control(_quantityWastedKey) as FormArray)
-                            .value)?[productvariantList.indexOf(e)])
-                        .toString(),
-                  ),
-                ]),
               ))
           .toList(),
       address: address?.copyWith(
@@ -698,12 +729,10 @@ class _DeliverInterventionPageState
       ),
       _quantityDistributedKey: FormArray<String>([
         ..._controllers.map(
-          (e) => FormControl<String>(validators: [Validators.required]),
-        ),
-      ]),
-      _quantityWastedKey: FormArray<String>([
-        ..._controllers.map(
-          (e) => FormControl<String>(),
+          (e) => FormControl<String>(
+            validators: [Validators.required],
+            value: calculatedCount.toString(),
+          ),
         ),
       ]),
     });

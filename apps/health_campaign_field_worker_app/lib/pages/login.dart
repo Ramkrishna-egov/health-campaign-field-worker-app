@@ -153,6 +153,34 @@ class _LoginPageState extends LocalizedState<LoginPage> {
                           );
                         },
                       ),
+                      TextButton(
+                        onPressed: () => DigitDialog.show(
+                          context,
+                          options: DigitDialogOptions(
+                            titleText: localizations.translate(
+                              i18.forgotPassword.labelText,
+                            ),
+                            contentText: localizations.translate(
+                              i18.forgotPassword.contentText,
+                            ),
+                            primaryAction: DigitDialogActions(
+                              label: localizations.translate(
+                                i18.forgotPassword.primaryActionLabel,
+                              ),
+                              action: (ctx) =>
+                                  Navigator.of(context, rootNavigator: true)
+                                      .pop(),
+                            ),
+                          ),
+                        ),
+                        child: Center(
+                          child: Text(
+                            localizations.translate(
+                              i18.forgotPassword.actionLabel,
+                            ),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 );
@@ -166,12 +194,12 @@ class _LoginPageState extends LocalizedState<LoginPage> {
 
   FormGroup buildForm() => fb.group(<String, Object>{
         _userId: FormControl<String>(
-          // value: 'COM-DIS',
+          // value: 'zumbo-moni17-reg1',
           validators: [Validators.required],
         ),
         _password: FormControl<String>(
           validators: [Validators.required],
-          // value: 'eGov@4321',
+          // value: 'egov@4321',
         ),
       });
 }

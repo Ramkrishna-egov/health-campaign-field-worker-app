@@ -601,48 +601,6 @@ class _HouseholdOverviewPageState
                                       },
                                     ).toList(),
                                   ),
-                                  Center(
-                                    child: DigitIconButton(
-                                      onPressed: () async {
-                                        final bloc = context
-                                            .read<HouseholdOverviewBloc>();
-
-                                        final wrapper =
-                                            state.householdMemberWrapper;
-                                        final address =
-                                            wrapper.household.address;
-
-                                        if (address == null) return;
-
-                                        final projectId = context.projectId;
-
-                                        await context.router.push(
-                                          BeneficiaryRegistrationWrapperRoute(
-                                            initialState:
-                                                BeneficiaryRegistrationAddMemberState(
-                                              addressModel: address,
-                                              householdModel: wrapper.household,
-                                            ),
-                                            children: [
-                                              IndividualDetailsRoute(),
-                                            ],
-                                          ),
-                                        );
-                                        bloc.add(
-                                          HouseholdOverviewReloadEvent(
-                                            projectId: projectId,
-                                            projectBeneficiaryType:
-                                                beneficiaryType,
-                                          ),
-                                        );
-                                      },
-                                      iconText: localizations.translate(
-                                        i18.householdOverView
-                                            .householdOverViewAddActionText,
-                                      ),
-                                      icon: Icons.add_circle,
-                                    ),
-                                  ),
                                 ],
                               ),
                             ),

@@ -34,23 +34,6 @@ class _BeneficiaryProgressBarState extends State<BeneficiaryProgressBar> {
                 ProjectBeneficiarySearchModel>>()
         as ProjectBeneficiaryLocalRepository;
 
-    final now = DateTime.now();
-    final gte = DateTime(
-      now.year,
-      now.month,
-      now.day,
-    );
-
-    final lte = DateTime(
-      now.year,
-      now.month,
-      now.day,
-      23,
-      59,
-      59,
-      999,
-    );
-
     repository.listenToChanges(
       query: ProjectBeneficiarySearchModel(
         projectId: context.projectId,
@@ -58,6 +41,22 @@ class _BeneficiaryProgressBarState extends State<BeneficiaryProgressBar> {
       listener: (data) {
         if (mounted) {
           setState(() {
+            final now = DateTime.now();
+            final gte = DateTime(
+              now.year,
+              now.month,
+              now.day,
+            );
+
+            final lte = DateTime(
+              now.year,
+              now.month,
+              now.day,
+              23,
+              59,
+              59,
+              999,
+            );
             current = data
                 .where((element) =>
                     element.dateOfRegistrationTime.isAfter(gte) &&
@@ -73,7 +72,7 @@ class _BeneficiaryProgressBarState extends State<BeneficiaryProgressBar> {
 
   @override
   Widget build(BuildContext context) {
-    final target = 65;
+    final target = 40;
 
     return ProgressIndicatorContainer(
       label: '${max(target - current, 0).round()} ${widget.label}',

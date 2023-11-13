@@ -1,5 +1,4 @@
 import 'package:digit_components/digit_components.dart';
-import 'package:digit_components/widgets/atoms/digit_checkbox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,8 +13,6 @@ class ResourceBeneficiaryCard extends LocalizedStatefulWidget {
   final int cardIndex;
   final FormGroup form;
   final int totalItems;
-  final bool isAdministered;
-  final void Function(bool) checkDoseAdministration;
 
   const ResourceBeneficiaryCard({
     Key? key,
@@ -24,8 +21,6 @@ class ResourceBeneficiaryCard extends LocalizedStatefulWidget {
     required this.cardIndex,
     required this.form,
     required this.totalItems,
-    this.isAdministered = false,
-    required this.checkDoseAdministration,
   }) : super(key: key);
 
   @override
@@ -35,7 +30,6 @@ class ResourceBeneficiaryCard extends LocalizedStatefulWidget {
 
 class _ResourceBeneficiaryCardState
     extends LocalizedState<ResourceBeneficiaryCard> {
-  bool doseAdministered = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -75,32 +69,18 @@ class _ResourceBeneficiaryCardState
               );
             },
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 16.0),
-            child: DigitCheckbox(
-              label: localizations.translate(
-                i18.deliverIntervention.deliverInteventionAdministeredLabel,
-              ),
-              value: doseAdministered,
-              onChanged: (value) {
-                setState(() {
-                  doseAdministered = value!;
-                  widget.checkDoseAdministration(value);
-                });
-              },
-            ),
-          ),
           DigitTextFormField(
-            formControlName: 'quantityWasted.${widget.cardIndex}',
+            formControlName: 'quantityDistributed.${widget.cardIndex}',
+            readOnly: true,
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
             inputFormatters: [
-              LengthLimitingTextInputFormatter(3),
+              LengthLimitingTextInputFormatter(1),
               FilteringTextInputFormatter.allow(
-                RegExp(r'^(1000|[1-9][0-9]{0,2}|0)$'),
+                RegExp(r'^[1-2]+$'),
               ),
             ],
             label: localizations.translate(
-              i18.deliverIntervention.quantityWastedLabel,
+              i18.deliverIntervention.quantityDistributedLabel,
             ),
             validationMessages: {
               "required": (control) {
