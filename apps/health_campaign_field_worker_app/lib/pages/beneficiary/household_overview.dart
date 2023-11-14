@@ -545,28 +545,6 @@ class _HouseholdOverviewPageState
                                               // TODO Need to handle the null check
                                               name:
                                                   '${e.name?.givenName ?? ' - '} ${e.name?.familyName ?? ' - '}',
-                                              years: (e.dateOfBirth == null
-                                                      ? null
-                                                      : DigitDateUtils
-                                                          .calculateAge(
-                                                          DigitDateUtils
-                                                                  .getFormattedDateToDateTime(
-                                                                e.dateOfBirth!,
-                                                              ) ??
-                                                              DateTime.now(),
-                                                        ).years) ??
-                                                  0,
-                                              months: (e.dateOfBirth == null
-                                                      ? null
-                                                      : DigitDateUtils
-                                                          .calculateAge(
-                                                          DigitDateUtils
-                                                                  .getFormattedDateToDateTime(
-                                                                e.dateOfBirth!,
-                                                              ) ??
-                                                              DateTime.now(),
-                                                        ).months) ??
-                                                  0,
                                               gender: e.gender?.name,
                                               isBeneficiaryRefused:
                                                   isBeneficiaryRefused &&

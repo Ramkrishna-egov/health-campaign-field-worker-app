@@ -84,9 +84,6 @@ class _IndividualDetailsPageState
                   margin: const EdgeInsets.only(left: 0, right: 0, top: 10),
                   child: DigitElevatedButton(
                     onPressed: () async {
-                      if (form.control(_dobKey).value == null) {
-                        form.control(_dobKey).setErrors({'': true});
-                      }
                       final userId = context.loggedInUserUuid;
                       final projectId = context.projectId;
                       form.markAllAsTouched();
@@ -300,44 +297,6 @@ class _IndividualDetailsPageState
                               value: widget.isHeadOfHousehold,
                             ),
                           ),
-                          DigitDobPicker(
-                            datePickerFormControl: _dobKey,
-                            datePickerLabel: localizations.translate(
-                              i18.individualDetails.dobLabelText,
-                            ),
-                            ageFieldLabel: localizations.translate(
-                              i18.individualDetails.ageLabelText,
-                            ),
-                            yearsHintLabel: localizations.translate(
-                              i18.individualDetails.yearsHintText,
-                            ),
-                            monthsHintLabel: localizations.translate(
-                              i18.individualDetails.monthsHintText,
-                            ),
-                            separatorLabel: localizations.translate(
-                              i18.individualDetails.separatorLabelText,
-                            ),
-                            yearsAndMonthsErrMsg: localizations.translate(
-                              i18.individualDetails.yearsAndMonthsErrorText,
-                            ),
-                            onChangeOfFormControl: (formControl) {
-                              // Handle changes to the control's value here
-                              final value = formControl.value;
-                              if (value == null) {
-                                formControl.setErrors({'': true});
-                              } else {
-                                DigitDOBAge age =
-                                    DigitDateUtils.calculateAge(value);
-                                if ((age.years == 0 && age.months == 0) ||
-                                    age.months > 11 ||
-                                    (age.years >= 150 && age.months > 0)) {
-                                  formControl.setErrors({'': true});
-                                } else {
-                                  formControl.removeError('');
-                                }
-                              }
-                            },
-                          ),
                           BlocBuilder<AppInitializationBloc,
                               AppInitializationState>(
                             builder: (context, state) => state.maybeWhen(
@@ -408,12 +367,6 @@ class _IndividualDetailsPageState
     required FormGroup form,
     IndividualModel? oldIndividual,
   }) {
-    final dob = form.control(_dobKey).value as DateTime?;
-    String? dobString;
-    if (dob != null) {
-      dobString = DateFormat('dd/MM/yyyy').format(dob);
-    }
-
     var individual = oldIndividual;
     individual ??= IndividualModel(
       clientReferenceId: IdGen.i.identifier,
@@ -485,7 +438,6 @@ class _IndividualDetailsPageState
           : Gender.values
               .byName(form.control(_genderKey).value.toString().toLowerCase()),
       mobileNumber: form.control(_mobileNumberKey).value,
-      dateOfBirth: dobString,
       identifiers: [
         identifier.copyWith(
           identifierId: 'DEFAULT',
@@ -526,13 +478,6 @@ class _IndividualDetailsPageState
           Validators.maxLength(validation.individual.nameMaxLength),
         ],
         value: individual?.name?.familyName ?? '',
-      ),
-      _dobKey: FormControl<DateTime>(
-        value: individual?.dateOfBirth != null
-            ? DateFormat('dd/MM/yyyy').parse(
-                individual!.dateOfBirth!,
-              )
-            : null,
       ),
       _genderKey: FormControl<String>(
         validators: [

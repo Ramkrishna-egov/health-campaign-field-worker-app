@@ -258,35 +258,6 @@ class _BeneficiaryDetailsPageState
                                           ? '${householdMemberWrapper.headOfHousehold.name?.givenName ?? ''} ${householdMemberWrapper.headOfHousehold.name?.familyName ?? ''}'
                                           : '--',
                                   localizations.translate(
-                                    i18.common.coreCommonAge,
-                                  ): () {
-                                    final dob = context.beneficiaryType !=
-                                            BeneficiaryType.individual
-                                        ? householdMemberWrapper
-                                            .headOfHousehold.dateOfBirth
-                                        : state.selectedIndividual?.dateOfBirth;
-                                    if (dob == null || dob.isEmpty) {
-                                      return '--';
-                                    }
-
-                                    final int years =
-                                        DigitDateUtils.calculateAge(
-                                      DigitDateUtils.getFormattedDateToDateTime(
-                                            dob,
-                                          ) ??
-                                          DateTime.now(),
-                                    ).years;
-                                    final int months =
-                                        DigitDateUtils.calculateAge(
-                                      DigitDateUtils.getFormattedDateToDateTime(
-                                            dob,
-                                          ) ??
-                                          DateTime.now(),
-                                    ).months;
-
-                                    return "$years ${localizations.translate(i18.memberCard.deliverDetailsYearText)} $months ${localizations.translate(i18.memberCard.deliverDetailsMonthsText)}";
-                                  }(),
-                                  localizations.translate(
                                     i18.common.coreCommonGender,
                                   ): context.beneficiaryType !=
                                           BeneficiaryType.individual
