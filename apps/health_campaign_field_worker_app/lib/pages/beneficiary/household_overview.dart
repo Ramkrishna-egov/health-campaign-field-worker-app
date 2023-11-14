@@ -349,19 +349,15 @@ class _HouseholdOverviewPageState
                                                 : null;
                                             final ageInYears =
                                                 DigitDateUtils.calculateAge(
-                                              DigitDateUtils
-                                                      .getFormattedDateToDateTime(
-                                                    e.dateOfBirth!,
-                                                  ) ??
-                                                  DateTime.now(),
+                                              e.dateOfBirth != null ? DigitDateUtils.getFormattedDateToDateTime(
+                                                  e.dateOfBirth!,
+                                                    ) ?? DateTime.now() : DateTime.now(),
                                             ).years;
                                             final ageInMonths =
                                                 DigitDateUtils.calculateAge(
-                                              DigitDateUtils
-                                                      .getFormattedDateToDateTime(
-                                                    e.dateOfBirth!,
-                                                  ) ??
-                                                  DateTime.now(),
+                                              e.dateOfBirth != null ? DigitDateUtils.getFormattedDateToDateTime(
+                                                  e.dateOfBirth!,
+                                                    ) ?? DateTime.now() : DateTime.now(),
                                             ).months;
                                             final currentCycle = projectState
                                                 .projectType?.cycles
