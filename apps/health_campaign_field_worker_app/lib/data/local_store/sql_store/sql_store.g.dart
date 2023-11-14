@@ -11095,6 +11095,7 @@ class ProjectBeneficiaryData extends DataClass
   final String? id;
   final String? projectId;
   final String? beneficiaryId;
+  final String? tag;
   final String? beneficiaryClientReferenceId;
   final String? auditCreatedBy;
   final bool? nonRecoverableError;
@@ -11115,6 +11116,7 @@ class ProjectBeneficiaryData extends DataClass
       {this.id,
       this.projectId,
       this.beneficiaryId,
+      this.tag,
       this.beneficiaryClientReferenceId,
       this.auditCreatedBy,
       this.nonRecoverableError,
@@ -11141,6 +11143,8 @@ class ProjectBeneficiaryData extends DataClass
           .mapFromDatabaseResponse(data['${effectivePrefix}project_id']),
       beneficiaryId: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}beneficiary_id']),
+      tag: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}tag']),
       beneficiaryClientReferenceId: const StringType().mapFromDatabaseResponse(
           data['${effectivePrefix}beneficiary_client_reference_id']),
       auditCreatedBy: const StringType()
@@ -11186,6 +11190,9 @@ class ProjectBeneficiaryData extends DataClass
     }
     if (!nullToAbsent || beneficiaryId != null) {
       map['beneficiary_id'] = Variable<String?>(beneficiaryId);
+    }
+    if (!nullToAbsent || tag != null) {
+      map['tag'] = Variable<String?>(tag);
     }
     if (!nullToAbsent || beneficiaryClientReferenceId != null) {
       map['beneficiary_client_reference_id'] =
@@ -11244,6 +11251,7 @@ class ProjectBeneficiaryData extends DataClass
       beneficiaryId: beneficiaryId == null && nullToAbsent
           ? const Value.absent()
           : Value(beneficiaryId),
+      tag: tag == null && nullToAbsent ? const Value.absent() : Value(tag),
       beneficiaryClientReferenceId:
           beneficiaryClientReferenceId == null && nullToAbsent
               ? const Value.absent()
@@ -11299,6 +11307,7 @@ class ProjectBeneficiaryData extends DataClass
       id: serializer.fromJson<String?>(json['id']),
       projectId: serializer.fromJson<String?>(json['projectId']),
       beneficiaryId: serializer.fromJson<String?>(json['beneficiaryId']),
+      tag: serializer.fromJson<String?>(json['tag']),
       beneficiaryClientReferenceId:
           serializer.fromJson<String?>(json['beneficiaryClientReferenceId']),
       auditCreatedBy: serializer.fromJson<String?>(json['auditCreatedBy']),
@@ -11326,6 +11335,7 @@ class ProjectBeneficiaryData extends DataClass
       'id': serializer.toJson<String?>(id),
       'projectId': serializer.toJson<String?>(projectId),
       'beneficiaryId': serializer.toJson<String?>(beneficiaryId),
+      'tag': serializer.toJson<String?>(tag),
       'beneficiaryClientReferenceId':
           serializer.toJson<String?>(beneficiaryClientReferenceId),
       'auditCreatedBy': serializer.toJson<String?>(auditCreatedBy),
@@ -11350,6 +11360,7 @@ class ProjectBeneficiaryData extends DataClass
           {String? id,
           String? projectId,
           String? beneficiaryId,
+          String? tag,
           String? beneficiaryClientReferenceId,
           String? auditCreatedBy,
           bool? nonRecoverableError,
@@ -11370,6 +11381,7 @@ class ProjectBeneficiaryData extends DataClass
         id: id ?? this.id,
         projectId: projectId ?? this.projectId,
         beneficiaryId: beneficiaryId ?? this.beneficiaryId,
+        tag: tag ?? this.tag,
         beneficiaryClientReferenceId:
             beneficiaryClientReferenceId ?? this.beneficiaryClientReferenceId,
         auditCreatedBy: auditCreatedBy ?? this.auditCreatedBy,
@@ -11394,6 +11406,7 @@ class ProjectBeneficiaryData extends DataClass
           ..write('id: $id, ')
           ..write('projectId: $projectId, ')
           ..write('beneficiaryId: $beneficiaryId, ')
+          ..write('tag: $tag, ')
           ..write(
               'beneficiaryClientReferenceId: $beneficiaryClientReferenceId, ')
           ..write('auditCreatedBy: $auditCreatedBy, ')
@@ -11420,6 +11433,7 @@ class ProjectBeneficiaryData extends DataClass
       id,
       projectId,
       beneficiaryId,
+      tag,
       beneficiaryClientReferenceId,
       auditCreatedBy,
       nonRecoverableError,
@@ -11443,6 +11457,7 @@ class ProjectBeneficiaryData extends DataClass
           other.id == this.id &&
           other.projectId == this.projectId &&
           other.beneficiaryId == this.beneficiaryId &&
+          other.tag == this.tag &&
           other.beneficiaryClientReferenceId ==
               this.beneficiaryClientReferenceId &&
           other.auditCreatedBy == this.auditCreatedBy &&
@@ -11467,6 +11482,7 @@ class ProjectBeneficiaryCompanion
   final Value<String?> id;
   final Value<String?> projectId;
   final Value<String?> beneficiaryId;
+  final Value<String?> tag;
   final Value<String?> beneficiaryClientReferenceId;
   final Value<String?> auditCreatedBy;
   final Value<bool?> nonRecoverableError;
@@ -11487,6 +11503,7 @@ class ProjectBeneficiaryCompanion
     this.id = const Value.absent(),
     this.projectId = const Value.absent(),
     this.beneficiaryId = const Value.absent(),
+    this.tag = const Value.absent(),
     this.beneficiaryClientReferenceId = const Value.absent(),
     this.auditCreatedBy = const Value.absent(),
     this.nonRecoverableError = const Value.absent(),
@@ -11508,6 +11525,7 @@ class ProjectBeneficiaryCompanion
     this.id = const Value.absent(),
     this.projectId = const Value.absent(),
     this.beneficiaryId = const Value.absent(),
+    this.tag = const Value.absent(),
     this.beneficiaryClientReferenceId = const Value.absent(),
     this.auditCreatedBy = const Value.absent(),
     this.nonRecoverableError = const Value.absent(),
@@ -11530,6 +11548,7 @@ class ProjectBeneficiaryCompanion
     Expression<String?>? id,
     Expression<String?>? projectId,
     Expression<String?>? beneficiaryId,
+    Expression<String?>? tag,
     Expression<String?>? beneficiaryClientReferenceId,
     Expression<String?>? auditCreatedBy,
     Expression<bool?>? nonRecoverableError,
@@ -11551,6 +11570,7 @@ class ProjectBeneficiaryCompanion
       if (id != null) 'id': id,
       if (projectId != null) 'project_id': projectId,
       if (beneficiaryId != null) 'beneficiary_id': beneficiaryId,
+      if (tag != null) 'tag': tag,
       if (beneficiaryClientReferenceId != null)
         'beneficiary_client_reference_id': beneficiaryClientReferenceId,
       if (auditCreatedBy != null) 'audit_created_by': auditCreatedBy,
@@ -11578,6 +11598,7 @@ class ProjectBeneficiaryCompanion
       {Value<String?>? id,
       Value<String?>? projectId,
       Value<String?>? beneficiaryId,
+      Value<String?>? tag,
       Value<String?>? beneficiaryClientReferenceId,
       Value<String?>? auditCreatedBy,
       Value<bool?>? nonRecoverableError,
@@ -11598,6 +11619,7 @@ class ProjectBeneficiaryCompanion
       id: id ?? this.id,
       projectId: projectId ?? this.projectId,
       beneficiaryId: beneficiaryId ?? this.beneficiaryId,
+      tag: tag ?? this.tag,
       beneficiaryClientReferenceId:
           beneficiaryClientReferenceId ?? this.beneficiaryClientReferenceId,
       auditCreatedBy: auditCreatedBy ?? this.auditCreatedBy,
@@ -11629,6 +11651,9 @@ class ProjectBeneficiaryCompanion
     }
     if (beneficiaryId.present) {
       map['beneficiary_id'] = Variable<String?>(beneficiaryId.value);
+    }
+    if (tag.present) {
+      map['tag'] = Variable<String?>(tag.value);
     }
     if (beneficiaryClientReferenceId.present) {
       map['beneficiary_client_reference_id'] =
@@ -11688,6 +11713,7 @@ class ProjectBeneficiaryCompanion
           ..write('id: $id, ')
           ..write('projectId: $projectId, ')
           ..write('beneficiaryId: $beneficiaryId, ')
+          ..write('tag: $tag, ')
           ..write(
               'beneficiaryClientReferenceId: $beneficiaryClientReferenceId, ')
           ..write('auditCreatedBy: $auditCreatedBy, ')
@@ -11731,6 +11757,11 @@ class $ProjectBeneficiaryTable extends ProjectBeneficiary
   @override
   late final GeneratedColumn<String?> beneficiaryId = GeneratedColumn<String?>(
       'beneficiary_id', aliasedName, true,
+      type: const StringType(), requiredDuringInsert: false);
+  final VerificationMeta _tagMeta = const VerificationMeta('tag');
+  @override
+  late final GeneratedColumn<String?> tag = GeneratedColumn<String?>(
+      'tag', aliasedName, true,
       type: const StringType(), requiredDuringInsert: false);
   final VerificationMeta _beneficiaryClientReferenceIdMeta =
       const VerificationMeta('beneficiaryClientReferenceId');
@@ -11837,6 +11868,7 @@ class $ProjectBeneficiaryTable extends ProjectBeneficiary
         id,
         projectId,
         beneficiaryId,
+        tag,
         beneficiaryClientReferenceId,
         auditCreatedBy,
         nonRecoverableError,
@@ -11876,6 +11908,10 @@ class $ProjectBeneficiaryTable extends ProjectBeneficiary
           _beneficiaryIdMeta,
           beneficiaryId.isAcceptableOrUnknown(
               data['beneficiary_id']!, _beneficiaryIdMeta));
+    }
+    if (data.containsKey('tag')) {
+      context.handle(
+          _tagMeta, tag.isAcceptableOrUnknown(data['tag']!, _tagMeta));
     }
     if (data.containsKey('beneficiary_client_reference_id')) {
       context.handle(

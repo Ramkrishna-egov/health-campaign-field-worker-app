@@ -39,6 +39,7 @@ class ProjectBeneficiaryLocalRepository
           tenantId: e.tenantId,
           beneficiaryClientReferenceId: e.beneficiaryClientReferenceId,
           id: e.id,
+          tag: e.tag,
           rowVersion: e.rowVersion,
           isDeleted: e.isDeleted,
           beneficiaryId: e.beneficiaryId,
@@ -65,6 +66,10 @@ class ProjectBeneficiaryLocalRepository
           ..where(
             buildAnd(
               [
+                if (query.tag != null)
+                  sql.projectBeneficiary.tag.equals(
+                    query.tag,
+                  ),
                 if (query.clientReferenceId != null)
                   sql.projectBeneficiary.clientReferenceId.isIn(
                     query.clientReferenceId!,
@@ -112,6 +117,7 @@ class ProjectBeneficiaryLocalRepository
             beneficiaryId: projectBeneficiary.beneficiaryId,
             dateOfRegistration: projectBeneficiary.dateOfRegistration,
             projectId: projectBeneficiary.projectId,
+            tag: projectBeneficiary.tag,
             auditDetails: AuditDetails(
               createdTime: projectBeneficiary.auditCreatedTime!,
               createdBy: projectBeneficiary.auditCreatedBy!,
