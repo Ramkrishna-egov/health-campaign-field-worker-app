@@ -83,7 +83,7 @@ class _ViewBeneficiaryCardState extends LocalizedState<ViewBeneficiaryCard> {
     ];
     final filteredHeaderList = context.beneficiaryType !=
             BeneficiaryType.individual
-        ? headerList.where((element) => element.cellKey != 'delivery').toList()
+        ? headerList.where((element) => element.cellKey != 'delivery' && element.cellKey != 'age').toList()
         : headerList;
     final bloc = context.read<ProjectBloc>().state;
     final currentCycle = bloc.projectType?.cycles?.firstWhereOrNull(
@@ -124,16 +124,14 @@ class _ViewBeneficiaryCardState extends LocalizedState<ViewBeneficiaryCard> {
                 .toList()
             : null;
         final ageInYears = DigitDateUtils.calculateAge(
-          DigitDateUtils.getFormattedDateToDateTime(
-                e.dateOfBirth!,
-              ) ??
-              DateTime.now(),
+          e.dateOfBirth != null ? DigitDateUtils.getFormattedDateToDateTime(
+            e.dateOfBirth!,
+          ) ?? DateTime.now() : DateTime.now(),
         ).years;
         final ageInMonths = DigitDateUtils.calculateAge(
-          DigitDateUtils.getFormattedDateToDateTime(
-                e.dateOfBirth!,
-              ) ??
-              DateTime.now(),
+          e.dateOfBirth != null ? DigitDateUtils.getFormattedDateToDateTime(
+            e.dateOfBirth!,
+          ) ?? DateTime.now() : DateTime.now(),
         ).months;
 
         final isNotEligible = !checkEligibilityForAgeAndSideEffect(
@@ -226,7 +224,7 @@ class _ViewBeneficiaryCardState extends LocalizedState<ViewBeneficiaryCard> {
         return TableDataRow(
           context.beneficiaryType != BeneficiaryType.individual
               ? rowTableData
-                  .where((element) => element.cellKey != 'delivery')
+                  .where((element) => element.cellKey != 'delivery' && element.cellKey != 'age')
                   .toList()
               : rowTableData,
         );
@@ -235,16 +233,14 @@ class _ViewBeneficiaryCardState extends LocalizedState<ViewBeneficiaryCard> {
     ).toList();
 
     final ageInYears = DigitDateUtils.calculateAge(
-      DigitDateUtils.getFormattedDateToDateTime(
+      householdMember.headOfHousehold.dateOfBirth != null ? DigitDateUtils.getFormattedDateToDateTime(
             householdMember.headOfHousehold.dateOfBirth!,
-          ) ??
-          DateTime.now(),
+          ) ?? DateTime.now() : DateTime.now(),
     ).years;
     final ageInMonths = DigitDateUtils.calculateAge(
-      DigitDateUtils.getFormattedDateToDateTime(
+      householdMember.headOfHousehold.dateOfBirth != null ? DigitDateUtils.getFormattedDateToDateTime(
             householdMember.headOfHousehold.dateOfBirth!,
-          ) ??
-          DateTime.now(),
+          ) ?? DateTime.now() : DateTime.now(),
     ).months;
 
     final isNotEligible = !checkEligibilityForAgeAndSideEffect(

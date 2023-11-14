@@ -349,19 +349,15 @@ class _HouseholdOverviewPageState
                                                 : null;
                                             final ageInYears =
                                                 DigitDateUtils.calculateAge(
-                                              DigitDateUtils
-                                                      .getFormattedDateToDateTime(
-                                                    e.dateOfBirth!,
-                                                  ) ??
-                                                  DateTime.now(),
+                                              e.dateOfBirth != null ? DigitDateUtils.getFormattedDateToDateTime(
+                                                  e.dateOfBirth!,
+                                                    ) ?? DateTime.now() : DateTime.now(),
                                             ).years;
                                             final ageInMonths =
                                                 DigitDateUtils.calculateAge(
-                                              DigitDateUtils
-                                                      .getFormattedDateToDateTime(
-                                                    e.dateOfBirth!,
-                                                  ) ??
-                                                  DateTime.now(),
+                                              e.dateOfBirth != null ? DigitDateUtils.getFormattedDateToDateTime(
+                                                  e.dateOfBirth!,
+                                                    ) ?? DateTime.now() : DateTime.now(),
                                             ).months;
                                             final currentCycle = projectState
                                                 .projectType?.cycles
@@ -545,28 +541,6 @@ class _HouseholdOverviewPageState
                                               // TODO Need to handle the null check
                                               name:
                                                   '${e.name?.givenName ?? ' - '} ${e.name?.familyName ?? ' - '}',
-                                              years: (e.dateOfBirth == null
-                                                      ? null
-                                                      : DigitDateUtils
-                                                          .calculateAge(
-                                                          DigitDateUtils
-                                                                  .getFormattedDateToDateTime(
-                                                                e.dateOfBirth!,
-                                                              ) ??
-                                                              DateTime.now(),
-                                                        ).years) ??
-                                                  0,
-                                              months: (e.dateOfBirth == null
-                                                      ? null
-                                                      : DigitDateUtils
-                                                          .calculateAge(
-                                                          DigitDateUtils
-                                                                  .getFormattedDateToDateTime(
-                                                                e.dateOfBirth!,
-                                                              ) ??
-                                                              DateTime.now(),
-                                                        ).months) ??
-                                                  0,
                                               gender: e.gender?.name,
                                               isBeneficiaryRefused:
                                                   isBeneficiaryRefused &&
