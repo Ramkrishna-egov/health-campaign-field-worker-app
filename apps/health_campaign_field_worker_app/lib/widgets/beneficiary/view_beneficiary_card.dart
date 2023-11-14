@@ -157,8 +157,7 @@ class _ViewBeneficiaryCardState extends LocalizedState<ViewBeneficiaryCard> {
             ) &&
             !checkStatus(taskdata, currentCycle);
         final isBeneficiaryReferred = checkIfBeneficiaryReferred(
-          referralData,
-          currentCycle ?? const Cycle(),
+          taskdata,
         );
 
         final isHead = e.clientReferenceId ==
