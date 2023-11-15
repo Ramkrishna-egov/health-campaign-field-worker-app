@@ -512,51 +512,15 @@ class _DeliverInterventionPageState
                                                   CrossAxisAlignment.start,
                                               mainAxisSize: MainAxisSize.min,
                                               children: [
-                                                Text(
-                                                  localizations.translate(
-                                                    i18.deliverIntervention
-                                                        .deliveryCommentLabel,
+                                                DigitTextFormField(
+                                                  formControlName: _deliveryCommentKey,
+                                                  label: localizations.translate(
+                                                    i18.deliverIntervention.deliveryCommentLabel,
                                                   ),
-                                                  style: theme
-                                                      .textTheme.displayMedium,
-                                                ),
-                                                BlocBuilder<
-                                                    AppInitializationBloc,
-                                                    AppInitializationState>(
-                                                  builder: (context, state) {
-                                                    if (state
-                                                        is! AppInitialized) {
-                                                      return const Offstage();
-                                                    }
-
-                                                    final deliveryCommentOptions = state
-                                                            .appConfiguration
-                                                            .deliveryCommentOptions ??
-                                                        <DeliveryCommentOptions>[];
-
-                                                    return DigitReactiveDropdown<
-                                                        String>(
-                                                      label: localizations
-                                                          .translate(
-                                                        i18.deliverIntervention
-                                                            .deliveryCommentLabel,
-                                                      ),
-                                                      valueMapper: (value) =>
-                                                          value,
-                                                      initialValue:
-                                                          deliveryCommentOptions
-                                                              .firstOrNull
-                                                              ?.name,
-                                                      menuItems:
-                                                          deliveryCommentOptions
-                                                              .map((e) {
-                                                        return localizations
-                                                            .translate(e.name);
-                                                      }).toList(),
-                                                      formControlName:
-                                                          _deliveryCommentKey,
-                                                    );
-                                                  },
+                                                  labelStyle: theme
+                                                      .textTheme.labelMedium,
+                                                  maxLength: 100,
+                                                  isRequired: false,
                                                 ),
                                               ],
                                             ),

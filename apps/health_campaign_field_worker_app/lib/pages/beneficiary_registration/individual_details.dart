@@ -406,7 +406,7 @@ class _IndividualDetailsPageState
                             label: localizations.translate(
                               i18.individualDetails.mobileNumberLabelText,
                             ),
-                            maxLength: 9,
+                            maxLength: 10,
                             inputFormatters: [
                               FilteringTextInputFormatter.allow(
                                 RegExp("[0-9]"),
