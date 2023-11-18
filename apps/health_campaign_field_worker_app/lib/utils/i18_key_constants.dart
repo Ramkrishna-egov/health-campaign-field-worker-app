@@ -476,7 +476,7 @@ class HouseholdOverView {
       'HOUSEHOLD_OVER_VIEW_HOUSEHOLD_HEAD_NAME_LABEL';
 
   String get householdOverViewActionText =>
-      'HOUSEHOLD_OVER_VIEW_ACTION_TEXT_SPAQ';
+      'HOUSEHOLD_OVER_VIEW_ACTION_TEXT';
 
   String get viewDeliveryLabel => 'VIEW_DELIVERY_DETAILS_LABEL';
 
