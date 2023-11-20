@@ -299,13 +299,19 @@ class IndividualDetails {
 
   String get individualsDetailsLabelText => 'INDIVIDUAL_LABEL_TEXT';
 
+  String get headHouseholdDetailsLabelText => 'HOUSEHOLD_HEAD_LABEL_TEXT';
+
   String get childIndividualsDetailsLabelText => 'CHILD_INDIVIDUAL_LABEL_TEXT';
 
   String get nameLabelText => 'INDIVIDUAL_NAME_LABEL_TEXT';
 
   String get firstNameLabelText => 'INDIVIDUAL_FIRST_NAME_LABEL_TEXT';
 
+  String get firstNameHeadLabelText => 'HEAD_HOUSEHOLD_FIRST_NAME_LABEL_TEXT';
+
   String get lastNameLabelText => 'INDIVIDUAL_LAST_NAME_LABEL_TEXT';
+  
+  String get lastNameHeadLabelText => 'HEAD_HOUSEHOLD_LAST_NAME_LABEL_TEXT';
 
   String get childFirstNameLabelText =>
       'CHILD_INDIVIDUAL_FIRST_NAME_LABEL_TEXT';

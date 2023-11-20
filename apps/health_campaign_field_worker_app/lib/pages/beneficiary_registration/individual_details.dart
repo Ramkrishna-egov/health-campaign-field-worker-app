@@ -247,7 +247,7 @@ class _IndividualDetailsPageState
                         localizations.translate(
                           widget.isHeadOfHousehold
                               ? i18
-                                  .individualDetails.individualsDetailsLabelText
+                                  .individualDetails.headHouseholdDetailsLabelText
                               : i18.individualDetails
                                   .childIndividualsDetailsLabelText,
                         ),
@@ -259,7 +259,7 @@ class _IndividualDetailsPageState
                             formControlName: _individualNameKey,
                             label: localizations.translate(
                               widget.isHeadOfHousehold
-                                  ? i18.individualDetails.firstNameLabelText
+                                  ? i18.individualDetails.firstNameHeadLabelText
                                   : i18.individualDetails
                                       .childFirstNameLabelText,
                             ),
@@ -282,7 +282,7 @@ class _IndividualDetailsPageState
                             formControlName: _individualLastNameKey,
                             label: localizations.translate(
                               widget.isHeadOfHousehold
-                                  ? i18.individualDetails.lastNameLabelText
+                                  ? i18.individualDetails.lastNameHeadLabelText
                                   : i18
                                       .individualDetails.childLastNameLabelText,
                             ),
