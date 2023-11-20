@@ -130,7 +130,8 @@ class _SearchBeneficiaryPageState
                                       }
                                     },
                                   ),
-                                  locationState.latitude != null
+                                  locationState.latitude != null &&
+                                          !context.isRegistrar
                                       ? Row(
                                           children: [
                                             Switch(
@@ -264,7 +265,7 @@ class _SearchBeneficiaryPageState
               },
             ),
             bottomNavigationBar: SizedBox(
-              height: 150,
+              height: 100,
               child: DigitCard(
                 margin: const EdgeInsets.only(left: 0, right: 0, top: 10),
                 child: Column(
@@ -297,32 +298,41 @@ class _SearchBeneficiaryPageState
                                 ));
                               };
 
-                        return DigitElevatedButton(
-                          onPressed: onPressed,
-                          child: Center(
-                            child: Text(localizations.translate(
-                              i18.searchBeneficiary.beneficiaryAddActionLabel,
-                            )),
-                          ),
-                        );
+                        return !context.isRegistrar
+                            ? const SizedBox(
+                                height: null,
+                              )
+                            : DigitElevatedButton(
+                                onPressed: onPressed,
+                                child: Center(
+                                  child: Text(localizations.translate(
+                                    i18.searchBeneficiary
+                                        .beneficiaryAddActionLabel,
+                                  )),
+                                ),
+                              );
                       },
                     ),
                     const SizedBox(
                       height: kPadding,
                     ),
-                    DigitOutlineIconButton(
-                      onPressed: () {
-                        context.router.push(QRScannerRoute(
-                          quantity: 1,
-                          isGS1code: false,
-                          sinlgleValue: true,
-                        ));
-                      },
-                      icon: Icons.qr_code,
-                      label: localizations.translate(
-                        i18.deliverIntervention.scannerLabel,
-                      ),
-                    ),
+                    context.isRegistrar
+                        ? const SizedBox(
+                            height: null,
+                          )
+                        : DigitOutlineIconButton(
+                            onPressed: () {
+                              context.router.push(QRScannerRoute(
+                                quantity: 1,
+                                isGS1code: false,
+                                sinlgleValue: true,
+                              ));
+                            },
+                            icon: Icons.qr_code,
+                            label: localizations.translate(
+                              i18.deliverIntervention.scannerLabel,
+                            ),
+                          ),
                   ],
                 ),
               ),

@@ -631,7 +631,7 @@ class _HouseholdOverviewPageState
                   },
                 ),
           bottomNavigationBar: Offstage(
-            offstage: beneficiaryType == BeneficiaryType.individual,
+            offstage: beneficiaryType == BeneficiaryType.individual || context.isRegistrar,
             child: SizedBox(
               height: 85,
               child: BlocBuilder<DeliverInterventionBloc,
