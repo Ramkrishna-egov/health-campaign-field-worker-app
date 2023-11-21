@@ -103,25 +103,11 @@ class MemberCard extends StatelessWidget {
                         widget: ActionCard(
                           items: [
                             ActionCardModel(
-                              icon: Icons.person,
-                              label: localizations.translate(
-                                i18.memberCard.assignAsHouseholdhead,
-                              ),
-                              action: isHead ? null : setAsHeadAction,
-                            ),
-                            ActionCardModel(
                               icon: Icons.edit,
                               label: localizations.translate(
                                 i18.memberCard.editIndividualDetails,
                               ),
                               action: editMemberAction,
-                            ),
-                            ActionCardModel(
-                              icon: Icons.delete,
-                              label: localizations.translate(
-                                i18.memberCard.deleteIndividualActionText,
-                              ),
-                              action: isHead ? null : deleteMemberAction,
                             ),
                           ],
                         ),
@@ -151,12 +137,12 @@ class MemberCard extends StatelessWidget {
                     style: theme.textTheme.bodyMedium,
                   ),
                 ),
-                if(years != null)
+                if (years != null)
                   Expanded(
                     child: Text(
                       " | $years ${localizations.translate(i18.memberCard.deliverDetailsYearText)} $months ${localizations.translate(i18.memberCard.deliverDetailsMonthsText)}",
                       style: theme.textTheme.bodyMedium,
-                    ), 
+                    ),
                   ),
               ],
             ),

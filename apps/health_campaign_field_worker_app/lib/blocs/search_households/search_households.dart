@@ -442,9 +442,7 @@ class SearchHouseholdsBloc
       ...firstNameClientRefResults,
       ...lastNameClientRefResults,
     ]
-        .where((obj) =>
-            uniqueClientRefIds.contains(obj.clientReferenceId) &&
-            obj.auditDetails?.createdBy == userUid)
+        .where((obj) => uniqueClientRefIds.contains(obj.clientReferenceId))
         .toList();
 
     // Search for individual results based on the search text only.
@@ -477,11 +475,7 @@ class SearchHouseholdsBloc
     List<IndividualModel> results = [
       ...firstNameResults,
       ...lastNameResults,
-    ]
-        .where((obj) =>
-            uniqueIds.contains(obj.clientReferenceId) &&
-            obj.auditDetails?.createdBy == userUid)
-        .toList();
+    ].where((obj) => uniqueIds.contains(obj.clientReferenceId)).toList();
 
     // Initialize a list to store household members.
     final householdMembers = <HouseholdMemberModel>[];

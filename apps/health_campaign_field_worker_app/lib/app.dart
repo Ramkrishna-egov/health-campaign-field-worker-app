@@ -120,7 +120,7 @@ class MainApplicationState extends State<MainApplication>
             ],
             child: BlocBuilder<AppInitializationBloc, AppInitializationState>(
               builder: (context, appConfigState) {
-                const defaultLocale = Locale('en', 'MZ');
+                const defaultLocale = Locale('en', 'LB');
 
                 return BlocBuilder<AuthBloc, AuthState>(
                   builder: (context, authState) {
@@ -163,7 +163,7 @@ class MainApplicationState extends State<MainApplication>
                                             .join(',')
                                             .toString(),
                                         tenantId: appConfig.tenantId.toString(),
-                                        locale: 'en_MZ',
+                                        locale: firstLanguage,
                                         path: Constants.localizationApiPath,
                                       ),
                                     )
