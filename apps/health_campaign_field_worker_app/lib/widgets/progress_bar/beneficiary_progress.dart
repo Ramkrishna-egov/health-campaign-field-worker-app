@@ -77,15 +77,24 @@ class _BeneficiaryProgressBarState extends State<BeneficiaryProgressBar> {
           );
           List<TaskModel> results =
               await taskRepository.search(taskSearchQuery);
+
+          results = results
+              .where((result) =>
+                  DateTime.fromMillisecondsSinceEpoch(
+                          result.clientAuditDetails!.createdTime,)
+                      .isAfter(gte) &&
+                  DateTime.fromMillisecondsSinceEpoch(
+                          result.clientAuditDetails!.createdTime,)
+                      .isBefore(lte))
+              .toList();
+
           // Grouping results by client reference ID
           Map<String, List<TaskModel>> clientRefIdVsTask = {};
           clientReferenceIdsList.forEach((element) {
             var successfulAdministered = results
                 .where((result) =>
                     result.projectBeneficiaryClientReferenceId == element &&
-                    result.status == Status.administeredSuccess.toValue() &&
-                    result.createdDateTime!.isAfter(gte) &&
-                    result.createdDateTime!.isBefore(now))
+                    result.status == Status.administeredSuccess.toValue())
                 .toList();
             clientRefIdVsTask[element] = clientRefIdVsTask[element] ?? [];
             clientRefIdVsTask[element]?.addAll(successfulAdministered);
