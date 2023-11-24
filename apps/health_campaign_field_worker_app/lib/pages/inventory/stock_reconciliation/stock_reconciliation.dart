@@ -312,7 +312,7 @@ class _StockReconciliationPageState
                                             child: Icon(Icons.search),
                                           ),
                                           formControlName: _facilityKey,
-                                          readOnly: true,
+                                          readOnly: false,
                                           isRequired: true,
                                           onTap: () async {
                                             final stockReconciliationBloc =
