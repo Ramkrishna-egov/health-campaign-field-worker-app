@@ -310,7 +310,7 @@ class IndividualDetails {
   String get firstNameHeadLabelText => 'HEAD_HOUSEHOLD_FIRST_NAME_LABEL_TEXT';
 
   String get lastNameLabelText => 'INDIVIDUAL_LAST_NAME_LABEL_TEXT';
-  
+
   String get lastNameHeadLabelText => 'HEAD_HOUSEHOLD_LAST_NAME_LABEL_TEXT';
 
   String get childFirstNameLabelText =>
@@ -1129,6 +1129,9 @@ class ReferBeneficiary {
   String get dialogContent => 'REFERRAL_CONFIRMATION_DIALOG_CONTENT';
   String get dialogSuccess => 'REFERRAL_CONFIRMATION_SUCCESS_LABEL';
   String get dialogCancel => 'REFERRAL_CONFIRMATION_CANCEL_LABEL';
+  String get referredDialogTitle => 'REFERRAL_CONFIRMATION_DIALOG_BOX_TITLE';
+  String get referredDialogContent =>
+      'REFERRAL_CONFIRMATION_DIALOG_BOX_CONTENT';
 }
 
 class IneligibilityReasons {
