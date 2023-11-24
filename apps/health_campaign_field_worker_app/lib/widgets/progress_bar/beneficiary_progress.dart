@@ -65,9 +65,7 @@ class _BeneficiaryProgressBarState extends State<BeneficiaryProgressBar> {
               await repository.search(beneficiarySearchModel);
           List<ProjectBeneficiaryModel> filteredProjectBeneficiaries = data
               .where((element) =>
-                  element.dateOfRegistrationTime.isAfter(gte) &&
-                  (element.isDeleted == false || element.isDeleted == null) &&
-                  element.dateOfRegistrationTime.isBefore(lte))
+                  (element.isDeleted == false || element.isDeleted == null))
               .toList();
           List<String> clientReferenceIdsList = filteredProjectBeneficiaries
               .map((element) => element.clientReferenceId)
@@ -85,7 +83,9 @@ class _BeneficiaryProgressBarState extends State<BeneficiaryProgressBar> {
             var successfulAdministered = results
                 .where((result) =>
                     result.projectBeneficiaryClientReferenceId == element &&
-                    result.status == Status.administeredSuccess.toValue())
+                    result.status == Status.administeredSuccess.toValue() &&
+                    result.createdDateTime!.isAfter(gte) &&
+                    result.createdDateTime!.isBefore(now))
                 .toList();
             clientRefIdVsTask[element] = clientRefIdVsTask[element] ?? [];
             clientRefIdVsTask[element]?.addAll(successfulAdministered);
