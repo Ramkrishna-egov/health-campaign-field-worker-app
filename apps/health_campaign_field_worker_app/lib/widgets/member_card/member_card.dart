@@ -224,12 +224,12 @@ class MemberCard extends StatelessWidget {
                                           context,
                                           options: DigitDialogOptions(
                                             titleText: localizations.translate(
-                                              i18.referBeneficiary.referredDialogTitle,
+                                              i18.referBeneficiary.dialogTitle,
                                             ),
                                             contentText:
                                                 localizations.translate(
                                               i18.referBeneficiary
-                                                  .referredDialogContent,
+                                                  .dialogContent,
                                             ),
                                             secondaryAction: DigitDialogActions(
                                               label: localizations.translate(

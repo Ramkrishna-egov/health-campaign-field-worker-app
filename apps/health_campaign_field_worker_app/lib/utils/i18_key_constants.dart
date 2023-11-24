@@ -1126,9 +1126,7 @@ class ReferBeneficiary {
   String get referralDetails => 'REFERRAL_DETAILS_HEADER';
   String get facilityValidationMessage => 'PLEASE_ENTER_VALID_FACILITY';
   String get dialogTitle => 'REFERRAL_CONFIRMATION_DIALOG_TITLE';
-  String get referredDialogTitle => 'REFERRAL_CONFIRMATION_DIALOG_BOX_TITLE';
   String get dialogContent => 'REFERRAL_CONFIRMATION_DIALOG_CONTENT';
-  String get referredDialogContent => 'REFERRAL_CONFIRMATION_DIALOG_BOX_CONTENT';
   String get dialogSuccess => 'REFERRAL_CONFIRMATION_SUCCESS_LABEL';
   String get dialogCancel => 'REFERRAL_CONFIRMATION_CANCEL_LABEL';
 }
