@@ -444,9 +444,13 @@ class MemberCard extends StatelessWidget {
                                                   (tasks ?? [])
                                                       .where((element) =>
                                                           element.status !=
-                                                          Status
-                                                              .beneficiaryRefused
-                                                              .toValue())
+                                                              Status
+                                                                  .beneficiaryRefused
+                                                                  .toValue() &&
+                                                          element.status !=
+                                                              Status
+                                                                  .beneficiaryReferred
+                                                                  .toValue())
                                                       .toList()
                                                       .isNotEmpty &&
                                                   !checkStatus(
@@ -600,9 +604,13 @@ class MemberCard extends StatelessWidget {
                                                   (tasks ?? [])
                                                       .where((element) =>
                                                           element.status !=
-                                                          Status
-                                                              .beneficiaryRefused
-                                                              .toValue())
+                                                              Status
+                                                                  .beneficiaryRefused
+                                                                  .toValue() &&
+                                                          element.status !=
+                                                              Status
+                                                                  .beneficiaryReferred
+                                                                  .toValue())
                                                       .toList()
                                                       .isNotEmpty
                                               ? () async {
@@ -644,9 +652,13 @@ class MemberCard extends StatelessWidget {
                                                   (tasks ?? [])
                                                       .where((element) =>
                                                           element.status !=
-                                                          Status
-                                                              .beneficiaryRefused
-                                                              .toValue())
+                                                              Status
+                                                                  .beneficiaryRefused
+                                                                  .toValue() &&
+                                                          element.status !=
+                                                              Status
+                                                                  .beneficiaryReferred
+                                                                  .toValue())
                                                       .toList()
                                                       .isNotEmpty &&
                                                   !checkStatus(
