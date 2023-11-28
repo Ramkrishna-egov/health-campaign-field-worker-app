@@ -248,8 +248,8 @@ class _IndividualDetailsPageState
                       Text(
                         localizations.translate(
                           widget.isHeadOfHousehold
-                              ? i18
-                                  .individualDetails.headHouseholdDetailsLabelText
+                              ? i18.individualDetails
+                                  .headHouseholdDetailsLabelText
                               : i18.individualDetails
                                   .childIndividualsDetailsLabelText,
                         ),
@@ -278,6 +278,9 @@ class _IndividualDetailsPageState
                               'maxLength': (object) => localizations.translate(
                                     i18.individualDetails.firstNameLengthError,
                                   ),
+                              "min3": (object) => localizations.translate(
+                                    i18.common.min3CharsRequired,
+                                  ),
                             },
                           ),
                           DigitTextFormField(
@@ -300,6 +303,9 @@ class _IndividualDetailsPageState
                                   ),
                               'maxLength': (object) => localizations.translate(
                                     i18.individualDetails.lastNameLengthError,
+                                  ),
+                              "min3": (object) => localizations.translate(
+                                    i18.common.min3CharsRequired,
                                   ),
                             },
                           ),
