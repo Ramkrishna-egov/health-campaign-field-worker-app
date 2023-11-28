@@ -71,7 +71,7 @@ class CustomValidator {
             control.value.toString().trim().length >= 3 ||
             control.value.toString().trim().isEmpty
         ? null
-        : {'min3': true};
+        : {'mín3': true};
   }
 
   static Map<String, dynamic>? validMobileNumber(
