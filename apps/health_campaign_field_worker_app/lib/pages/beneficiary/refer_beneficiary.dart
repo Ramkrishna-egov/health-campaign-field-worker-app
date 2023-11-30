@@ -23,6 +23,7 @@ class ReferBeneficiaryPage extends LocalizedStatefulWidget {
   final bool isEditing;
   final String projectBeneficiaryClientRefId;
   final IndividualModel individual;
+  final bool isReadministrationSuccessful;
 
   const ReferBeneficiaryPage({
     super.key,
@@ -30,6 +31,7 @@ class ReferBeneficiaryPage extends LocalizedStatefulWidget {
     this.isEditing = false,
     required this.projectBeneficiaryClientRefId,
     required this.individual,
+    required this.isReadministrationSuccessful ,
   });
   @override
   State<ReferBeneficiaryPage> createState() => _ReferBeneficiaryPageState();
@@ -53,7 +55,9 @@ class _ReferBeneficiaryPageState extends LocalizedState<ReferBeneficiaryPage> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final bool isReadministrationSuccessful = widget.isReadministrationSuccessful;
     // final router = context.router;
+    print("refer page called ");
 
     return BlocConsumer<FacilityBloc, FacilityState>(
       listener: (context, state) {
@@ -66,7 +70,7 @@ class _ReferBeneficiaryPageState extends LocalizedState<ReferBeneficiaryPage> {
               fetched: (_, facilities, __) {
                 final projectFacilities = facilities
                     .where((e) => e.id != 'NA' && e.id != 'DT')
-                    .toList(); 
+                    .toList();
                 final healthFacilities = [
                   FacilityModel(
                     id: 'APS',
@@ -84,8 +88,12 @@ class _ReferBeneficiaryPageState extends LocalizedState<ReferBeneficiaryPage> {
           body: ReactiveFormBuilder(
             form: buildForm,
             builder: (context, form, child) => ScrollableContent(
-              header: const Column(children: [
-                BackNavigationHelpHeaderWidget(),
+              header: Column(children: [
+                isReadministrationSuccessful
+                    ? const BackNavigationHelpHeaderWidget(
+                        showBackNavigation: false,
+                      )
+                    : const BackNavigationHelpHeaderWidget(),
               ]),
               footer: SizedBox(
                 height: 85,

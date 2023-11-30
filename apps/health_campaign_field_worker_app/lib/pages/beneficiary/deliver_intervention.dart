@@ -95,6 +95,9 @@ class _DeliverInterventionPageState
                       .toList();
 
           final projectState = context.read<ProjectBloc>().state;
+          final selectedIndividual = state.selectedIndividual;
+          final projectBeneficiaryClientReferenceId =
+              selectedIndividual!.clientReferenceId;
 
           return Scaffold(
             body: state.loading
@@ -295,29 +298,58 @@ class _DeliverInterventionPageState
                                                             ),
                                                           );
 
-                                                      if (state.futureDeliveries !=
+                                                      if (form
+                                                                  .control(
+                                                                      _deliveryCommentKey)
+                                                                  .value !=
                                                               null &&
-                                                          state
-                                                              .futureDeliveries!
-                                                              .isNotEmpty &&
-                                                          projectState
-                                                                  .projectType
-                                                                  ?.cycles
-                                                                  ?.isNotEmpty ==
-                                                              true) {
-                                                        context.router.push(
-                                                          SplashAcknowledgementRoute(
-                                                            enableBackToSearch:
-                                                                false,
-                                                          ),
-                                                        );
-                                                      } else {
-                                                        context.router.push(
-                                                          SplashAcknowledgementRoute(
-                                                            enableBackToSearch:
+                                                          form
+                                                                  .control(
+                                                                      _deliveryCommentKey)
+                                                                  .value ==
+                                                              "Readministração sem sucesso") {
+                                                        Navigator.of(
+                                                          context,
+                                                          rootNavigator: true,
+                                                        ).pop(false);
+
+                                                        context.router
+                                                            .push(
+                                                          ReferBeneficiaryRoute(
+                                                            projectBeneficiaryClientRefId:
+                                                                projectBeneficiaryClientReferenceId ??
+                                                                    '',
+                                                            individual:
+                                                                selectedIndividual,
+                                                            isReadministrationSuccessful:
                                                                 true,
                                                           ),
                                                         );
+                                                      } else {
+                                                        if (state.futureDeliveries !=
+                                                                null &&
+                                                            state
+                                                                .futureDeliveries!
+                                                                .isNotEmpty &&
+                                                            projectState
+                                                                    .projectType
+                                                                    ?.cycles
+                                                                    ?.isNotEmpty ==
+                                                                true) {
+                                                          context.router.push(
+                                                            SplashAcknowledgementRoute(
+                                                              enableBackToSearch:
+                                                                  false,
+                                                            ),
+                                                          );
+                                                        } else {
+                                                          context.router.push(
+                                                            SplashAcknowledgementRoute(
+                                                              enableBackToSearch:
+                                                                  true,
+                                                            ),
+                                                          );
+                                                        }
                                                       }
                                                     }
                                                   }
