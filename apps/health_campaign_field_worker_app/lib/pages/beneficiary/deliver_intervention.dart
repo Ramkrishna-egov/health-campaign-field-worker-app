@@ -96,7 +96,8 @@ class _DeliverInterventionPageState
 
           final projectState = context.read<ProjectBloc>().state;
           final selectedIndividual = state.selectedIndividual;
-          final projectBeneficiaryClientReferenceId = projectBeneficiary.first.clientReferenceId;
+          final projectBeneficiaryClientReferenceId =
+              projectBeneficiary.first.clientReferenceId;
 
           return Scaffold(
             body: state.loading
@@ -292,6 +293,8 @@ class _DeliverInterventionPageState
                                                                     '',
                                                             individual:
                                                                 selectedIndividual!,
+                                                            isReadministrationSuccessful:
+                                                                true,
                                                           ),
                                                         );
                                                       } else {

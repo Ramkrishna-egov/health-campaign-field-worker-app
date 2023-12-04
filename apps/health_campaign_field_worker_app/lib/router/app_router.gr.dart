@@ -1868,6 +1868,7 @@ class ReferBeneficiaryRoute extends PageRouteInfo<ReferBeneficiaryRouteArgs> {
     bool isEditing = false,
     required String projectBeneficiaryClientRefId,
     required IndividualModel individual,
+    bool isReadministrationSuccessful = false,
   }) : super(
           ReferBeneficiaryRoute.name,
           path: 'refer-beneficiary',
@@ -1877,6 +1878,7 @@ class ReferBeneficiaryRoute extends PageRouteInfo<ReferBeneficiaryRouteArgs> {
             isEditing: isEditing,
             projectBeneficiaryClientRefId: projectBeneficiaryClientRefId,
             individual: individual,
+            isReadministrationSuccessful: isReadministrationSuccessful,
           ),
         );
 
@@ -1890,6 +1892,7 @@ class ReferBeneficiaryRouteArgs {
     this.isEditing = false,
     required this.projectBeneficiaryClientRefId,
     required this.individual,
+    this.isReadministrationSuccessful = false,
   });
 
   final Key? key;
@@ -1902,9 +1905,11 @@ class ReferBeneficiaryRouteArgs {
 
   final IndividualModel individual;
 
+  final bool isReadministrationSuccessful;
+
   @override
   String toString() {
-    return 'ReferBeneficiaryRouteArgs{key: $key, appLocalizations: $appLocalizations, isEditing: $isEditing, projectBeneficiaryClientRefId: $projectBeneficiaryClientRefId, individual: $individual}';
+    return 'ReferBeneficiaryRouteArgs{key: $key, appLocalizations: $appLocalizations, isEditing: $isEditing, projectBeneficiaryClientRefId: $projectBeneficiaryClientRefId, individual: $individual ,isReadministrationSuccessful : $isReadministrationSuccessful}';
   }
 }
 
