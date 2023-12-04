@@ -96,8 +96,7 @@ class _DeliverInterventionPageState
 
           final projectState = context.read<ProjectBloc>().state;
           final selectedIndividual = state.selectedIndividual;
-          final projectBeneficiaryClientReferenceId =
-              selectedIndividual!.clientReferenceId;
+          final projectBeneficiaryClientReferenceId = projectBeneficiary.first.clientReferenceId;
 
           return Scaffold(
             body: state.loading
@@ -292,7 +291,7 @@ class _DeliverInterventionPageState
                                                                 projectBeneficiaryClientReferenceId ??
                                                                     '',
                                                             individual:
-                                                                selectedIndividual,
+                                                                selectedIndividual!,
                                                           ),
                                                         );
                                                       } else {
@@ -654,11 +653,7 @@ class _DeliverInterventionPageState
         relatedClientReferenceId: clientReferenceId,
         id: null,
       ),
-      status: form.control(_deliveryCommentKey).value != null &&
-              form.control(_deliveryCommentKey).value ==
-                  "Readministração sem sucesso"
-          ? Status.beneficiaryReferred.toValue()
-          : Status.administeredSuccess.toValue(),
+      status: Status.administeredSuccess.toValue(),
       additionalFields: TaskAdditionalFields(
         version: task.additionalFields?.version ?? 1,
         fields: [
