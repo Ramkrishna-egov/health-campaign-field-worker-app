@@ -295,6 +295,10 @@ class _DeliverInterventionPageState
                                                                 selectedIndividual!,
                                                             isReadministrationSuccessful:
                                                                 true,
+                                                            quantityWasted: form
+                                                                .control(
+                                                                    _quantityWastedKey,)
+                                                                .value,
                                                           ),
                                                         );
                                                       } else {

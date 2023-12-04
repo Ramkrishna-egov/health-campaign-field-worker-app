@@ -23,6 +23,8 @@ class ReferBeneficiaryPage extends LocalizedStatefulWidget {
   final bool isEditing;
   final String projectBeneficiaryClientRefId;
   final IndividualModel individual;
+  final bool isReadministrationSuccessful;
+  final int quantityWasted;
 
   const ReferBeneficiaryPage({
     super.key,
@@ -30,6 +32,8 @@ class ReferBeneficiaryPage extends LocalizedStatefulWidget {
     this.isEditing = false,
     required this.projectBeneficiaryClientRefId,
     required this.individual,
+    this.isReadministrationSuccessful = false,
+    this.quantityWasted = 0,
   });
   @override
   State<ReferBeneficiaryPage> createState() => _ReferBeneficiaryPageState();
@@ -54,7 +58,6 @@ class _ReferBeneficiaryPageState extends LocalizedState<ReferBeneficiaryPage> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     // final router = context.router;
-    print("refer page called ");
 
     return BlocConsumer<FacilityBloc, FacilityState>(
       listener: (context, state) {
@@ -221,6 +224,12 @@ class _ReferBeneficiaryPageState extends LocalizedState<ReferBeneficiaryPage> {
                                                   'taskStatus',
                                                   Status.beneficiaryReferred
                                                       .toValue(),
+                                                ),
+                                                AdditionalField(
+                                                  'quantityWasted',
+                                                  widget.isReadministrationSuccessful
+                                                      ? widget.quantityWasted.toString()
+                                                      : "0",
                                                 ),
                                               ],
                                             ),
@@ -403,7 +412,7 @@ class _ReferBeneficiaryPageState extends LocalizedState<ReferBeneficiaryPage> {
       },
     );
   }
-
+ 
   FormGroup buildForm() {
     return fb.group(<String, Object>{
       _dateOfReferralKey: FormControl<DateTime>(value: DateTime.now()),

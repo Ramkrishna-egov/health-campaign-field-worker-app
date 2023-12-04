@@ -1869,6 +1869,7 @@ class ReferBeneficiaryRoute extends PageRouteInfo<ReferBeneficiaryRouteArgs> {
     required String projectBeneficiaryClientRefId,
     required IndividualModel individual,
     bool isReadministrationSuccessful = false,
+    final int quantityWasted = 0,
   }) : super(
           ReferBeneficiaryRoute.name,
           path: 'refer-beneficiary',
@@ -1879,6 +1880,7 @@ class ReferBeneficiaryRoute extends PageRouteInfo<ReferBeneficiaryRouteArgs> {
             projectBeneficiaryClientRefId: projectBeneficiaryClientRefId,
             individual: individual,
             isReadministrationSuccessful: isReadministrationSuccessful,
+            quantityWasted : quantityWasted,
           ),
         );
 
@@ -1893,6 +1895,7 @@ class ReferBeneficiaryRouteArgs {
     required this.projectBeneficiaryClientRefId,
     required this.individual,
     this.isReadministrationSuccessful = false,
+    this.quantityWasted = 0 ,
   });
 
   final Key? key;
@@ -1907,9 +1910,11 @@ class ReferBeneficiaryRouteArgs {
 
   final bool isReadministrationSuccessful;
 
+  final int quantityWasted ;
+
   @override
   String toString() {
-    return 'ReferBeneficiaryRouteArgs{key: $key, appLocalizations: $appLocalizations, isEditing: $isEditing, projectBeneficiaryClientRefId: $projectBeneficiaryClientRefId, individual: $individual ,isReadministrationSuccessful : $isReadministrationSuccessful}';
+    return 'ReferBeneficiaryRouteArgs{key: $key, appLocalizations: $appLocalizations, isEditing: $isEditing, projectBeneficiaryClientRefId: $projectBeneficiaryClientRefId, individual: $individual ,isReadministrationSuccessful : $isReadministrationSuccessful, quantityWasted :$quantityWasted}';
   }
 }
 
