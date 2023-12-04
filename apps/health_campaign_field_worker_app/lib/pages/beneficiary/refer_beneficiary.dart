@@ -23,7 +23,6 @@ class ReferBeneficiaryPage extends LocalizedStatefulWidget {
   final bool isEditing;
   final String projectBeneficiaryClientRefId;
   final IndividualModel individual;
-  final bool isReadministrationSuccessful;
 
   const ReferBeneficiaryPage({
     super.key,
@@ -31,7 +30,6 @@ class ReferBeneficiaryPage extends LocalizedStatefulWidget {
     this.isEditing = false,
     required this.projectBeneficiaryClientRefId,
     required this.individual,
-    required this.isReadministrationSuccessful ,
   });
   @override
   State<ReferBeneficiaryPage> createState() => _ReferBeneficiaryPageState();
@@ -55,7 +53,6 @@ class _ReferBeneficiaryPageState extends LocalizedState<ReferBeneficiaryPage> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final bool isReadministrationSuccessful = widget.isReadministrationSuccessful;
     // final router = context.router;
     print("refer page called ");
 
@@ -88,12 +85,8 @@ class _ReferBeneficiaryPageState extends LocalizedState<ReferBeneficiaryPage> {
           body: ReactiveFormBuilder(
             form: buildForm,
             builder: (context, form, child) => ScrollableContent(
-              header: Column(children: [
-                isReadministrationSuccessful
-                    ? const BackNavigationHelpHeaderWidget(
-                        showBackNavigation: false,
-                      )
-                    : const BackNavigationHelpHeaderWidget(),
+              header: const Column(children: [
+                BackNavigationHelpHeaderWidget(),
               ]),
               footer: SizedBox(
                 height: 85,

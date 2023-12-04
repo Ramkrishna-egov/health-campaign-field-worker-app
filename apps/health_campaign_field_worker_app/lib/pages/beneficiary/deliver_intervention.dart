@@ -265,38 +265,6 @@ class _DeliverInterventionPageState
                                                         BeneficiaryWrapperRoute
                                                             .name,
                                                       );
-                                                      context
-                                                          .read<
-                                                              DeliverInterventionBloc>()
-                                                          .add(
-                                                            DeliverInterventionSubmitEvent(
-                                                              _getTaskModel(
-                                                                context,
-                                                                form: form,
-                                                                oldTask: null,
-                                                                projectBeneficiaryClientReferenceId:
-                                                                    projectBeneficiary
-                                                                        .first
-                                                                        .clientReferenceId,
-                                                                dose:
-                                                                    deliveryInterventionstate
-                                                                        .dose,
-                                                                cycle:
-                                                                    deliveryInterventionstate
-                                                                        .cycle,
-                                                                deliveryStrategy:
-                                                                    getDeliveryStrategy,
-                                                                address:
-                                                                    householdMemberWrapper
-                                                                        .members
-                                                                        .first
-                                                                        .address
-                                                                        ?.first,
-                                                              ),
-                                                              false,
-                                                              context.boundary,
-                                                            ),
-                                                          );
 
                                                       if (form
                                                                   .control(
@@ -308,12 +276,16 @@ class _DeliverInterventionPageState
                                                                       _deliveryCommentKey)
                                                                   .value ==
                                                               "Readministração sem sucesso") {
-                                                        Navigator.of(
+                                                        if (Navigator.canPop(
                                                           context,
-                                                          rootNavigator: true,
-                                                        ).pop(false);
+                                                        )) {
+                                                          Navigator.of(
+                                                            context,
+                                                            rootNavigator: true,
+                                                          ).pop(false);
+                                                        }
 
-                                                        context.router
+                                                        await context.router
                                                             .push(
                                                           ReferBeneficiaryRoute(
                                                             projectBeneficiaryClientRefId:
@@ -321,11 +293,42 @@ class _DeliverInterventionPageState
                                                                     '',
                                                             individual:
                                                                 selectedIndividual,
-                                                            isReadministrationSuccessful:
-                                                                true,
                                                           ),
                                                         );
                                                       } else {
+                                                        context
+                                                            .read<
+                                                                DeliverInterventionBloc>()
+                                                            .add(
+                                                              DeliverInterventionSubmitEvent(
+                                                                _getTaskModel(
+                                                                  context,
+                                                                  form: form,
+                                                                  oldTask: null,
+                                                                  projectBeneficiaryClientReferenceId:
+                                                                      projectBeneficiary
+                                                                          .first
+                                                                          .clientReferenceId,
+                                                                  dose:
+                                                                      deliveryInterventionstate
+                                                                          .dose,
+                                                                  cycle:
+                                                                      deliveryInterventionstate
+                                                                          .cycle,
+                                                                  deliveryStrategy:
+                                                                      getDeliveryStrategy,
+                                                                  address:
+                                                                    householdMemberWrapper
+                                                                      .members
+                                                                      .first
+                                                                      .address
+                                                                      ?.first,
+                                                                ),
+                                                                false,
+                                                                context.boundary,
+                                                              ),
+                                                            );
+
                                                         if (state.futureDeliveries !=
                                                                 null &&
                                                             state
@@ -651,7 +654,11 @@ class _DeliverInterventionPageState
         relatedClientReferenceId: clientReferenceId,
         id: null,
       ),
-      status: Status.administeredSuccess.toValue(),
+      status: form.control(_deliveryCommentKey).value != null &&
+              form.control(_deliveryCommentKey).value ==
+                  "Readministração sem sucesso"
+          ? Status.beneficiaryReferred.toValue()
+          : Status.administeredSuccess.toValue(),
       additionalFields: TaskAdditionalFields(
         version: task.additionalFields?.version ?? 1,
         fields: [
