@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.egov.qa.smc">
+    package="org.egov.training.smc">
    <uses-permission android:name="android.permission.INTERNET"/>
    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
@@ -20,9 +20,9 @@
   </queries>
   <!--#enddocregion android-queries-->
    <application
-        android:label="salama"
+        android:label="QSM Formação"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher_training">
         <activity
             android:showWhenLocked="true"
     android:turnScreenOn="true"

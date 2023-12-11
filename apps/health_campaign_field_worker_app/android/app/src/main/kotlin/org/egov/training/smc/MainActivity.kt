@@ -1,4 +1,4 @@
-package org.egov.qa.smc
+package org.egov.training.smc
 import android.app.NotificationManager
 import android.content.Context
 import io.flutter.embedding.android.FlutterActivity
