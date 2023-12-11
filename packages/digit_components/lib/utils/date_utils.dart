@@ -53,49 +53,6 @@ class DigitDateUtils {
         days: days,
       );
     }
-
-//
-// // Calculate the difference in years, months, and days
-    // int ageInYears = currentDate.year - selectedDate.year;
-    // int ageInMonths = currentDate.month - selectedDate.month;
-    // int ageInDays = currentDate.day - selectedDate.day;
-
-    // // If the current day is earlier than the selected day in the same month,
-    // // reduce the month count and adjust the days accordingly.
-    // if (ageInDays < 0) {
-    //   ageInDays += DateTime(selectedDate.year, selectedDate.month + 1, 0).day;
-    // }
-
-    // // If the current month is earlier than the selected month, reduce the year count
-    // // and adjust the month and day counts accordingly.
-    // if (ageInMonths < 0) {
-    //   ageInYears--;
-    //   ageInMonths += 12;
-    // }
-
-    // return DigitDOBAge(
-    //     years: ageInYears >= 0 ? ageInYears : 0,
-    //     months: ageInMonths,
-    //     days: ageInDays);
-
-//
-    // // here calculating  the exact days,months and year of the age
-    // Duration difference = currentDate.difference(selectedDate);
-    // int years = difference.inDays ~/ 365;
-    // int remainingDays = difference.inDays % 365;
-    // // Adjust for leap years
-    // int leapYears =
-    //     (years / 4).floor() - (years / 100).floor() + (years / 400).floor();
-    // remainingDays -= leapYears;
-    // int months = remainingDays ~/ 30;
-    // int remainingDaysAfterMonths = remainingDays % 30;
-    // int days = remainingDaysAfterMonths;
-
-    // return DigitDOBAge(
-    //   years: years,
-    //   months: months,
-    //   days: days,
-    // );
   }
 
   // Function to get a formatted date string based on the provided date string and date format.
