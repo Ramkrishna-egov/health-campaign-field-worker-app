@@ -198,6 +198,23 @@ class BeneficiaryRegistrationBloc
                 createdBy: event.userUuid,
                 createdTime: createdAt,
               ),
+              additionalFields: ProjectBeneficiaryAdditionalFields(
+                version: 1,
+                fields: [
+                  AdditionalField(
+                    "startTime",
+                    address.auditDetails!.createdTime,
+                  ),
+                  AdditionalField(
+                    "endTime",
+                    createdAt,
+                  ),
+                  AdditionalField(
+                    "differenceTime",
+                    (createdAt - address.auditDetails!.createdTime),
+                  ),
+                ],
+              ),
             ),
           );
 
