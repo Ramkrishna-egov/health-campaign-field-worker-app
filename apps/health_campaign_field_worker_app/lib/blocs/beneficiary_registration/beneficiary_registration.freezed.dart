@@ -2396,6 +2396,7 @@ mixin _$BeneficiaryRegistrationState {
             IndividualModel? individualModel,
             DateTime? registrationDate,
             String? searchQuery,
+            int? startTime,
             bool loading,
             bool isHeadOfHousehold)
         create,
@@ -2430,6 +2431,7 @@ mixin _$BeneficiaryRegistrationState {
             IndividualModel? individualModel,
             DateTime? registrationDate,
             String? searchQuery,
+            int? startTime,
             bool loading,
             bool isHeadOfHousehold)?
         create,
@@ -2463,6 +2465,7 @@ mixin _$BeneficiaryRegistrationState {
             IndividualModel? individualModel,
             DateTime? registrationDate,
             String? searchQuery,
+            int? startTime,
             bool loading,
             bool isHeadOfHousehold)?
         create,
@@ -2561,6 +2564,7 @@ abstract class _$$BeneficiaryRegistrationCreateStateCopyWith<$Res> {
       IndividualModel? individualModel,
       DateTime? registrationDate,
       String? searchQuery,
+      int? startTime,
       bool loading,
       bool isHeadOfHousehold});
 }
@@ -2583,6 +2587,7 @@ class __$$BeneficiaryRegistrationCreateStateCopyWithImpl<$Res>
     Object? individualModel = freezed,
     Object? registrationDate = freezed,
     Object? searchQuery = freezed,
+    Object? startTime = freezed,
     Object? loading = null,
     Object? isHeadOfHousehold = null,
   }) {
@@ -2607,6 +2612,10 @@ class __$$BeneficiaryRegistrationCreateStateCopyWithImpl<$Res>
           ? _value.searchQuery
           : searchQuery // ignore: cast_nullable_to_non_nullable
               as String?,
+      startTime: freezed == startTime
+          ? _value.startTime
+          : startTime // ignore: cast_nullable_to_non_nullable
+              as int?,
       loading: null == loading
           ? _value.loading
           : loading // ignore: cast_nullable_to_non_nullable
@@ -2629,6 +2638,7 @@ class _$BeneficiaryRegistrationCreateState
       this.individualModel,
       this.registrationDate,
       this.searchQuery,
+      this.startTime,
       this.loading = false,
       this.isHeadOfHousehold = false});
 
@@ -2643,6 +2653,8 @@ class _$BeneficiaryRegistrationCreateState
   @override
   final String? searchQuery;
   @override
+  final int? startTime;
+  @override
   @JsonKey()
   final bool loading;
   @override
@@ -2651,7 +2663,7 @@ class _$BeneficiaryRegistrationCreateState
 
   @override
   String toString() {
-    return 'BeneficiaryRegistrationState.create(addressModel: $addressModel, householdModel: $householdModel, individualModel: $individualModel, registrationDate: $registrationDate, searchQuery: $searchQuery, loading: $loading, isHeadOfHousehold: $isHeadOfHousehold)';
+    return 'BeneficiaryRegistrationState.create(addressModel: $addressModel, householdModel: $householdModel, individualModel: $individualModel, registrationDate: $registrationDate, searchQuery: $searchQuery, startTime: $startTime, loading: $loading, isHeadOfHousehold: $isHeadOfHousehold)';
   }
 
   @override
@@ -2669,6 +2681,8 @@ class _$BeneficiaryRegistrationCreateState
                 other.registrationDate == registrationDate) &&
             (identical(other.searchQuery, searchQuery) ||
                 other.searchQuery == searchQuery) &&
+            (identical(other.startTime, startTime) ||
+                other.startTime == startTime) &&
             (identical(other.loading, loading) || other.loading == loading) &&
             (identical(other.isHeadOfHousehold, isHeadOfHousehold) ||
                 other.isHeadOfHousehold == isHeadOfHousehold));
@@ -2682,6 +2696,7 @@ class _$BeneficiaryRegistrationCreateState
       individualModel,
       registrationDate,
       searchQuery,
+      startTime,
       loading,
       isHeadOfHousehold);
 
@@ -2702,6 +2717,7 @@ class _$BeneficiaryRegistrationCreateState
             IndividualModel? individualModel,
             DateTime? registrationDate,
             String? searchQuery,
+            int? startTime,
             bool loading,
             bool isHeadOfHousehold)
         create,
@@ -2728,7 +2744,7 @@ class _$BeneficiaryRegistrationCreateState
         persisted,
   }) {
     return create(addressModel, householdModel, individualModel,
-        registrationDate, searchQuery, loading, isHeadOfHousehold);
+        registrationDate, searchQuery, startTime, loading, isHeadOfHousehold);
   }
 
   @override
@@ -2740,6 +2756,7 @@ class _$BeneficiaryRegistrationCreateState
             IndividualModel? individualModel,
             DateTime? registrationDate,
             String? searchQuery,
+            int? startTime,
             bool loading,
             bool isHeadOfHousehold)?
         create,
@@ -2765,7 +2782,7 @@ class _$BeneficiaryRegistrationCreateState
         persisted,
   }) {
     return create?.call(addressModel, householdModel, individualModel,
-        registrationDate, searchQuery, loading, isHeadOfHousehold);
+        registrationDate, searchQuery, startTime, loading, isHeadOfHousehold);
   }
 
   @override
@@ -2777,6 +2794,7 @@ class _$BeneficiaryRegistrationCreateState
             IndividualModel? individualModel,
             DateTime? registrationDate,
             String? searchQuery,
+            int? startTime,
             bool loading,
             bool isHeadOfHousehold)?
         create,
@@ -2804,7 +2822,7 @@ class _$BeneficiaryRegistrationCreateState
   }) {
     if (create != null) {
       return create(addressModel, householdModel, individualModel,
-          registrationDate, searchQuery, loading, isHeadOfHousehold);
+          registrationDate, searchQuery, startTime, loading, isHeadOfHousehold);
     }
     return orElse();
   }
@@ -2866,6 +2884,7 @@ abstract class BeneficiaryRegistrationCreateState
       final IndividualModel? individualModel,
       final DateTime? registrationDate,
       final String? searchQuery,
+      final int? startTime,
       final bool loading,
       final bool isHeadOfHousehold}) = _$BeneficiaryRegistrationCreateState;
 
@@ -2874,6 +2893,7 @@ abstract class BeneficiaryRegistrationCreateState
   IndividualModel? get individualModel;
   DateTime? get registrationDate;
   String? get searchQuery;
+  int? get startTime;
   bool get loading;
   bool get isHeadOfHousehold;
   @JsonKey(ignore: true)
@@ -3030,6 +3050,7 @@ class _$BeneficiaryRegistrationEditHouseholdState
             IndividualModel? individualModel,
             DateTime? registrationDate,
             String? searchQuery,
+            int? startTime,
             bool loading,
             bool isHeadOfHousehold)
         create,
@@ -3068,6 +3089,7 @@ class _$BeneficiaryRegistrationEditHouseholdState
             IndividualModel? individualModel,
             DateTime? registrationDate,
             String? searchQuery,
+            int? startTime,
             bool loading,
             bool isHeadOfHousehold)?
         create,
@@ -3105,6 +3127,7 @@ class _$BeneficiaryRegistrationEditHouseholdState
             IndividualModel? individualModel,
             DateTime? registrationDate,
             String? searchQuery,
+            int? startTime,
             bool loading,
             bool isHeadOfHousehold)?
         create,
@@ -3334,6 +3357,7 @@ class _$BeneficiaryRegistrationEditIndividualState
             IndividualModel? individualModel,
             DateTime? registrationDate,
             String? searchQuery,
+            int? startTime,
             bool loading,
             bool isHeadOfHousehold)
         create,
@@ -3372,6 +3396,7 @@ class _$BeneficiaryRegistrationEditIndividualState
             IndividualModel? individualModel,
             DateTime? registrationDate,
             String? searchQuery,
+            int? startTime,
             bool loading,
             bool isHeadOfHousehold)?
         create,
@@ -3409,6 +3434,7 @@ class _$BeneficiaryRegistrationEditIndividualState
             IndividualModel? individualModel,
             DateTime? registrationDate,
             String? searchQuery,
+            int? startTime,
             bool loading,
             bool isHeadOfHousehold)?
         create,
@@ -3610,6 +3636,7 @@ class _$BeneficiaryRegistrationAddMemberState
             IndividualModel? individualModel,
             DateTime? registrationDate,
             String? searchQuery,
+            int? startTime,
             bool loading,
             bool isHeadOfHousehold)
         create,
@@ -3647,6 +3674,7 @@ class _$BeneficiaryRegistrationAddMemberState
             IndividualModel? individualModel,
             DateTime? registrationDate,
             String? searchQuery,
+            int? startTime,
             bool loading,
             bool isHeadOfHousehold)?
         create,
@@ -3683,6 +3711,7 @@ class _$BeneficiaryRegistrationAddMemberState
             IndividualModel? individualModel,
             DateTime? registrationDate,
             String? searchQuery,
+            int? startTime,
             bool loading,
             bool isHeadOfHousehold)?
         create,
@@ -3867,6 +3896,7 @@ class _$BeneficiaryRegistrationPersistedState
             IndividualModel? individualModel,
             DateTime? registrationDate,
             String? searchQuery,
+            int? startTime,
             bool loading,
             bool isHeadOfHousehold)
         create,
@@ -3904,6 +3934,7 @@ class _$BeneficiaryRegistrationPersistedState
             IndividualModel? individualModel,
             DateTime? registrationDate,
             String? searchQuery,
+            int? startTime,
             bool loading,
             bool isHeadOfHousehold)?
         create,
@@ -3940,6 +3971,7 @@ class _$BeneficiaryRegistrationPersistedState
             IndividualModel? individualModel,
             DateTime? registrationDate,
             String? searchQuery,
+            int? startTime,
             bool loading,
             bool isHeadOfHousehold)?
         create,

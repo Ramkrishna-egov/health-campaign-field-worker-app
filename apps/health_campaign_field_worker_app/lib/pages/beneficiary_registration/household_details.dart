@@ -73,6 +73,7 @@ class _HouseHoldDetailsPageState extends LocalizedState<HouseHoldDetailsPage> {
                           searchQuery,
                           loading,
                           isHeadOfHousehold,
+                          startTime,
                         ) {
                           var household = householdModel;
                           household ??= HouseholdModel(

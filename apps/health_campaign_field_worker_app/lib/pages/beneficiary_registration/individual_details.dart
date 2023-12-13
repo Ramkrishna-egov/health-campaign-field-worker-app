@@ -105,6 +105,7 @@ class _IndividualDetailsPageState
                           searchQuery,
                           loading,
                           isHeadOfHousehold,
+                          startTime,
                         ) async {
                           final individual = _getIndividualModel(
                             context,

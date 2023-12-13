@@ -293,6 +293,7 @@ class _SearchBeneficiaryPageState
                                 router.push(BeneficiaryRegistrationWrapperRoute(
                                   initialState:
                                       BeneficiaryRegistrationCreateState(
+                                    startTime: context.millisecondsSinceEpoch(),
                                     searchQuery: state.searchQuery,
                                   ),
                                 ));

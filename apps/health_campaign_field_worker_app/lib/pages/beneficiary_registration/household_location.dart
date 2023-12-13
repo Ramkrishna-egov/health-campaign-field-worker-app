@@ -89,6 +89,7 @@ class _HouseholdLocationPageState
                                 searchQuery,
                                 loading,
                                 isHeadOfHousehold,
+                                startTime,
                               ) {
                                 var addressModel = AddressModel(
                                   addressLine1: context.boundary.name,
