@@ -1,6 +1,7 @@
 import 'package:digit_components/digit_components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:health_campaign_field_worker_app/widgets/beneficiary/distribution_center_card.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../blocs/beneficiary_registration/beneficiary_registration.dart';
@@ -173,6 +174,9 @@ class _HouseholdLocationPageState
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
+                        const DistributionCenterCard(
+                          leftPadding: false,
+                        ),
                         Text(
                           localizations.translate(
                             i18.householdLocation.householdLocationLabelText,

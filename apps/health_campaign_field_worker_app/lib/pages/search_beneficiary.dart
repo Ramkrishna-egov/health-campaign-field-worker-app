@@ -2,6 +2,7 @@ import 'package:digit_components/digit_components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:health_campaign_field_worker_app/widgets/beneficiary/distribution_center_card.dart';
 import 'package:location/location.dart';
 
 import '../blocs/app_initialization/app_initialization.dart';
@@ -61,6 +62,9 @@ class _SearchBeneficiaryPageState
                     SliverToBoxAdapter(
                       child: Column(
                         children: [
+                          const DistributionCenterCard(
+                            leftPadding: true,
+                          ),
                           Padding(
                             padding: const EdgeInsets.all(8),
                             child: Align(

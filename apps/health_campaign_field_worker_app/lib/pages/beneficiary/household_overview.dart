@@ -3,6 +3,7 @@ import 'package:digit_components/digit_components.dart';
 import 'package:digit_components/utils/date_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:health_campaign_field_worker_app/widgets/beneficiary/distribution_center_card.dart';
 
 import '../../blocs/beneficiary_registration/beneficiary_registration.dart';
 import '../../blocs/delivery_intervention/deliver_intervention.dart';
@@ -69,6 +70,9 @@ class _HouseholdOverviewPageState
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
+                                  const DistributionCenterCard(
+                                    leftPadding: false,
+                                  ),
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -378,15 +382,23 @@ class _HouseholdOverviewPageState
                                                 : null;
                                             final ageInYears =
                                                 DigitDateUtils.calculateAge(
-                                              e.dateOfBirth != null ? DigitDateUtils.getFormattedDateToDateTime(
-                                                  e.dateOfBirth!,
-                                                    ) ?? DateTime.now() : DateTime.now(),
+                                              e.dateOfBirth != null
+                                                  ? DigitDateUtils
+                                                          .getFormattedDateToDateTime(
+                                                        e.dateOfBirth!,
+                                                      ) ??
+                                                      DateTime.now()
+                                                  : DateTime.now(),
                                             ).years;
                                             final ageInMonths =
                                                 DigitDateUtils.calculateAge(
-                                              e.dateOfBirth != null ? DigitDateUtils.getFormattedDateToDateTime(
-                                                  e.dateOfBirth!,
-                                                    ) ?? DateTime.now() : DateTime.now(),
+                                              e.dateOfBirth != null
+                                                  ? DigitDateUtils
+                                                          .getFormattedDateToDateTime(
+                                                        e.dateOfBirth!,
+                                                      ) ??
+                                                      DateTime.now()
+                                                  : DateTime.now(),
                                             ).months;
                                             final currentCycle = projectState
                                                 .projectType?.cycles
@@ -631,7 +643,8 @@ class _HouseholdOverviewPageState
                   },
                 ),
           bottomNavigationBar: Offstage(
-            offstage: beneficiaryType == BeneficiaryType.individual || context.isRegistrar,
+            offstage: beneficiaryType == BeneficiaryType.individual ||
+                context.isRegistrar,
             child: SizedBox(
               height: 85,
               child: BlocBuilder<DeliverInterventionBloc,
