@@ -36,14 +36,14 @@ class DigitDateUtils {
       // here calculating  the exact days,months and year of the age
       // for age calculation , consider only year and month
 
-      Duration difference = currentDate.difference(selectedDate);
+      Duration difference = currentDate.difference(selectedDate).abs();
       int years = difference.inDays ~/ 365;
       int remainingDays = difference.inDays % 365;
       // Adjust for leap years
       int leapYears =
           (years / 4).floor() - (years / 100).floor() + (years / 400).floor();
       remainingDays -= leapYears;
-      int months = remainingDays ~/ 30;
+      int months = remainingDays ~/ 30.42;
       int remainingDaysAfterMonths = remainingDays % 30;
       int days = remainingDaysAfterMonths;
 
