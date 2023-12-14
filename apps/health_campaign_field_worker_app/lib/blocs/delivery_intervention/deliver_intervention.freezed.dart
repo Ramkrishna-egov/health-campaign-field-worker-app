@@ -962,6 +962,7 @@ mixin _$DeliverInterventionState {
       throw _privateConstructorUsedError;
   List<TaskModel>? get futureTask => throw _privateConstructorUsedError;
   TaskModel? get oldTask => throw _privateConstructorUsedError;
+  int? get startTime => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DeliverInterventionStateCopyWith<DeliverInterventionState> get copyWith =>
@@ -985,7 +986,8 @@ abstract class $DeliverInterventionStateCopyWith<$Res> {
       List<TaskModel>? tasks,
       List<DeliveryModel>? futureDeliveries,
       List<TaskModel>? futureTask,
-      TaskModel? oldTask});
+      TaskModel? oldTask,
+      int? startTime});
 }
 
 /// @nodoc
@@ -1013,6 +1015,7 @@ class _$DeliverInterventionStateCopyWithImpl<$Res,
     Object? futureDeliveries = freezed,
     Object? futureTask = freezed,
     Object? oldTask = freezed,
+    Object? startTime = freezed,
   }) {
     return _then(_value.copyWith(
       loading: null == loading
@@ -1059,6 +1062,10 @@ class _$DeliverInterventionStateCopyWithImpl<$Res,
           ? _value.oldTask
           : oldTask // ignore: cast_nullable_to_non_nullable
               as TaskModel?,
+      startTime: freezed == startTime
+          ? _value.startTime
+          : startTime // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -1083,7 +1090,8 @@ abstract class _$$_DeliverInterventionStateCopyWith<$Res>
       List<TaskModel>? tasks,
       List<DeliveryModel>? futureDeliveries,
       List<TaskModel>? futureTask,
-      TaskModel? oldTask});
+      TaskModel? oldTask,
+      int? startTime});
 }
 
 /// @nodoc
@@ -1109,6 +1117,7 @@ class __$$_DeliverInterventionStateCopyWithImpl<$Res>
     Object? futureDeliveries = freezed,
     Object? futureTask = freezed,
     Object? oldTask = freezed,
+    Object? startTime = freezed,
   }) {
     return _then(_$_DeliverInterventionState(
       loading: null == loading
@@ -1155,6 +1164,10 @@ class __$$_DeliverInterventionStateCopyWithImpl<$Res>
           ? _value.oldTask
           : oldTask // ignore: cast_nullable_to_non_nullable
               as TaskModel?,
+      startTime: freezed == startTime
+          ? _value.startTime
+          : startTime // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -1173,7 +1186,8 @@ class _$_DeliverInterventionState implements _DeliverInterventionState {
       final List<TaskModel>? tasks,
       final List<DeliveryModel>? futureDeliveries,
       final List<TaskModel>? futureTask,
-      this.oldTask})
+      this.oldTask,
+      this.startTime})
       : _pastCycles = pastCycles,
         _tasks = tasks,
         _futureDeliveries = futureDeliveries,
@@ -1235,10 +1249,12 @@ class _$_DeliverInterventionState implements _DeliverInterventionState {
 
   @override
   final TaskModel? oldTask;
+  @override
+  final int? startTime;
 
   @override
   String toString() {
-    return 'DeliverInterventionState(loading: $loading, isEditing: $isEditing, cycle: $cycle, dose: $dose, pastCycles: $pastCycles, hasCycleArrived: $hasCycleArrived, isLastDoseOfCycle: $isLastDoseOfCycle, tasks: $tasks, futureDeliveries: $futureDeliveries, futureTask: $futureTask, oldTask: $oldTask)';
+    return 'DeliverInterventionState(loading: $loading, isEditing: $isEditing, cycle: $cycle, dose: $dose, pastCycles: $pastCycles, hasCycleArrived: $hasCycleArrived, isLastDoseOfCycle: $isLastDoseOfCycle, tasks: $tasks, futureDeliveries: $futureDeliveries, futureTask: $futureTask, oldTask: $oldTask, startTime: $startTime)';
   }
 
   @override
@@ -1262,7 +1278,9 @@ class _$_DeliverInterventionState implements _DeliverInterventionState {
                 .equals(other._futureDeliveries, _futureDeliveries) &&
             const DeepCollectionEquality()
                 .equals(other._futureTask, _futureTask) &&
-            (identical(other.oldTask, oldTask) || other.oldTask == oldTask));
+            (identical(other.oldTask, oldTask) || other.oldTask == oldTask) &&
+            (identical(other.startTime, startTime) ||
+                other.startTime == startTime));
   }
 
   @override
@@ -1278,7 +1296,8 @@ class _$_DeliverInterventionState implements _DeliverInterventionState {
       const DeepCollectionEquality().hash(_tasks),
       const DeepCollectionEquality().hash(_futureDeliveries),
       const DeepCollectionEquality().hash(_futureTask),
-      oldTask);
+      oldTask,
+      startTime);
 
   @JsonKey(ignore: true)
   @override
@@ -1300,7 +1319,8 @@ abstract class _DeliverInterventionState implements DeliverInterventionState {
       final List<TaskModel>? tasks,
       final List<DeliveryModel>? futureDeliveries,
       final List<TaskModel>? futureTask,
-      final TaskModel? oldTask}) = _$_DeliverInterventionState;
+      final TaskModel? oldTask,
+      final int? startTime}) = _$_DeliverInterventionState;
 
   @override
   bool get loading;
@@ -1324,6 +1344,8 @@ abstract class _DeliverInterventionState implements DeliverInterventionState {
   List<TaskModel>? get futureTask;
   @override
   TaskModel? get oldTask;
+  @override
+  int? get startTime;
   @override
   @JsonKey(ignore: true)
   _$$_DeliverInterventionStateCopyWith<_$_DeliverInterventionState>

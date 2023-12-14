@@ -246,6 +246,8 @@ class _SearchBeneficiaryPageState
                                   await context.router.push(
                                     BeneficiaryWrapperRoute(
                                       wrapper: i,
+                                      startTime:
+                                          DateTime.now().millisecondsSinceEpoch,
                                     ),
                                   );
                                   setState(() {

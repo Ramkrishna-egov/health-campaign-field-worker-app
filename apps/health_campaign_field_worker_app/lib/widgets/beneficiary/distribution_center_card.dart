@@ -13,7 +13,11 @@ class DistributionCenterCard extends StatelessWidget {
       builder: (context, state) {
         return Padding(
           padding: EdgeInsets.only(
-              left: leftPadding ? 8 : 0, right: 8, top: 8, bottom: 8),
+            left: leftPadding ? 8 : 0,
+            right: 8,
+            top: 8,
+            bottom: 8,
+          ),
           child: Align(
             alignment: Alignment.topLeft,
             child: Text(
