@@ -6,5 +6,7 @@ enum BeneficiaryType {
   @MappableValue("INDIVIDUAL") individual,
   @MappableValue("HOUSEHOLD") household,
   @MappableValue("PRODUCT") product,
+  @MappableValue("3-12MONTH") individual1,
+  @MappableValue("13-59MONTH") individual2,
   ;
 }
