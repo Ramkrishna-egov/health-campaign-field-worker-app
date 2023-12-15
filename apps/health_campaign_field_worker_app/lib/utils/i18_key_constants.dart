@@ -677,6 +677,12 @@ class WarehouseDetails {
   String get warehouseNameId => 'WAREHOSUE_DETAILS_WAREHOUSE_NAME_ID';
 
   String get usNameCommunitySupervisor => 'US_NAME_COMMUNITY_SUPERVISOR';
+
+  String get dateOfLoss => "WAREHOUSE_DETAILS_DATE_OF_LOSS";
+
+  String get dateOfDamage => "WAREHOUSE_DETAILS_DATE_OF_DAMAGE";
+  String get dateOfIssue => "WAREHOUSE_DETAILS_DATE_OF_ISSUE";
+  String get dateOfReturn => "WAREHOUSE_DETAILS_DATE_OF_RETURN";
 }
 
 class StockDetails {

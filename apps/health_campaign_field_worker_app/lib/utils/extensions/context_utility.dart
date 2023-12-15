@@ -158,4 +158,19 @@ extension ContextUtilityExtensions on BuildContext {
       throw AppException('Could not fetch ${T.runtimeType}');
     }
   }
+
+// to check  logged in user is isWarehouseManager or not
+  bool get isWarehouseManager {
+    final authState = _get<AuthBloc>().state;
+
+    if (authState is! AuthAuthenticatedState) {
+      return false;
+    }
+
+    final roles = authState.userModel.roles.map((e) {
+      return e.code;
+    });
+
+    return roles.contains("WAREHOUSE_MANAGER");
+  }
 }
