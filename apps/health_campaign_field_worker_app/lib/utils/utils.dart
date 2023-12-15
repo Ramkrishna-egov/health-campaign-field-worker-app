@@ -61,7 +61,7 @@ class CustomValidator {
             control.value.toString().length >= 2 ||
             control.value.toString().trim().isEmpty
         ? null
-        : {'required': true};
+        : {'min2': true};
   }
 
   static Map<String, dynamic>? requiredMin3(

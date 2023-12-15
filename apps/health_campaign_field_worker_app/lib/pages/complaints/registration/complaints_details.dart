@@ -350,6 +350,20 @@ class _ComplaintsDetailsPageState
                                 state.mapOrNull(
                                   authenticated: (value) {
                                     var user = value.userModel;
+
+                                    if (isRaisedForSelf) {
+                                      form.control(_complainantName).value =
+                                          user.name;
+                                      form
+                                          .control(_complainantContactNumber)
+                                          .value = user.mobileNumber;
+                                    } else {
+                                      form.control(_complainantName).value =
+                                          null;
+                                      form
+                                          .control(_complainantContactNumber)
+                                          .value = null;
+                                    }
                                   },
                                 );
 

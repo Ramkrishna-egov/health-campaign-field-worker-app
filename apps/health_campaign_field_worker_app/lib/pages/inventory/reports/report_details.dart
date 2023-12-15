@@ -273,8 +273,8 @@ class _InventoryReportDetailsPageState
                                                   validationMessages: {
                                                     'required': (object) =>
                                                         localizations.translate(
-                                                          i18.stockReconciliationDetails
-                                                              .fieldRequired,
+                                                          i18.common
+                                                              .corecommonRequired,
                                                         ),
                                                   },
                                                 );
@@ -440,6 +440,24 @@ class _InventoryReportDetailsPageState
                                                   label:
                                                       localizations.translate(
                                                     i18.inventoryReportDetails
+                                                        .damagedCountLabel,
+                                                  ),
+                                                  key: damagedKey,
+                                                  width: 120,
+                                                ),
+                                                DigitGridColumn(
+                                                  label:
+                                                      localizations.translate(
+                                                    i18.inventoryReportDetails
+                                                        .lostCountLabel,
+                                                  ),
+                                                  key: lossKey,
+                                                  width: 120,
+                                                ),
+                                                DigitGridColumn(
+                                                  label:
+                                                      localizations.translate(
+                                                    i18.inventoryReportDetails
                                                         .stockInHandLabel,
                                                   ),
                                                   key: stockInHandKey,
@@ -488,6 +506,22 @@ class _InventoryReportDetailsPageState
                                                               _getCountFromAdditionalDetails(
                                                             model,
                                                             'returned',
+                                                          ),
+                                                        ),
+                                                        DigitGridCell(
+                                                          key: lossKey,
+                                                          value:
+                                                              _getCountFromAdditionalDetails(
+                                                            model,
+                                                            'lost',
+                                                          ),
+                                                        ),
+                                                        DigitGridCell(
+                                                          key: damagedKey,
+                                                          value:
+                                                              _getCountFromAdditionalDetails(
+                                                            model,
+                                                            'damaged',
                                                           ),
                                                         ),
                                                         DigitGridCell(
