@@ -475,8 +475,7 @@ class HouseholdOverView {
   String get householdOverViewHouseholdHeadNameLabel =>
       'HOUSEHOLD_OVER_VIEW_HOUSEHOLD_HEAD_NAME_LABEL';
 
-  String get householdOverViewActionText =>
-      'HOUSEHOLD_OVER_VIEW_ACTION_TEXT';
+  String get householdOverViewActionText => 'HOUSEHOLD_OVER_VIEW_ACTION_TEXT';
 
   String get viewDeliveryLabel => 'VIEW_DELIVERY_DETAILS_LABEL';
 
@@ -536,13 +535,13 @@ class DeliverIntervention {
       'DELIVER_INTERVENTION_DATE_OF_REGISTRATION_LABEL';
 
   String get resourceDeliveredLabel =>
-      'DELIVER_INTERVENTION_RESOURCE_DELIVERED_LABEL_SPAQ';
+      'DELIVER_INTERVENTION_RESOURCE_DELIVERED_LABEL';
 
   String get resourceDeliveredError =>
       'DELIVER_INTERVENTION_RESOURCE_DELIVERED_ERROR';
 
   String get quantityDistributedLabel =>
-      'DELIVER_INTERVENTION_QUANTITY_DISTRIBUTED_LABEL_SPAQ';
+      'DELIVER_INTERVENTION_QUANTITY_DISTRIBUTED_LABEL';
 
   String get quantityWastedLabel =>
       'DELIVER_INTERVENTION_QUANTITY_WASTED_LABEL_SPAQ';

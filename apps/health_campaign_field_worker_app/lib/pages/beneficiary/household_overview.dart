@@ -317,6 +317,11 @@ class _HouseholdOverviewPageState
                                         i18.deliverIntervention.memberCountText,
                                       ): state.householdMemberWrapper.household
                                           .memberCount,
+                                      localizations.translate(
+                                        i18.common.coreCommonMobileNumber,
+                                      ): state.householdMemberWrapper
+                                              .headOfHousehold.mobileNumber ??
+                                          "--",
                                     },
                                   ),
                                   Column(
@@ -663,14 +668,18 @@ class _HouseholdOverviewPageState
                   margin: const EdgeInsets.only(left: 0, right: 0, top: 10),
                   child: state.tasks?.first.status ==
                           Status.administeredSuccess.toValue()
-                      ? DigitOutLineButton(
-                          label: localizations.translate(
-                            i18.memberCard.deliverDetailsUpdateLabel,
+                      ? Offstage(
+                          //TODO: update delivery details button option hidden
+                          offstage: true,
+                          child: DigitOutLineButton(
+                            label: localizations.translate(
+                              i18.memberCard.deliverDetailsUpdateLabel,
+                            ),
+                            onPressed: () async {
+                              await context.router
+                                  .push(BeneficiaryDetailsRoute());
+                            },
                           ),
-                          onPressed: () async {
-                            await context.router
-                                .push(BeneficiaryDetailsRoute());
-                          },
                         )
                       : DigitElevatedButton(
                           onPressed: () async {

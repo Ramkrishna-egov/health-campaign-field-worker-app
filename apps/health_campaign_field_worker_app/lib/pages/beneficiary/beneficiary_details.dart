@@ -276,7 +276,8 @@ class _BeneficiaryDetailsPageState
                                   ): context.beneficiaryType !=
                                           BeneficiaryType.individual
                                       ? householdMemberWrapper
-                                          .headOfHousehold.mobileNumber
+                                              .headOfHousehold.mobileNumber ??
+                                          '--'
                                       : state.selectedIndividual
                                               ?.mobileNumber ??
                                           '--',
