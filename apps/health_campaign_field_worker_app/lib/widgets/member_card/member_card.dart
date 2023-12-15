@@ -91,31 +91,34 @@ class MemberCard extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width / 3.5,
-                child: Align(
-                  alignment: Alignment.topRight,
-                  child: Padding(
-                    padding: const EdgeInsets.all(0),
-                    child: DigitIconButton(
-                      onPressed: () => DigitActionDialog.show(
-                        context,
-                        widget: ActionCard(
-                          items: [
-                            ActionCardModel(
-                              icon: Icons.edit,
-                              label: localizations.translate(
-                                i18.memberCard.editIndividualDetails,
+              Offstage(
+                offstage: Constants.editButtonShow,
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width / 3.5,
+                  child: Align(
+                    alignment: Alignment.topRight,
+                    child: Padding(
+                      padding: const EdgeInsets.all(0),
+                      child: DigitIconButton(
+                        onPressed: () => DigitActionDialog.show(
+                          context,
+                          widget: ActionCard(
+                            items: [
+                              ActionCardModel(
+                                icon: Icons.edit,
+                                label: localizations.translate(
+                                  i18.memberCard.editIndividualDetails,
+                                ),
+                                action: editMemberAction,
                               ),
-                              action: editMemberAction,
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
+                        iconText: localizations.translate(
+                          i18.memberCard.editDetails,
+                        ),
+                        icon: Icons.edit,
                       ),
-                      iconText: localizations.translate(
-                        i18.memberCard.editDetails,
-                      ),
-                      icon: Icons.edit,
                     ),
                   ),
                 ),

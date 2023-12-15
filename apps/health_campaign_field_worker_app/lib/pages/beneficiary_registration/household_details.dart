@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:digit_components/digit_components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:health_campaign_field_worker_app/widgets/beneficiary/distribution_center_card.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../blocs/app_initialization/app_initialization.dart';
@@ -73,6 +74,7 @@ class _HouseHoldDetailsPageState extends LocalizedState<HouseHoldDetailsPage> {
                           searchQuery,
                           loading,
                           isHeadOfHousehold,
+                          startTime,
                         ) {
                           var household = householdModel;
                           household ??= HouseholdModel(
@@ -209,6 +211,9 @@ class _HouseHoldDetailsPageState extends LocalizedState<HouseHoldDetailsPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
+                      const DistributionCenterCard(
+                        leftPadding: false,
+                      ),
                       Text(
                         localizations.translate(
                           i18.householdDetails.householdDetailsLabel,

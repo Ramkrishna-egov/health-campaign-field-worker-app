@@ -284,5 +284,6 @@ class DeliverInterventionState with _$DeliverInterventionState {
     List<DeliveryModel>? futureDeliveries,
     List<TaskModel>? futureTask,
     TaskModel? oldTask,
+    int? startTime,
   }) = _DeliverInterventionState;
 }

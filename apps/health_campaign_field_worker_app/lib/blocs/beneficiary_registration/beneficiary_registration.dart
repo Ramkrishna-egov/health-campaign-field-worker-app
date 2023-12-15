@@ -117,6 +117,8 @@ class BeneficiaryRegistrationBloc
         throw const InvalidRegistrationStateException();
       },
       create: (value) async {
+        final startTime = value.startTime;
+
         final individual = value.individualModel;
         final household = value.householdModel;
         final address = value.addressModel;
@@ -197,6 +199,23 @@ class BeneficiaryRegistrationBloc
               auditDetails: AuditDetails(
                 createdBy: event.userUuid,
                 createdTime: createdAt,
+              ),
+              additionalFields: ProjectBeneficiaryAdditionalFields(
+                version: 1,
+                fields: [
+                  AdditionalField(
+                    "startTime",
+                    startTime,
+                  ),
+                  AdditionalField(
+                    "endTime",
+                    createdAt,
+                  ),
+                  AdditionalField(
+                    "differenceTime",
+                    (createdAt - startTime!),
+                  ),
+                ],
               ),
             ),
           );
@@ -521,6 +540,7 @@ class BeneficiaryRegistrationState with _$BeneficiaryRegistrationState {
     IndividualModel? individualModel,
     DateTime? registrationDate,
     String? searchQuery,
+    int? startTime,
     @Default(false) bool loading,
     @Default(false) bool isHeadOfHousehold,
   }) = BeneficiaryRegistrationCreateState;

@@ -7,6 +7,7 @@ import 'package:digit_components/widgets/digit_dob_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:health_campaign_field_worker_app/widgets/beneficiary/distribution_center_card.dart';
 import 'package:intl/intl.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -105,6 +106,7 @@ class _IndividualDetailsPageState
                           searchQuery,
                           loading,
                           isHeadOfHousehold,
+                          startTime,
                         ) async {
                           final individual = _getIndividualModel(
                             context,
@@ -310,6 +312,9 @@ class _IndividualDetailsPageState
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
+                      const DistributionCenterCard(
+                        leftPadding: false,
+                      ),
                       Text(
                         localizations.translate(
                           i18.individualDetails.individualsDetailsLabelText,

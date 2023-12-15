@@ -102,6 +102,8 @@ class Constants {
     }
   }
 
+// Tempororily created editButtonShow boolean value to adjust some feature interms of showing and hiding
+  static const bool editButtonShow = true;
   static const String localizationApiPath = 'localization/messages/v1/_search';
   static const String projectSearchApiPath = '/project/v1/_search';
   static const String logoutUserPath = '/user/_logout';

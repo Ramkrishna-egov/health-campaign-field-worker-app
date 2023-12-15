@@ -258,6 +258,12 @@ class _DeliverInterventionPageState
 
                                                   if (shouldSubmit ?? false) {
                                                     if (context.mounted) {
+                                                      final data = context
+                                                          .read<
+                                                              DeliverInterventionBloc>()
+                                                          .state
+                                                          .startTime;
+
                                                       context.router
                                                           .popUntilRouteWithName(
                                                         BeneficiaryWrapperRoute
@@ -270,6 +276,7 @@ class _DeliverInterventionPageState
                                                             DeliverInterventionSubmitEvent(
                                                               _getTaskModel(
                                                                 context,
+                                                                data,
                                                                 form: form,
                                                                 oldTask: null,
                                                                 projectBeneficiaryClientReferenceId:
@@ -513,9 +520,12 @@ class _DeliverInterventionPageState
                                               mainAxisSize: MainAxisSize.min,
                                               children: [
                                                 DigitTextFormField(
-                                                  formControlName: _deliveryCommentKey,
-                                                  label: localizations.translate(
-                                                    i18.deliverIntervention.deliveryCommentLabel,
+                                                  formControlName:
+                                                      _deliveryCommentKey,
+                                                  label:
+                                                      localizations.translate(
+                                                    i18.deliverIntervention
+                                                        .deliveryCommentLabel,
                                                   ),
                                                   labelStyle: theme
                                                       .textTheme.labelMedium,
@@ -552,7 +562,8 @@ class _DeliverInterventionPageState
 
   // ignore: long-parameter-list
   TaskModel _getTaskModel(
-    BuildContext context, {
+    BuildContext context,
+    int? startTime, {
     required FormGroup form,
     TaskModel? oldTask,
     int? cycle,
@@ -583,6 +594,10 @@ class _DeliverInterventionPageState
     final productvariantList =
         ((form.control(_resourceDeliveredKey) as FormArray).value
             as List<ProductVariantModel?>);
+
+// endTime is taken for calculating what time task is completed
+// To find the difference between startTime and endTime
+    final int endTime = DateTime.now().millisecondsSinceEpoch;
 
     // Update the task with information from the form and other context
     task = task.copyWith(
@@ -641,6 +656,18 @@ class _DeliverInterventionPageState
           AdditionalField(
             AdditionalFieldsType.deliveryStrategy.toValue(),
             deliveryStrategy,
+          ),
+          AdditionalField(
+            "startTime",
+            startTime,
+          ),
+          AdditionalField(
+            "endTime",
+            endTime,
+          ),
+          AdditionalField(
+            "differenceTime",
+            (endTime - startTime!),
           ),
         ],
       ),

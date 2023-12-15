@@ -108,6 +108,7 @@ class _$AppRouter extends RootStackRouter {
           key: args.key,
           wrapper: args.wrapper,
           isEditing: args.isEditing,
+          startTime: args.startTime,
         ),
       );
     },
@@ -1165,6 +1166,7 @@ class BeneficiaryWrapperRoute
     Key? key,
     required HouseholdMemberWrapper wrapper,
     bool isEditing = false,
+    int? startTime,
     List<PageRouteInfo>? children,
   }) : super(
           BeneficiaryWrapperRoute.name,
@@ -1173,6 +1175,7 @@ class BeneficiaryWrapperRoute
             key: key,
             wrapper: wrapper,
             isEditing: isEditing,
+            startTime: startTime,
           ),
           initialChildren: children,
         );
@@ -1185,6 +1188,7 @@ class BeneficiaryWrapperRouteArgs {
     this.key,
     required this.wrapper,
     this.isEditing = false,
+    this.startTime,
   });
 
   final Key? key;
@@ -1193,9 +1197,11 @@ class BeneficiaryWrapperRouteArgs {
 
   final bool isEditing;
 
+  final int? startTime;
+
   @override
   String toString() {
-    return 'BeneficiaryWrapperRouteArgs{key: $key, wrapper: $wrapper, isEditing: $isEditing}';
+    return 'BeneficiaryWrapperRouteArgs{key: $key, wrapper: $wrapper, isEditing: $isEditing, startTime: $startTime}';
   }
 }
 

@@ -16,11 +16,13 @@ import '../../utils/extensions/extensions.dart';
 class BeneficiaryWrapperPage extends StatelessWidget {
   final HouseholdMemberWrapper wrapper;
   final bool isEditing;
+  final int? startTime;
 
   const BeneficiaryWrapperPage({
     Key? key,
     required this.wrapper,
     this.isEditing = false,
+    this.startTime,
   }) : super(key: key);
 
   @override
@@ -93,6 +95,7 @@ class BeneficiaryWrapperPage extends StatelessWidget {
         BlocProvider(
           create: (_) => DeliverInterventionBloc(
             DeliverInterventionState(
+              startTime: startTime,
               isEditing: isEditing,
             ),
             taskRepository: task,
@@ -121,6 +124,7 @@ class BeneficiaryWrapperPage extends StatelessWidget {
             lazy: false,
             create: (_) => DeliverInterventionBloc(
               DeliverInterventionState(
+                startTime: startTime,
                 isEditing: isEditing,
               ),
               taskRepository: task,
