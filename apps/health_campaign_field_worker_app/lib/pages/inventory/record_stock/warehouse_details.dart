@@ -45,6 +45,9 @@ class _WarehouseDetailsPageState extends LocalizedState<WarehouseDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
+    //final isWarehouseManager = context.isWarehouseManager;
+    final stockState = context.read<RecordStockBloc>().state;
+
     return BlocBuilder<ProjectBloc, ProjectState>(
       builder: (ctx, projectState) {
         final selectedProject = projectState.selectedProject;
@@ -139,7 +142,7 @@ class _WarehouseDetailsPageState extends LocalizedState<WarehouseDetailsPage> {
                             children: [
                               Text(
                                 localizations.translate(
-                                  i18.warehouseDetails.usDetails,
+                                  i18.warehouseDetails.warehouseDetailsLabel,
                                 ),
                                 style: theme.textTheme.displayMedium,
                               ),
@@ -149,7 +152,7 @@ class _WarehouseDetailsPageState extends LocalizedState<WarehouseDetailsPage> {
                                   lastDate: DateTime.now(),
                                   formControlName: _dateOfEntryKey,
                                   label: localizations.translate(
-                                    i18.warehouseDetails.dateOfReceipt,
+                                    getStockTypeDateLabel(stockState.entryType),
                                   ),
                                   isRequired: false,
                                   confirmText: localizations.translate(
@@ -173,8 +176,7 @@ class _WarehouseDetailsPageState extends LocalizedState<WarehouseDetailsPage> {
                                 ),
                                 isRequired: true,
                                 label: localizations.translate(
-                                  i18.warehouseDetails
-                                      .usNameCommunitySupervisor,
+                                  i18.warehouseDetails.warehouseNameId,
                                 ),
                                 suffix: const Padding(
                                   padding: EdgeInsets.all(8.0),
@@ -209,5 +211,22 @@ class _WarehouseDetailsPageState extends LocalizedState<WarehouseDetailsPage> {
         );
       },
     );
+  }
+
+  String getStockTypeDateLabel(StockRecordEntryType type) {
+    switch (type) {
+      case StockRecordEntryType.receipt:
+        return i18.warehouseDetails.dateOfReceipt;
+      case StockRecordEntryType.dispatch:
+        return i18.warehouseDetails.dateOfIssue;
+      case StockRecordEntryType.damaged:
+        return i18.warehouseDetails.dateOfDamage;
+      case StockRecordEntryType.returned:
+        return i18.warehouseDetails.dateOfReturn;
+      case StockRecordEntryType.loss:
+        return i18.warehouseDetails.dateOfLoss;
+      default:
+        return i18.warehouseDetails.dateOfReceipt;
+    }
   }
 }
