@@ -392,9 +392,8 @@ class _DeliverInterventionPageState
                                                         maxStepReached: 3,
                                                         lineLength:
                                                             MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width /
+                                                                  context,
+                                                                ).size.width /
                                                                 steps.length,
                                                       ),
                                                       DigitDateFormPicker(
@@ -457,7 +456,9 @@ class _DeliverInterventionPageState
                                                               .translate(
                                                             i18.deliverIntervention
                                                                 .deliveryNoOfResourcesLable,
-                                                          ): memberCount,
+                                                          ): (form.control(
+                                                            _quantityDistributedKey,
+                                                          )).value[0],
                                                         },
                                                       ),
                                                     ],
