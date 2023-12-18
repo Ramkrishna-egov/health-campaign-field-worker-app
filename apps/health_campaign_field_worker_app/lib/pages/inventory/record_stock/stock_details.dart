@@ -515,6 +515,7 @@ class _StockDetailsPageState extends LocalizedState<StockDetailsPage> {
                               },
                             ),
                             DigitTextFormField(
+                              keyboardType: TextInputType.number,
                               label: localizations.translate(
                                 i18.stockDetails
                                     .quantityOfProductIndicatedOnWaybillLabel,
