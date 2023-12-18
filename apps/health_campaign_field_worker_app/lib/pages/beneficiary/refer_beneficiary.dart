@@ -69,7 +69,11 @@ class _ReferBeneficiaryPageState extends LocalizedState<ReferBeneficiaryPage> {
         final facilities = facilityState.whenOrNull(
               fetched: (_, facilities, __) {
                 final projectFacilities = facilities
-                    .where((e) => e.id != 'NA' && e.id != 'DT')
+                    .where((e) =>
+                        e.id != 'NA' &&
+                        e.id != 'DT' &&
+                        (context.loggedInUser.permanentCity == null ||
+                            e.name == context.loggedInUser.permanentCity))
                     .toList();
                 final healthFacilities = [
                   FacilityModel(
@@ -412,7 +416,7 @@ class _ReferBeneficiaryPageState extends LocalizedState<ReferBeneficiaryPage> {
       },
     );
   }
- 
+
   FormGroup buildForm() {
     return fb.group(<String, Object>{
       _dateOfReferralKey: FormControl<DateTime>(value: DateTime.now()),

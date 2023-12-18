@@ -577,6 +577,12 @@ class DeliverIntervention {
   String get resourceDeliveredValidation => 'RESOURCE_DELIVERED_VALIDATION';
 
   String get deliveryCommentRequired => 'DELIVERY_COMMENT_REQUIRED';
+
+  // [new key added for record past delivery details]
+  String get wasDosePastDeliveryDetailPart2 =>
+      'DELIVER_INTERVENTION_PAST_DOSE_DELIVERY_DETAILS_2';
+  String get wasDosePastDeliveryDetailPart3 =>
+      'DELIVER_INTERVENTION_PAST_DOSE_DELIVERY_DETAILS_3';
 }
 
 class ProjectSelection {

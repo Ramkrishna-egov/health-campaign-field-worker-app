@@ -45,6 +45,11 @@ class SideBar extends StatelessWidget {
                       value.userModel.mobileNumber.toString(),
                       style: theme.textTheme.labelSmall,
                     ),
+                    if (value.userModel.permanentCity != null)
+                      Text(
+                        value.userModel.permanentCity.toString(),
+                        style: theme.textTheme.labelSmall,
+                      ),
                   ],
                 ),
                 orElse: () => const Offstage(),
