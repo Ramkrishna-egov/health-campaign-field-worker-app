@@ -133,12 +133,11 @@ class _ReferBeneficiaryPageState extends LocalizedState<ReferBeneficiaryPage> {
                                       final reason = form
                                           .control(_referralReason)
                                           .value as KeyValue;
-                                      final recipientType = recipient.id ==
-                                              'Community Health Worker'
-                                          ? 'STAFF'
-                                          : 'FACILITY';
-                                      final recipientId = recipient.id ==
-                                              'Community Health Worker'
+                                      final recipientType =
+                                          recipient.id == 'APS'
+                                              ? 'STAFF'
+                                              : 'FACILITY';
+                                      final recipientId = recipient.id == 'APS'
                                           ? context.loggedInUserUuid
                                           : recipient.id;
                                       final referralComment =
