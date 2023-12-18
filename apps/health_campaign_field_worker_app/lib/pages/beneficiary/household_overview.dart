@@ -693,9 +693,11 @@ class _HouseholdOverviewPageState
                                 projectBeneficiaryType: beneficiaryType,
                               ),
                             );
+                            // TODO: removed the Beneficiaryoute from the flow distributor task
 
-                            await context.router
-                                .push(BeneficiaryDetailsRoute());
+                            // await context.router
+                            //     .push(BeneficiaryDetailsRoute());
+                            context.router.push(DeliverInterventionRoute());
                           },
                           child: Center(
                             child: Text(
