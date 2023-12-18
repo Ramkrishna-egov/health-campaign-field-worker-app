@@ -258,6 +258,12 @@ class _ReferBeneficiaryPageState extends LocalizedState<ReferBeneficiaryPage> {
                                                                 .quantityWasted
                                                                 .toString(),
                                                       ),
+                                                    if (widget
+                                                        .isReadministrationUnSuccessful)
+                                                      const AdditionalField(
+                                                        'unsuccessfullDelivery',
+                                                        'true',
+                                                      ),
                                                   ],
                                                 ),
                                                 address: widget
