@@ -334,6 +334,8 @@ class _$AppRouter extends RootStackRouter {
           isEditing: args.isEditing,
           projectBeneficiaryClientRefId: args.projectBeneficiaryClientRefId,
           individual: args.individual,
+          isReadministrationUnSuccessful: args.isReadministrationUnSuccessful,
+          quantityWasted: args.quantityWasted,
         ),
       );
     },
@@ -1868,8 +1870,8 @@ class ReferBeneficiaryRoute extends PageRouteInfo<ReferBeneficiaryRouteArgs> {
     bool isEditing = false,
     required String projectBeneficiaryClientRefId,
     required IndividualModel individual,
-    bool isReadministrationSuccessful = false,
-    final int quantityWasted = 0,
+    bool isReadministrationUnSuccessful = false,
+    String quantityWasted = "00",
   }) : super(
           ReferBeneficiaryRoute.name,
           path: 'refer-beneficiary',
@@ -1879,8 +1881,8 @@ class ReferBeneficiaryRoute extends PageRouteInfo<ReferBeneficiaryRouteArgs> {
             isEditing: isEditing,
             projectBeneficiaryClientRefId: projectBeneficiaryClientRefId,
             individual: individual,
-            isReadministrationSuccessful: isReadministrationSuccessful,
-            quantityWasted : quantityWasted,
+            isReadministrationUnSuccessful: isReadministrationUnSuccessful,
+            quantityWasted: quantityWasted,
           ),
         );
 
@@ -1894,8 +1896,8 @@ class ReferBeneficiaryRouteArgs {
     this.isEditing = false,
     required this.projectBeneficiaryClientRefId,
     required this.individual,
-    this.isReadministrationSuccessful = false,
-    this.quantityWasted = 0 ,
+    this.isReadministrationUnSuccessful = false,
+    this.quantityWasted = "00",
   });
 
   final Key? key;
@@ -1908,13 +1910,13 @@ class ReferBeneficiaryRouteArgs {
 
   final IndividualModel individual;
 
-  final bool isReadministrationSuccessful;
+  final bool isReadministrationUnSuccessful;
 
-  final int quantityWasted ;
+  final String quantityWasted;
 
   @override
   String toString() {
-    return 'ReferBeneficiaryRouteArgs{key: $key, appLocalizations: $appLocalizations, isEditing: $isEditing, projectBeneficiaryClientRefId: $projectBeneficiaryClientRefId, individual: $individual ,isReadministrationSuccessful : $isReadministrationSuccessful, quantityWasted :$quantityWasted}';
+    return 'ReferBeneficiaryRouteArgs{key: $key, appLocalizations: $appLocalizations, isEditing: $isEditing, projectBeneficiaryClientRefId: $projectBeneficiaryClientRefId, individual: $individual, isReadministrationUnSuccessful: $isReadministrationUnSuccessful, quantityWasted: $quantityWasted}';
   }
 }
 

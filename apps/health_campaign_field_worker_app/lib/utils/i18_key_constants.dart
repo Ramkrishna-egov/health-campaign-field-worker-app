@@ -544,6 +544,10 @@ class DeliverIntervention {
 
   String get dialogContent => 'DELIVER_INTERVENTION_DIALOG_CONTENT';
 
+  String get referDialogTitle => 'DELIVER_INTERVENTION_REFER_DIALOG_TITLE';
+
+  String get referDialogContent => 'DELIVER_INTERVENTION_REFER_DIALOG_CONTENT';
+
   String get didYouObserveAdvEventsTitle =>
       'DID_YOU_OBSERVE_ADVERSE_EVENTS_TITLE';
   String get didYouObservePreviousAdvEventsTitle =>
@@ -1138,6 +1142,8 @@ class ReferBeneficiary {
   String get referredDialogTitle => 'REFERRAL_CONFIRMATION_DIALOG_BOX_TITLE';
   String get referredDialogContent =>
       'REFERRAL_CONFIRMATION_DIALOG_BOX_CONTENT';
+  String get referAlertDialogTitle => 'REFERRAL_ALERT_DIALOG_TITLE';
+  String get referAlertDialogContent => 'REFERRAL_ALERT_DIALOG_CONTENT';
 }
 
 class IneligibilityReasons {

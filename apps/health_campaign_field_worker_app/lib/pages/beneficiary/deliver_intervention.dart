@@ -213,6 +213,20 @@ class _DeliverInterventionPageState
                                                     ),
                                                   );
                                                 } else {
+                                                  bool isReferral = form
+                                                              .control(
+                                                                _deliveryCommentKey,
+                                                              )
+                                                              .value !=
+                                                          null &&
+                                                      form
+                                                              .control(
+                                                                _deliveryCommentKey,
+                                                              )
+                                                              .value ==
+                                                          "ADMINISTRATION_NOT_SUCCESSFUL" &&
+                                                      doseAdministered;
+
                                                   final shouldSubmit =
                                                       await DigitDialog.show<
                                                           bool>(
@@ -220,13 +234,23 @@ class _DeliverInterventionPageState
                                                     options: DigitDialogOptions(
                                                       titleText: localizations
                                                           .translate(
-                                                        i18.deliverIntervention
-                                                            .dialogTitle,
+                                                        isReferral
+                                                            ? i18
+                                                                .deliverIntervention
+                                                                .referDialogTitle
+                                                            : i18
+                                                                .deliverIntervention
+                                                                .dialogTitle,
                                                       ),
                                                       contentText: localizations
                                                           .translate(
-                                                        i18.deliverIntervention
-                                                            .dialogContent,
+                                                        isReferral
+                                                            ? i18
+                                                                .deliverIntervention
+                                                                .referDialogContent
+                                                            : i18
+                                                                .deliverIntervention
+                                                                .dialogContent,
                                                       ),
                                                       primaryAction:
                                                           DigitDialogActions(
@@ -266,16 +290,7 @@ class _DeliverInterventionPageState
                                                             .name,
                                                       );
 
-                                                      if (form
-                                                                  .control(
-                                                                      _deliveryCommentKey)
-                                                                  .value !=
-                                                              null &&
-                                                          form
-                                                                  .control(
-                                                                      _deliveryCommentKey)
-                                                                  .value ==
-                                                              "Readministração sem sucesso") {
+                                                      if (isReferral) {
                                                         if (Navigator.canPop(
                                                           context,
                                                         )) {
@@ -293,12 +308,13 @@ class _DeliverInterventionPageState
                                                                     '',
                                                             individual:
                                                                 selectedIndividual!,
-                                                            isReadministrationSuccessful:
+                                                            isReadministrationUnSuccessful:
                                                                 true,
-                                                            quantityWasted: form
-                                                                .control(
-                                                                    _quantityWastedKey,)
-                                                                .value,
+                                                            quantityWasted:
+                                                                (((form.control(_quantityWastedKey)
+                                                                            as FormArray)
+                                                                        .value)?[0])
+                                                                    .toString(),
                                                           ),
                                                         );
                                                       } else {
@@ -323,15 +339,15 @@ class _DeliverInterventionPageState
                                                                           .cycle,
                                                                   deliveryStrategy:
                                                                       getDeliveryStrategy,
-                                                                  address:
-                                                                    householdMemberWrapper
+                                                                  address: householdMemberWrapper
                                                                       .members
                                                                       .first
                                                                       .address
                                                                       ?.first,
                                                                 ),
                                                                 false,
-                                                                context.boundary,
+                                                                context
+                                                                    .boundary,
                                                               ),
                                                             );
 
@@ -541,7 +557,8 @@ class _DeliverInterventionPageState
                                                             .deliveryCommentLabel,
                                                       ),
                                                       valueMapper: (value) =>
-                                                          value,
+                                                          localizations
+                                                              .translate(value),
                                                       initialValue:
                                                           deliveryCommentOptions
                                                               .firstOrNull
@@ -549,8 +566,7 @@ class _DeliverInterventionPageState
                                                       menuItems:
                                                           deliveryCommentOptions
                                                               .map((e) {
-                                                        return localizations
-                                                            .translate(e.name);
+                                                        return e.code;
                                                       }).toList(),
                                                       formControlName:
                                                           _deliveryCommentKey,
