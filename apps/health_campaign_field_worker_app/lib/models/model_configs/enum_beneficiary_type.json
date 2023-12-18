@@ -20,6 +20,14 @@
       {
         "name": "individual2",
         "value": "13-59MONTH"
+      },
+      {
+        "name": "spaq1",
+        "value": "SPAQ1"
+      },
+      {
+        "name": "spaq2",
+        "value": "SPAQ2"
       }
     ],
     "isEnum": true
