@@ -2,10 +2,12 @@ import 'dart:async';
 
 import 'package:digit_components/digit_components.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../blocs/household_overview/household_overview.dart';
 
 import '../../../router/app_router.dart';
-import '../../../widgets/localized.dart';
 import '../../../utils/i18_key_constants.dart' as i18;
+import '../../../widgets/localized.dart';
 
 class SplashAcknowledgementPage extends LocalizedStatefulWidget {
   final bool? enableBackToSearch;
@@ -45,6 +47,20 @@ class _SplashAcknowledgementPageState
         action: () {
           context.router.pop();
         },
+        secondaryAction: () {
+          final wrapper = context
+              .read<HouseholdOverviewBloc>()
+              .state
+              .householdMemberWrapper;
+
+          context.router.popAndPush(
+            BeneficiaryWrapperRoute(wrapper: wrapper),
+          );
+        },
+        enableViewHousehold: true,
+        secondaryLabel: localizations.translate(
+          i18.householdDetails.viewHouseHoldDetailsAction,
+        ),
         enableBackToSearch: widget.enableBackToSearch ?? true,
         actionLabel:
             localizations.translate(i18.acknowledgementSuccess.actionLabelText),
