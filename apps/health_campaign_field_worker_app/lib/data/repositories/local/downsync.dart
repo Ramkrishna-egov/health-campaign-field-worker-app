@@ -24,6 +24,8 @@ class DownsyncLocalRepository
         mode: InsertMode.insertOrReplace,
       );
     });
+
+    await super.create(entity, createOpLog: false);
   }
 
   @override
