@@ -95,6 +95,9 @@ class _DeliverInterventionPageState
                       .toList();
 
           final projectState = context.read<ProjectBloc>().state;
+          final selectedIndividual = state.selectedIndividual;
+          final projectBeneficiaryClientReferenceId =
+              projectBeneficiary.first.clientReferenceId;
 
           return Scaffold(
             body: state.loading
@@ -210,6 +213,20 @@ class _DeliverInterventionPageState
                                                     ),
                                                   );
                                                 } else {
+                                                  bool isReferral = form
+                                                              .control(
+                                                                _deliveryCommentKey,
+                                                              )
+                                                              .value !=
+                                                          null &&
+                                                      form
+                                                              .control(
+                                                                _deliveryCommentKey,
+                                                              )
+                                                              .value ==
+                                                          "ADMINISTRATION_NOT_SUCCESSFUL" &&
+                                                      doseAdministered;
+
                                                   final shouldSubmit =
                                                       await DigitDialog.show<
                                                           bool>(
@@ -217,13 +234,23 @@ class _DeliverInterventionPageState
                                                     options: DigitDialogOptions(
                                                       titleText: localizations
                                                           .translate(
-                                                        i18.deliverIntervention
-                                                            .dialogTitle,
+                                                        isReferral
+                                                            ? i18
+                                                                .deliverIntervention
+                                                                .referDialogTitle
+                                                            : i18
+                                                                .deliverIntervention
+                                                                .dialogTitle,
                                                       ),
                                                       contentText: localizations
                                                           .translate(
-                                                        i18.deliverIntervention
-                                                            .dialogContent,
+                                                        isReferral
+                                                            ? i18
+                                                                .deliverIntervention
+                                                                .referDialogContent
+                                                            : i18
+                                                                .deliverIntervention
+                                                                .dialogContent,
                                                       ),
                                                       primaryAction:
                                                           DigitDialogActions(
@@ -262,62 +289,92 @@ class _DeliverInterventionPageState
                                                         BeneficiaryWrapperRoute
                                                             .name,
                                                       );
-                                                      context
-                                                          .read<
-                                                              DeliverInterventionBloc>()
-                                                          .add(
-                                                            DeliverInterventionSubmitEvent(
-                                                              _getTaskModel(
-                                                                context,
-                                                                form: form,
-                                                                oldTask: null,
-                                                                projectBeneficiaryClientReferenceId:
-                                                                    projectBeneficiary
-                                                                        .first
-                                                                        .clientReferenceId,
-                                                                dose:
-                                                                    deliveryInterventionstate
-                                                                        .dose,
-                                                                cycle:
-                                                                    deliveryInterventionstate
-                                                                        .cycle,
-                                                                deliveryStrategy:
-                                                                    getDeliveryStrategy,
-                                                                address:
-                                                                    householdMemberWrapper
-                                                                        .members
-                                                                        .first
-                                                                        .address
-                                                                        ?.first,
-                                                              ),
-                                                              false,
-                                                              context.boundary,
-                                                            ),
-                                                          );
 
-                                                      if (state.futureDeliveries !=
-                                                              null &&
-                                                          state
-                                                              .futureDeliveries!
-                                                              .isNotEmpty &&
-                                                          projectState
-                                                                  .projectType
-                                                                  ?.cycles
-                                                                  ?.isNotEmpty ==
-                                                              true) {
-                                                        context.router.push(
-                                                          SplashAcknowledgementRoute(
-                                                            enableBackToSearch:
-                                                                false,
+                                                      if (isReferral) {
+                                                        if (Navigator.canPop(
+                                                          context,
+                                                        )) {
+                                                          Navigator.of(
+                                                            context,
+                                                            rootNavigator: true,
+                                                          ).pop(false);
+                                                        }
+
+                                                        await context.router
+                                                            .push(
+                                                          ReferBeneficiaryRoute(
+                                                            projectBeneficiaryClientRefId:
+                                                                projectBeneficiaryClientReferenceId ??
+                                                                    '',
+                                                            individual:
+                                                                selectedIndividual!,
+                                                            isReadministrationUnSuccessful:
+                                                                true,
+                                                            quantityWasted:
+                                                                (((form.control(_quantityWastedKey)
+                                                                            as FormArray)
+                                                                        .value)?[0])
+                                                                    .toString(),
                                                           ),
                                                         );
                                                       } else {
-                                                        context.router.push(
-                                                          SplashAcknowledgementRoute(
-                                                            enableBackToSearch:
-                                                                true,
-                                                          ),
-                                                        );
+                                                        context
+                                                            .read<
+                                                                DeliverInterventionBloc>()
+                                                            .add(
+                                                              DeliverInterventionSubmitEvent(
+                                                                _getTaskModel(
+                                                                  context,
+                                                                  form: form,
+                                                                  oldTask: null,
+                                                                  projectBeneficiaryClientReferenceId:
+                                                                      projectBeneficiary
+                                                                          .first
+                                                                          .clientReferenceId,
+                                                                  dose:
+                                                                      deliveryInterventionstate
+                                                                          .dose,
+                                                                  cycle:
+                                                                      deliveryInterventionstate
+                                                                          .cycle,
+                                                                  deliveryStrategy:
+                                                                      getDeliveryStrategy,
+                                                                  address: householdMemberWrapper
+                                                                      .members
+                                                                      .first
+                                                                      .address
+                                                                      ?.first,
+                                                                ),
+                                                                false,
+                                                                context
+                                                                    .boundary,
+                                                              ),
+                                                            );
+
+                                                        if (state.futureDeliveries !=
+                                                                null &&
+                                                            state
+                                                                .futureDeliveries!
+                                                                .isNotEmpty &&
+                                                            projectState
+                                                                    .projectType
+                                                                    ?.cycles
+                                                                    ?.isNotEmpty ==
+                                                                true) {
+                                                          context.router.push(
+                                                            SplashAcknowledgementRoute(
+                                                              enableBackToSearch:
+                                                                  false,
+                                                            ),
+                                                          );
+                                                        } else {
+                                                          context.router.push(
+                                                            SplashAcknowledgementRoute(
+                                                              enableBackToSearch:
+                                                                  true,
+                                                            ),
+                                                          );
+                                                        }
                                                       }
                                                     }
                                                   }
@@ -500,7 +557,8 @@ class _DeliverInterventionPageState
                                                             .deliveryCommentLabel,
                                                       ),
                                                       valueMapper: (value) =>
-                                                          value,
+                                                          localizations
+                                                              .translate(value),
                                                       initialValue:
                                                           deliveryCommentOptions
                                                               .firstOrNull
@@ -508,8 +566,7 @@ class _DeliverInterventionPageState
                                                       menuItems:
                                                           deliveryCommentOptions
                                                               .map((e) {
-                                                        return localizations
-                                                            .translate(e.name);
+                                                        return e.code;
                                                       }).toList(),
                                                       formControlName:
                                                           _deliveryCommentKey,
