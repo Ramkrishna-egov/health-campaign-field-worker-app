@@ -4,6 +4,7 @@ import 'package:digit_components/models/digit_row_card/digit_row_card_model.dart
 import 'package:digit_components/widgets/atoms/digit_toaster.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:health_campaign_field_worker_app/utils/utils.dart';
 
 import '../../../blocs/localization/app_localization.dart';
 import '../../blocs/app_initialization/app_initialization.dart';
