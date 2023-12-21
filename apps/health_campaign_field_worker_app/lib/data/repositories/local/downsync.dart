@@ -24,6 +24,7 @@ class DownsyncLocalRepository
         mode: InsertMode.insertOrReplace,
       );
     });
+    await super.create(entity, createOpLog: false);
   }
 
   @override
@@ -79,4 +80,8 @@ class DownsyncLocalRepository
       );
     }).toList();
   }
+
+  @override
+  // TODO: implement table
+  TableInfo<Table, dynamic> get table => throw UnimplementedError();
 }
