@@ -1,0 +1,19 @@
+{
+  "name": "RolesType",
+  "enumValues": [
+    {
+      "name": "Warehouse Manager",
+      "value": "WAREHOUSE_MANAGER"
+    },
+    {
+      "name": "Distributor",
+      "value": "DISTRIBUTOR"
+    },
+    {
+      "name": "Registrar",
+      "value": "REGISTRAR"
+      
+    }
+  ],
+  "isEnum": true
+}
