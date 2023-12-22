@@ -166,7 +166,7 @@ class ProjectBeneficiaryLocalRepository
       batch.insert(sql.projectBeneficiary, projectBeneficiaryCompanion);
     });
 
-    await super.create(entity);
+    await super.create(entity, createOpLog: true);
   }
 
   @override
