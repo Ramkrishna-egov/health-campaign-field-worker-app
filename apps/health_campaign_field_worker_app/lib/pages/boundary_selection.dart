@@ -58,6 +58,14 @@ class _BoundarySelectionPageState
 
   @override
   Widget build(BuildContext context) {
+    bool isDistributor = context.loggedInUserRoles
+        .where(
+          (role) => (role.code == RolesType.communityDistributor.toValue() ||
+              role.code == RolesType.healthFacilitySupervisor.toValue()),
+        )
+        .toList()
+        .isNotEmpty;
+
     return WillPopScope(
       onWillPop: () async => shouldPop,
       child: BlocBuilder<BoundaryBloc, BoundaryState>(
@@ -460,7 +468,8 @@ class _BoundarySelectionPageState
                                                     await getIsConnected();
 
                                                 if (context.mounted) {
-                                                  if (isOnline) {
+                                                  if (isOnline &&
+                                                      isDistributor) {
                                                     context
                                                         .read<
                                                             BeneficiaryDownSyncBloc>()
