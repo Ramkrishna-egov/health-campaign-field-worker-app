@@ -3,12 +3,14 @@
 import 'package:drift/drift.dart';
 
 
-class Facility extends Table {
-  TextColumn get id => text()();
-  TextColumn get name => text().nullable()();
-  BoolColumn get isPermanent => boolean().nullable()();
-  TextColumn get usage => text().nullable()();
-  IntColumn get storageCapacity => integer().nullable()();
+class Downsync extends Table {
+  TextColumn get locality => text().nullable()();
+  TextColumn get projectId => text().nullable()();
+  IntColumn get offset => integer().nullable()();
+  IntColumn get limit => integer().nullable()();
+  IntColumn get lastSyncedTime => integer().nullable()();
+  IntColumn get totalCount => integer().nullable()();
+  TextColumn get boundaryName => text().nullable()();
   TextColumn get auditCreatedBy => text().nullable()();
   BoolColumn get nonRecoverableError => boolean().nullable().withDefault(const Constant(false))();
   IntColumn get auditCreatedTime => integer().nullable()();
@@ -25,5 +27,5 @@ class Facility extends Table {
   TextColumn get additionalFields => text().nullable()();
 
   @override
-  Set<Column> get primaryKey => { id, auditCreatedBy,  };
+  Set<Column> get primaryKey => { locality, auditCreatedBy,  };
 }
