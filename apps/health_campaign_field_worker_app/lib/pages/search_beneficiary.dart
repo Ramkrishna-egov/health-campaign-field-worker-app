@@ -37,7 +37,6 @@ class _SearchBeneficiaryPageState
     context
         .read<SearchHouseholdsBloc>()
         .add(const SearchHouseholdsClearEvent());
-    // TODO: implement initState
 
     super.initState();
   }
