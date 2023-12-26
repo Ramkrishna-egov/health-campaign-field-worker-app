@@ -34,6 +34,9 @@ class _SearchBeneficiaryPageState
 
   @override
   void initState() {
+    context
+        .read<SearchHouseholdsBloc>()
+        .add(const SearchHouseholdsClearEvent());
     // TODO: implement initState
 
     super.initState();
