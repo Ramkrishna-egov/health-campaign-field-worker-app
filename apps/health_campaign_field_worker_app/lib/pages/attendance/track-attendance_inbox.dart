@@ -1,0 +1,192 @@
+import 'package:digit_components/digit_components.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
+import '../../blocs/attendance/attendance_register.dart';
+import '../../blocs/localization/app_localization.dart';
+import '../../models/attendance/attendance_registry_model.dart';
+import '../../router/app_router.dart';
+import '../../widgets/header/back_navigation_help_header.dart';
+import '../../widgets/localized.dart';
+
+class TrackAttendanceInboxPage extends LocalizedStatefulWidget {
+  const TrackAttendanceInboxPage({
+    super.key,
+    super.appLocalizations,
+  });
+
+  @override
+  State<TrackAttendanceInboxPage> createState() =>
+      _TrackAttendanceInboxPageState();
+}
+
+class _TrackAttendanceInboxPageState extends State<TrackAttendanceInboxPage> {
+  List<Map<dynamic, dynamic>> projectList = [];
+  List<AttendanceRegister> attendanceRegisters = [];
+
+  @override
+  void initState() {
+    context.read<AttendanceProjectsSearchBloc>().add(
+          const SearchAttendanceProjectsEvent(),
+        );
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: BlocListener<AttendanceProjectsSearchBloc,
+            AttendanceProjectsSearchState>(
+          listener: (context, state) {
+            state.maybeWhen(
+              loading: () => const Center(
+                child: CircularProgressIndicator.adaptive(),
+              ),
+              loaded: (AttendanceRegistersModel? attendanceRegistersModel) {
+                attendanceRegisters = List<AttendanceRegister>.from(
+                  attendanceRegistersModel!.attendanceRegister!,
+                );
+
+                attendanceRegisters.sort((a, b) =>
+                    b.registerAuditDetails!.lastModifiedTime!.compareTo(
+                      a.registerAuditDetails!.lastModifiedTime!.toInt(),
+                    ));
+
+                projectList = attendanceRegisters
+                    .map((e) => {
+                          "Work order Number": e
+                                  .attendanceRegisterAdditionalDetails
+                                  ?.contractId ??
+                              "",
+                          "Register ID": e.registerNumber,
+                          "Project ID": e.attendanceRegisterAdditionalDetails
+                                  ?.projectId ??
+                              "",
+                          "Project Name": e.attendanceRegisterAdditionalDetails
+                                  ?.projectName ??
+                              "",
+                          "Project Description": e
+                                  .attendanceRegisterAdditionalDetails
+                                  ?.projectDesc ??
+                              "",
+                          " Individuals Count": e.attendeesEntries != null
+                              ? e.attendeesEntries
+                                  ?.where((att) =>
+                                      att.denrollmentDate == null ||
+                                      !(att.denrollmentDate! <=
+                                          DateTime.now()
+                                              .millisecondsSinceEpoch))
+                                  .toList()
+                                  .length
+                              : 0,
+                          "Start Date": DateFormat('dd/MM/yyyy').format(
+                            DateTime.fromMillisecondsSinceEpoch(
+                              e.startDate!,
+                            ),
+                          ),
+                          "End date": DateFormat('dd/MM/yyyy').format(
+                            DateTime.fromMillisecondsSinceEpoch(
+                              e.endDate!,
+                            ),
+                          ),
+                        })
+                    .toList();
+              },
+              error: (String? error) => Container(),
+              orElse: () => Container(),
+            );
+          },
+          child: BlocBuilder<AttendanceProjectsSearchBloc,
+              AttendanceProjectsSearchState>(
+            builder: (context, state) {
+              return state.maybeWhen(
+                orElse: () => Container(),
+                loading: () => const Center(
+                  child: CircularProgressIndicator.adaptive(),
+                ),
+                loaded: (AttendanceRegistersModel? attendanceModel) {
+                  var list = <Widget>[];
+
+                  for (int i = 0; i < projectList.length; i++) {
+                    list.add(RegistarCard(
+                      data: projectList[i] as Map<String, dynamic>,
+                      regisId: attendanceModel!.attendanceRegister![i].id!,
+                      tenatId: attendanceModel!.attendanceRegister![i].tenantId,
+                      show: true,
+                    ));
+                  }
+
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const BackNavigationHelpHeaderWidget(),
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(
+                          'Attendance Registers(${projectList.length})',
+                          style: DigitTheme
+                              .instance.mobileTheme.textTheme.headlineLarge
+                              ?.apply(color: const DigitColors().black),
+                          textAlign: TextAlign.left,
+                        ),
+                      ),
+                      ...list,
+                      const SizedBox(
+                        height: 16.0,
+                      ),
+                      const Align(
+                        alignment: Alignment.bottomCenter,
+                        child: PoweredByDigit(
+                          version: '1.2.0',
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class RegistarCard extends StatelessWidget {
+  final Map<String, dynamic> data;
+  final String tenatId;
+  final String regisId;
+  final bool show;
+  const RegistarCard({
+    super.key,
+    required this.data,
+    required this.tenatId,
+    required this.regisId,
+    this.show = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return DigitCard(
+      child: Column(
+        children: [
+          DigitTableCard(
+            element: data,
+          ),
+          show
+              ? DigitElevatedButton(
+                  child: const Text("Mark Attendance"),
+                  onPressed: () {
+                    context.router.push(AttendanceDateSessionSelectionRoute(
+                      id: regisId,
+                      tenantId: tenatId,
+                    ));
+                  },
+                )
+              : const SizedBox.shrink(),
+        ],
+      ),
+    );
+  }
+}

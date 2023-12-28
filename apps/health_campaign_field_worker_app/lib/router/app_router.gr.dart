@@ -262,6 +262,12 @@ class _$AppRouter extends RootStackRouter {
         )),
       );
     },
+    TrackAttendanceWrapperRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: WrappedRoute(child: const TrackAttendanceWrapperPage()),
+      );
+    },
     IndividualDetailsRoute.name: (routeData) {
       final args = routeData.argsAs<IndividualDetailsRouteArgs>(
           orElse: () => const IndividualDetailsRouteArgs());
@@ -575,6 +581,40 @@ class _$AppRouter extends RootStackRouter {
       return MaterialPageX<dynamic>(
         routeData: routeData,
         child: ComplaintsDetailsPage(
+          key: args.key,
+          appLocalizations: args.appLocalizations,
+        ),
+      );
+    },
+    TrackAttendanceInboxRoute.name: (routeData) {
+      final args = routeData.argsAs<TrackAttendanceInboxRouteArgs>(
+          orElse: () => const TrackAttendanceInboxRouteArgs());
+      return MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: TrackAttendanceInboxPage(
+          key: args.key,
+          appLocalizations: args.appLocalizations,
+        ),
+      );
+    },
+    AttendanceDateSessionSelectionRoute.name: (routeData) {
+      final args = routeData.argsAs<AttendanceDateSessionSelectionRouteArgs>();
+      return MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: AttendanceDateSessionSelectionPage(
+          id: args.id,
+          tenantId: args.tenantId,
+          key: args.key,
+          appLocalizations: args.appLocalizations,
+        ),
+      );
+    },
+    MarkAttendanceRoute.name: (routeData) {
+      final args = routeData.argsAs<MarkAttendanceRouteArgs>(
+          orElse: () => const MarkAttendanceRouteArgs());
+      return MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: MarkAttendancePage(
           key: args.key,
           appLocalizations: args.appLocalizations,
         ),
@@ -902,6 +942,35 @@ class _$AppRouter extends RootStackRouter {
                   ComplaintsDetailsRoute.name,
                   path: 'complaints-details',
                   parent: ComplaintsRegistrationWrapperRoute.name,
+                ),
+              ],
+            ),
+            RouteConfig(
+              TrackAttendanceWrapperRoute.name,
+              path: 'beneficiary-attendance',
+              parent: AuthenticatedRouteWrapper.name,
+              children: [
+                RouteConfig(
+                  '#redirect',
+                  path: '',
+                  parent: TrackAttendanceWrapperRoute.name,
+                  redirectTo: 'search-registar',
+                  fullMatch: true,
+                ),
+                RouteConfig(
+                  TrackAttendanceInboxRoute.name,
+                  path: 'search-registar',
+                  parent: TrackAttendanceWrapperRoute.name,
+                ),
+                RouteConfig(
+                  AttendanceDateSessionSelectionRoute.name,
+                  path: 'attendance-date-selection',
+                  parent: TrackAttendanceWrapperRoute.name,
+                ),
+                RouteConfig(
+                  MarkAttendanceRoute.name,
+                  path: 'mark-attendance',
+                  parent: TrackAttendanceWrapperRoute.name,
                 ),
               ],
             ),
@@ -1693,6 +1762,19 @@ class ComplaintsRegistrationWrapperRouteArgs {
   String toString() {
     return 'ComplaintsRegistrationWrapperRouteArgs{key: $key, pgrServiceModel: $pgrServiceModel}';
   }
+}
+
+/// generated route for
+/// [TrackAttendanceWrapperPage]
+class TrackAttendanceWrapperRoute extends PageRouteInfo<void> {
+  const TrackAttendanceWrapperRoute({List<PageRouteInfo>? children})
+      : super(
+          TrackAttendanceWrapperRoute.name,
+          path: 'beneficiary-attendance',
+          initialChildren: children,
+        );
+
+  static const String name = 'TrackAttendanceWrapperRoute';
 }
 
 /// generated route for
@@ -2726,5 +2808,119 @@ class ComplaintsDetailsRouteArgs {
   @override
   String toString() {
     return 'ComplaintsDetailsRouteArgs{key: $key, appLocalizations: $appLocalizations}';
+  }
+}
+
+/// generated route for
+/// [TrackAttendanceInboxPage]
+class TrackAttendanceInboxRoute
+    extends PageRouteInfo<TrackAttendanceInboxRouteArgs> {
+  TrackAttendanceInboxRoute({
+    Key? key,
+    AppLocalizations? appLocalizations,
+  }) : super(
+          TrackAttendanceInboxRoute.name,
+          path: 'search-registar',
+          args: TrackAttendanceInboxRouteArgs(
+            key: key,
+            appLocalizations: appLocalizations,
+          ),
+        );
+
+  static const String name = 'TrackAttendanceInboxRoute';
+}
+
+class TrackAttendanceInboxRouteArgs {
+  const TrackAttendanceInboxRouteArgs({
+    this.key,
+    this.appLocalizations,
+  });
+
+  final Key? key;
+
+  final AppLocalizations? appLocalizations;
+
+  @override
+  String toString() {
+    return 'TrackAttendanceInboxRouteArgs{key: $key, appLocalizations: $appLocalizations}';
+  }
+}
+
+/// generated route for
+/// [AttendanceDateSessionSelectionPage]
+class AttendanceDateSessionSelectionRoute
+    extends PageRouteInfo<AttendanceDateSessionSelectionRouteArgs> {
+  AttendanceDateSessionSelectionRoute({
+    required String id,
+    required String tenantId,
+    Key? key,
+    AppLocalizations? appLocalizations,
+  }) : super(
+          AttendanceDateSessionSelectionRoute.name,
+          path: 'attendance-date-selection',
+          args: AttendanceDateSessionSelectionRouteArgs(
+            id: id,
+            tenantId: tenantId,
+            key: key,
+            appLocalizations: appLocalizations,
+          ),
+        );
+
+  static const String name = 'AttendanceDateSessionSelectionRoute';
+}
+
+class AttendanceDateSessionSelectionRouteArgs {
+  const AttendanceDateSessionSelectionRouteArgs({
+    required this.id,
+    required this.tenantId,
+    this.key,
+    this.appLocalizations,
+  });
+
+  final String id;
+
+  final String tenantId;
+
+  final Key? key;
+
+  final AppLocalizations? appLocalizations;
+
+  @override
+  String toString() {
+    return 'AttendanceDateSessionSelectionRouteArgs{id: $id, tenantId: $tenantId, key: $key, appLocalizations: $appLocalizations}';
+  }
+}
+
+/// generated route for
+/// [MarkAttendancePage]
+class MarkAttendanceRoute extends PageRouteInfo<MarkAttendanceRouteArgs> {
+  MarkAttendanceRoute({
+    Key? key,
+    AppLocalizations? appLocalizations,
+  }) : super(
+          MarkAttendanceRoute.name,
+          path: 'mark-attendance',
+          args: MarkAttendanceRouteArgs(
+            key: key,
+            appLocalizations: appLocalizations,
+          ),
+        );
+
+  static const String name = 'MarkAttendanceRoute';
+}
+
+class MarkAttendanceRouteArgs {
+  const MarkAttendanceRouteArgs({
+    this.key,
+    this.appLocalizations,
+  });
+
+  final Key? key;
+
+  final AppLocalizations? appLocalizations;
+
+  @override
+  String toString() {
+    return 'MarkAttendanceRouteArgs{key: $key, appLocalizations: $appLocalizations}';
   }
 }

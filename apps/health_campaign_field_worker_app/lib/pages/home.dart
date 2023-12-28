@@ -425,6 +425,17 @@ class _HomePageState extends LocalizedState<HomePage> {
           );
         },
       ),
+
+      // attendance
+      'Attendance': HomeItemCard(
+        icon: Icons.table_chart,
+        label: 'View Attendance',
+        onPressed: () {
+          context.router.push(
+            const TrackAttendanceWrapperRoute(),
+          );
+        },
+      ),
     };
 
     final homeItemsLabel = <String>[
@@ -438,6 +449,8 @@ class _HomePageState extends LocalizedState<HomePage> {
       i18.home.syncDataLabel,
       i18.home.viewReportsLabel,
       'DB',
+      // attendance
+      'Attendance',
     ];
 
     final List<String> filteredLabels = homeItemsLabel
@@ -459,6 +472,16 @@ class _HomePageState extends LocalizedState<HomePage> {
               context.read<LocalSqlDataStore>(),
             ),
           ),
+        );
+      },
+    ));
+// attendance
+    widgetList.add(HomeItemCard(
+      icon: Icons.group_add_outlined,
+      label: 'Attendance',
+      onPressed: () {
+        context.router.push(
+          const TrackAttendanceWrapperRoute(),
         );
       },
     ));

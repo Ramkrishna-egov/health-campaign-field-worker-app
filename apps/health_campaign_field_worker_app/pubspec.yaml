@@ -64,6 +64,7 @@ dependencies:
   audioplayers: ^5.2.0
   gs1_barcode_parser: ^1.0.5
   disk_space: ^0.2.1
+  syncfusion_flutter_datepicker: ^20.4.43
 
 dev_dependencies:
   flutter_test:
@@ -96,6 +97,8 @@ flutter:
     - ./
     - ./assets/audio/add.wav
     - ./assets/audio/buzzer.wav
+    - ./assets/registar_data.json
+    - ./assets/muster_data.json
 
   fonts:
     - family: Roboto

@@ -21,9 +21,33 @@ class TableDataRow {
 }
 
 class TableData {
-  final String label;
+  final String? label;
   final TextStyle? style;
   final String? cellKey;
   ValueChanged<TableData>? callBack;
-  TableData(this.label, {this.style, this.callBack, this.cellKey});
+  final Widget? widget;
+  TableData({
+    this.label,
+    this.style,
+    this.callBack,
+    this.cellKey,
+    this.widget,
+    String? apiKey,
+  });
 }
+
+// class TableData {
+//   final String? label;
+//   final Widget? widget;
+//   final TextStyle? style;
+//   final String? apiKey;
+//   bool? hide = false;
+//   ValueChanged<TableData>? callBack;
+//   TableData(
+//       {this.label,
+//       this.widget,
+//       this.style,
+//       this.callBack,
+//       this.apiKey,
+//       this.hide});
+// }

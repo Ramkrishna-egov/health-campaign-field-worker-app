@@ -82,15 +82,18 @@ class DigitTable extends StatelessWidget {
 
   double columnRowIncreasedHeight(int index) {
     return (50 +
-        tableData[index].tableRow.first.label.substring(28).length.toDouble());
+        (tableData[index].tableRow.first.label ?? "")
+            .substring(28)
+            .length
+            .toDouble());
     //if greater than 28 characters
   }
 
   Widget _generateColumnRow(BuildContext context, int index, String input,
-      {TextStyle? style}) {
+      {Widget? buttonWidget, TextStyle? style}) {
     return Container(
       width: columnWidth,
-      height: tableData[index].tableRow.first.label.length > 28
+      height: (tableData[index].tableRow.first.label ?? "").length > 28
           ? columnRowIncreasedHeight(index)
           : columnRowFixedHeight,
       padding: const EdgeInsets.only(left: 17, right: 5, top: 6, bottom: 6),
@@ -103,12 +106,14 @@ class DigitTable extends StatelessWidget {
       child: Row(
         children: <Widget>[
           Expanded(
-            child: Text(
-              (input),
-              style: style,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
+            child: input.isNotEmpty
+                ? Text(
+                    (input),
+                    style: style,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  )
+                : buttonWidget ?? const Text(''),
           )
         ],
       ),
@@ -120,8 +125,9 @@ class DigitTable extends StatelessWidget {
     var data = tableData[index];
     var list = <Widget>[];
     for (int i = 1; i < data.tableRow.length; i++) {
-      list.add(_generateColumnRow(context, index, data.tableRow[i].label,
-          style: data.tableRow[i].style));
+      list.add(_generateColumnRow(context, index, data.tableRow[i].label ?? "",
+          style: data.tableRow[i].style,
+          buttonWidget: data.tableRow[i].widget));
     }
 
     return Container(
@@ -153,12 +159,12 @@ class DigitTable extends StatelessWidget {
               right: tableCellStrongBorder,
             )),
         width: columnWidth,
-        height: tableData[index].tableRow.first.label.length > 28
+        height: (tableData[index].tableRow.first.label ?? "").length > 28
             ? columnRowIncreasedHeight(index)
             : columnRowFixedHeight,
         padding: const EdgeInsets.only(left: 17, right: 5, top: 6, bottom: 6),
         alignment: Alignment.centerLeft,
-        child: Text(tableData[index].tableRow.first.label,
+        child: Text((tableData[index].tableRow.first.label ?? ""),
             style: tableData[index].tableRow.first.style),
       ),
     );
