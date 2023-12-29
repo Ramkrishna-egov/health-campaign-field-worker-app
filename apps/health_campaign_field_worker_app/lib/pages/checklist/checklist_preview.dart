@@ -133,13 +133,11 @@ class _ChecklistPreviewPageState extends LocalizedState<ChecklistPreviewPage> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       children: [
-                                        Text(localizations
-                                            .translate(item2!.code.toString())),
                                         Align(
                                           alignment: Alignment.centerLeft,
                                           child: Text(
                                             localizations.translate(
-                                              i18.checklist.checklist,
+                                              item2?.code ?? '',
                                             ),
                                             style:
                                                 theme.textTheme.displayMedium,
@@ -162,7 +160,7 @@ class _ChecklistPreviewPageState extends LocalizedState<ChecklistPreviewPage> {
                                                           Alignment.centerLeft,
                                                       child: Text(
                                                         localizations.translate(
-                                                          "${item2.code}.${e.attributeCode!}",
+                                                          "${item2?.code ?? ''}.${e.attributeCode!}",
                                                         ),
                                                         style: theme.textTheme
                                                             .headlineSmall,
@@ -210,7 +208,7 @@ class _ChecklistPreviewPageState extends LocalizedState<ChecklistPreviewPage> {
                                                                   child: Text(
                                                                     localizations
                                                                         .translate(
-                                                                      "${item2.code}.${e.attributeCode!}.ADDITIONAL_FIELD",
+                                                                      "${item2?.code ?? ''}.${e.attributeCode!}.ADDITIONAL_FIELD",
                                                                     ),
                                                                   ),
                                                                 ),

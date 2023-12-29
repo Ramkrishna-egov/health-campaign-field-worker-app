@@ -12,6 +12,7 @@ import '../blocs/household_details/household_details.dart';
 import '../blocs/localization/app_localization.dart';
 import '../blocs/search_households/project_beneficiaries_downsync.dart';
 import '../blocs/search_households/search_households.dart';
+import '../blocs/search_referrals/search_referrals.dart';
 import '../blocs/sync/sync.dart';
 import '../data/data_repository.dart';
 import '../data/local_store/no_sql/schema/oplog.dart';
@@ -132,135 +133,151 @@ class AuthenticatedPageWrapper extends StatelessWidget {
                     if (!bloc.isClosed) {
                       bloc.add(SyncRefreshEvent(userId));
                     }
-/* Every time when the user changes the screen 
+/* Every time when the user changes the screen
  this will refresh the data of sync count */
-                    isar.opLogs
-                        .filter()
-                        .createdByEqualTo(userId)
-                        .syncedUpEqualTo(false)
-                        .watch()
-                        .listen(
-                      (event) {
-                        if (!bloc.isClosed) {
-                          bloc.add(
-                            SyncRefreshEvent(
-                              userId,
-                              event.where((element) {
-                                switch (element.entityType) {
-                                  case DataModelType.household:
-                                  case DataModelType.individual:
-                                  case DataModelType.householdMember:
-                                  case DataModelType.projectBeneficiary:
-                                  case DataModelType.task:
-                                  case DataModelType.stock:
-                                  case DataModelType.stockReconciliation:
-                                  case DataModelType.service:
-                                  case DataModelType.complaints:
-                                  case DataModelType.sideEffect:
-                                  case DataModelType.referral:
-                                    return true;
-                                  default:
-                                    return false;
-                                }
-                              }).length,
-                            ),
+                          isar.opLogs
+                              .filter()
+                              .createdByEqualTo(userId)
+                              .syncedUpEqualTo(false)
+                              .watch()
+                              .listen(
+                            (event) {
+                              if (!bloc.isClosed) {
+                                bloc.add(
+                                  SyncRefreshEvent(
+                                    userId,
+                                    event.where((element) {
+                                      switch (element.entityType) {
+                                        case DataModelType.household:
+                                        case DataModelType.individual:
+                                        case DataModelType.householdMember:
+                                        case DataModelType.projectBeneficiary:
+                                        case DataModelType.task:
+                                        case DataModelType.stock:
+                                        case DataModelType.stockReconciliation:
+                                        case DataModelType.service:
+                                        case DataModelType.complaints:
+                                        case DataModelType.sideEffect:
+                                        case DataModelType.referral:
+                                        case DataModelType.hFReferral:
+                                          return true;
+                                        default:
+                                          return false;
+                                      }
+                                    }).length,
+                                  ),
+                                );
+                              }
+                            },
                           );
-                        }
-                      },
-                    );
 
-                    isar.opLogs
-                        .filter()
-                        .createdByEqualTo(userId)
-                        .syncedUpEqualTo(true)
-                        .syncedDownEqualTo(false)
-                        .watch()
-                        .listen(
-                      (event) {
-                        if (!bloc.isClosed) {
-                          bloc.add(
-                            SyncRefreshEvent(
-                              userId,
-                              event.where((element) {
-                                switch (element.entityType) {
-                                  case DataModelType.household:
-                                  case DataModelType.individual:
-                                  case DataModelType.projectBeneficiary:
-                                  case DataModelType.task:
-                                  case DataModelType.stock:
-                                  case DataModelType.stockReconciliation:
-                                  case DataModelType.complaints:
-                                  case DataModelType.sideEffect:
-                                  case DataModelType.referral:
-                                  case DataModelType.householdMember:
-                                    return true;
-                                  default:
-                                    return false;
-                                }
-                              }).length,
-                            ),
+                          isar.opLogs
+                              .filter()
+                              .createdByEqualTo(userId)
+                              .syncedUpEqualTo(true)
+                              .syncedDownEqualTo(false)
+                              .watch()
+                              .listen(
+                            (event) {
+                              if (!bloc.isClosed) {
+                                bloc.add(
+                                  SyncRefreshEvent(
+                                    userId,
+                                    event.where((element) {
+                                      switch (element.entityType) {
+                                        case DataModelType.household:
+                                        case DataModelType.householdMember:
+                                        case DataModelType.individual:
+                                        case DataModelType.projectBeneficiary:
+                                        case DataModelType.task:
+                                        case DataModelType.stock:
+                                        case DataModelType.stockReconciliation:
+                                        case DataModelType.complaints:
+                                        case DataModelType.sideEffect:
+                                        case DataModelType.referral:
+                                        case DataModelType.hFReferral:
+                                          return true;
+                                        default:
+                                          return false;
+                                      }
+                                    }).length,
+                                  ),
+                                );
+                              }
+                            },
                           );
-                        }
-                      },
-                    );
 
-                    return bloc;
-                  },
-                ),
-                BlocProvider(
-                  create: (_) => LocationBloc(location: Location())
-                    ..add(const LoadLocationEvent()),
-                ),
-                BlocProvider(
-                  create: (_) =>
-                      HouseholdDetailsBloc(const HouseholdDetailsState()),
-                ),
-                BlocProvider(
-                  create: (ctx) => BeneficiaryDownSyncBloc(
-                    //{TODO: Need to get the bandwidth path from config
-                    bandwidthCheckRepository: BandwidthCheckRepository(
-                        DioClient().dio,
-                        bandwidthPath: '/project/check/bandwidth'),
-                    householdLocalRepository: ctx.read<
-                        LocalRepository<HouseholdModel,
-                            HouseholdSearchModel>>(),
-                    householdMemberLocalRepository: ctx.read<
-                        LocalRepository<HouseholdMemberModel,
-                            HouseholdMemberSearchModel>>(),
-                    individualLocalRepository: ctx.read<
-                        LocalRepository<IndividualModel,
-                            IndividualSearchModel>>(),
-                    projectBeneficiaryLocalRepository: ctx.read<
-                        LocalRepository<ProjectBeneficiaryModel,
-                            ProjectBeneficiarySearchModel>>(),
-                    taskLocalRepository:
-                        ctx.read<LocalRepository<TaskModel, TaskSearchModel>>(),
-                    sideEffectLocalRepository: ctx.read<
-                        LocalRepository<SideEffectModel,
-                            SideEffectSearchModel>>(),
-                    referralLocalRepository: ctx.read<
-                        LocalRepository<ReferralModel, ReferralSearchModel>>(),
-                    downSyncRemoteRepository: ctx.read<
-                        RemoteRepository<DownsyncModel, DownsyncSearchModel>>(),
-                    downSyncLocalRepository: ctx.read<
-                        LocalRepository<DownsyncModel, DownsyncSearchModel>>(),
-                    networkManager: ctx.read(),
-                  ),
-                ),
-              ],
-              child: AutoRouter(
-                navigatorObservers: () => [
-                  AuthenticatedRouteObserver(
-                    onNavigated: () {
-                      bool shouldShowDrawer;
-                      switch (context.router.topRoute.name) {
-                        case ProjectSelectionRoute.name:
-                        case BoundarySelectionRoute.name:
-                          shouldShowDrawer = false;
-                          break;
-                        default:
-                          shouldShowDrawer = true;
-                      }
+                          return bloc;
+                        },
+                      ),
+                      BlocProvider(
+                        create: (_) => LocationBloc(location: Location())
+                          ..add(const LoadLocationEvent()),
+                      ),
+                      BlocProvider(
+                        create: (_) =>
+                            HouseholdDetailsBloc(const HouseholdDetailsState()),
+                      ),
+                      BlocProvider(
+                        create: (ctx) => BeneficiaryDownSyncBloc(
+                          //{TODO: Need to get the bandwidth path from config
+                          bandwidthCheckRepository: BandwidthCheckRepository(
+                            DioClient().dio,
+                            bandwidthPath: '/project/check/bandwidth',
+                          ),
+                          householdLocalRepository: ctx.read<
+                              LocalRepository<HouseholdModel,
+                                  HouseholdSearchModel>>(),
+                          householdMemberLocalRepository: ctx.read<
+                              LocalRepository<HouseholdMemberModel,
+                                  HouseholdMemberSearchModel>>(),
+                          individualLocalRepository: ctx.read<
+                              LocalRepository<IndividualModel,
+                                  IndividualSearchModel>>(),
+                          projectBeneficiaryLocalRepository: ctx.read<
+                              LocalRepository<ProjectBeneficiaryModel,
+                                  ProjectBeneficiarySearchModel>>(),
+                          taskLocalRepository: ctx.read<
+                              LocalRepository<TaskModel, TaskSearchModel>>(),
+                          sideEffectLocalRepository: ctx.read<
+                              LocalRepository<SideEffectModel,
+                                  SideEffectSearchModel>>(),
+                          referralLocalRepository: ctx.read<
+                              LocalRepository<ReferralModel,
+                                  ReferralSearchModel>>(),
+                          downSyncRemoteRepository: ctx.read<
+                              RemoteRepository<DownsyncModel,
+                                  DownsyncSearchModel>>(),
+                          downSyncLocalRepository: ctx.read<
+                              LocalRepository<DownsyncModel,
+                                  DownsyncSearchModel>>(),
+                          networkManager: ctx.read(),
+                        ),
+                      ),
+                      BlocProvider(
+                        create: (_) => SearchReferralsBloc(
+                          userUid: context.loggedInUserUuid,
+                          projectId: context.projectId,
+                          beneficiaryType: context.beneficiaryType,
+                          hfReferralDataRepository: context.repository<
+                              HFReferralModel, HFReferralSearchModel>(),
+                        )..add(const SearchReferralsClearEvent()),
+                      ),
+                    ],
+                    child: AutoRouter(
+                      navigatorObservers: () => [
+                        AuthenticatedRouteObserver(
+                          onNavigated: () {
+                            bool shouldShowDrawer;
+                            switch (context.router.topRoute.name) {
+                              case ProjectSelectionRoute.name:
+                              case BoundarySelectionRoute.name:
+                              case QRScannerRoute.name:
+                                shouldShowDrawer = false;
+                                break;
+                              default:
+                                shouldShowDrawer = true;
+                            }
 
                       _drawerVisibilityController.add(shouldShowDrawer);
                     },
