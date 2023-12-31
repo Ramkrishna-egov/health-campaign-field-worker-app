@@ -610,11 +610,16 @@ class _$AppRouter extends RootStackRouter {
       );
     },
     MarkAttendanceRoute.name: (routeData) {
-      final args = routeData.argsAs<MarkAttendanceRouteArgs>(
-          orElse: () => const MarkAttendanceRouteArgs());
+      final args = routeData.argsAs<MarkAttendanceRouteArgs>();
       return MaterialPageX<dynamic>(
         routeData: routeData,
         child: MarkAttendancePage(
+          exitTime: args.exitTime,
+          entryTime: args.entryTime,
+          dateTime: args.dateTime,
+          attendeeIds: args.attendeeIds,
+          registerId: args.registerId,
+          tenantId: args.tenantId,
           key: args.key,
           appLocalizations: args.appLocalizations,
         ),
@@ -2895,12 +2900,24 @@ class AttendanceDateSessionSelectionRouteArgs {
 /// [MarkAttendancePage]
 class MarkAttendanceRoute extends PageRouteInfo<MarkAttendanceRouteArgs> {
   MarkAttendanceRoute({
+    required int exitTime,
+    required int entryTime,
+    required DateTime dateTime,
+    required List<String> attendeeIds,
+    required String registerId,
+    required String tenantId,
     Key? key,
     AppLocalizations? appLocalizations,
   }) : super(
           MarkAttendanceRoute.name,
           path: 'mark-attendance',
           args: MarkAttendanceRouteArgs(
+            exitTime: exitTime,
+            entryTime: entryTime,
+            dateTime: dateTime,
+            attendeeIds: attendeeIds,
+            registerId: registerId,
+            tenantId: tenantId,
             key: key,
             appLocalizations: appLocalizations,
           ),
@@ -2911,9 +2928,27 @@ class MarkAttendanceRoute extends PageRouteInfo<MarkAttendanceRouteArgs> {
 
 class MarkAttendanceRouteArgs {
   const MarkAttendanceRouteArgs({
+    required this.exitTime,
+    required this.entryTime,
+    required this.dateTime,
+    required this.attendeeIds,
+    required this.registerId,
+    required this.tenantId,
     this.key,
     this.appLocalizations,
   });
+
+  final int exitTime;
+
+  final int entryTime;
+
+  final DateTime dateTime;
+
+  final List<String> attendeeIds;
+
+  final String registerId;
+
+  final String tenantId;
 
   final Key? key;
 
@@ -2921,6 +2956,6 @@ class MarkAttendanceRouteArgs {
 
   @override
   String toString() {
-    return 'MarkAttendanceRouteArgs{key: $key, appLocalizations: $appLocalizations}';
+    return 'MarkAttendanceRouteArgs{exitTime: $exitTime, entryTime: $entryTime, dateTime: $dateTime, attendeeIds: $attendeeIds, registerId: $registerId, tenantId: $tenantId, key: $key, appLocalizations: $appLocalizations}';
   }
 }

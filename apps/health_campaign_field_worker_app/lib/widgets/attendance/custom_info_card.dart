@@ -57,7 +57,7 @@ class CustomInfoCard extends StatelessWidget {
                   title,
                   style: titleStyle ?? theme.textTheme.headlineMedium,
                 ),
-              )
+              ),
             ],
           ),
           Padding(
@@ -71,7 +71,7 @@ class CustomInfoCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(kPadding),
             child: child ?? const SizedBox.shrink(),
-          )
+          ),
         ],
       ),
     );

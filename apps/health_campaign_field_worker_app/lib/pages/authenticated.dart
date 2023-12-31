@@ -8,6 +8,7 @@ import 'package:health_campaign_field_worker_app/blocs/attendance/attendance_reg
 import 'package:isar/isar.dart';
 import 'package:location/location.dart';
 
+import '../blocs/attendance/attendance_individual/individual_attendance_log.dart';
 import '../blocs/attendance/attendance_individual_registar.dart';
 import '../blocs/attendance/attendance_muster_roll.dart';
 import '../blocs/boundary/boundary.dart';
@@ -284,6 +285,16 @@ class AuthenticatedPageWrapper extends StatelessWidget {
 
                   return MusterRollEstimateBloc(
                     AttendanceMusterRepository(
+                      DioClient().dio,
+                      isar,
+                    ),
+                  );
+                }),
+                BlocProvider(create: (ctx) {
+                  final isar = context.read<Isar>();
+
+                  return AttendanceIndividualBloc(
+                    attendanceRegisterRepository: AttendanceRegisterRepository(
                       DioClient().dio,
                       isar,
                     ),

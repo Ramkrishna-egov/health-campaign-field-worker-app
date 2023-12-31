@@ -99,6 +99,8 @@ flutter:
     - ./assets/audio/buzzer.wav
     - ./assets/registar_data.json
     - ./assets/muster_data.json
+    - ./assets/attendees.json
+    - ./assets/attendee_log.json
 
   fonts:
     - family: Roboto
