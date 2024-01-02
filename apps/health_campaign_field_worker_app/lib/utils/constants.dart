@@ -9,6 +9,7 @@ import 'package:path_provider/path_provider.dart';
 
 import '../blocs/app_initialization/app_initialization.dart';
 import '../data/data_repository.dart';
+import '../data/local_store/no_sql/schema/absent_attendee.dart';
 import '../data/local_store/no_sql/schema/app_configuration.dart';
 import '../data/local_store/no_sql/schema/localization.dart';
 import '../data/local_store/no_sql/schema/oplog.dart';
@@ -93,6 +94,7 @@ class Constants {
           OpLogSchema,
           ProjectTypeListCycleSchema,
           RowVersionListSchema,
+          AbsentAttendeeSchema,
         ],
         inspector: true,
         directory: directory.path,

@@ -36,7 +36,6 @@ class AttendanceIndividualBloc
     AttendanceIndividualLogSearchEvent event,
     AttendanceIndividualEmitter emit,
   ) async {
-    print(event.offset.toString());
     if (event.offset == 0) {
       emit(const AttendanceIndividualState.loading());
       AttendeeServerResponse a =

@@ -70,6 +70,13 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
               final tableData = getAttendanceData(d!);
 
               return ScrollableContent(
+                footer: SizedBox(
+                  height: 50,
+                  child: DigitElevatedButton(
+                    child: const Text("Mark"),
+                    onPressed: () {},
+                  ),
+                ),
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 header: const BackNavigationHelpHeaderWidget(
@@ -134,19 +141,19 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                           totalCount: countData,
                           isDisabled: false,
                         ),
-                        ElevatedButton(
-                          onPressed: () {
-                            print(attendanceRowModelList.length);
-                            dynamic s = attendanceRowModelList
-                                .where((e) => e.status == 1)
-                                .toList();
+                        // ElevatedButton(
+                        //   onPressed: () {
+                        //     print(attendanceRowModelList.length);
+                        //     dynamic s = attendanceRowModelList
+                        //         .where((e) => e.status == 1)
+                        //         .toList();
 
-                            print(s.length);
-                          },
-                          child: const Text(
-                            "ok",
-                          ),
-                        ),
+                        //     print(s.length);
+                        //   },
+                        //   child: const Text(
+                        //     "ok",
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),

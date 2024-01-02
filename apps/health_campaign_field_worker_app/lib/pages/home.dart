@@ -427,9 +427,9 @@ class _HomePageState extends LocalizedState<HomePage> {
       ),
 
       // attendance
-      'Attendance': HomeItemCard(
+      i18.attendance.viewAttendanceLabel: HomeItemCard(
         icon: Icons.table_chart,
-        label: 'View Attendance',
+        label: i18.attendance.viewAttendanceLabel,
         onPressed: () {
           context.router.push(
             const TrackAttendanceWrapperRoute(),
@@ -450,7 +450,7 @@ class _HomePageState extends LocalizedState<HomePage> {
       i18.home.viewReportsLabel,
       'DB',
       // attendance
-      'Attendance',
+      i18.attendance.viewAttendanceLabel,
     ];
 
     final List<String> filteredLabels = homeItemsLabel
@@ -478,7 +478,7 @@ class _HomePageState extends LocalizedState<HomePage> {
 // attendance
     widgetList.add(HomeItemCard(
       icon: Icons.group_add_outlined,
-      label: 'Attendance',
+      label: i18.attendance.viewAttendanceLabel,
       onPressed: () {
         context.router.push(
           const TrackAttendanceWrapperRoute(),

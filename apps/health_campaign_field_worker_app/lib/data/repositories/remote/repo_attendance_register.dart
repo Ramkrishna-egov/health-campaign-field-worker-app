@@ -10,6 +10,7 @@ import '../../../models/attendance/attendance_model/attendance_attendee_log.dart
 import '../../../models/attendance/attendance_model/attendance_attendee_model.dart';
 import '../../../models/attendance/attendance_model/attendee_wraper_log_model.dart';
 import '../../../models/attendance/attendance_registry_model.dart';
+import '../../local_store/no_sql/schema/absent_attendee.dart';
 
 class AttendanceRegisterRepository {
   final Dio client;
@@ -108,5 +109,16 @@ class AttendanceRegisterRepository {
     } on DioError catch (ex) {
       rethrow;
     }
+  }
+
+// storeAbsentAttendance in local nosql db(ISAR)
+  Future<dynamic> storeAbsentAttendee(AbsentAttendee absentAttendee) async {
+    int s = await isar.writeTxn(() async {
+      int id = await isar.absentAttendees.put(absentAttendee);
+
+      return id;
+    });
+
+    return s;
   }
 }

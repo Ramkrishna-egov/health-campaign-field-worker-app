@@ -27,6 +27,9 @@ const inventoryReportDetails = InventoryReportDetails();
 const syncDialog = SyncDialog();
 const referBeneficiary = ReferBeneficiary();
 const ineligibilityReasons = IneligibilityReasons();
+//attendance
+
+const attendance = Attendance();
 
 class Common {
   const Common();
@@ -1233,4 +1236,14 @@ class IneligibilityReasons {
   String get dialogContent => 'INELIGIBILITY_REASONS_DIALOG_CONTENT';
   String get ineligibilityReasonsLabel => 'INELIGIBILITY_REASONS_LABEL';
   String get selectReasonsLabel => 'INELIGIBILITY_REASONS_SELECT_LABEL';
+}
+
+// attendance module
+//
+class Attendance {
+  const Attendance();
+
+  String get viewAttendanceLabel => 'HOME_VIEW_ATTENDANCE_LABEL';
+
+  // String get manageStockLabel => 'HOME_MANAGE_STOCK_LABEL';
 }
