@@ -164,7 +164,7 @@ class __$$_AttendanceRowModelCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_AttendanceRowModel implements _AttendanceRowModel {
-  const _$_AttendanceRowModel(
+  _$_AttendanceRowModel(
       {this.name,
       this.individualId,
       this.entryDate,
@@ -231,7 +231,7 @@ class _$_AttendanceRowModel implements _AttendanceRowModel {
 }
 
 abstract class _AttendanceRowModel implements AttendanceRowModel {
-  const factory _AttendanceRowModel(
+  factory _AttendanceRowModel(
       {final String? name,
       final String? individualId,
       final int? entryDate,

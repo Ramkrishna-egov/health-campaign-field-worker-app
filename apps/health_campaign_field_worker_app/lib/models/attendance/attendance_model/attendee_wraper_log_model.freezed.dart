@@ -21,6 +21,8 @@ AttendeeLogWrappperResponse _$AttendeeLogWrappperResponseFromJson(
 
 /// @nodoc
 mixin _$AttendeeLogWrappperResponse {
+  @JsonKey(name: "count")
+  int get count => throw _privateConstructorUsedError;
   @JsonKey(name: "attendance")
   List<AttendeeAttendanceResponseLog>? get attendanceAttendeLog =>
       throw _privateConstructorUsedError;
@@ -40,7 +42,9 @@ abstract class $AttendeeLogWrappperResponseCopyWith<$Res> {
           AttendeeLogWrappperResponse>;
   @useResult
   $Res call(
-      {@JsonKey(name: "attendance")
+      {@JsonKey(name: "count")
+          int count,
+      @JsonKey(name: "attendance")
           List<AttendeeAttendanceResponseLog>? attendanceAttendeLog});
 }
 
@@ -58,9 +62,14 @@ class _$AttendeeLogWrappperResponseCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? count = null,
     Object? attendanceAttendeLog = freezed,
   }) {
     return _then(_value.copyWith(
+      count: null == count
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int,
       attendanceAttendeLog: freezed == attendanceAttendeLog
           ? _value.attendanceAttendeLog
           : attendanceAttendeLog // ignore: cast_nullable_to_non_nullable
@@ -79,7 +88,9 @@ abstract class _$$_AttendeeLogWrappperResponseCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: "attendance")
+      {@JsonKey(name: "count")
+          int count,
+      @JsonKey(name: "attendance")
           List<AttendeeAttendanceResponseLog>? attendanceAttendeLog});
 }
 
@@ -96,9 +107,14 @@ class __$$_AttendeeLogWrappperResponseCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? count = null,
     Object? attendanceAttendeLog = freezed,
   }) {
     return _then(_$_AttendeeLogWrappperResponse(
+      count: null == count
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int,
       attendanceAttendeLog: freezed == attendanceAttendeLog
           ? _value._attendanceAttendeLog
           : attendanceAttendeLog // ignore: cast_nullable_to_non_nullable
@@ -111,13 +127,18 @@ class __$$_AttendeeLogWrappperResponseCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_AttendeeLogWrappperResponse implements _AttendeeLogWrappperResponse {
   _$_AttendeeLogWrappperResponse(
-      {@JsonKey(name: "attendance")
+      {@JsonKey(name: "count")
+          this.count = 0,
+      @JsonKey(name: "attendance")
           final List<AttendeeAttendanceResponseLog>? attendanceAttendeLog})
       : _attendanceAttendeLog = attendanceAttendeLog;
 
   factory _$_AttendeeLogWrappperResponse.fromJson(Map<String, dynamic> json) =>
       _$$_AttendeeLogWrappperResponseFromJson(json);
 
+  @override
+  @JsonKey(name: "count")
+  final int count;
   final List<AttendeeAttendanceResponseLog>? _attendanceAttendeLog;
   @override
   @JsonKey(name: "attendance")
@@ -130,7 +151,7 @@ class _$_AttendeeLogWrappperResponse implements _AttendeeLogWrappperResponse {
 
   @override
   String toString() {
-    return 'AttendeeLogWrappperResponse(attendanceAttendeLog: $attendanceAttendeLog)';
+    return 'AttendeeLogWrappperResponse(count: $count, attendanceAttendeLog: $attendanceAttendeLog)';
   }
 
   @override
@@ -138,14 +159,15 @@ class _$_AttendeeLogWrappperResponse implements _AttendeeLogWrappperResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AttendeeLogWrappperResponse &&
+            (identical(other.count, count) || other.count == count) &&
             const DeepCollectionEquality()
                 .equals(other._attendanceAttendeLog, _attendanceAttendeLog));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_attendanceAttendeLog));
+  int get hashCode => Object.hash(runtimeType, count,
+      const DeepCollectionEquality().hash(_attendanceAttendeLog));
 
   @JsonKey(ignore: true)
   @override
@@ -165,13 +187,18 @@ class _$_AttendeeLogWrappperResponse implements _AttendeeLogWrappperResponse {
 abstract class _AttendeeLogWrappperResponse
     implements AttendeeLogWrappperResponse {
   factory _AttendeeLogWrappperResponse(
-      {@JsonKey(name: "attendance")
+      {@JsonKey(name: "count")
+          final int count,
+      @JsonKey(name: "attendance")
           final List<AttendeeAttendanceResponseLog>?
               attendanceAttendeLog}) = _$_AttendeeLogWrappperResponse;
 
   factory _AttendeeLogWrappperResponse.fromJson(Map<String, dynamic> json) =
       _$_AttendeeLogWrappperResponse.fromJson;
 
+  @override
+  @JsonKey(name: "count")
+  int get count;
   @override
   @JsonKey(name: "attendance")
   List<AttendeeAttendanceResponseLog>? get attendanceAttendeLog;

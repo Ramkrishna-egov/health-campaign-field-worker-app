@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 
 import '../../blocs/attendance/attendance_individual/individual_attendance_log.dart';
 import '../../models/attendance/attendance_model/attendance_row_model.dart';
+import '../../widgets/attendance/attendance_pagination.dart';
 import '../../widgets/attendance/circular_button.dart';
 import '../../widgets/header/back_navigation_help_header.dart';
 import '../../widgets/localized.dart';
@@ -45,13 +46,28 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocBuilder<AttendanceIndividualBloc, AttendanceIndividualState>(
+        buildWhen: (p, c) {
+          return p != c ? true : false;
+        },
         builder: (context, state) {
           return state.maybeWhen(
             orElse: () {
               return const SizedBox.shrink();
             },
-            loaded: (attendanceRowModelList) {
-              final tableData = getAttendanceData(attendanceRowModelList!);
+            loaded: (
+              attendanceRowModelList,
+              offsetData,
+              currentOffset,
+              countData,
+              limitData,
+            ) {
+              dynamic d = attendanceRowModelList!.sublist(
+                offsetData * 10,
+                offsetData + limitData <= attendanceRowModelList!.length
+                    ? (offsetData * limitData) + 9
+                    : attendanceRowModelList!.length,
+              );
+              final tableData = getAttendanceData(d!);
 
               return ScrollableContent(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -96,11 +112,39 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 8.0),
                           child: DigitTable(
-                            height: 58 + (52.0 * (tableData.length + 0.3)),
+                            height: 80 + (52.0 * (tableData.length + 0.3)),
                             headerList: headerList(widget.dateTime),
                             tableData: tableData,
                             columnWidth: 100,
                             scrollPhysics: const NeverScrollableScrollPhysics(),
+                          ),
+                        ),
+                        Pagination(
+                          callBack: (dynamic d) {
+                            context.read<AttendanceIndividualBloc>().add(
+                                  AttendanceIndividualLogSearchEvent(
+                                    attendeeId: ["qewq", "qe"],
+                                    limit: d['limit'],
+                                    offset: d['offset'],
+                                  ),
+                                );
+                          },
+                          limit: limitData,
+                          offSet: offsetData,
+                          totalCount: countData,
+                          isDisabled: false,
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            print(attendanceRowModelList.length);
+                            dynamic s = attendanceRowModelList
+                                .where((e) => e.status == 1)
+                                .toList();
+
+                            print(s.length);
+                          },
+                          child: const Text(
+                            "ok",
                           ),
                         ),
                       ],
@@ -141,7 +185,7 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
             print("working- ${tableDataModel.individualId}");
             context.read<AttendanceIndividualBloc>().add(
                   AttendanceMarkEvent(
-                    individualId: "1",
+                    individualId: tableDataModel.individualId!,
                     registarId: '2',
                     status: tableDataModel.individualId,
                   ),

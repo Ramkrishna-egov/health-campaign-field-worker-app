@@ -66,7 +66,7 @@ class AttendanceRegisterRepository {
 
 // fetch list of individuals attendance log
 
-  Future<List<AttendeeAttendanceResponseLog>> fetchAttendeesLog({
+  Future<AttendeeLogWrappperResponse> fetchAttendeesLog({
     required String registartId,
     required int fromTime,
     required toTime,
@@ -81,7 +81,30 @@ class AttendanceRegisterRepository {
         ),
       );
 
-      return dec.attendanceAttendeLog!;
+      return dec;
+    } on DioError catch (ex) {
+      rethrow;
+    }
+  }
+
+// create attendance log
+
+  Future<AttendeeLogWrappperResponse> createAttendanceLog({
+    required String registartId,
+    required int fromTime,
+    required toTime,
+    required List<Map<String, dynamic>> attedeesList,
+  }) async {
+    try {
+      var data = await rootBundle.loadString("assets/attendee_log.json");
+
+      AttendeeLogWrappperResponse dec = AttendeeLogWrappperResponse.fromJson(
+        json.decode(
+          data.toString(),
+        ),
+      );
+
+      return dec;
     } on DioError catch (ex) {
       rethrow;
     }

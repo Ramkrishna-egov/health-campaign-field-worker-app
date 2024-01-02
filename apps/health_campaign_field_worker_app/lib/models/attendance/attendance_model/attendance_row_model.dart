@@ -5,7 +5,7 @@ part 'attendance_row_model.g.dart';
 
 @freezed
 class AttendanceRowModel with _$AttendanceRowModel {
-  const factory AttendanceRowModel({
+  factory AttendanceRowModel({
     String? name,
     String? individualId,
     int? entryDate,

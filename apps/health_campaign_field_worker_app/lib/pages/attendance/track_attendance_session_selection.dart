@@ -96,11 +96,11 @@ class _AttendanceDateSessionSelectionPageState
                       );
                   context.router.push(MarkAttendanceRoute(
                     attendeeIds: const ["1", "2"],
-                    registerId: '1234',
-                    tenantId: '4321',
+                    registerId: widget.id,
+                    tenantId: widget.tenantId,
                     dateTime: s,
                     entryTime: s.millisecondsSinceEpoch,
-                    exitTime: s.microsecondsSinceEpoch + 10,
+                    exitTime: s.microsecondsSinceEpoch - 10,
                   ));
                 }
               },

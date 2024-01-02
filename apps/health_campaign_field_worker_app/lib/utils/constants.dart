@@ -386,3 +386,26 @@ class DataModels {
     }
   }
 }
+
+class ApiUtil {
+  static String fetchIndividuals({
+    required int limit,
+    required int offset,
+    required String tenantId,
+    required bool isDeleted,
+  }) {
+    return "individual/v1/_search?limit=$limit&offset=$offset&tenantId=$tenantId&includeDeleted=$isDeleted";
+  }
+
+  static String fetchRegisters() {
+    return "";
+  }
+
+  static String fetchIndividualAttendanceLog() {
+    return "";
+  }
+
+  static String createAttendanceLog() {
+    return "";
+  }
+}
