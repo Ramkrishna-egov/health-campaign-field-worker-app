@@ -570,7 +570,8 @@ mixin _$AttendanceIndividualProjectSearchState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            AttendanceRegistersModel? individualAttendanceRegisterModel)
+            AttendanceMarkRegisterModelResponse?
+                individualAttendanceRegisterModel)
         loaded,
     required TResult Function(String? error) error,
   }) =>
@@ -580,7 +581,8 @@ mixin _$AttendanceIndividualProjectSearchState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(
-            AttendanceRegistersModel? individualAttendanceRegisterModel)?
+            AttendanceMarkRegisterModelResponse?
+                individualAttendanceRegisterModel)?
         loaded,
     TResult? Function(String? error)? error,
   }) =>
@@ -590,7 +592,8 @@ mixin _$AttendanceIndividualProjectSearchState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(
-            AttendanceRegistersModel? individualAttendanceRegisterModel)?
+            AttendanceMarkRegisterModelResponse?
+                individualAttendanceRegisterModel)?
         loaded,
     TResult Function(String? error)? error,
     required TResult orElse(),
@@ -684,7 +687,8 @@ class _$_Initial extends _Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            AttendanceRegistersModel? individualAttendanceRegisterModel)
+            AttendanceMarkRegisterModelResponse?
+                individualAttendanceRegisterModel)
         loaded,
     required TResult Function(String? error) error,
   }) {
@@ -697,7 +701,8 @@ class _$_Initial extends _Initial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(
-            AttendanceRegistersModel? individualAttendanceRegisterModel)?
+            AttendanceMarkRegisterModelResponse?
+                individualAttendanceRegisterModel)?
         loaded,
     TResult? Function(String? error)? error,
   }) {
@@ -710,7 +715,8 @@ class _$_Initial extends _Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(
-            AttendanceRegistersModel? individualAttendanceRegisterModel)?
+            AttendanceMarkRegisterModelResponse?
+                individualAttendanceRegisterModel)?
         loaded,
     TResult Function(String? error)? error,
     required TResult orElse(),
@@ -804,7 +810,8 @@ class _$_Loading extends _Loading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            AttendanceRegistersModel? individualAttendanceRegisterModel)
+            AttendanceMarkRegisterModelResponse?
+                individualAttendanceRegisterModel)
         loaded,
     required TResult Function(String? error) error,
   }) {
@@ -817,7 +824,8 @@ class _$_Loading extends _Loading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(
-            AttendanceRegistersModel? individualAttendanceRegisterModel)?
+            AttendanceMarkRegisterModelResponse?
+                individualAttendanceRegisterModel)?
         loaded,
     TResult? Function(String? error)? error,
   }) {
@@ -830,7 +838,8 @@ class _$_Loading extends _Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(
-            AttendanceRegistersModel? individualAttendanceRegisterModel)?
+            AttendanceMarkRegisterModelResponse?
+                individualAttendanceRegisterModel)?
         loaded,
     TResult Function(String? error)? error,
     required TResult orElse(),
@@ -890,9 +899,10 @@ abstract class _$$_IndividualLoadedCopyWith<$Res> {
           _$_IndividualLoaded value, $Res Function(_$_IndividualLoaded) then) =
       __$$_IndividualLoadedCopyWithImpl<$Res>;
   @useResult
-  $Res call({AttendanceRegistersModel? individualAttendanceRegisterModel});
+  $Res call(
+      {AttendanceMarkRegisterModelResponse? individualAttendanceRegisterModel});
 
-  $AttendanceRegistersModelCopyWith<$Res>?
+  $AttendanceMarkRegisterModelResponseCopyWith<$Res>?
       get individualAttendanceRegisterModel;
 }
 
@@ -913,19 +923,19 @@ class __$$_IndividualLoadedCopyWithImpl<$Res>
       freezed == individualAttendanceRegisterModel
           ? _value.individualAttendanceRegisterModel
           : individualAttendanceRegisterModel // ignore: cast_nullable_to_non_nullable
-              as AttendanceRegistersModel?,
+              as AttendanceMarkRegisterModelResponse?,
     ));
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $AttendanceRegistersModelCopyWith<$Res>?
+  $AttendanceMarkRegisterModelResponseCopyWith<$Res>?
       get individualAttendanceRegisterModel {
     if (_value.individualAttendanceRegisterModel == null) {
       return null;
     }
 
-    return $AttendanceRegistersModelCopyWith<$Res>(
+    return $AttendanceMarkRegisterModelResponseCopyWith<$Res>(
         _value.individualAttendanceRegisterModel!, (value) {
       return _then(_value.copyWith(individualAttendanceRegisterModel: value));
     });
@@ -938,7 +948,7 @@ class _$_IndividualLoaded extends _IndividualLoaded {
   const _$_IndividualLoaded(this.individualAttendanceRegisterModel) : super._();
 
   @override
-  final AttendanceRegistersModel? individualAttendanceRegisterModel;
+  final AttendanceMarkRegisterModelResponse? individualAttendanceRegisterModel;
 
   @override
   String toString() {
@@ -972,7 +982,8 @@ class _$_IndividualLoaded extends _IndividualLoaded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            AttendanceRegistersModel? individualAttendanceRegisterModel)
+            AttendanceMarkRegisterModelResponse?
+                individualAttendanceRegisterModel)
         loaded,
     required TResult Function(String? error) error,
   }) {
@@ -985,7 +996,8 @@ class _$_IndividualLoaded extends _IndividualLoaded {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(
-            AttendanceRegistersModel? individualAttendanceRegisterModel)?
+            AttendanceMarkRegisterModelResponse?
+                individualAttendanceRegisterModel)?
         loaded,
     TResult? Function(String? error)? error,
   }) {
@@ -998,7 +1010,8 @@ class _$_IndividualLoaded extends _IndividualLoaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(
-            AttendanceRegistersModel? individualAttendanceRegisterModel)?
+            AttendanceMarkRegisterModelResponse?
+                individualAttendanceRegisterModel)?
         loaded,
     TResult Function(String? error)? error,
     required TResult orElse(),
@@ -1050,11 +1063,11 @@ class _$_IndividualLoaded extends _IndividualLoaded {
 abstract class _IndividualLoaded
     extends AttendanceIndividualProjectSearchState {
   const factory _IndividualLoaded(
-          final AttendanceRegistersModel? individualAttendanceRegisterModel) =
-      _$_IndividualLoaded;
+      final AttendanceMarkRegisterModelResponse?
+          individualAttendanceRegisterModel) = _$_IndividualLoaded;
   const _IndividualLoaded._() : super._();
 
-  AttendanceRegistersModel? get individualAttendanceRegisterModel;
+  AttendanceMarkRegisterModelResponse? get individualAttendanceRegisterModel;
   @JsonKey(ignore: true)
   _$$_IndividualLoadedCopyWith<_$_IndividualLoaded> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1125,7 +1138,8 @@ class _$_Error extends _Error {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            AttendanceRegistersModel? individualAttendanceRegisterModel)
+            AttendanceMarkRegisterModelResponse?
+                individualAttendanceRegisterModel)
         loaded,
     required TResult Function(String? error) error,
   }) {
@@ -1138,7 +1152,8 @@ class _$_Error extends _Error {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(
-            AttendanceRegistersModel? individualAttendanceRegisterModel)?
+            AttendanceMarkRegisterModelResponse?
+                individualAttendanceRegisterModel)?
         loaded,
     TResult? Function(String? error)? error,
   }) {
@@ -1151,7 +1166,8 @@ class _$_Error extends _Error {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(
-            AttendanceRegistersModel? individualAttendanceRegisterModel)?
+            AttendanceMarkRegisterModelResponse?
+                individualAttendanceRegisterModel)?
         loaded,
     TResult Function(String? error)? error,
     required TResult orElse(),

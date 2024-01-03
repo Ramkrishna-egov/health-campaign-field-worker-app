@@ -333,7 +333,7 @@ mixin _$AttendanceProjectsSearchState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            AttendanceRegistersModel? attendanceRegistersModel)
+            AttendanceMarkRegisterModelResponse? attendanceRegistersModel)
         loaded,
     required TResult Function(String? error) error,
   }) =>
@@ -342,7 +342,8 @@ mixin _$AttendanceProjectsSearchState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(AttendanceRegistersModel? attendanceRegistersModel)?
+    TResult? Function(
+            AttendanceMarkRegisterModelResponse? attendanceRegistersModel)?
         loaded,
     TResult? Function(String? error)? error,
   }) =>
@@ -351,7 +352,8 @@ mixin _$AttendanceProjectsSearchState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(AttendanceRegistersModel? attendanceRegistersModel)?
+    TResult Function(
+            AttendanceMarkRegisterModelResponse? attendanceRegistersModel)?
         loaded,
     TResult Function(String? error)? error,
     required TResult orElse(),
@@ -445,7 +447,7 @@ class _$_Initial extends _Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            AttendanceRegistersModel? attendanceRegistersModel)
+            AttendanceMarkRegisterModelResponse? attendanceRegistersModel)
         loaded,
     required TResult Function(String? error) error,
   }) {
@@ -457,7 +459,8 @@ class _$_Initial extends _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(AttendanceRegistersModel? attendanceRegistersModel)?
+    TResult? Function(
+            AttendanceMarkRegisterModelResponse? attendanceRegistersModel)?
         loaded,
     TResult? Function(String? error)? error,
   }) {
@@ -469,7 +472,8 @@ class _$_Initial extends _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(AttendanceRegistersModel? attendanceRegistersModel)?
+    TResult Function(
+            AttendanceMarkRegisterModelResponse? attendanceRegistersModel)?
         loaded,
     TResult Function(String? error)? error,
     required TResult orElse(),
@@ -563,7 +567,7 @@ class _$_Loading extends _Loading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            AttendanceRegistersModel? attendanceRegistersModel)
+            AttendanceMarkRegisterModelResponse? attendanceRegistersModel)
         loaded,
     required TResult Function(String? error) error,
   }) {
@@ -575,7 +579,8 @@ class _$_Loading extends _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(AttendanceRegistersModel? attendanceRegistersModel)?
+    TResult? Function(
+            AttendanceMarkRegisterModelResponse? attendanceRegistersModel)?
         loaded,
     TResult? Function(String? error)? error,
   }) {
@@ -587,7 +592,8 @@ class _$_Loading extends _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(AttendanceRegistersModel? attendanceRegistersModel)?
+    TResult Function(
+            AttendanceMarkRegisterModelResponse? attendanceRegistersModel)?
         loaded,
     TResult Function(String? error)? error,
     required TResult orElse(),
@@ -646,9 +652,10 @@ abstract class _$$_LoadedCopyWith<$Res> {
   factory _$$_LoadedCopyWith(_$_Loaded value, $Res Function(_$_Loaded) then) =
       __$$_LoadedCopyWithImpl<$Res>;
   @useResult
-  $Res call({AttendanceRegistersModel? attendanceRegistersModel});
+  $Res call({AttendanceMarkRegisterModelResponse? attendanceRegistersModel});
 
-  $AttendanceRegistersModelCopyWith<$Res>? get attendanceRegistersModel;
+  $AttendanceMarkRegisterModelResponseCopyWith<$Res>?
+      get attendanceRegistersModel;
 }
 
 /// @nodoc
@@ -667,18 +674,19 @@ class __$$_LoadedCopyWithImpl<$Res>
       freezed == attendanceRegistersModel
           ? _value.attendanceRegistersModel
           : attendanceRegistersModel // ignore: cast_nullable_to_non_nullable
-              as AttendanceRegistersModel?,
+              as AttendanceMarkRegisterModelResponse?,
     ));
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $AttendanceRegistersModelCopyWith<$Res>? get attendanceRegistersModel {
+  $AttendanceMarkRegisterModelResponseCopyWith<$Res>?
+      get attendanceRegistersModel {
     if (_value.attendanceRegistersModel == null) {
       return null;
     }
 
-    return $AttendanceRegistersModelCopyWith<$Res>(
+    return $AttendanceMarkRegisterModelResponseCopyWith<$Res>(
         _value.attendanceRegistersModel!, (value) {
       return _then(_value.copyWith(attendanceRegistersModel: value));
     });
@@ -691,7 +699,7 @@ class _$_Loaded extends _Loaded {
   const _$_Loaded(this.attendanceRegistersModel) : super._();
 
   @override
-  final AttendanceRegistersModel? attendanceRegistersModel;
+  final AttendanceMarkRegisterModelResponse? attendanceRegistersModel;
 
   @override
   String toString() {
@@ -723,7 +731,7 @@ class _$_Loaded extends _Loaded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            AttendanceRegistersModel? attendanceRegistersModel)
+            AttendanceMarkRegisterModelResponse? attendanceRegistersModel)
         loaded,
     required TResult Function(String? error) error,
   }) {
@@ -735,7 +743,8 @@ class _$_Loaded extends _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(AttendanceRegistersModel? attendanceRegistersModel)?
+    TResult? Function(
+            AttendanceMarkRegisterModelResponse? attendanceRegistersModel)?
         loaded,
     TResult? Function(String? error)? error,
   }) {
@@ -747,7 +756,8 @@ class _$_Loaded extends _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(AttendanceRegistersModel? attendanceRegistersModel)?
+    TResult Function(
+            AttendanceMarkRegisterModelResponse? attendanceRegistersModel)?
         loaded,
     TResult Function(String? error)? error,
     required TResult orElse(),
@@ -798,10 +808,11 @@ class _$_Loaded extends _Loaded {
 
 abstract class _Loaded extends AttendanceProjectsSearchState {
   const factory _Loaded(
-      final AttendanceRegistersModel? attendanceRegistersModel) = _$_Loaded;
+          final AttendanceMarkRegisterModelResponse? attendanceRegistersModel) =
+      _$_Loaded;
   const _Loaded._() : super._();
 
-  AttendanceRegistersModel? get attendanceRegistersModel;
+  AttendanceMarkRegisterModelResponse? get attendanceRegistersModel;
   @JsonKey(ignore: true)
   _$$_LoadedCopyWith<_$_Loaded> get copyWith =>
       throw _privateConstructorUsedError;
@@ -872,7 +883,7 @@ class _$_Error extends _Error {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            AttendanceRegistersModel? attendanceRegistersModel)
+            AttendanceMarkRegisterModelResponse? attendanceRegistersModel)
         loaded,
     required TResult Function(String? error) error,
   }) {
@@ -884,7 +895,8 @@ class _$_Error extends _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(AttendanceRegistersModel? attendanceRegistersModel)?
+    TResult? Function(
+            AttendanceMarkRegisterModelResponse? attendanceRegistersModel)?
         loaded,
     TResult? Function(String? error)? error,
   }) {
@@ -896,7 +908,8 @@ class _$_Error extends _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(AttendanceRegistersModel? attendanceRegistersModel)?
+    TResult Function(
+            AttendanceMarkRegisterModelResponse? attendanceRegistersModel)?
         loaded,
     TResult Function(String? error)? error,
     required TResult orElse(),

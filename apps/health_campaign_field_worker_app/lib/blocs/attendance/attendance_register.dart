@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import '../../models/attendance/attendance_mark_model/register_model.dart';
 import '../../models/attendance/attendance_registry_model.dart';
 
 import '../../data/repositories/remote/repo_attendance_register.dart';
@@ -30,7 +31,7 @@ class AttendanceProjectsSearchBloc
       emit(const AttendanceProjectsSearchState.initial());
       emit(const AttendanceProjectsSearchState.loading());
 
-      AttendanceRegistersModel attendanceRegistersModel =
+      AttendanceMarkRegisterModelResponse attendanceRegistersModel =
           await attendanceRegisterRepository.searchAttendanceProjects(
         url: " Urls.attendanceRegisterServices.searchAttendanceRegister",
         queryParameters: event.id.trim().toString().isNotEmpty
@@ -73,7 +74,7 @@ class AttendanceProjectsSearchState with _$AttendanceProjectsSearchState {
   const factory AttendanceProjectsSearchState.initial() = _Initial;
   const factory AttendanceProjectsSearchState.loading() = _Loading;
   const factory AttendanceProjectsSearchState.loaded(
-    AttendanceRegistersModel? attendanceRegistersModel,
+    AttendanceMarkRegisterModelResponse? attendanceRegistersModel,
   ) = _Loaded;
   const factory AttendanceProjectsSearchState.error(String? error) = _Error;
   // const factory AttendanceProjectsSearchState({

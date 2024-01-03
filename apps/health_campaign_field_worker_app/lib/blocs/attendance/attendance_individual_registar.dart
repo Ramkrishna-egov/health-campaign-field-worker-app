@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../data/repositories/remote/repo_attendance_register.dart';
+import '../../models/attendance/attendance_mark_model/register_model.dart';
 import '../../models/attendance/attendance_registry_model.dart';
 
 part 'attendance_individual_registar.freezed.dart';
@@ -29,9 +30,9 @@ class AttendanceIndividualProjectSearchBloc extends Bloc<
     AttendanceIndividualProjectSearchEmitter emit,
   ) async {
     emit(const AttendanceIndividualProjectSearchState.initial());
-    emit(const AttendanceIndividualProjectSearchState.loaded(
-      AttendanceRegistersModel(),
-    ));
+    // emit(const AttendanceIndividualProjectSearchState.loaded(
+    //   AttendanceRegistersModel(),
+    // ));
   }
 
   FutureOr<void> _onIndividualSearch(
@@ -45,7 +46,7 @@ class AttendanceIndividualProjectSearchBloc extends Bloc<
       } else {
         emit(const AttendanceIndividualProjectSearchState.initial());
         emit(const AttendanceIndividualProjectSearchState.loading());
-        AttendanceRegistersModel attendanceRegistersModel =
+        AttendanceMarkRegisterModelResponse attendanceRegistersModel =
             await attendanceRegisterRepository.searchAttendanceProjects(
           url: " Urls.attendanceRegisterServices.searchAttendanceRegister",
           queryParameters: event.id.trim().toString().isNotEmpty
@@ -123,7 +124,7 @@ class AttendanceIndividualProjectSearchState
   const factory AttendanceIndividualProjectSearchState.initial() = _Initial;
   const factory AttendanceIndividualProjectSearchState.loading() = _Loading;
   const factory AttendanceIndividualProjectSearchState.loaded(
-    AttendanceRegistersModel? individualAttendanceRegisterModel,
+    AttendanceMarkRegisterModelResponse? individualAttendanceRegisterModel,
   ) = _IndividualLoaded;
   const factory AttendanceIndividualProjectSearchState.error(String? error) =
       _Error;

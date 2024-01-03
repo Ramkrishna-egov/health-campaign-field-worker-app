@@ -678,8 +678,13 @@ mixin _$AttendanceIndividualState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<AttendanceRowModel>? attendanceRowModelList,
-            int offsetData, int currentOffset, int countData, int limitData)
+    required TResult Function(
+            List<AttendanceRowModel>? attendanceRowModelList,
+            List<AttendeeCollectionModel>? attendanceCollectionModel,
+            int offsetData,
+            int currentOffset,
+            int countData,
+            int limitData)
         loaded,
     required TResult Function(String? error) error,
   }) =>
@@ -688,8 +693,13 @@ mixin _$AttendanceIndividualState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<AttendanceRowModel>? attendanceRowModelList,
-            int offsetData, int currentOffset, int countData, int limitData)?
+    TResult? Function(
+            List<AttendanceRowModel>? attendanceRowModelList,
+            List<AttendeeCollectionModel>? attendanceCollectionModel,
+            int offsetData,
+            int currentOffset,
+            int countData,
+            int limitData)?
         loaded,
     TResult? Function(String? error)? error,
   }) =>
@@ -698,8 +708,13 @@ mixin _$AttendanceIndividualState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<AttendanceRowModel>? attendanceRowModelList,
-            int offsetData, int currentOffset, int countData, int limitData)?
+    TResult Function(
+            List<AttendanceRowModel>? attendanceRowModelList,
+            List<AttendeeCollectionModel>? attendanceCollectionModel,
+            int offsetData,
+            int currentOffset,
+            int countData,
+            int limitData)?
         loaded,
     TResult Function(String? error)? error,
     required TResult orElse(),
@@ -790,8 +805,13 @@ class _$_Initial extends _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<AttendanceRowModel>? attendanceRowModelList,
-            int offsetData, int currentOffset, int countData, int limitData)
+    required TResult Function(
+            List<AttendanceRowModel>? attendanceRowModelList,
+            List<AttendeeCollectionModel>? attendanceCollectionModel,
+            int offsetData,
+            int currentOffset,
+            int countData,
+            int limitData)
         loaded,
     required TResult Function(String? error) error,
   }) {
@@ -803,8 +823,13 @@ class _$_Initial extends _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<AttendanceRowModel>? attendanceRowModelList,
-            int offsetData, int currentOffset, int countData, int limitData)?
+    TResult? Function(
+            List<AttendanceRowModel>? attendanceRowModelList,
+            List<AttendeeCollectionModel>? attendanceCollectionModel,
+            int offsetData,
+            int currentOffset,
+            int countData,
+            int limitData)?
         loaded,
     TResult? Function(String? error)? error,
   }) {
@@ -816,8 +841,13 @@ class _$_Initial extends _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<AttendanceRowModel>? attendanceRowModelList,
-            int offsetData, int currentOffset, int countData, int limitData)?
+    TResult Function(
+            List<AttendanceRowModel>? attendanceRowModelList,
+            List<AttendeeCollectionModel>? attendanceCollectionModel,
+            int offsetData,
+            int currentOffset,
+            int countData,
+            int limitData)?
         loaded,
     TResult Function(String? error)? error,
     required TResult orElse(),
@@ -910,8 +940,13 @@ class _$_Loading extends _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<AttendanceRowModel>? attendanceRowModelList,
-            int offsetData, int currentOffset, int countData, int limitData)
+    required TResult Function(
+            List<AttendanceRowModel>? attendanceRowModelList,
+            List<AttendeeCollectionModel>? attendanceCollectionModel,
+            int offsetData,
+            int currentOffset,
+            int countData,
+            int limitData)
         loaded,
     required TResult Function(String? error) error,
   }) {
@@ -923,8 +958,13 @@ class _$_Loading extends _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<AttendanceRowModel>? attendanceRowModelList,
-            int offsetData, int currentOffset, int countData, int limitData)?
+    TResult? Function(
+            List<AttendanceRowModel>? attendanceRowModelList,
+            List<AttendeeCollectionModel>? attendanceCollectionModel,
+            int offsetData,
+            int currentOffset,
+            int countData,
+            int limitData)?
         loaded,
     TResult? Function(String? error)? error,
   }) {
@@ -936,8 +976,13 @@ class _$_Loading extends _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<AttendanceRowModel>? attendanceRowModelList,
-            int offsetData, int currentOffset, int countData, int limitData)?
+    TResult Function(
+            List<AttendanceRowModel>? attendanceRowModelList,
+            List<AttendeeCollectionModel>? attendanceCollectionModel,
+            int offsetData,
+            int currentOffset,
+            int countData,
+            int limitData)?
         loaded,
     TResult Function(String? error)? error,
     required TResult orElse(),
@@ -1000,6 +1045,7 @@ abstract class _$$_AttendanceRowModelLoadedCopyWith<$Res> {
   @useResult
   $Res call(
       {List<AttendanceRowModel>? attendanceRowModelList,
+      List<AttendeeCollectionModel>? attendanceCollectionModel,
       int offsetData,
       int currentOffset,
       int countData,
@@ -1019,6 +1065,7 @@ class __$$_AttendanceRowModelLoadedCopyWithImpl<$Res>
   @override
   $Res call({
     Object? attendanceRowModelList = freezed,
+    Object? attendanceCollectionModel = freezed,
     Object? offsetData = null,
     Object? currentOffset = null,
     Object? countData = null,
@@ -1029,6 +1076,10 @@ class __$$_AttendanceRowModelLoadedCopyWithImpl<$Res>
           ? _value._attendanceRowModelList
           : attendanceRowModelList // ignore: cast_nullable_to_non_nullable
               as List<AttendanceRowModel>?,
+      attendanceCollectionModel: freezed == attendanceCollectionModel
+          ? _value._attendanceCollectionModel
+          : attendanceCollectionModel // ignore: cast_nullable_to_non_nullable
+              as List<AttendeeCollectionModel>?,
       offsetData: null == offsetData
           ? _value.offsetData
           : offsetData // ignore: cast_nullable_to_non_nullable
@@ -1054,17 +1105,28 @@ class __$$_AttendanceRowModelLoadedCopyWithImpl<$Res>
 class _$_AttendanceRowModelLoaded extends _AttendanceRowModelLoaded {
   _$_AttendanceRowModelLoaded(
       {final List<AttendanceRowModel>? attendanceRowModelList,
+      final List<AttendeeCollectionModel>? attendanceCollectionModel,
       this.offsetData = 0,
       this.currentOffset = 0,
       this.countData = 0,
       this.limitData = 10})
       : _attendanceRowModelList = attendanceRowModelList,
+        _attendanceCollectionModel = attendanceCollectionModel,
         super._();
 
   final List<AttendanceRowModel>? _attendanceRowModelList;
   @override
   List<AttendanceRowModel>? get attendanceRowModelList {
     final value = _attendanceRowModelList;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<AttendeeCollectionModel>? _attendanceCollectionModel;
+  @override
+  List<AttendeeCollectionModel>? get attendanceCollectionModel {
+    final value = _attendanceCollectionModel;
     if (value == null) return null;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
@@ -1085,7 +1147,7 @@ class _$_AttendanceRowModelLoaded extends _AttendanceRowModelLoaded {
 
   @override
   String toString() {
-    return 'AttendanceIndividualState.loaded(attendanceRowModelList: $attendanceRowModelList, offsetData: $offsetData, currentOffset: $currentOffset, countData: $countData, limitData: $limitData)';
+    return 'AttendanceIndividualState.loaded(attendanceRowModelList: $attendanceRowModelList, attendanceCollectionModel: $attendanceCollectionModel, offsetData: $offsetData, currentOffset: $currentOffset, countData: $countData, limitData: $limitData)';
   }
 
   @override
@@ -1095,6 +1157,8 @@ class _$_AttendanceRowModelLoaded extends _AttendanceRowModelLoaded {
             other is _$_AttendanceRowModelLoaded &&
             const DeepCollectionEquality().equals(
                 other._attendanceRowModelList, _attendanceRowModelList) &&
+            const DeepCollectionEquality().equals(
+                other._attendanceCollectionModel, _attendanceCollectionModel) &&
             (identical(other.offsetData, offsetData) ||
                 other.offsetData == offsetData) &&
             (identical(other.currentOffset, currentOffset) ||
@@ -1109,6 +1173,7 @@ class _$_AttendanceRowModelLoaded extends _AttendanceRowModelLoaded {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_attendanceRowModelList),
+      const DeepCollectionEquality().hash(_attendanceCollectionModel),
       offsetData,
       currentOffset,
       countData,
@@ -1126,13 +1191,18 @@ class _$_AttendanceRowModelLoaded extends _AttendanceRowModelLoaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<AttendanceRowModel>? attendanceRowModelList,
-            int offsetData, int currentOffset, int countData, int limitData)
+    required TResult Function(
+            List<AttendanceRowModel>? attendanceRowModelList,
+            List<AttendeeCollectionModel>? attendanceCollectionModel,
+            int offsetData,
+            int currentOffset,
+            int countData,
+            int limitData)
         loaded,
     required TResult Function(String? error) error,
   }) {
-    return loaded(attendanceRowModelList, offsetData, currentOffset, countData,
-        limitData);
+    return loaded(attendanceRowModelList, attendanceCollectionModel, offsetData,
+        currentOffset, countData, limitData);
   }
 
   @override
@@ -1140,13 +1210,18 @@ class _$_AttendanceRowModelLoaded extends _AttendanceRowModelLoaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<AttendanceRowModel>? attendanceRowModelList,
-            int offsetData, int currentOffset, int countData, int limitData)?
+    TResult? Function(
+            List<AttendanceRowModel>? attendanceRowModelList,
+            List<AttendeeCollectionModel>? attendanceCollectionModel,
+            int offsetData,
+            int currentOffset,
+            int countData,
+            int limitData)?
         loaded,
     TResult? Function(String? error)? error,
   }) {
-    return loaded?.call(attendanceRowModelList, offsetData, currentOffset,
-        countData, limitData);
+    return loaded?.call(attendanceRowModelList, attendanceCollectionModel,
+        offsetData, currentOffset, countData, limitData);
   }
 
   @override
@@ -1154,15 +1229,20 @@ class _$_AttendanceRowModelLoaded extends _AttendanceRowModelLoaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<AttendanceRowModel>? attendanceRowModelList,
-            int offsetData, int currentOffset, int countData, int limitData)?
+    TResult Function(
+            List<AttendanceRowModel>? attendanceRowModelList,
+            List<AttendeeCollectionModel>? attendanceCollectionModel,
+            int offsetData,
+            int currentOffset,
+            int countData,
+            int limitData)?
         loaded,
     TResult Function(String? error)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(attendanceRowModelList, offsetData, currentOffset,
-          countData, limitData);
+      return loaded(attendanceRowModelList, attendanceCollectionModel,
+          offsetData, currentOffset, countData, limitData);
     }
     return orElse();
   }
@@ -1208,6 +1288,7 @@ class _$_AttendanceRowModelLoaded extends _AttendanceRowModelLoaded {
 abstract class _AttendanceRowModelLoaded extends AttendanceIndividualState {
   factory _AttendanceRowModelLoaded(
       {final List<AttendanceRowModel>? attendanceRowModelList,
+      final List<AttendeeCollectionModel>? attendanceCollectionModel,
       final int offsetData,
       final int currentOffset,
       final int countData,
@@ -1215,6 +1296,7 @@ abstract class _AttendanceRowModelLoaded extends AttendanceIndividualState {
   _AttendanceRowModelLoaded._() : super._();
 
   List<AttendanceRowModel>? get attendanceRowModelList;
+  List<AttendeeCollectionModel>? get attendanceCollectionModel;
   int get offsetData;
   int get currentOffset;
   int get countData;
@@ -1288,8 +1370,13 @@ class _$_Error extends _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<AttendanceRowModel>? attendanceRowModelList,
-            int offsetData, int currentOffset, int countData, int limitData)
+    required TResult Function(
+            List<AttendanceRowModel>? attendanceRowModelList,
+            List<AttendeeCollectionModel>? attendanceCollectionModel,
+            int offsetData,
+            int currentOffset,
+            int countData,
+            int limitData)
         loaded,
     required TResult Function(String? error) error,
   }) {
@@ -1301,8 +1388,13 @@ class _$_Error extends _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<AttendanceRowModel>? attendanceRowModelList,
-            int offsetData, int currentOffset, int countData, int limitData)?
+    TResult? Function(
+            List<AttendanceRowModel>? attendanceRowModelList,
+            List<AttendeeCollectionModel>? attendanceCollectionModel,
+            int offsetData,
+            int currentOffset,
+            int countData,
+            int limitData)?
         loaded,
     TResult? Function(String? error)? error,
   }) {
@@ -1314,8 +1406,13 @@ class _$_Error extends _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<AttendanceRowModel>? attendanceRowModelList,
-            int offsetData, int currentOffset, int countData, int limitData)?
+    TResult Function(
+            List<AttendanceRowModel>? attendanceRowModelList,
+            List<AttendeeCollectionModel>? attendanceCollectionModel,
+            int offsetData,
+            int currentOffset,
+            int countData,
+            int limitData)?
         loaded,
     TResult Function(String? error)? error,
     required TResult orElse(),

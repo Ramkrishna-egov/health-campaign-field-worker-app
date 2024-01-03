@@ -4,8 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import '../../blocs/attendance/attendance_register.dart';
 import '../../blocs/localization/app_localization.dart';
+import '../../models/attendance/attendance_mark_model/register_model.dart';
 import '../../models/attendance/attendance_registry_model.dart';
 import '../../router/app_router.dart';
+import '../../utils/utils.dart';
 import '../../widgets/header/back_navigation_help_header.dart';
 import '../../widgets/localized.dart';
 
@@ -22,7 +24,7 @@ class TrackAttendanceInboxPage extends LocalizedStatefulWidget {
 
 class _TrackAttendanceInboxPageState extends State<TrackAttendanceInboxPage> {
   List<Map<dynamic, dynamic>> projectList = [];
-  List<AttendanceRegister> attendanceRegisters = [];
+  List<AttendanceMarkRegisterModel> attendanceRegisters = [];
 
   @override
   void initState() {
@@ -43,35 +45,25 @@ class _TrackAttendanceInboxPageState extends State<TrackAttendanceInboxPage> {
               loading: () => const Center(
                 child: CircularProgressIndicator.adaptive(),
               ),
-              loaded: (AttendanceRegistersModel? attendanceRegistersModel) {
-                attendanceRegisters = List<AttendanceRegister>.from(
+              loaded: (AttendanceMarkRegisterModelResponse?
+                  attendanceRegistersModel) {
+                attendanceRegisters = List<AttendanceMarkRegisterModel>.from(
                   attendanceRegistersModel!.attendanceRegister!,
                 );
 
-                attendanceRegisters.sort((a, b) =>
-                    b.registerAuditDetails!.lastModifiedTime!.compareTo(
-                      a.registerAuditDetails!.lastModifiedTime!.toInt(),
-                    ));
+                attendanceRegisters
+                    .sort((a, b) => b.auditDetails!.lastModifiedTime!.compareTo(
+                          a.auditDetails!.lastModifiedTime!.toInt(),
+                        ));
 
-                projectList = attendanceRegisters
+                projectList = attendanceRegisters!
                     .map((e) => {
-                          "Work order Number": e
-                                  .attendanceRegisterAdditionalDetails
-                                  ?.contractId ??
-                              "",
+                          "Work order Number": e.registerNumber ?? "",
                           "Register ID": e.registerNumber,
-                          "Project ID": e.attendanceRegisterAdditionalDetails
-                                  ?.projectId ??
-                              "",
-                          "Project Name": e.attendanceRegisterAdditionalDetails
-                                  ?.projectName ??
-                              "",
-                          "Project Description": e
-                                  .attendanceRegisterAdditionalDetails
-                                  ?.projectDesc ??
-                              "",
-                          " Individuals Count": e.attendeesEntries != null
-                              ? e.attendeesEntries
+                          "Project ID": context.projectId.toString() ?? "",
+                          "Project Name": e.name ?? "",
+                          " Individuals Count": e.attendanceAttendees != null
+                              ? e.attendanceAttendees
                                   ?.where((att) =>
                                       att.denrollmentDate == null ||
                                       !(att.denrollmentDate! <=
@@ -105,14 +97,15 @@ class _TrackAttendanceInboxPageState extends State<TrackAttendanceInboxPage> {
                 loading: () => const Center(
                   child: CircularProgressIndicator.adaptive(),
                 ),
-                loaded: (AttendanceRegistersModel? attendanceModel) {
+                loaded: (AttendanceMarkRegisterModelResponse? attendanceModel) {
                   var list = <Widget>[];
 
                   for (int i = 0; i < projectList.length; i++) {
                     list.add(RegistarCard(
                       data: projectList[i] as Map<String, dynamic>,
                       regisId: attendanceModel!.attendanceRegister![i].id!,
-                      tenatId: attendanceModel!.attendanceRegister![i].tenantId,
+                      tenatId:
+                          attendanceModel!.attendanceRegister![i].tenantId!,
                       show: true,
                     ));
                   }

@@ -8,6 +8,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../blocs/attendance/attendance_individual/individual_attendance_log.dart';
 import '../../router/app_router.dart';
+import '../../utils/attendance/date_util_attendance.dart';
 import '../../widgets/attendance/custom_info_card.dart';
 import '../../widgets/header/back_navigation_help_header.dart';
 import '../../widgets/localized.dart';
@@ -87,6 +88,19 @@ class _AttendanceDateSessionSelectionPageState
                   debugPrint(s.microsecondsSinceEpoch.toString());
                   print(form.control(_sessionRadio).value.key.toString());
 
+                  final entryTime =
+                      AttendanceDateTimeManagement.getMillisecondEpoch(
+                    s,
+                    form.control(_sessionRadio).value.key.toString(),
+                    "entryTime",
+                  );
+
+                  final exitTime =
+                      AttendanceDateTimeManagement.getMillisecondEpoch(
+                    s,
+                    form.control(_sessionRadio).value.key.toString(),
+                    "exitType",
+                  );
                   context.read<AttendanceIndividualBloc>().add(
                         const AttendanceIndividualLogSearchEvent(
                           attendeeId: ["qewq", "qe"],
@@ -99,8 +113,8 @@ class _AttendanceDateSessionSelectionPageState
                     registerId: widget.id,
                     tenantId: widget.tenantId,
                     dateTime: s,
-                    entryTime: s.millisecondsSinceEpoch,
-                    exitTime: s.microsecondsSinceEpoch - 10,
+                    entryTime: entryTime,
+                    exitTime: exitTime,
                   ));
                 }
               },

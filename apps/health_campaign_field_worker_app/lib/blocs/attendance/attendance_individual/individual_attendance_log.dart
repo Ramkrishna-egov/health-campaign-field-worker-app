@@ -3,9 +3,11 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../data/local_store/no_sql/schema/absent_attendee.dart';
 import '../../../data/repositories/remote/repo_attendance_register.dart';
 import '../../../models/attendance/attendance_model/attendance_attendee_log.dart';
 import '../../../models/attendance/attendance_model/attendance_attendee_model.dart';
+import '../../../models/attendance/attendance_model/attendance_collection_attendee.dart';
 import '../../../models/attendance/attendance_model/attendance_row_model.dart';
 import '../../../models/attendance/attendance_model/attendee_wraper_log_model.dart';
 
@@ -39,7 +41,14 @@ class AttendanceIndividualBloc
     if (event.offset == 0) {
       emit(const AttendanceIndividualState.loading());
       AttendeeServerResponse a =
-          await attendanceRegisterRepository.fetchAttendees();
+          await attendanceRegisterRepository.fetchAttendees(
+        attendeeids: [
+          "ba13b724-093a-4e05-b7b0-048159cd7908",
+        ],
+        limit: 1000,
+        offset: 0,
+        tenantId: 'lb',
+      );
 
       AttendeeLogWrappperResponse l =
           await attendanceRegisterRepository.fetchAttendeesLog(
@@ -117,120 +126,213 @@ class AttendanceIndividualBloc
         loaded: (value) async {
           // emit(const AttendanceIndividualState.loading());
           try {
-            if (event.offset <= value.currentOffset) {
-              // dynamic d = value.attendanceRowModelList!.sublist(
-              //   value.offsetData,
-              //   value.offsetData + value.limitData <=
-              //           value.attendanceRowModelList!.length
-              //       ? value.offsetData + value.limitData
-              //       : value.attendanceRowModelList!.length,
-              // );
+            // if (event.offset <= value.currentOffset) {
+            //   // dynamic d = value.attendanceRowModelList!.sublist(
+            //   //   value.offsetData,
+            //   //   value.offsetData + value.limitData <=
+            //   //           value.attendanceRowModelList!.length
+            //   //       ? value.offsetData + value.limitData
+            //   //       : value.attendanceRowModelList!.length,
+            //   // );
 
-              // emit(
-              //   value.copyWith(
-              //     attendanceRowModelList: d,
-              //     countData: value.countData,
-              //     limitData: event.limit,
-              //     offsetData: event.offset,
-              //     currentOffset: event.offset < value.currentOffset
-              //         ? value.currentOffset
-              //         : event.offset + value.currentOffset,
-              //   ),
-              // );
-              emit(value.copyWith(offsetData: event.offset));
-            } else {
-              AttendeeServerResponse a =
-                  await attendanceRegisterRepository.fetchAttendees();
+            //   // emit(
+            //   //   value.copyWith(
+            //   //     attendanceRowModelList: d,
+            //   //     countData: value.countData,
+            //   //     limitData: event.limit,
+            //   //     offsetData: event.offset,
+            //   //     currentOffset: event.offset < value.currentOffset
+            //   //         ? value.currentOffset
+            //   //         : event.offset + value.currentOffset,
+            //   //   ),
+            //   // );
+            //   emit(value.copyWith(offsetData: event.offset));
+            // } else {
+            //   AttendeeServerResponse a =
+            //       await attendanceRegisterRepository.fetchAttendees();
 
-              AttendeeLogWrappperResponse l =
-                  await attendanceRegisterRepository.fetchAttendeesLog(
-                registartId: "registartId",
-                fromTime: 9,
-                toTime: 10,
-                individualId: ["1", "2", "3"],
-              );
-              List<AttendeeAttendanceResponseLog> b = l.attendanceAttendeLog!;
-              List<AttendanceRowModel> data = a.attendeeResponseModel!
-                  .map(
-                    (e) => AttendanceRowModel(
-                      entryDate: b
-                              .where((mu) => mu.individualId == e.id)
-                              .toList()
-                              .isNotEmpty
-                          ? b
-                                      .where(
-                                        (element) =>
-                                            element.individualId == e.id,
-                                      )
-                                      .first
-                                      .type ==
-                                  "ENTRY"
-                              ? 120
-                              : 130
-                          : 130,
-                      existDate: b
-                              .where((mu) => mu.individualId == e.id)
-                              .toList()
-                              .isNotEmpty
-                          ? b
-                                      .where(
-                                        (element) =>
-                                            element.individualId == e.id,
-                                      )
-                                      .first
-                                      .type ==
-                                  "EXIT"
-                              ? 150
-                              : 180
-                          : 180,
-                      name: e.name!.givenName,
-                      type: b
-                              .where((mu) => mu.individualId == e.id)
-                              .toList()
-                              .isNotEmpty
-                          ? b
-                              .where((element) => element.individualId == e.id)
-                              .first
-                              .type
-                          : "INACTIVE",
-                      status: b
-                              .where((mu) => mu.individualId == e.id)
-                              .toList()
-                              .isNotEmpty
-                          ? b
-                                      .where(
-                                        (element) =>
-                                            element.individualId == e.id,
-                                      )
-                                      .first
-                                      .status ==
-                                  "ACTIVE"
-                              ? 1
-                              : 0
-                          : -1,
-                      individualId: e.id,
-                    ),
-                  )
-                  .toList();
+            //   AttendeeLogWrappperResponse l =
+            //       await attendanceRegisterRepository.fetchAttendeesLog(
+            //     registartId: "registartId",
+            //     fromTime: 9,
+            //     toTime: 10,
+            //     individualId: ["1", "2", "3"],
+            //   );
+            //   List<AttendeeAttendanceResponseLog> b = l.attendanceAttendeLog!;
+            //   List<AttendanceRowModel> data = a.attendeeResponseModel!
+            //       .map(
+            //         (e) => AttendanceRowModel(
+            //           entryDate: b
+            //                   .where((mu) => mu.individualId == e.id)
+            //                   .toList()
+            //                   .isNotEmpty
+            //               ? b
+            //                           .where(
+            //                             (element) =>
+            //                                 element.individualId == e.id,
+            //                           )
+            //                           .first
+            //                           .type ==
+            //                       "ENTRY"
+            //                   ? 120
+            //                   : 130
+            //               : 130,
+            //           existDate: b
+            //                   .where((mu) => mu.individualId == e.id)
+            //                   .toList()
+            //                   .isNotEmpty
+            //               ? b
+            //                           .where(
+            //                             (element) =>
+            //                                 element.individualId == e.id,
+            //                           )
+            //                           .first
+            //                           .type ==
+            //                       "EXIT"
+            //                   ? 150
+            //                   : 180
+            //               : 180,
+            //           name: e.name!.givenName,
+            //           type: b
+            //                   .where((mu) => mu.individualId == e.id)
+            //                   .toList()
+            //                   .isNotEmpty
+            //               ? b
+            //                   .where((element) => element.individualId == e.id)
+            //                   .first
+            //                   .type
+            //               : "INACTIVE",
+            //           status: b
+            //                   .where((mu) => mu.individualId == e.id)
+            //                   .toList()
+            //                   .isNotEmpty
+            //               ? b
+            //                           .where(
+            //                             (element) =>
+            //                                 element.individualId == e.id,
+            //                           )
+            //                           .first
+            //                           .status ==
+            //                       "ACTIVE"
+            //                   ? 1
+            //                   : 0
+            //               : -1,
+            //           individualId: e.id,
+            //         ),
+            //       )
+            //       .toList();
 
-              final updatedModel = value.copyWith(
-                attendanceRowModelList: [
-                  ...value.attendanceRowModelList!,
-                  ...data,
-                ],
-              );
-              await Future.delayed(const Duration(seconds: 3));
+            //   final updatedModel = value.copyWith(
+            //     attendanceRowModelList: [
+            //       ...value.attendanceRowModelList!,
+            //       ...data,
+            //     ],
+            //   );
+            //   await Future.delayed(const Duration(seconds: 3));
 
-              emit(
-                value.copyWith(
-                  attendanceRowModelList: updatedModel.attendanceRowModelList,
-                  countData: a.count,
-                  limitData: event.limit,
-                  offsetData: event.offset,
-                  currentOffset: value.currentOffset + 1,
-                ),
-              );
+            //   emit(
+            //     value.copyWith(
+            //       attendanceRowModelList: updatedModel.attendanceRowModelList,
+            //       countData: a.count,
+            //       limitData: event.limit,
+            //       offsetData: event.offset,
+            //       currentOffset: value.currentOffset + 1,
+            //     ),
+            //   );
+            // }
+
+            ////////
+
+            AttendeeServerResponse a =
+                await attendanceRegisterRepository.fetchAttendees(
+              attendeeids: [
+                "ba13b724-093a-4e05-b7b0-048159cd7908",
+              ],
+              limit: 1000,
+              offset: 0,
+              tenantId: 'lb',
+            );
+            AttendeeLogWrappperResponse l =
+                await attendanceRegisterRepository.fetchAttendeesLog(
+              registartId: "registartId",
+              fromTime: 9,
+              toTime: 10,
+              individualId: ["1", "2", "3"],
+            );
+            List<AttendeeAttendanceResponseLog> b = l.attendanceAttendeLog!;
+            List<AttendanceRowModel> data = a.attendeeResponseModel!
+                .map(
+                  (e) => AttendanceRowModel(
+                    entryDate: b
+                            .where((mu) => mu.individualId == e.id)
+                            .toList()
+                            .isNotEmpty
+                        ? b
+                                    .where((element) =>
+                                        element.individualId == e.id)
+                                    .first
+                                    .type ==
+                                "ENTRY"
+                            ? 120
+                            : 130
+                        : 130,
+                    existDate: b
+                            .where((mu) => mu.individualId == e.id)
+                            .toList()
+                            .isNotEmpty
+                        ? b
+                                    .where((element) =>
+                                        element.individualId == e.id)
+                                    .first
+                                    .type ==
+                                "EXIT"
+                            ? 150
+                            : 180
+                        : 180,
+                    name: e.name!.givenName,
+                    type: b
+                            .where((mu) => mu.individualId == e.id)
+                            .toList()
+                            .isNotEmpty
+                        ? b
+                            .where((element) => element.individualId == e.id)
+                            .first
+                            .type
+                        : "EXIT",
+                    status: b
+                            .where((mu) => mu.individualId == e.id)
+                            .toList()
+                            .isNotEmpty
+                        ? b
+                                    .where((element) =>
+                                        element.individualId == e.id)
+                                    .first
+                                    .status ==
+                                "ACTIVE"
+                            ? 1
+                            : 0
+                        : -1,
+                    individualId: e.id,
+                  ),
+                )
+                .toList();
+
+            final s = data.map((e) {
+              final attendee = AbsentAttendee();
+              attendee.individualId = e.individualId!;
+              attendee.name = e.name ?? "";
+              attendee.tenantId = event.tenantId;
+              attendee.registerId = event.registerId;
+              attendee.status = e.status!;
+
+              return attendee;
+            });
+
+            for (var element in s) {
+              await attendanceRegisterRepository.storeAbsentAttendee(element);
             }
+
+            emit(value);
           } catch (error) {
             // Handle errors if any
             // For example: emit an error state or log the error
@@ -240,73 +342,6 @@ class AttendanceIndividualBloc
         },
       );
     }
-    // emit(const AttendanceIndividualState.loading());
-    // AttendeeServerResponse a =
-    //     await attendanceRegisterRepository.fetchAttendees();
-
-    // AttendeeLogWrappperResponse l =
-    //     await attendanceRegisterRepository.fetchAttendeesLog(
-    //   registartId: "registartId",
-    //   fromTime: 9,
-    //   toTime: 10,
-    //   individualId: ["1", "2", "3"],
-    // );
-    // List<AttendeeAttendanceResponseLog> b = l.attendanceAttendeLog!;
-    // List<AttendanceRowModel> data = a.attendeeResponseModel!
-    //     .map(
-    //       (e) => AttendanceRowModel(
-    //         entryDate: b
-    //                 .where((mu) => mu.individualId == e.id)
-    //                 .toList()
-    //                 .isNotEmpty
-    //             ? b
-    //                         .where((element) => element.individualId == e.id)
-    //                         .first
-    //                         .type ==
-    //                     "ENTRY"
-    //                 ? 120
-    //                 : 130
-    //             : 130,
-    //         existDate: b
-    //                 .where((mu) => mu.individualId == e.id)
-    //                 .toList()
-    //                 .isNotEmpty
-    //             ? b
-    //                         .where((element) => element.individualId == e.id)
-    //                         .first
-    //                         .type ==
-    //                     "EXIT"
-    //                 ? 150
-    //                 : 180
-    //             : 180,
-    //         name: e.name!.givenName,
-    //         type: b.where((mu) => mu.individualId == e.id).toList().isNotEmpty
-    //             ? b.where((element) => element.individualId == e.id).first.type
-    //             : "INACTIVE",
-    //         status: b.where((mu) => mu.individualId == e.id).toList().isNotEmpty
-    //             ? b
-    //                         .where((element) => element.individualId == e.id)
-    //                         .first
-    //                         .status ==
-    //                     "ACTIVE"
-    //                 ? 1
-    //                 : 0
-    //             : -1,
-    //         individualId: e.id,
-    //       ),
-    //     )
-    //     .toList();
-
-    // await Future.delayed(const Duration(seconds: 3));
-
-    // emit(
-    //   _AttendanceRowModelLoaded(
-    //     attendanceRowModelList: data,
-    //     countData: a.count,
-    //     limitData: 50,
-    //     offsetData: 7,
-    //   ),
-    // );
   }
 
   FutureOr<void> _onIndividualAttendanceMark(
@@ -367,6 +402,7 @@ class AttendanceIndividualState with _$AttendanceIndividualState {
   const factory AttendanceIndividualState.loading() = _Loading;
   factory AttendanceIndividualState.loaded({
     List<AttendanceRowModel>? attendanceRowModelList,
+    List<AttendeeCollectionModel>? attendanceCollectionModel,
     @Default(0) int offsetData,
     @Default(0) int currentOffset,
     @Default(0) int countData,

@@ -55,6 +55,7 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
               return const SizedBox.shrink();
             },
             loaded: (
+              attendanceCollectionModel,
               attendanceRowModelList,
               offsetData,
               currentOffset,
