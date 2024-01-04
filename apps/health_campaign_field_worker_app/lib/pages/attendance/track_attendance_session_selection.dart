@@ -2,13 +2,17 @@ import 'package:digit_components/digit_components.dart';
 import 'package:digit_components/widgets/atoms/digit_radio_button_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 //import 'package:digit_components/models/digit_table_model.dart';
 
 import '../../blocs/attendance/attendance_individual/individual_attendance_log.dart';
+import '../../blocs/attendance/attendance_register.dart';
+import '../../models/attendance/attendance_mark_model/register_model.dart';
 import '../../router/app_router.dart';
 import '../../utils/attendance/date_util_attendance.dart';
+import '../../utils/utils.dart';
 import '../../widgets/attendance/custom_info_card.dart';
 import '../../widgets/header/back_navigation_help_header.dart';
 import '../../widgets/localized.dart';
@@ -16,7 +20,9 @@ import '../../widgets/localized.dart';
 class AttendanceDateSessionSelectionPage extends LocalizedStatefulWidget {
   final String id;
   final String tenantId;
+  final List<String> attendanceMarkIndividualModelAttendee;
   const AttendanceDateSessionSelectionPage({
+    required this.attendanceMarkIndividualModelAttendee,
     required this.id,
     required this.tenantId,
     super.key,
@@ -32,6 +38,7 @@ class _AttendanceDateSessionSelectionPageState
     extends State<AttendanceDateSessionSelectionPage> {
   static const _dateOfSession = 'dateOfSession';
   static const _sessionRadio = 'sessionRadio';
+  List<String> attendeeList = [];
   @override
   void initState() {
     // context.read<AttendanceIndividualProjectSearchBloc>().add(
@@ -102,14 +109,21 @@ class _AttendanceDateSessionSelectionPageState
                     "exitType",
                   );
                   context.read<AttendanceIndividualBloc>().add(
-                        const AttendanceIndividualLogSearchEvent(
-                          attendeeId: ["qewq", "qe"],
+                        AttendanceIndividualLogSearchEvent(
+                          attendeeId:
+                              widget.attendanceMarkIndividualModelAttendee,
                           limit: 10,
                           offset: 0,
+                          currentDate: s.millisecondsSinceEpoch,
+                          entryTime: entryTime,
+                          exitTime: exitTime,
+                          projectId: context.projectId,
+                          registerId: widget.id,
+                          tenantId: widget.tenantId,
                         ),
                       );
                   context.router.push(MarkAttendanceRoute(
-                    attendeeIds: const ["1", "2"],
+                    attendeeIds: widget.attendanceMarkIndividualModelAttendee,
                     registerId: widget.id,
                     tenantId: widget.tenantId,
                     dateTime: s,

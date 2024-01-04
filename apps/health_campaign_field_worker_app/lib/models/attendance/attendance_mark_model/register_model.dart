@@ -30,7 +30,7 @@ class AttendanceMarkRegisterModel with _$AttendanceMarkRegisterModel {
     int? endDate,
     String? status,
     @JsonKey(name: 'attendees')
-        List<AttendanceMarkIndividualModel>? attendanceAttendees,
+        List<AttendanceMarkIndividualModelAttendee>? attendanceAttendees,
     @JsonKey(name: 'auditDetails')
         AuditDetails? auditDetails,
   }) = _AttendanceMarkRegisterModel;
@@ -42,20 +42,21 @@ class AttendanceMarkRegisterModel with _$AttendanceMarkRegisterModel {
 }
 
 @freezed
-class AttendanceMarkIndividualModel with _$AttendanceMarkIndividualModel {
-  factory AttendanceMarkIndividualModel({
+class AttendanceMarkIndividualModelAttendee
+    with _$AttendanceMarkIndividualModelAttendee {
+  factory AttendanceMarkIndividualModelAttendee({
     String? id,
     String? tenantId,
     String? registerId,
     String? individualId,
     int? enrollmentDate,
     int? denrollmentDate,
-  }) = _AttendanceMarkIndividualModel;
+  }) = _AttendanceMarkIndividualModelAttendee;
 
-  factory AttendanceMarkIndividualModel.fromJson(
+  factory AttendanceMarkIndividualModelAttendee.fromJson(
     Map<String, dynamic> json,
   ) =>
-      _$AttendanceMarkIndividualModelFromJson(json);
+      _$AttendanceMarkIndividualModelAttendeeFromJson(json);
 }
 
 @freezed

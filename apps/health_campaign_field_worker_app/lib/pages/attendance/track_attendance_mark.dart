@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 import '../../blocs/attendance/attendance_individual/individual_attendance_log.dart';
+import '../../models/attendance/attendance_model/attendance_collection_attendee.dart';
 import '../../models/attendance/attendance_model/attendance_row_model.dart';
 import '../../widgets/attendance/attendance_pagination.dart';
 import '../../widgets/attendance/circular_button.dart';
@@ -55,26 +56,20 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
               return const SizedBox.shrink();
             },
             loaded: (
-              attendanceCollectionModel,
               attendanceRowModelList,
+              attendanceCollectionModel,
               offsetData,
               currentOffset,
               countData,
               limitData,
             ) {
-              dynamic d = attendanceRowModelList!.sublist(
-                offsetData * 10,
-                offsetData + limitData <= attendanceRowModelList!.length
-                    ? (offsetData * limitData) + 9
-                    : attendanceRowModelList!.length,
-              );
-              final tableData = getAttendanceData(d!);
+              final tableData = getAttendanceData(attendanceCollectionModel!);
 
               return ScrollableContent(
                 footer: SizedBox(
                   height: 50,
                   child: DigitElevatedButton(
-                    child: const Text("Mark"),
+                    child: const Text("Mark Attendance"),
                     onPressed: () {},
                   ),
                 ),
@@ -120,41 +115,13 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 8.0),
                           child: DigitTable(
-                            height: 80 + (52.0 * (tableData.length + 0.3)),
+                            height: (55.0 * (tableData.length)),
                             headerList: headerList(widget.dateTime),
                             tableData: tableData,
                             columnWidth: 100,
                             scrollPhysics: const NeverScrollableScrollPhysics(),
                           ),
                         ),
-                        Pagination(
-                          callBack: (dynamic d) {
-                            context.read<AttendanceIndividualBloc>().add(
-                                  AttendanceIndividualLogSearchEvent(
-                                    attendeeId: ["qewq", "qe"],
-                                    limit: d['limit'],
-                                    offset: d['offset'],
-                                  ),
-                                );
-                          },
-                          limit: limitData,
-                          offSet: offsetData,
-                          totalCount: countData,
-                          isDisabled: false,
-                        ),
-                        // ElevatedButton(
-                        //   onPressed: () {
-                        //     print(attendanceRowModelList.length);
-                        //     dynamic s = attendanceRowModelList
-                        //         .where((e) => e.status == 1)
-                        //         .toList();
-
-                        //     print(s.length);
-                        //   },
-                        //   child: const Text(
-                        //     "ok",
-                        //   ),
-                        // ),
                       ],
                     ),
                   ),
@@ -173,11 +140,11 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
     );
   }
 
-  List<TableDataRow> getAttendanceData(List<AttendanceRowModel>? list) {
+  List<TableDataRow> getAttendanceData(List<AttendeeCollectionModel>? list) {
     return list!.map((e) => getAttendanceRow(e)).toList();
   }
 
-  TableDataRow getAttendanceRow(AttendanceRowModel tableDataModel) {
+  TableDataRow getAttendanceRow(AttendeeCollectionModel tableDataModel) {
     return TableDataRow([
       TableData(label: tableDataModel.name, apiKey: tableDataModel.name),
       TableData(
@@ -196,6 +163,7 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                     individualId: tableDataModel.individualId!,
                     registarId: '2',
                     status: tableDataModel.individualId,
+                    id: tableDataModel.id!,
                   ),
                 );
           },
@@ -204,6 +172,10 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
       TableData(
         label: tableDataModel.individualId,
         apiKey: tableDataModel.individualId,
+      ),
+      TableData(
+        label: tableDataModel.id.toString(),
+        apiKey: tableDataModel.id.toString(),
       ),
     ]);
   }
@@ -222,6 +194,10 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
       TableHeader(
         "UserId",
         cellKey: "userId",
+      ),
+      TableHeader(
+        "sl",
+        cellKey: "sl",
       ),
     ];
   }

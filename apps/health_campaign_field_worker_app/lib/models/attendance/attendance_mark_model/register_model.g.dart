@@ -35,8 +35,8 @@ _$_AttendanceMarkRegisterModel _$$_AttendanceMarkRegisterModelFromJson(
       endDate: json['endDate'] as int?,
       status: json['status'] as String?,
       attendanceAttendees: (json['attendees'] as List<dynamic>?)
-          ?.map((e) =>
-              AttendanceMarkIndividualModel.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => AttendanceMarkIndividualModelAttendee.fromJson(
+              e as Map<String, dynamic>))
           .toList(),
       auditDetails: json['auditDetails'] == null
           ? null
@@ -59,19 +59,20 @@ Map<String, dynamic> _$$_AttendanceMarkRegisterModelToJson(
       'auditDetails': instance.auditDetails,
     };
 
-_$_AttendanceMarkIndividualModel _$$_AttendanceMarkIndividualModelFromJson(
-        Map<String, dynamic> json) =>
-    _$_AttendanceMarkIndividualModel(
-      id: json['id'] as String?,
-      tenantId: json['tenantId'] as String?,
-      registerId: json['registerId'] as String?,
-      individualId: json['individualId'] as String?,
-      enrollmentDate: json['enrollmentDate'] as int?,
-      denrollmentDate: json['denrollmentDate'] as int?,
-    );
+_$_AttendanceMarkIndividualModelAttendee
+    _$$_AttendanceMarkIndividualModelAttendeeFromJson(
+            Map<String, dynamic> json) =>
+        _$_AttendanceMarkIndividualModelAttendee(
+          id: json['id'] as String?,
+          tenantId: json['tenantId'] as String?,
+          registerId: json['registerId'] as String?,
+          individualId: json['individualId'] as String?,
+          enrollmentDate: json['enrollmentDate'] as int?,
+          denrollmentDate: json['denrollmentDate'] as int?,
+        );
 
-Map<String, dynamic> _$$_AttendanceMarkIndividualModelToJson(
-        _$_AttendanceMarkIndividualModel instance) =>
+Map<String, dynamic> _$$_AttendanceMarkIndividualModelAttendeeToJson(
+        _$_AttendanceMarkIndividualModelAttendee instance) =>
     <String, dynamic>{
       'id': instance.id,
       'tenantId': instance.tenantId,

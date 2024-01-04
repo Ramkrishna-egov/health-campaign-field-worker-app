@@ -7,7 +7,7 @@ part 'attendee_indv_model.g.dart';
 class AttendanceMarkIndividualModel with _$AttendanceMarkIndividualModel {
   factory AttendanceMarkIndividualModel({
     @JsonKey(name: 'Individual')
-        List<AttendanceMarkIndividualModel>? attendanceRegister,
+        List<AttendanceMarkIndividual>? attendanceRegister,
   }) = _AttendanceMarkIndividualModel;
 
   factory AttendanceMarkIndividualModel.fromJson(

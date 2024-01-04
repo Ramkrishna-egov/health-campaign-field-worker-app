@@ -602,6 +602,8 @@ class _$AppRouter extends RootStackRouter {
       return MaterialPageX<dynamic>(
         routeData: routeData,
         child: AttendanceDateSessionSelectionPage(
+          attendanceMarkIndividualModelAttendee:
+              args.attendanceMarkIndividualModelAttendee,
           id: args.id,
           tenantId: args.tenantId,
           key: args.key,
@@ -2856,6 +2858,7 @@ class TrackAttendanceInboxRouteArgs {
 class AttendanceDateSessionSelectionRoute
     extends PageRouteInfo<AttendanceDateSessionSelectionRouteArgs> {
   AttendanceDateSessionSelectionRoute({
+    required List<String> attendanceMarkIndividualModelAttendee,
     required String id,
     required String tenantId,
     Key? key,
@@ -2864,6 +2867,8 @@ class AttendanceDateSessionSelectionRoute
           AttendanceDateSessionSelectionRoute.name,
           path: 'attendance-date-selection',
           args: AttendanceDateSessionSelectionRouteArgs(
+            attendanceMarkIndividualModelAttendee:
+                attendanceMarkIndividualModelAttendee,
             id: id,
             tenantId: tenantId,
             key: key,
@@ -2876,11 +2881,14 @@ class AttendanceDateSessionSelectionRoute
 
 class AttendanceDateSessionSelectionRouteArgs {
   const AttendanceDateSessionSelectionRouteArgs({
+    required this.attendanceMarkIndividualModelAttendee,
     required this.id,
     required this.tenantId,
     this.key,
     this.appLocalizations,
   });
+
+  final List<String> attendanceMarkIndividualModelAttendee;
 
   final String id;
 
@@ -2892,7 +2900,7 @@ class AttendanceDateSessionSelectionRouteArgs {
 
   @override
   String toString() {
-    return 'AttendanceDateSessionSelectionRouteArgs{id: $id, tenantId: $tenantId, key: $key, appLocalizations: $appLocalizations}';
+    return 'AttendanceDateSessionSelectionRouteArgs{attendanceMarkIndividualModelAttendee: $attendanceMarkIndividualModelAttendee, id: $id, tenantId: $tenantId, key: $key, appLocalizations: $appLocalizations}';
   }
 }
 

@@ -6,6 +6,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 import 'package:isar/isar.dart';
+import '../../../models/attendance/attendance_mark_model/attendee_indv_model.dart';
 import '../../../models/attendance/attendance_mark_model/register_model.dart';
 import '../../../models/attendance/attendance_model/attendance_attendee_log.dart';
 import '../../../models/attendance/attendance_model/attendance_attendee_model.dart';
@@ -75,7 +76,7 @@ class AttendanceRegisterRepository {
   }
 
 // feting list of individuals
-  Future<AttendeeServerResponse> fetchAttendees({
+  Future<AttendanceMarkIndividualModel> fetchAttendees({
     required List<String> attendeeids,
     required String tenantId,
     required int limit,
@@ -83,7 +84,10 @@ class AttendanceRegisterRepository {
   }) async {
     try {
       var g = ApiUtil.fetchIndividuals(
-          limit: limit, offset: offset, tenantId: tenantId);
+        limit: limit,
+        offset: offset,
+        tenantId: tenantId,
+      );
       var res = await client.post(
         // "attendance/v1/_search",
         // queryParameters: {
@@ -96,18 +100,19 @@ class AttendanceRegisterRepository {
             "authToken": "cf05ac59-62e8-4096-ba04-aa30850ef633",
           },
           "Individual": {
-            "id": [
-              "ba13b724-093a-4e05-b7b0-048159cd7908",
-            ],
+            // "id": [
+            //   "ba13b724-093a-4e05-b7b0-048159cd7908",
+            // ],
+            "id": attendeeids,
           },
         },
       );
 
       var data = await rootBundle.loadString("assets/attendees.json");
 
-      return AttendeeServerResponse.fromJson(
+      return AttendanceMarkIndividualModel.fromJson(
         json.decode(
-          data.toString(),
+          res.toString(),
         ),
       );
     } on DioError catch (ex) {
@@ -162,13 +167,47 @@ class AttendanceRegisterRepository {
   }
 
 // storeAbsentAttendance in local nosql db(ISAR)
-  Future<dynamic> storeAbsentAttendee(AbsentAttendee absentAttendee) async {
-    int s = await isar.writeTxn(() async {
-      int id = await isar.absentAttendees.put(absentAttendee);
-
-      return id;
+  Future<void> storeAbsentAttendee(List<AbsentAttendee> absentAttendee) async {
+    await isar.writeTxn(() async {
+      await isar.absentAttendees.putAll(absentAttendee);
     });
+  }
 
-    return s;
+  Future<List<AbsentAttendee>> getAttendeeListFromLocalDB({
+    required String tenantId,
+    required int entryTime,
+    required int exitTime,
+    required String registarId,
+  }) async {
+    List<AbsentAttendee> favorites = await isar.absentAttendees
+        .filter()
+        .tenantIdContains(tenantId)
+        .entryTimeEqualTo(entryTime)
+        .exitTimeEqualTo(exitTime)
+        .registerIdContains(registarId)
+        .findAll();
+
+    return favorites;
+  }
+
+  Future<AbsentAttendee> updateAttendeeInLocalDB({
+    required int id,
+  }) async {
+    try {
+      AbsentAttendee? data = await isar.absentAttendees.get(id);
+
+      data!.status = data!.status == -1
+          ? 1
+          : data!.status == 1
+              ? 0
+              : 1;
+      await isar.writeTxn(() async {
+        await isar.absentAttendees.put(data);
+      });
+
+      return data;
+    } catch (ex) {
+      rethrow;
+    }
   }
 }

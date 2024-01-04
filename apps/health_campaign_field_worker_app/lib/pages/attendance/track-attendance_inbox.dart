@@ -107,6 +107,9 @@ class _TrackAttendanceInboxPageState extends State<TrackAttendanceInboxPage> {
                       tenatId:
                           attendanceModel!.attendanceRegister![i].tenantId!,
                       show: true,
+                      attendee: attendanceModel!
+                              .attendanceRegister![i].attendanceAttendees ??
+                          [],
                     ));
                   }
 
@@ -151,12 +154,14 @@ class RegistarCard extends StatelessWidget {
   final String tenatId;
   final String regisId;
   final bool show;
+  final List<AttendanceMarkIndividualModelAttendee> attendee;
   const RegistarCard({
     super.key,
     required this.data,
     required this.tenatId,
     required this.regisId,
     this.show = false,
+    required this.attendee,
   });
 
   @override
@@ -172,8 +177,12 @@ class RegistarCard extends StatelessWidget {
                   child: const Text("Mark Attendance"),
                   onPressed: () {
                     context.router.push(AttendanceDateSessionSelectionRoute(
+                      //id: registarId
+
                       id: regisId,
                       tenantId: tenatId,
+                      attendanceMarkIndividualModelAttendee:
+                          fetchAttendeeList(attendee),
                     ));
                   },
                 )
@@ -181,5 +190,17 @@ class RegistarCard extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  List<String> fetchAttendeeList(
+    List<AttendanceMarkIndividualModelAttendee> s,
+  ) {
+    final d = s
+        .map(
+          (e) => e.individualId!,
+        )
+        .toList();
+
+    return d;
   }
 }

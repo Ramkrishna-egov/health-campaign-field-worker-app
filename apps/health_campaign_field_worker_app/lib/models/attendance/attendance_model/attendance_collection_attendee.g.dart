@@ -9,6 +9,7 @@ part of 'attendance_collection_attendee.dart';
 _$_AttendeeCollectionModel _$$_AttendeeCollectionModelFromJson(
         Map<String, dynamic> json) =>
     _$_AttendeeCollectionModel(
+      name: json['name'] as String?,
       id: json['id'] as int?,
       registerId: json['registerId'] as String?,
       individualId: json['individualId'] as String?,
@@ -24,6 +25,7 @@ _$_AttendeeCollectionModel _$$_AttendeeCollectionModelFromJson(
 Map<String, dynamic> _$$_AttendeeCollectionModelToJson(
         _$_AttendeeCollectionModel instance) =>
     <String, dynamic>{
+      'name': instance.name,
       'id': instance.id,
       'registerId': instance.registerId,
       'individualId': instance.individualId,

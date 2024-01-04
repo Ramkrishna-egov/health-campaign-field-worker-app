@@ -22,7 +22,7 @@ AttendanceMarkIndividualModel _$AttendanceMarkIndividualModelFromJson(
 /// @nodoc
 mixin _$AttendanceMarkIndividualModel {
   @JsonKey(name: 'Individual')
-  List<AttendanceMarkIndividualModel>? get attendanceRegister =>
+  List<AttendanceMarkIndividual>? get attendanceRegister =>
       throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,7 +41,7 @@ abstract class $AttendanceMarkIndividualModelCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'Individual')
-          List<AttendanceMarkIndividualModel>? attendanceRegister});
+          List<AttendanceMarkIndividual>? attendanceRegister});
 }
 
 /// @nodoc
@@ -64,7 +64,7 @@ class _$AttendanceMarkIndividualModelCopyWithImpl<$Res,
       attendanceRegister: freezed == attendanceRegister
           ? _value.attendanceRegister
           : attendanceRegister // ignore: cast_nullable_to_non_nullable
-              as List<AttendanceMarkIndividualModel>?,
+              as List<AttendanceMarkIndividual>?,
     ) as $Val);
   }
 }
@@ -80,7 +80,7 @@ abstract class _$$_AttendanceMarkIndividualModelCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'Individual')
-          List<AttendanceMarkIndividualModel>? attendanceRegister});
+          List<AttendanceMarkIndividual>? attendanceRegister});
 }
 
 /// @nodoc
@@ -102,7 +102,7 @@ class __$$_AttendanceMarkIndividualModelCopyWithImpl<$Res>
       attendanceRegister: freezed == attendanceRegister
           ? _value._attendanceRegister
           : attendanceRegister // ignore: cast_nullable_to_non_nullable
-              as List<AttendanceMarkIndividualModel>?,
+              as List<AttendanceMarkIndividual>?,
     ));
   }
 }
@@ -113,17 +113,17 @@ class _$_AttendanceMarkIndividualModel
     implements _AttendanceMarkIndividualModel {
   _$_AttendanceMarkIndividualModel(
       {@JsonKey(name: 'Individual')
-          final List<AttendanceMarkIndividualModel>? attendanceRegister})
+          final List<AttendanceMarkIndividual>? attendanceRegister})
       : _attendanceRegister = attendanceRegister;
 
   factory _$_AttendanceMarkIndividualModel.fromJson(
           Map<String, dynamic> json) =>
       _$$_AttendanceMarkIndividualModelFromJson(json);
 
-  final List<AttendanceMarkIndividualModel>? _attendanceRegister;
+  final List<AttendanceMarkIndividual>? _attendanceRegister;
   @override
   @JsonKey(name: 'Individual')
-  List<AttendanceMarkIndividualModel>? get attendanceRegister {
+  List<AttendanceMarkIndividual>? get attendanceRegister {
     final value = _attendanceRegister;
     if (value == null) return null;
     // ignore: implicit_dynamic_type
@@ -168,7 +168,7 @@ abstract class _AttendanceMarkIndividualModel
     implements AttendanceMarkIndividualModel {
   factory _AttendanceMarkIndividualModel(
           {@JsonKey(name: 'Individual')
-              final List<AttendanceMarkIndividualModel>? attendanceRegister}) =
+              final List<AttendanceMarkIndividual>? attendanceRegister}) =
       _$_AttendanceMarkIndividualModel;
 
   factory _AttendanceMarkIndividualModel.fromJson(Map<String, dynamic> json) =
@@ -176,7 +176,7 @@ abstract class _AttendanceMarkIndividualModel
 
   @override
   @JsonKey(name: 'Individual')
-  List<AttendanceMarkIndividualModel>? get attendanceRegister;
+  List<AttendanceMarkIndividual>? get attendanceRegister;
   @override
   @JsonKey(ignore: true)
   _$$_AttendanceMarkIndividualModelCopyWith<_$_AttendanceMarkIndividualModel>

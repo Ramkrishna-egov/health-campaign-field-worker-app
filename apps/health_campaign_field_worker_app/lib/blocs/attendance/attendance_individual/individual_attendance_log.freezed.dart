@@ -18,33 +18,57 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AttendanceIndividualEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String registerId, String tenantId,
-            List<String> attendeeId, int offset, int limit)
+    required TResult Function(
+            String registerId,
+            String tenantId,
+            int entryTime,
+            int exitTime,
+            int currentDate,
+            String projectId,
+            List<String> attendeeId,
+            int offset,
+            int limit)
         individualAttendanceLogSearch,
     required TResult Function(int entryTime, int exitTime, dynamic status,
-            String individualId, String registarId)
+            String individualId, String registarId, int id)
         individualAttendanceMark,
     required TResult Function() dispose,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String registerId, String tenantId,
-            List<String> attendeeId, int offset, int limit)?
+    TResult? Function(
+            String registerId,
+            String tenantId,
+            int entryTime,
+            int exitTime,
+            int currentDate,
+            String projectId,
+            List<String> attendeeId,
+            int offset,
+            int limit)?
         individualAttendanceLogSearch,
     TResult? Function(int entryTime, int exitTime, dynamic status,
-            String individualId, String registarId)?
+            String individualId, String registarId, int id)?
         individualAttendanceMark,
     TResult? Function()? dispose,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String registerId, String tenantId,
-            List<String> attendeeId, int offset, int limit)?
+    TResult Function(
+            String registerId,
+            String tenantId,
+            int entryTime,
+            int exitTime,
+            int currentDate,
+            String projectId,
+            List<String> attendeeId,
+            int offset,
+            int limit)?
         individualAttendanceLogSearch,
     TResult Function(int entryTime, int exitTime, dynamic status,
-            String individualId, String registarId)?
+            String individualId, String registarId, int id)?
         individualAttendanceMark,
     TResult Function()? dispose,
     required TResult orElse(),
@@ -107,6 +131,10 @@ abstract class _$$AttendanceIndividualLogSearchEventCopyWith<$Res> {
   $Res call(
       {String registerId,
       String tenantId,
+      int entryTime,
+      int exitTime,
+      int currentDate,
+      String projectId,
       List<String> attendeeId,
       int offset,
       int limit});
@@ -127,6 +155,10 @@ class __$$AttendanceIndividualLogSearchEventCopyWithImpl<$Res>
   $Res call({
     Object? registerId = null,
     Object? tenantId = null,
+    Object? entryTime = null,
+    Object? exitTime = null,
+    Object? currentDate = null,
+    Object? projectId = null,
     Object? attendeeId = null,
     Object? offset = null,
     Object? limit = null,
@@ -139,6 +171,22 @@ class __$$AttendanceIndividualLogSearchEventCopyWithImpl<$Res>
       tenantId: null == tenantId
           ? _value.tenantId
           : tenantId // ignore: cast_nullable_to_non_nullable
+              as String,
+      entryTime: null == entryTime
+          ? _value.entryTime
+          : entryTime // ignore: cast_nullable_to_non_nullable
+              as int,
+      exitTime: null == exitTime
+          ? _value.exitTime
+          : exitTime // ignore: cast_nullable_to_non_nullable
+              as int,
+      currentDate: null == currentDate
+          ? _value.currentDate
+          : currentDate // ignore: cast_nullable_to_non_nullable
+              as int,
+      projectId: null == projectId
+          ? _value.projectId
+          : projectId // ignore: cast_nullable_to_non_nullable
               as String,
       attendeeId: null == attendeeId
           ? _value._attendeeId
@@ -161,19 +209,29 @@ class __$$AttendanceIndividualLogSearchEventCopyWithImpl<$Res>
 class _$AttendanceIndividualLogSearchEvent
     implements AttendanceIndividualLogSearchEvent {
   const _$AttendanceIndividualLogSearchEvent(
-      {this.registerId = '',
-      this.tenantId = '',
+      {required this.registerId,
+      required this.tenantId,
+      required this.entryTime,
+      required this.exitTime,
+      required this.currentDate,
+      required this.projectId,
       required final List<String> attendeeId,
       required this.offset,
       required this.limit})
       : _attendeeId = attendeeId;
 
   @override
-  @JsonKey()
   final String registerId;
   @override
-  @JsonKey()
   final String tenantId;
+  @override
+  final int entryTime;
+  @override
+  final int exitTime;
+  @override
+  final int currentDate;
+  @override
+  final String projectId;
   final List<String> _attendeeId;
   @override
   List<String> get attendeeId {
@@ -188,7 +246,7 @@ class _$AttendanceIndividualLogSearchEvent
 
   @override
   String toString() {
-    return 'AttendanceIndividualEvent.individualAttendanceLogSearch(registerId: $registerId, tenantId: $tenantId, attendeeId: $attendeeId, offset: $offset, limit: $limit)';
+    return 'AttendanceIndividualEvent.individualAttendanceLogSearch(registerId: $registerId, tenantId: $tenantId, entryTime: $entryTime, exitTime: $exitTime, currentDate: $currentDate, projectId: $projectId, attendeeId: $attendeeId, offset: $offset, limit: $limit)';
   }
 
   @override
@@ -200,6 +258,14 @@ class _$AttendanceIndividualLogSearchEvent
                 other.registerId == registerId) &&
             (identical(other.tenantId, tenantId) ||
                 other.tenantId == tenantId) &&
+            (identical(other.entryTime, entryTime) ||
+                other.entryTime == entryTime) &&
+            (identical(other.exitTime, exitTime) ||
+                other.exitTime == exitTime) &&
+            (identical(other.currentDate, currentDate) ||
+                other.currentDate == currentDate) &&
+            (identical(other.projectId, projectId) ||
+                other.projectId == projectId) &&
             const DeepCollectionEquality()
                 .equals(other._attendeeId, _attendeeId) &&
             (identical(other.offset, offset) || other.offset == offset) &&
@@ -207,8 +273,17 @@ class _$AttendanceIndividualLogSearchEvent
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, registerId, tenantId,
-      const DeepCollectionEquality().hash(_attendeeId), offset, limit);
+  int get hashCode => Object.hash(
+      runtimeType,
+      registerId,
+      tenantId,
+      entryTime,
+      exitTime,
+      currentDate,
+      projectId,
+      const DeepCollectionEquality().hash(_attendeeId),
+      offset,
+      limit);
 
   @JsonKey(ignore: true)
   @override
@@ -221,48 +296,72 @@ class _$AttendanceIndividualLogSearchEvent
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String registerId, String tenantId,
-            List<String> attendeeId, int offset, int limit)
+    required TResult Function(
+            String registerId,
+            String tenantId,
+            int entryTime,
+            int exitTime,
+            int currentDate,
+            String projectId,
+            List<String> attendeeId,
+            int offset,
+            int limit)
         individualAttendanceLogSearch,
     required TResult Function(int entryTime, int exitTime, dynamic status,
-            String individualId, String registarId)
+            String individualId, String registarId, int id)
         individualAttendanceMark,
     required TResult Function() dispose,
   }) {
-    return individualAttendanceLogSearch(
-        registerId, tenantId, attendeeId, offset, limit);
+    return individualAttendanceLogSearch(registerId, tenantId, entryTime,
+        exitTime, currentDate, projectId, attendeeId, offset, limit);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String registerId, String tenantId,
-            List<String> attendeeId, int offset, int limit)?
+    TResult? Function(
+            String registerId,
+            String tenantId,
+            int entryTime,
+            int exitTime,
+            int currentDate,
+            String projectId,
+            List<String> attendeeId,
+            int offset,
+            int limit)?
         individualAttendanceLogSearch,
     TResult? Function(int entryTime, int exitTime, dynamic status,
-            String individualId, String registarId)?
+            String individualId, String registarId, int id)?
         individualAttendanceMark,
     TResult? Function()? dispose,
   }) {
-    return individualAttendanceLogSearch?.call(
-        registerId, tenantId, attendeeId, offset, limit);
+    return individualAttendanceLogSearch?.call(registerId, tenantId, entryTime,
+        exitTime, currentDate, projectId, attendeeId, offset, limit);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String registerId, String tenantId,
-            List<String> attendeeId, int offset, int limit)?
+    TResult Function(
+            String registerId,
+            String tenantId,
+            int entryTime,
+            int exitTime,
+            int currentDate,
+            String projectId,
+            List<String> attendeeId,
+            int offset,
+            int limit)?
         individualAttendanceLogSearch,
     TResult Function(int entryTime, int exitTime, dynamic status,
-            String individualId, String registarId)?
+            String individualId, String registarId, int id)?
         individualAttendanceMark,
     TResult Function()? dispose,
     required TResult orElse(),
   }) {
     if (individualAttendanceLogSearch != null) {
-      return individualAttendanceLogSearch(
-          registerId, tenantId, attendeeId, offset, limit);
+      return individualAttendanceLogSearch(registerId, tenantId, entryTime,
+          exitTime, currentDate, projectId, attendeeId, offset, limit);
     }
     return orElse();
   }
@@ -309,14 +408,22 @@ class _$AttendanceIndividualLogSearchEvent
 abstract class AttendanceIndividualLogSearchEvent
     implements AttendanceIndividualEvent {
   const factory AttendanceIndividualLogSearchEvent(
-      {final String registerId,
-      final String tenantId,
+      {required final String registerId,
+      required final String tenantId,
+      required final int entryTime,
+      required final int exitTime,
+      required final int currentDate,
+      required final String projectId,
       required final List<String> attendeeId,
       required final int offset,
       required final int limit}) = _$AttendanceIndividualLogSearchEvent;
 
   String get registerId;
   String get tenantId;
+  int get entryTime;
+  int get exitTime;
+  int get currentDate;
+  String get projectId;
   List<String> get attendeeId;
   int get offset;
   int get limit;
@@ -337,7 +444,8 @@ abstract class _$$AttendanceMarkEventCopyWith<$Res> {
       int exitTime,
       dynamic status,
       String individualId,
-      String registarId});
+      String registarId,
+      int id});
 }
 
 /// @nodoc
@@ -356,6 +464,7 @@ class __$$AttendanceMarkEventCopyWithImpl<$Res>
     Object? status = null,
     Object? individualId = null,
     Object? registarId = null,
+    Object? id = null,
   }) {
     return _then(_$AttendanceMarkEvent(
       entryTime: null == entryTime
@@ -375,6 +484,10 @@ class __$$AttendanceMarkEventCopyWithImpl<$Res>
           ? _value.registarId
           : registarId // ignore: cast_nullable_to_non_nullable
               as String,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -387,7 +500,8 @@ class _$AttendanceMarkEvent implements AttendanceMarkEvent {
       this.exitTime = 0,
       this.status = -1,
       required this.individualId,
-      required this.registarId});
+      required this.registarId,
+      required this.id});
 
   @override
   @JsonKey()
@@ -402,10 +516,12 @@ class _$AttendanceMarkEvent implements AttendanceMarkEvent {
   final String individualId;
   @override
   final String registarId;
+  @override
+  final int id;
 
   @override
   String toString() {
-    return 'AttendanceIndividualEvent.individualAttendanceMark(entryTime: $entryTime, exitTime: $exitTime, status: $status, individualId: $individualId, registarId: $registarId)';
+    return 'AttendanceIndividualEvent.individualAttendanceMark(entryTime: $entryTime, exitTime: $exitTime, status: $status, individualId: $individualId, registarId: $registarId, id: $id)';
   }
 
   @override
@@ -421,12 +537,19 @@ class _$AttendanceMarkEvent implements AttendanceMarkEvent {
             (identical(other.individualId, individualId) ||
                 other.individualId == individualId) &&
             (identical(other.registarId, registarId) ||
-                other.registarId == registarId));
+                other.registarId == registarId) &&
+            (identical(other.id, id) || other.id == id));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, entryTime, exitTime,
-      const DeepCollectionEquality().hash(status), individualId, registarId);
+  int get hashCode => Object.hash(
+      runtimeType,
+      entryTime,
+      exitTime,
+      const DeepCollectionEquality().hash(status),
+      individualId,
+      registarId,
+      id);
 
   @JsonKey(ignore: true)
   @override
@@ -438,48 +561,72 @@ class _$AttendanceMarkEvent implements AttendanceMarkEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String registerId, String tenantId,
-            List<String> attendeeId, int offset, int limit)
+    required TResult Function(
+            String registerId,
+            String tenantId,
+            int entryTime,
+            int exitTime,
+            int currentDate,
+            String projectId,
+            List<String> attendeeId,
+            int offset,
+            int limit)
         individualAttendanceLogSearch,
     required TResult Function(int entryTime, int exitTime, dynamic status,
-            String individualId, String registarId)
+            String individualId, String registarId, int id)
         individualAttendanceMark,
     required TResult Function() dispose,
   }) {
     return individualAttendanceMark(
-        entryTime, exitTime, status, individualId, registarId);
+        entryTime, exitTime, status, individualId, registarId, id);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String registerId, String tenantId,
-            List<String> attendeeId, int offset, int limit)?
+    TResult? Function(
+            String registerId,
+            String tenantId,
+            int entryTime,
+            int exitTime,
+            int currentDate,
+            String projectId,
+            List<String> attendeeId,
+            int offset,
+            int limit)?
         individualAttendanceLogSearch,
     TResult? Function(int entryTime, int exitTime, dynamic status,
-            String individualId, String registarId)?
+            String individualId, String registarId, int id)?
         individualAttendanceMark,
     TResult? Function()? dispose,
   }) {
     return individualAttendanceMark?.call(
-        entryTime, exitTime, status, individualId, registarId);
+        entryTime, exitTime, status, individualId, registarId, id);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String registerId, String tenantId,
-            List<String> attendeeId, int offset, int limit)?
+    TResult Function(
+            String registerId,
+            String tenantId,
+            int entryTime,
+            int exitTime,
+            int currentDate,
+            String projectId,
+            List<String> attendeeId,
+            int offset,
+            int limit)?
         individualAttendanceLogSearch,
     TResult Function(int entryTime, int exitTime, dynamic status,
-            String individualId, String registarId)?
+            String individualId, String registarId, int id)?
         individualAttendanceMark,
     TResult Function()? dispose,
     required TResult orElse(),
   }) {
     if (individualAttendanceMark != null) {
       return individualAttendanceMark(
-          entryTime, exitTime, status, individualId, registarId);
+          entryTime, exitTime, status, individualId, registarId, id);
     }
     return orElse();
   }
@@ -529,13 +676,15 @@ abstract class AttendanceMarkEvent implements AttendanceIndividualEvent {
       final int exitTime,
       final dynamic status,
       required final String individualId,
-      required final String registarId}) = _$AttendanceMarkEvent;
+      required final String registarId,
+      required final int id}) = _$AttendanceMarkEvent;
 
   int get entryTime;
   int get exitTime;
   dynamic get status;
   String get individualId;
   String get registarId;
+  int get id;
   @JsonKey(ignore: true)
   _$$AttendanceMarkEventCopyWith<_$AttendanceMarkEvent> get copyWith =>
       throw _privateConstructorUsedError;
@@ -584,11 +733,19 @@ class _$DisposeAttendanceIndividualEvent
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String registerId, String tenantId,
-            List<String> attendeeId, int offset, int limit)
+    required TResult Function(
+            String registerId,
+            String tenantId,
+            int entryTime,
+            int exitTime,
+            int currentDate,
+            String projectId,
+            List<String> attendeeId,
+            int offset,
+            int limit)
         individualAttendanceLogSearch,
     required TResult Function(int entryTime, int exitTime, dynamic status,
-            String individualId, String registarId)
+            String individualId, String registarId, int id)
         individualAttendanceMark,
     required TResult Function() dispose,
   }) {
@@ -598,11 +755,19 @@ class _$DisposeAttendanceIndividualEvent
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String registerId, String tenantId,
-            List<String> attendeeId, int offset, int limit)?
+    TResult? Function(
+            String registerId,
+            String tenantId,
+            int entryTime,
+            int exitTime,
+            int currentDate,
+            String projectId,
+            List<String> attendeeId,
+            int offset,
+            int limit)?
         individualAttendanceLogSearch,
     TResult? Function(int entryTime, int exitTime, dynamic status,
-            String individualId, String registarId)?
+            String individualId, String registarId, int id)?
         individualAttendanceMark,
     TResult? Function()? dispose,
   }) {
@@ -612,11 +777,19 @@ class _$DisposeAttendanceIndividualEvent
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String registerId, String tenantId,
-            List<String> attendeeId, int offset, int limit)?
+    TResult Function(
+            String registerId,
+            String tenantId,
+            int entryTime,
+            int exitTime,
+            int currentDate,
+            String projectId,
+            List<String> attendeeId,
+            int offset,
+            int limit)?
         individualAttendanceLogSearch,
     TResult Function(int entryTime, int exitTime, dynamic status,
-            String individualId, String registarId)?
+            String individualId, String registarId, int id)?
         individualAttendanceMark,
     TResult Function()? dispose,
     required TResult orElse(),

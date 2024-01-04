@@ -11,7 +11,7 @@ _$_AttendanceMarkIndividualModel _$$_AttendanceMarkIndividualModelFromJson(
     _$_AttendanceMarkIndividualModel(
       attendanceRegister: (json['Individual'] as List<dynamic>?)
           ?.map((e) =>
-              AttendanceMarkIndividualModel.fromJson(e as Map<String, dynamic>))
+              AttendanceMarkIndividual.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
