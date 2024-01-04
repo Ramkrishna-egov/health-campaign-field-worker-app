@@ -125,23 +125,44 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
               loaded: (value) {
                 if (value.flag && !isDialogOpen) {
                   isDialogOpen = true;
-                  showDialog(
-                    barrierDismissible: true,
-                    context: ctx,
-                    builder: (ctx) {
-                      return const AlertDialog(
-                        title: Text("Loading,"),
-                      );
-                    },
-                  );
+                  // showDialog(
+                  //   barrierDismissible: true,
+                  //   context: ctx,
+                  //   builder: (ctx) {
+                  //     return const AlertDialog(
+                  //       title: SizedBox(
+                  //         width: 50,
+                  //         height: 50,
+                  //         child: Center(
+                  //           child: CircularProgressIndicator.adaptive(),
+                  //         ),
+                  //       ),
+                  //     );
+                  //   },
+                  // );
+                  Loaders.showLoadingDialog(ctx);
                 } else {
                   if (isDialogOpen) {
-                    Navigator.of(ctx).pop();
-                    isDialogOpen = false;
+                    // Navigator.of(ctx).pop();
+                    // isDialogOpen = false;
 
+                    // context.router.popAndPush(AcknowledgementRoute());
+                    Navigator.of(
+                      context,
+                      rootNavigator: true,
+                    ).popUntil(
+                      (route) => route is! PopupRoute,
+                    );
                     context.router.popAndPush(AcknowledgementRoute());
                   }
-                  //context.router.pop();
+
+                  // Navigator.of(
+                  //   context,
+                  //   rootNavigator: true,
+                  // ).popUntil(
+                  //   (route) => route is! PopupRoute,
+                  // );
+                  // context.router.popAndPush(AcknowledgementRoute());
                 }
               },
             );

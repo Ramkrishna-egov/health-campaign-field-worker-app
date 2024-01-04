@@ -61,7 +61,6 @@ class _TrackAttendanceInboxPageState extends State<TrackAttendanceInboxPage> {
 
                 projectList = attendanceRegisters!
                     .map((e) => {
-                          "Work order Number": e.registerNumber ?? "",
                           "Register ID": e.registerNumber,
                           "Project ID": context.projectId.toString() ?? "",
                           "Project Name": e.name ?? "",
@@ -106,13 +105,11 @@ class _TrackAttendanceInboxPageState extends State<TrackAttendanceInboxPage> {
                   for (int i = 0; i < projectList.length; i++) {
                     list.add(RegistarCard(
                       data: projectList[i] as Map<String, dynamic>,
-                      regisId: attendanceModel!.attendanceRegister![i].id!,
-                      tenatId:
-                          attendanceModel!.attendanceRegister![i].tenantId!,
+                      regisId: attendanceRegisters![i].id!,
+                      tenatId: attendanceRegisters![i].tenantId!,
                       show: true,
-                      attendee: attendanceModel!
-                              .attendanceRegister![i].attendanceAttendees ??
-                          [],
+                      attendee:
+                          attendanceRegisters![i].attendanceAttendees ?? [],
                     ));
                   }
 
