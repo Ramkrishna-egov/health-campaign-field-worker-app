@@ -409,6 +409,6 @@ class ApiUtil {
   }
 
   static String createAttendanceLog() {
-    return "";
+    return "attendance/log/v1/_create";
   }
 }

@@ -4,11 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-
+import '../../utils/i18_key_constants.dart' as i18;
 //import 'package:digit_components/models/digit_table_model.dart';
 
 import '../../blocs/attendance/attendance_individual/individual_attendance_log.dart';
 import '../../blocs/attendance/attendance_register.dart';
+import '../../blocs/localization/app_localization.dart';
 import '../../models/attendance/attendance_mark_model/register_model.dart';
 import '../../router/app_router.dart';
 import '../../utils/attendance/date_util_attendance.dart';
@@ -68,6 +69,8 @@ class _AttendanceDateSessionSelectionPageState
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+
     return Scaffold(
       body: ReactiveFormBuilder(
         form: () => buildForm(
@@ -79,7 +82,9 @@ class _AttendanceDateSessionSelectionPageState
               showHelp: true,
             ),
             footer: DigitElevatedButton(
-              child: const Text("View Attendance"),
+              child: Text(
+                " ${localizations.translate(i18.attendance.viewAttendance)}",
+              ),
               onPressed: () {
                 if (form.control(_sessionRadio).value == null) {
                   form.control(_sessionRadio).setErrors({'': true});
@@ -91,9 +96,9 @@ class _AttendanceDateSessionSelectionPageState
                 } else {
                   DateTime s = form.control(_dateOfSession).value;
 
-                  debugPrint(widget.tenantId);
-                  debugPrint(s.microsecondsSinceEpoch.toString());
-                  print(form.control(_sessionRadio).value.key.toString());
+                  // debugPrint(widget.tenantId);
+                  // debugPrint(s.microsecondsSinceEpoch.toString());
+                  // print(form.control(_sessionRadio).value.key.toString());
 
                   final entryTime =
                       AttendanceDateTimeManagement.getMillisecondEpoch(
@@ -139,12 +144,13 @@ class _AttendanceDateSessionSelectionPageState
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Select Session",
+                      " ${localizations.translate(i18.attendance.selectSession)}",
                       style: DigitTheme
                           .instance.mobileTheme.textTheme.headlineLarge,
                     ),
-                    const DigitDateFormPicker(
-                      label: "Session Start",
+                    DigitDateFormPicker(
+                      label:
+                          " ${localizations.translate(i18.attendance.dateOfSession)}",
                       formControlName: _dateOfSession,
                       cancelText: "cancelText",
                       confirmText: "confirmText",
@@ -160,10 +166,11 @@ class _AttendanceDateSessionSelectionPageState
                         return value.label;
                       },
                     ),
-                    const CustomInfoCard(
-                      title: 'Missed Attendance',
+                    CustomInfoCard(
+                      title:
+                          " ${localizations.translate(i18.attendance.missedAttendanceInfo)}",
                       description:
-                          'Please make sure you mark attendance for the missing dates',
+                          " ${localizations.translate(i18.attendance.missedAttendanceDesc)}",
                     ),
                   ],
                 ),

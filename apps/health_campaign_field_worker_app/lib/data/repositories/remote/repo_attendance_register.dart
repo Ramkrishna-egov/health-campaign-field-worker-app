@@ -14,6 +14,7 @@ import '../../../models/attendance/attendance_model/attendee_wraper_log_model.da
 import '../../../models/attendance/attendance_registry_model.dart';
 import '../../../utils/utils.dart';
 import '../../local_store/no_sql/schema/absent_attendee.dart';
+import '../../local_store/secure_store/secure_store.dart';
 
 class AttendanceRegisterRepository {
   final Dio client;
@@ -21,32 +22,13 @@ class AttendanceRegisterRepository {
   AttendanceRegisterRepository(this.client, this.isar);
 
   Future<AttendanceMarkRegisterModelResponse> searchAttendanceProjects({
-    dynamic body,
-    Map<String, String>? queryParameters,
-    required String url,
+    required String projectId,
+    required String tenantId,
   }) async {
     try {
-      // var formData = FormData.fromMap(body);
-      // final response = await _client.post(url,
-      //     data: body ?? {},
-      //     queryParameters: queryParameters,
-      //     options: Options(extra: {
-      //       "accessToken": "GlobalVariables.authToken",
-      //       "apiId": "mukta-services",
-      //     }));
-
-      // return AttendanceRegistersModel.fromJson(
-      //   json.decode(response.toString()),
-      // );
-
-      var g =
-          ApiUtil.fetchRegisters("823f9d7c-4a19-4e46-ab5e-bc21685f515d", "lb");
+      final auth = await LocalSecureStore.instance.accessToken;
+      var g = ApiUtil.fetchRegisters(projectId, tenantId);
       var res = await client.post(
-        // "attendance/v1/_search",
-        // queryParameters: {
-        //   "tenantId": "lb",
-        //   "referenceId": "823f9d7c-4a19-4e46-ab5e-bc21685f515d",
-        // },
         g,
         data: {
           "RequestInfo": {
@@ -57,7 +39,7 @@ class AttendanceRegisterRepository {
             "did": null,
             "key": null,
             "msgId": "Create Attendance Register",
-            "authToken": "cf05ac59-62e8-4096-ba04-aa30850ef633",
+            "authToken": auth.toString(),
           },
         },
       );
@@ -144,23 +126,61 @@ class AttendanceRegisterRepository {
   }
 
 // create attendance log
+// {
+//   "requestInfo": {
+//     "apiId": "string",
+//     "ver": "string",
+//     "ts": 0,
+//     "action": "string",
+//     "did": "string",
+//     "key": "string",
+//     "msgId": "string",
+//     "requesterId": "string",
+//     "authToken": "string"
+//   },
+//   "attendance": [
+//     {
+//       "registerId": "string",
+//       "individualId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+//       "tenantId": "pb.amritsar",
+//       "time": 0,
+//       "type": "string",
+//       "status": "ACTIVE",
+//       "documentIds": [
+//         "string"
+//       ],
+//       "additionalDetails": {}
+//     }
+//   ]
+// }
 
-  Future<AttendeeLogWrappperResponse> createAttendanceLog({
+//
+
+  Future<bool> createAttendanceLog({
     required String registartId,
-    required int fromTime,
-    required toTime,
     required List<Map<String, dynamic>> attedeesList,
   }) async {
     try {
-      var data = await rootBundle.loadString("assets/attendee_log.json");
-
-      AttendeeLogWrappperResponse dec = AttendeeLogWrappperResponse.fromJson(
-        json.decode(
-          data.toString(),
-        ),
+      final auth = await LocalSecureStore.instance.accessToken;
+      final res = await client.post(
+        ApiUtil.createAttendanceLog(),
+        data: {
+          "requestInfo": {
+            "apiId": "mukta-services",
+            "ver": null,
+            "ts": 0,
+            "action": null,
+            "did": null,
+            "key": null,
+            "msgId": "creating the attendance log",
+            "requesterId": registartId,
+            "authToken": auth.toString(),
+          },
+          "attendance": attedeesList,
+        },
       );
 
-      return dec;
+      return true;
     } on DioError catch (ex) {
       rethrow;
     }
@@ -179,7 +199,7 @@ class AttendanceRegisterRepository {
     required int exitTime,
     required String registarId,
   }) async {
-    List<AbsentAttendee> favorites = await isar.absentAttendees
+    List<AbsentAttendee> attendeeList = await isar.absentAttendees
         .filter()
         .tenantIdContains(tenantId)
         .entryTimeEqualTo(entryTime)
@@ -187,7 +207,7 @@ class AttendanceRegisterRepository {
         .registerIdContains(registarId)
         .findAll();
 
-    return favorites;
+    return attendeeList;
   }
 
   Future<AbsentAttendee> updateAttendeeInLocalDB({

@@ -48,15 +48,8 @@ class AttendanceIndividualProjectSearchBloc extends Bloc<
         emit(const AttendanceIndividualProjectSearchState.loading());
         AttendanceMarkRegisterModelResponse attendanceRegistersModel =
             await attendanceRegisterRepository.searchAttendanceProjects(
-          url: " Urls.attendanceRegisterServices.searchAttendanceRegister",
-          queryParameters: event.id.trim().toString().isNotEmpty
-              ? {
-                  "tenantId": "GlobalVariables".toString(),
-                  "ids": "event.id",
-                }
-              : {
-                  "tenantId": "GlobalVariables".toString(),
-                },
+          projectId: '',
+          tenantId: '',
         );
 
         await Future.delayed(const Duration(seconds: 1));

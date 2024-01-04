@@ -33,15 +33,8 @@ class AttendanceProjectsSearchBloc
 
       AttendanceMarkRegisterModelResponse attendanceRegistersModel =
           await attendanceRegisterRepository.searchAttendanceProjects(
-        url: " Urls.attendanceRegisterServices.searchAttendanceRegister",
-        queryParameters: event.id.trim().toString().isNotEmpty
-            ? {
-                "tenantId": "GlobalVariables".toString(),
-                "ids": "event.id",
-              }
-            : {
-                "tenantId": "GlobalVariables".toString(),
-              },
+        projectId: event.projectid,
+        tenantId: event.tenantId,
       );
       await Future.delayed(const Duration(seconds: 1));
       emit(AttendanceProjectsSearchState.loaded(attendanceRegistersModel));
@@ -62,8 +55,10 @@ class AttendanceProjectsSearchBloc
 
 @freezed
 class AttendanceProjectsSearchEvent with _$AttendanceProjectsSearchEvent {
-  const factory AttendanceProjectsSearchEvent.search({@Default('') String id}) =
-      SearchAttendanceProjectsEvent;
+  const factory AttendanceProjectsSearchEvent.search({
+    required String tenantId,
+    required String projectid,
+  }) = SearchAttendanceProjectsEvent;
   const factory AttendanceProjectsSearchEvent.dispose() =
       DisposeAttendanceRegisterEvent;
 }

@@ -29,7 +29,10 @@ class _TrackAttendanceInboxPageState extends State<TrackAttendanceInboxPage> {
   @override
   void initState() {
     context.read<AttendanceProjectsSearchBloc>().add(
-          const SearchAttendanceProjectsEvent(),
+          SearchAttendanceProjectsEvent(
+            projectid: context.projectId,
+            tenantId: 'lb',
+          ),
         );
     super.initState();
   }

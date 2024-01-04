@@ -32,6 +32,9 @@ mixin _$AttendanceIndividualEvent {
     required TResult Function(int entryTime, int exitTime, dynamic status,
             String individualId, String registarId, int id)
         individualAttendanceMark,
+    required TResult Function(int entryTime, int exitTime, int status,
+            String tenantId, String registarId, String projectId)
+        uploadAttendance,
     required TResult Function() dispose,
   }) =>
       throw _privateConstructorUsedError;
@@ -51,6 +54,9 @@ mixin _$AttendanceIndividualEvent {
     TResult? Function(int entryTime, int exitTime, dynamic status,
             String individualId, String registarId, int id)?
         individualAttendanceMark,
+    TResult? Function(int entryTime, int exitTime, int status, String tenantId,
+            String registarId, String projectId)?
+        uploadAttendance,
     TResult? Function()? dispose,
   }) =>
       throw _privateConstructorUsedError;
@@ -70,6 +76,9 @@ mixin _$AttendanceIndividualEvent {
     TResult Function(int entryTime, int exitTime, dynamic status,
             String individualId, String registarId, int id)?
         individualAttendanceMark,
+    TResult Function(int entryTime, int exitTime, int status, String tenantId,
+            String registarId, String projectId)?
+        uploadAttendance,
     TResult Function()? dispose,
     required TResult orElse(),
   }) =>
@@ -80,6 +89,7 @@ mixin _$AttendanceIndividualEvent {
         individualAttendanceLogSearch,
     required TResult Function(AttendanceMarkEvent value)
         individualAttendanceMark,
+    required TResult Function(UploadAttendanceEvent value) uploadAttendance,
     required TResult Function(DisposeAttendanceIndividualEvent value) dispose,
   }) =>
       throw _privateConstructorUsedError;
@@ -88,6 +98,7 @@ mixin _$AttendanceIndividualEvent {
     TResult? Function(AttendanceIndividualLogSearchEvent value)?
         individualAttendanceLogSearch,
     TResult? Function(AttendanceMarkEvent value)? individualAttendanceMark,
+    TResult? Function(UploadAttendanceEvent value)? uploadAttendance,
     TResult? Function(DisposeAttendanceIndividualEvent value)? dispose,
   }) =>
       throw _privateConstructorUsedError;
@@ -96,6 +107,7 @@ mixin _$AttendanceIndividualEvent {
     TResult Function(AttendanceIndividualLogSearchEvent value)?
         individualAttendanceLogSearch,
     TResult Function(AttendanceMarkEvent value)? individualAttendanceMark,
+    TResult Function(UploadAttendanceEvent value)? uploadAttendance,
     TResult Function(DisposeAttendanceIndividualEvent value)? dispose,
     required TResult orElse(),
   }) =>
@@ -310,6 +322,9 @@ class _$AttendanceIndividualLogSearchEvent
     required TResult Function(int entryTime, int exitTime, dynamic status,
             String individualId, String registarId, int id)
         individualAttendanceMark,
+    required TResult Function(int entryTime, int exitTime, int status,
+            String tenantId, String registarId, String projectId)
+        uploadAttendance,
     required TResult Function() dispose,
   }) {
     return individualAttendanceLogSearch(registerId, tenantId, entryTime,
@@ -333,6 +348,9 @@ class _$AttendanceIndividualLogSearchEvent
     TResult? Function(int entryTime, int exitTime, dynamic status,
             String individualId, String registarId, int id)?
         individualAttendanceMark,
+    TResult? Function(int entryTime, int exitTime, int status, String tenantId,
+            String registarId, String projectId)?
+        uploadAttendance,
     TResult? Function()? dispose,
   }) {
     return individualAttendanceLogSearch?.call(registerId, tenantId, entryTime,
@@ -356,6 +374,9 @@ class _$AttendanceIndividualLogSearchEvent
     TResult Function(int entryTime, int exitTime, dynamic status,
             String individualId, String registarId, int id)?
         individualAttendanceMark,
+    TResult Function(int entryTime, int exitTime, int status, String tenantId,
+            String registarId, String projectId)?
+        uploadAttendance,
     TResult Function()? dispose,
     required TResult orElse(),
   }) {
@@ -373,6 +394,7 @@ class _$AttendanceIndividualLogSearchEvent
         individualAttendanceLogSearch,
     required TResult Function(AttendanceMarkEvent value)
         individualAttendanceMark,
+    required TResult Function(UploadAttendanceEvent value) uploadAttendance,
     required TResult Function(DisposeAttendanceIndividualEvent value) dispose,
   }) {
     return individualAttendanceLogSearch(this);
@@ -384,6 +406,7 @@ class _$AttendanceIndividualLogSearchEvent
     TResult? Function(AttendanceIndividualLogSearchEvent value)?
         individualAttendanceLogSearch,
     TResult? Function(AttendanceMarkEvent value)? individualAttendanceMark,
+    TResult? Function(UploadAttendanceEvent value)? uploadAttendance,
     TResult? Function(DisposeAttendanceIndividualEvent value)? dispose,
   }) {
     return individualAttendanceLogSearch?.call(this);
@@ -395,6 +418,7 @@ class _$AttendanceIndividualLogSearchEvent
     TResult Function(AttendanceIndividualLogSearchEvent value)?
         individualAttendanceLogSearch,
     TResult Function(AttendanceMarkEvent value)? individualAttendanceMark,
+    TResult Function(UploadAttendanceEvent value)? uploadAttendance,
     TResult Function(DisposeAttendanceIndividualEvent value)? dispose,
     required TResult orElse(),
   }) {
@@ -575,6 +599,9 @@ class _$AttendanceMarkEvent implements AttendanceMarkEvent {
     required TResult Function(int entryTime, int exitTime, dynamic status,
             String individualId, String registarId, int id)
         individualAttendanceMark,
+    required TResult Function(int entryTime, int exitTime, int status,
+            String tenantId, String registarId, String projectId)
+        uploadAttendance,
     required TResult Function() dispose,
   }) {
     return individualAttendanceMark(
@@ -598,6 +625,9 @@ class _$AttendanceMarkEvent implements AttendanceMarkEvent {
     TResult? Function(int entryTime, int exitTime, dynamic status,
             String individualId, String registarId, int id)?
         individualAttendanceMark,
+    TResult? Function(int entryTime, int exitTime, int status, String tenantId,
+            String registarId, String projectId)?
+        uploadAttendance,
     TResult? Function()? dispose,
   }) {
     return individualAttendanceMark?.call(
@@ -621,6 +651,9 @@ class _$AttendanceMarkEvent implements AttendanceMarkEvent {
     TResult Function(int entryTime, int exitTime, dynamic status,
             String individualId, String registarId, int id)?
         individualAttendanceMark,
+    TResult Function(int entryTime, int exitTime, int status, String tenantId,
+            String registarId, String projectId)?
+        uploadAttendance,
     TResult Function()? dispose,
     required TResult orElse(),
   }) {
@@ -638,6 +671,7 @@ class _$AttendanceMarkEvent implements AttendanceMarkEvent {
         individualAttendanceLogSearch,
     required TResult Function(AttendanceMarkEvent value)
         individualAttendanceMark,
+    required TResult Function(UploadAttendanceEvent value) uploadAttendance,
     required TResult Function(DisposeAttendanceIndividualEvent value) dispose,
   }) {
     return individualAttendanceMark(this);
@@ -649,6 +683,7 @@ class _$AttendanceMarkEvent implements AttendanceMarkEvent {
     TResult? Function(AttendanceIndividualLogSearchEvent value)?
         individualAttendanceLogSearch,
     TResult? Function(AttendanceMarkEvent value)? individualAttendanceMark,
+    TResult? Function(UploadAttendanceEvent value)? uploadAttendance,
     TResult? Function(DisposeAttendanceIndividualEvent value)? dispose,
   }) {
     return individualAttendanceMark?.call(this);
@@ -660,6 +695,7 @@ class _$AttendanceMarkEvent implements AttendanceMarkEvent {
     TResult Function(AttendanceIndividualLogSearchEvent value)?
         individualAttendanceLogSearch,
     TResult Function(AttendanceMarkEvent value)? individualAttendanceMark,
+    TResult Function(UploadAttendanceEvent value)? uploadAttendance,
     TResult Function(DisposeAttendanceIndividualEvent value)? dispose,
     required TResult orElse(),
   }) {
@@ -687,6 +723,271 @@ abstract class AttendanceMarkEvent implements AttendanceIndividualEvent {
   int get id;
   @JsonKey(ignore: true)
   _$$AttendanceMarkEventCopyWith<_$AttendanceMarkEvent> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UploadAttendanceEventCopyWith<$Res> {
+  factory _$$UploadAttendanceEventCopyWith(_$UploadAttendanceEvent value,
+          $Res Function(_$UploadAttendanceEvent) then) =
+      __$$UploadAttendanceEventCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {int entryTime,
+      int exitTime,
+      int status,
+      String tenantId,
+      String registarId,
+      String projectId});
+}
+
+/// @nodoc
+class __$$UploadAttendanceEventCopyWithImpl<$Res>
+    extends _$AttendanceIndividualEventCopyWithImpl<$Res,
+        _$UploadAttendanceEvent>
+    implements _$$UploadAttendanceEventCopyWith<$Res> {
+  __$$UploadAttendanceEventCopyWithImpl(_$UploadAttendanceEvent _value,
+      $Res Function(_$UploadAttendanceEvent) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? entryTime = null,
+    Object? exitTime = null,
+    Object? status = null,
+    Object? tenantId = null,
+    Object? registarId = null,
+    Object? projectId = null,
+  }) {
+    return _then(_$UploadAttendanceEvent(
+      entryTime: null == entryTime
+          ? _value.entryTime
+          : entryTime // ignore: cast_nullable_to_non_nullable
+              as int,
+      exitTime: null == exitTime
+          ? _value.exitTime
+          : exitTime // ignore: cast_nullable_to_non_nullable
+              as int,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as int,
+      tenantId: null == tenantId
+          ? _value.tenantId
+          : tenantId // ignore: cast_nullable_to_non_nullable
+              as String,
+      registarId: null == registarId
+          ? _value.registarId
+          : registarId // ignore: cast_nullable_to_non_nullable
+              as String,
+      projectId: null == projectId
+          ? _value.projectId
+          : projectId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UploadAttendanceEvent implements UploadAttendanceEvent {
+  const _$UploadAttendanceEvent(
+      {required this.entryTime,
+      required this.exitTime,
+      required this.status,
+      required this.tenantId,
+      required this.registarId,
+      required this.projectId});
+
+  @override
+  final int entryTime;
+  @override
+  final int exitTime;
+  @override
+  final int status;
+  @override
+  final String tenantId;
+  @override
+  final String registarId;
+  @override
+  final String projectId;
+
+  @override
+  String toString() {
+    return 'AttendanceIndividualEvent.uploadAttendance(entryTime: $entryTime, exitTime: $exitTime, status: $status, tenantId: $tenantId, registarId: $registarId, projectId: $projectId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UploadAttendanceEvent &&
+            (identical(other.entryTime, entryTime) ||
+                other.entryTime == entryTime) &&
+            (identical(other.exitTime, exitTime) ||
+                other.exitTime == exitTime) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.tenantId, tenantId) ||
+                other.tenantId == tenantId) &&
+            (identical(other.registarId, registarId) ||
+                other.registarId == registarId) &&
+            (identical(other.projectId, projectId) ||
+                other.projectId == projectId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, entryTime, exitTime, status,
+      tenantId, registarId, projectId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UploadAttendanceEventCopyWith<_$UploadAttendanceEvent> get copyWith =>
+      __$$UploadAttendanceEventCopyWithImpl<_$UploadAttendanceEvent>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String registerId,
+            String tenantId,
+            int entryTime,
+            int exitTime,
+            int currentDate,
+            String projectId,
+            List<String> attendeeId,
+            int offset,
+            int limit)
+        individualAttendanceLogSearch,
+    required TResult Function(int entryTime, int exitTime, dynamic status,
+            String individualId, String registarId, int id)
+        individualAttendanceMark,
+    required TResult Function(int entryTime, int exitTime, int status,
+            String tenantId, String registarId, String projectId)
+        uploadAttendance,
+    required TResult Function() dispose,
+  }) {
+    return uploadAttendance(
+        entryTime, exitTime, status, tenantId, registarId, projectId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            String registerId,
+            String tenantId,
+            int entryTime,
+            int exitTime,
+            int currentDate,
+            String projectId,
+            List<String> attendeeId,
+            int offset,
+            int limit)?
+        individualAttendanceLogSearch,
+    TResult? Function(int entryTime, int exitTime, dynamic status,
+            String individualId, String registarId, int id)?
+        individualAttendanceMark,
+    TResult? Function(int entryTime, int exitTime, int status, String tenantId,
+            String registarId, String projectId)?
+        uploadAttendance,
+    TResult? Function()? dispose,
+  }) {
+    return uploadAttendance?.call(
+        entryTime, exitTime, status, tenantId, registarId, projectId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String registerId,
+            String tenantId,
+            int entryTime,
+            int exitTime,
+            int currentDate,
+            String projectId,
+            List<String> attendeeId,
+            int offset,
+            int limit)?
+        individualAttendanceLogSearch,
+    TResult Function(int entryTime, int exitTime, dynamic status,
+            String individualId, String registarId, int id)?
+        individualAttendanceMark,
+    TResult Function(int entryTime, int exitTime, int status, String tenantId,
+            String registarId, String projectId)?
+        uploadAttendance,
+    TResult Function()? dispose,
+    required TResult orElse(),
+  }) {
+    if (uploadAttendance != null) {
+      return uploadAttendance(
+          entryTime, exitTime, status, tenantId, registarId, projectId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AttendanceIndividualLogSearchEvent value)
+        individualAttendanceLogSearch,
+    required TResult Function(AttendanceMarkEvent value)
+        individualAttendanceMark,
+    required TResult Function(UploadAttendanceEvent value) uploadAttendance,
+    required TResult Function(DisposeAttendanceIndividualEvent value) dispose,
+  }) {
+    return uploadAttendance(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(AttendanceIndividualLogSearchEvent value)?
+        individualAttendanceLogSearch,
+    TResult? Function(AttendanceMarkEvent value)? individualAttendanceMark,
+    TResult? Function(UploadAttendanceEvent value)? uploadAttendance,
+    TResult? Function(DisposeAttendanceIndividualEvent value)? dispose,
+  }) {
+    return uploadAttendance?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AttendanceIndividualLogSearchEvent value)?
+        individualAttendanceLogSearch,
+    TResult Function(AttendanceMarkEvent value)? individualAttendanceMark,
+    TResult Function(UploadAttendanceEvent value)? uploadAttendance,
+    TResult Function(DisposeAttendanceIndividualEvent value)? dispose,
+    required TResult orElse(),
+  }) {
+    if (uploadAttendance != null) {
+      return uploadAttendance(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UploadAttendanceEvent implements AttendanceIndividualEvent {
+  const factory UploadAttendanceEvent(
+      {required final int entryTime,
+      required final int exitTime,
+      required final int status,
+      required final String tenantId,
+      required final String registarId,
+      required final String projectId}) = _$UploadAttendanceEvent;
+
+  int get entryTime;
+  int get exitTime;
+  int get status;
+  String get tenantId;
+  String get registarId;
+  String get projectId;
+  @JsonKey(ignore: true)
+  _$$UploadAttendanceEventCopyWith<_$UploadAttendanceEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -747,6 +1048,9 @@ class _$DisposeAttendanceIndividualEvent
     required TResult Function(int entryTime, int exitTime, dynamic status,
             String individualId, String registarId, int id)
         individualAttendanceMark,
+    required TResult Function(int entryTime, int exitTime, int status,
+            String tenantId, String registarId, String projectId)
+        uploadAttendance,
     required TResult Function() dispose,
   }) {
     return dispose();
@@ -769,6 +1073,9 @@ class _$DisposeAttendanceIndividualEvent
     TResult? Function(int entryTime, int exitTime, dynamic status,
             String individualId, String registarId, int id)?
         individualAttendanceMark,
+    TResult? Function(int entryTime, int exitTime, int status, String tenantId,
+            String registarId, String projectId)?
+        uploadAttendance,
     TResult? Function()? dispose,
   }) {
     return dispose?.call();
@@ -791,6 +1098,9 @@ class _$DisposeAttendanceIndividualEvent
     TResult Function(int entryTime, int exitTime, dynamic status,
             String individualId, String registarId, int id)?
         individualAttendanceMark,
+    TResult Function(int entryTime, int exitTime, int status, String tenantId,
+            String registarId, String projectId)?
+        uploadAttendance,
     TResult Function()? dispose,
     required TResult orElse(),
   }) {
@@ -807,6 +1117,7 @@ class _$DisposeAttendanceIndividualEvent
         individualAttendanceLogSearch,
     required TResult Function(AttendanceMarkEvent value)
         individualAttendanceMark,
+    required TResult Function(UploadAttendanceEvent value) uploadAttendance,
     required TResult Function(DisposeAttendanceIndividualEvent value) dispose,
   }) {
     return dispose(this);
@@ -818,6 +1129,7 @@ class _$DisposeAttendanceIndividualEvent
     TResult? Function(AttendanceIndividualLogSearchEvent value)?
         individualAttendanceLogSearch,
     TResult? Function(AttendanceMarkEvent value)? individualAttendanceMark,
+    TResult? Function(UploadAttendanceEvent value)? uploadAttendance,
     TResult? Function(DisposeAttendanceIndividualEvent value)? dispose,
   }) {
     return dispose?.call(this);
@@ -829,6 +1141,7 @@ class _$DisposeAttendanceIndividualEvent
     TResult Function(AttendanceIndividualLogSearchEvent value)?
         individualAttendanceLogSearch,
     TResult Function(AttendanceMarkEvent value)? individualAttendanceMark,
+    TResult Function(UploadAttendanceEvent value)? uploadAttendance,
     TResult Function(DisposeAttendanceIndividualEvent value)? dispose,
     required TResult orElse(),
   }) {
@@ -857,7 +1170,8 @@ mixin _$AttendanceIndividualState {
             int offsetData,
             int currentOffset,
             int countData,
-            int limitData)
+            int limitData,
+            bool flag)
         loaded,
     required TResult Function(String? error) error,
   }) =>
@@ -872,7 +1186,8 @@ mixin _$AttendanceIndividualState {
             int offsetData,
             int currentOffset,
             int countData,
-            int limitData)?
+            int limitData,
+            bool flag)?
         loaded,
     TResult? Function(String? error)? error,
   }) =>
@@ -887,7 +1202,8 @@ mixin _$AttendanceIndividualState {
             int offsetData,
             int currentOffset,
             int countData,
-            int limitData)?
+            int limitData,
+            bool flag)?
         loaded,
     TResult Function(String? error)? error,
     required TResult orElse(),
@@ -984,7 +1300,8 @@ class _$_Initial extends _Initial {
             int offsetData,
             int currentOffset,
             int countData,
-            int limitData)
+            int limitData,
+            bool flag)
         loaded,
     required TResult Function(String? error) error,
   }) {
@@ -1002,7 +1319,8 @@ class _$_Initial extends _Initial {
             int offsetData,
             int currentOffset,
             int countData,
-            int limitData)?
+            int limitData,
+            bool flag)?
         loaded,
     TResult? Function(String? error)? error,
   }) {
@@ -1020,7 +1338,8 @@ class _$_Initial extends _Initial {
             int offsetData,
             int currentOffset,
             int countData,
-            int limitData)?
+            int limitData,
+            bool flag)?
         loaded,
     TResult Function(String? error)? error,
     required TResult orElse(),
@@ -1119,7 +1438,8 @@ class _$_Loading extends _Loading {
             int offsetData,
             int currentOffset,
             int countData,
-            int limitData)
+            int limitData,
+            bool flag)
         loaded,
     required TResult Function(String? error) error,
   }) {
@@ -1137,7 +1457,8 @@ class _$_Loading extends _Loading {
             int offsetData,
             int currentOffset,
             int countData,
-            int limitData)?
+            int limitData,
+            bool flag)?
         loaded,
     TResult? Function(String? error)? error,
   }) {
@@ -1155,7 +1476,8 @@ class _$_Loading extends _Loading {
             int offsetData,
             int currentOffset,
             int countData,
-            int limitData)?
+            int limitData,
+            bool flag)?
         loaded,
     TResult Function(String? error)? error,
     required TResult orElse(),
@@ -1222,7 +1544,8 @@ abstract class _$$_AttendanceRowModelLoadedCopyWith<$Res> {
       int offsetData,
       int currentOffset,
       int countData,
-      int limitData});
+      int limitData,
+      bool flag});
 }
 
 /// @nodoc
@@ -1243,6 +1566,7 @@ class __$$_AttendanceRowModelLoadedCopyWithImpl<$Res>
     Object? currentOffset = null,
     Object? countData = null,
     Object? limitData = null,
+    Object? flag = null,
   }) {
     return _then(_$_AttendanceRowModelLoaded(
       attendanceRowModelList: freezed == attendanceRowModelList
@@ -1269,6 +1593,10 @@ class __$$_AttendanceRowModelLoadedCopyWithImpl<$Res>
           ? _value.limitData
           : limitData // ignore: cast_nullable_to_non_nullable
               as int,
+      flag: null == flag
+          ? _value.flag
+          : flag // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -1282,7 +1610,8 @@ class _$_AttendanceRowModelLoaded extends _AttendanceRowModelLoaded {
       this.offsetData = 0,
       this.currentOffset = 0,
       this.countData = 0,
-      this.limitData = 10})
+      this.limitData = 10,
+      this.flag = false})
       : _attendanceRowModelList = attendanceRowModelList,
         _attendanceCollectionModel = attendanceCollectionModel,
         super._();
@@ -1317,10 +1646,13 @@ class _$_AttendanceRowModelLoaded extends _AttendanceRowModelLoaded {
   @override
   @JsonKey()
   final int limitData;
+  @override
+  @JsonKey()
+  final bool flag;
 
   @override
   String toString() {
-    return 'AttendanceIndividualState.loaded(attendanceRowModelList: $attendanceRowModelList, attendanceCollectionModel: $attendanceCollectionModel, offsetData: $offsetData, currentOffset: $currentOffset, countData: $countData, limitData: $limitData)';
+    return 'AttendanceIndividualState.loaded(attendanceRowModelList: $attendanceRowModelList, attendanceCollectionModel: $attendanceCollectionModel, offsetData: $offsetData, currentOffset: $currentOffset, countData: $countData, limitData: $limitData, flag: $flag)';
   }
 
   @override
@@ -1339,7 +1671,8 @@ class _$_AttendanceRowModelLoaded extends _AttendanceRowModelLoaded {
             (identical(other.countData, countData) ||
                 other.countData == countData) &&
             (identical(other.limitData, limitData) ||
-                other.limitData == limitData));
+                other.limitData == limitData) &&
+            (identical(other.flag, flag) || other.flag == flag));
   }
 
   @override
@@ -1350,7 +1683,8 @@ class _$_AttendanceRowModelLoaded extends _AttendanceRowModelLoaded {
       offsetData,
       currentOffset,
       countData,
-      limitData);
+      limitData,
+      flag);
 
   @JsonKey(ignore: true)
   @override
@@ -1370,12 +1704,13 @@ class _$_AttendanceRowModelLoaded extends _AttendanceRowModelLoaded {
             int offsetData,
             int currentOffset,
             int countData,
-            int limitData)
+            int limitData,
+            bool flag)
         loaded,
     required TResult Function(String? error) error,
   }) {
     return loaded(attendanceRowModelList, attendanceCollectionModel, offsetData,
-        currentOffset, countData, limitData);
+        currentOffset, countData, limitData, flag);
   }
 
   @override
@@ -1389,12 +1724,13 @@ class _$_AttendanceRowModelLoaded extends _AttendanceRowModelLoaded {
             int offsetData,
             int currentOffset,
             int countData,
-            int limitData)?
+            int limitData,
+            bool flag)?
         loaded,
     TResult? Function(String? error)? error,
   }) {
     return loaded?.call(attendanceRowModelList, attendanceCollectionModel,
-        offsetData, currentOffset, countData, limitData);
+        offsetData, currentOffset, countData, limitData, flag);
   }
 
   @override
@@ -1408,14 +1744,15 @@ class _$_AttendanceRowModelLoaded extends _AttendanceRowModelLoaded {
             int offsetData,
             int currentOffset,
             int countData,
-            int limitData)?
+            int limitData,
+            bool flag)?
         loaded,
     TResult Function(String? error)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
       return loaded(attendanceRowModelList, attendanceCollectionModel,
-          offsetData, currentOffset, countData, limitData);
+          offsetData, currentOffset, countData, limitData, flag);
     }
     return orElse();
   }
@@ -1465,7 +1802,8 @@ abstract class _AttendanceRowModelLoaded extends AttendanceIndividualState {
       final int offsetData,
       final int currentOffset,
       final int countData,
-      final int limitData}) = _$_AttendanceRowModelLoaded;
+      final int limitData,
+      final bool flag}) = _$_AttendanceRowModelLoaded;
   _AttendanceRowModelLoaded._() : super._();
 
   List<AttendanceRowModel>? get attendanceRowModelList;
@@ -1474,6 +1812,7 @@ abstract class _AttendanceRowModelLoaded extends AttendanceIndividualState {
   int get currentOffset;
   int get countData;
   int get limitData;
+  bool get flag;
   @JsonKey(ignore: true)
   _$$_AttendanceRowModelLoadedCopyWith<_$_AttendanceRowModelLoaded>
       get copyWith => throw _privateConstructorUsedError;
@@ -1549,7 +1888,8 @@ class _$_Error extends _Error {
             int offsetData,
             int currentOffset,
             int countData,
-            int limitData)
+            int limitData,
+            bool flag)
         loaded,
     required TResult Function(String? error) error,
   }) {
@@ -1567,7 +1907,8 @@ class _$_Error extends _Error {
             int offsetData,
             int currentOffset,
             int countData,
-            int limitData)?
+            int limitData,
+            bool flag)?
         loaded,
     TResult? Function(String? error)? error,
   }) {
@@ -1585,7 +1926,8 @@ class _$_Error extends _Error {
             int offsetData,
             int currentOffset,
             int countData,
-            int limitData)?
+            int limitData,
+            bool flag)?
         loaded,
     TResult Function(String? error)? error,
     required TResult orElse(),

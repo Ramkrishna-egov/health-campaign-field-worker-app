@@ -18,19 +18,19 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AttendanceProjectsSearchEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String id) search,
+    required TResult Function(String tenantId, String projectid) search,
     required TResult Function() dispose,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String id)? search,
+    TResult? Function(String tenantId, String projectid)? search,
     TResult? Function()? dispose,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String id)? search,
+    TResult Function(String tenantId, String projectid)? search,
     TResult Function()? dispose,
     required TResult orElse(),
   }) =>
@@ -84,7 +84,7 @@ abstract class _$$SearchAttendanceProjectsEventCopyWith<$Res> {
           $Res Function(_$SearchAttendanceProjectsEvent) then) =
       __$$SearchAttendanceProjectsEventCopyWithImpl<$Res>;
   @useResult
-  $Res call({String id});
+  $Res call({String tenantId, String projectid});
 }
 
 /// @nodoc
@@ -100,12 +100,17 @@ class __$$SearchAttendanceProjectsEventCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? tenantId = null,
+    Object? projectid = null,
   }) {
     return _then(_$SearchAttendanceProjectsEvent(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
+      tenantId: null == tenantId
+          ? _value.tenantId
+          : tenantId // ignore: cast_nullable_to_non_nullable
+              as String,
+      projectid: null == projectid
+          ? _value.projectid
+          : projectid // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -114,15 +119,17 @@ class __$$SearchAttendanceProjectsEventCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SearchAttendanceProjectsEvent implements SearchAttendanceProjectsEvent {
-  const _$SearchAttendanceProjectsEvent({this.id = ''});
+  const _$SearchAttendanceProjectsEvent(
+      {required this.tenantId, required this.projectid});
 
   @override
-  @JsonKey()
-  final String id;
+  final String tenantId;
+  @override
+  final String projectid;
 
   @override
   String toString() {
-    return 'AttendanceProjectsSearchEvent.search(id: $id)';
+    return 'AttendanceProjectsSearchEvent.search(tenantId: $tenantId, projectid: $projectid)';
   }
 
   @override
@@ -130,11 +137,14 @@ class _$SearchAttendanceProjectsEvent implements SearchAttendanceProjectsEvent {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SearchAttendanceProjectsEvent &&
-            (identical(other.id, id) || other.id == id));
+            (identical(other.tenantId, tenantId) ||
+                other.tenantId == tenantId) &&
+            (identical(other.projectid, projectid) ||
+                other.projectid == projectid));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id);
+  int get hashCode => Object.hash(runtimeType, tenantId, projectid);
 
   @JsonKey(ignore: true)
   @override
@@ -146,30 +156,30 @@ class _$SearchAttendanceProjectsEvent implements SearchAttendanceProjectsEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String id) search,
+    required TResult Function(String tenantId, String projectid) search,
     required TResult Function() dispose,
   }) {
-    return search(id);
+    return search(tenantId, projectid);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String id)? search,
+    TResult? Function(String tenantId, String projectid)? search,
     TResult? Function()? dispose,
   }) {
-    return search?.call(id);
+    return search?.call(tenantId, projectid);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String id)? search,
+    TResult Function(String tenantId, String projectid)? search,
     TResult Function()? dispose,
     required TResult orElse(),
   }) {
     if (search != null) {
-      return search(id);
+      return search(tenantId, projectid);
     }
     return orElse();
   }
@@ -208,10 +218,12 @@ class _$SearchAttendanceProjectsEvent implements SearchAttendanceProjectsEvent {
 
 abstract class SearchAttendanceProjectsEvent
     implements AttendanceProjectsSearchEvent {
-  const factory SearchAttendanceProjectsEvent({final String id}) =
-      _$SearchAttendanceProjectsEvent;
+  const factory SearchAttendanceProjectsEvent(
+      {required final String tenantId,
+      required final String projectid}) = _$SearchAttendanceProjectsEvent;
 
-  String get id;
+  String get tenantId;
+  String get projectid;
   @JsonKey(ignore: true)
   _$$SearchAttendanceProjectsEventCopyWith<_$SearchAttendanceProjectsEvent>
       get copyWith => throw _privateConstructorUsedError;
@@ -260,7 +272,7 @@ class _$DisposeAttendanceRegisterEvent
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String id) search,
+    required TResult Function(String tenantId, String projectid) search,
     required TResult Function() dispose,
   }) {
     return dispose();
@@ -269,7 +281,7 @@ class _$DisposeAttendanceRegisterEvent
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String id)? search,
+    TResult? Function(String tenantId, String projectid)? search,
     TResult? Function()? dispose,
   }) {
     return dispose?.call();
@@ -278,7 +290,7 @@ class _$DisposeAttendanceRegisterEvent
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String id)? search,
+    TResult Function(String tenantId, String projectid)? search,
     TResult Function()? dispose,
     required TResult orElse(),
   }) {

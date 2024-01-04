@@ -23,6 +23,7 @@ class AttendanceIndividualBloc
         ) {
     on<AttendanceIndividualLogSearchEvent>(_onIndividualAttendanceLogSearch);
     on<AttendanceMarkEvent>(_onIndividualAttendanceMark);
+    on<UploadAttendanceEvent>(_onUploadAttendanceToServer);
     on<DisposeAttendanceIndividualEvent>(_onDispose);
   }
 
@@ -167,6 +168,75 @@ class AttendanceIndividualBloc
       orElse: () {},
     );
   }
+
+  FutureOr<void> _onUploadAttendanceToServer(
+    UploadAttendanceEvent event,
+    AttendanceIndividualEmitter emit,
+  ) async {
+    List<Map<String, dynamic>> m = [];
+    List<AbsentAttendee> filterData =
+        await attendanceRegisterRepository.getAttendeeListFromLocalDB(
+      tenantId: event.tenantId,
+      entryTime: event.entryTime,
+      exitTime: event.exitTime,
+      registarId: event.registarId,
+    );
+    await state.maybeMap(
+      orElse: () {},
+      loaded: (value) async {
+        try {
+          emit(value.copyWith(
+            flag: true,
+          ));
+          for (var element in filterData) {
+            if (element.status == 1) {
+              final entry = {
+                "registerId": element.registerId,
+                "individualId": element.individualId,
+                "tenantId": element.tenantId,
+                "time": element.entryTime,
+                "type": "ENTRY",
+                "status": "ACTIVE",
+                "documentIds": [],
+                "additionalDetails": {},
+              };
+
+              final exit = {
+                "registerId": element.registerId,
+                "individualId": element.individualId,
+                "tenantId": element.tenantId,
+                "time": element.exitTime,
+                "type": "EXIT",
+                "status": "ACTIVE",
+                "documentIds": [],
+                "additionalDetails": {},
+              };
+              m.add(entry);
+              m.add(exit);
+            }
+          }
+
+          final check = await attendanceRegisterRepository.createAttendanceLog(
+            attedeesList: m,
+            registartId: event.registarId,
+          );
+          if (check) {
+            emit(value.copyWith(
+              flag: false,
+            ));
+          }
+
+          print(m);
+        } catch (e) {
+          // emit(value.copyWith(
+          //   flag: false,
+          // ));
+          emit(AttendanceIndividualState.error(e.toString()));
+        }
+      },
+      error: (value) {},
+    );
+  }
 }
 
 @freezed
@@ -190,6 +260,16 @@ class AttendanceIndividualEvent with _$AttendanceIndividualEvent {
     required String registarId,
     required int id,
   }) = AttendanceMarkEvent;
+
+  const factory AttendanceIndividualEvent.uploadAttendance({
+    required int entryTime,
+    required int exitTime,
+    required int status,
+    required String tenantId,
+    required String registarId,
+    required String projectId,
+  }) = UploadAttendanceEvent;
+
   const factory AttendanceIndividualEvent.dispose() =
       DisposeAttendanceIndividualEvent;
 }
@@ -207,6 +287,7 @@ class AttendanceIndividualState with _$AttendanceIndividualState {
     @Default(0) int currentOffset,
     @Default(0) int countData,
     @Default(10) int limitData,
+    @Default(false) bool flag,
   }) = _AttendanceRowModelLoaded;
   const factory AttendanceIndividualState.error(String? error) = _Error;
 }

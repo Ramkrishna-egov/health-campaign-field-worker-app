@@ -1245,5 +1245,25 @@ class Attendance {
 
   String get viewAttendanceLabel => 'HOME_VIEW_ATTENDANCE_LABEL';
 
+  String get selectSession => 'SESSION_SELECTION_HEADER';
+
+  String get dateOfSession => 'SESSION_DATE_OF_SESSION';
+
+  String get sessionDescForRadio => 'SESSION_RADIO_INFO';
+
+  String get missedAttendanceInfo => 'MISSED_ATTENDANCE_INFO';
+
+  String get missedAttendanceDesc => 'MISSED_ATTENDANCE_DESC';
+
+  String get viewAttendance => 'BUTTON_VIEW_ATTENDANCE';
+
+  String get markAttendance => 'BUTTON_MARK_ATTENDANCE';
+
+  String get tableHeaderName => 'TABLE_HEADER_NAME';
+
+  String get tableHeaderAttendance => 'TABLE_HEADER_ATTENDANCE';
+
+  String get tableHeaderUserId => 'TABLE_HEADER_USERID';
+
   // String get manageStockLabel => 'HOME_MANAGE_STOCK_LABEL';
 }
