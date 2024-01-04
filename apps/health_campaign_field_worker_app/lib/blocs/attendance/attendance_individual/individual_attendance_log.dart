@@ -24,6 +24,7 @@ class AttendanceIndividualBloc
     on<AttendanceIndividualLogSearchEvent>(_onIndividualAttendanceLogSearch);
     on<AttendanceMarkEvent>(_onIndividualAttendanceMark);
     on<UploadAttendanceEvent>(_onUploadAttendanceToServer);
+    on<SearchAttendeesEvent>(_onSearchAttendeeByName);
     on<DisposeAttendanceIndividualEvent>(_onDispose);
   }
 
@@ -38,6 +39,7 @@ class AttendanceIndividualBloc
     AttendanceIndividualLogSearchEvent event,
     AttendanceIndividualEmitter emit,
   ) async {
+    emit(const AttendanceIndividualState.loading());
     List<AbsentAttendee> filterData =
         await attendanceRegisterRepository.getAttendeeListFromLocalDB(
       tenantId: event.tenantId,
@@ -46,7 +48,6 @@ class AttendanceIndividualBloc
       registarId: event.registerId,
     );
     if (filterData.isEmpty) {
-      emit(const AttendanceIndividualState.loading());
       AttendanceMarkIndividualModel a =
           await attendanceRegisterRepository.fetchAttendees(
         attendeeids: event.attendeeId,
@@ -90,11 +91,11 @@ class AttendanceIndividualBloc
 
         return s;
       }).toList();
-
+      await Future.delayed(const Duration(milliseconds: 800));
       emit(
         _AttendanceRowModelLoaded(
           attendanceCollectionModel: emitData,
-          // attendanceRowModelList: data,
+          attendanceSearchModelList: [],
           countData: emitData.length,
           limitData: event.limit,
           offsetData: event.offset,
@@ -120,11 +121,11 @@ class AttendanceIndividualBloc
 
         return s;
       }).toList();
-      print(emitData.first.name);
+      await Future.delayed(const Duration(milliseconds: 800));
       emit(
         _AttendanceRowModelLoaded(
           attendanceCollectionModel: emitData,
-          // attendanceRowModelList: data,
+          attendanceSearchModelList: [],
           countData: emitData.length,
           limitData: event.limit,
           offsetData: event.offset,
@@ -252,6 +253,28 @@ class AttendanceIndividualBloc
       error: (value) {},
     );
   }
+
+  FutureOr<void> _onSearchAttendeeByName(
+    SearchAttendeesEvent event,
+    AttendanceIndividualEmitter emit,
+  ) {
+    state.maybeMap(
+      orElse: () {},
+      loaded: (value) {
+        if (event.name.isNotEmpty) {
+          final List<AttendeeCollectionModel> result = value
+              .attendanceCollectionModel!
+              .where((item) =>
+                  item.name!.toLowerCase().contains(event.name.toLowerCase()))
+              .toList();
+
+          emit(value.copyWith(attendanceSearchModelList: result));
+        } else {
+          emit(value.copyWith(attendanceSearchModelList: []));
+        }
+      },
+    );
+  }
 }
 
 @freezed
@@ -285,6 +308,15 @@ class AttendanceIndividualEvent with _$AttendanceIndividualEvent {
     required String projectId,
   }) = UploadAttendanceEvent;
 
+  const factory AttendanceIndividualEvent.searchAttendees({
+    required int entryTime,
+    required int exitTime,
+    required String name,
+    required String tenantId,
+    required String registarId,
+    required String projectId,
+  }) = SearchAttendeesEvent;
+
   const factory AttendanceIndividualEvent.dispose() =
       DisposeAttendanceIndividualEvent;
 }
@@ -296,7 +328,7 @@ class AttendanceIndividualState with _$AttendanceIndividualState {
   const factory AttendanceIndividualState.initial() = _Initial;
   const factory AttendanceIndividualState.loading() = _Loading;
   factory AttendanceIndividualState.loaded({
-    List<AttendanceRowModel>? attendanceRowModelList,
+    @Default([]) List<AttendeeCollectionModel> attendanceSearchModelList,
     List<AttendeeCollectionModel>? attendanceCollectionModel,
     @Default(0) int offsetData,
     @Default(0) int currentOffset,
