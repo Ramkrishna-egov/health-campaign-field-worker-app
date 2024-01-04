@@ -440,23 +440,24 @@ class MemberCard extends StatelessWidget {
                                               50,
                                             ),
                                           ),
-                                          onPressed: tasks != null &&
-                                                  (tasks ?? [])
-                                                      .where((element) =>
-                                                          element.status !=
-                                                              Status
-                                                                  .beneficiaryRefused
-                                                                  .toValue() &&
-                                                          element.status !=
-                                                              Status
-                                                                  .beneficiaryReferred
-                                                                  .toValue())
-                                                      .toList()
-                                                      .isNotEmpty &&
-                                                  !checkStatus(
-                                                    tasks,
-                                                    context.selectedCycle,
-                                                  )
+                                          onPressed: (tasks != null &&
+                                                      (tasks ?? [])
+                                                          .where((element) =>
+                                                              element.status !=
+                                                                  Status
+                                                                      .beneficiaryRefused
+                                                                      .toValue() &&
+                                                              element.status !=
+                                                                  Status
+                                                                      .beneficiaryReferred
+                                                                      .toValue())
+                                                          .toList()
+                                                          .isNotEmpty &&
+                                                      !checkStatus(
+                                                        tasks,
+                                                        context.selectedCycle,
+                                                      )) ||
+                                                  isDelivered
                                               ? null
                                               : () {
                                                   Navigator.of(context,
