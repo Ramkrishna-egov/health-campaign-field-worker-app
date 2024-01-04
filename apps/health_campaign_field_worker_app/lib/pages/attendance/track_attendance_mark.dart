@@ -40,6 +40,26 @@ class MarkAttendancePage extends LocalizedStatefulWidget {
 
 class _MarkAttendancePageState extends State<MarkAttendancePage> {
   bool isDialogOpen = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    context.read<AttendanceIndividualBloc>().add(
+          AttendanceIndividualLogSearchEvent(
+            attendeeId: widget.attendeeIds,
+            limit: 10,
+            offset: 0,
+            currentDate: widget.dateTime.millisecondsSinceEpoch,
+            entryTime: widget.entryTime,
+            exitTime: widget.exitTime,
+            projectId: context.projectId,
+            registerId: widget.registerId,
+            tenantId: widget.tenantId,
+          ),
+        );
+    super.initState();
+  }
+
   @override
   void dispose() {
     context
@@ -107,21 +127,23 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                   footer: SizedBox(
                     height: 50,
                     child: DigitElevatedButton(
+                      onPressed: currentOffset == 0
+                          ? () {
+                              context.read<AttendanceIndividualBloc>().add(
+                                    UploadAttendanceEvent(
+                                      entryTime: widget.entryTime,
+                                      exitTime: widget.exitTime,
+                                      projectId: context.projectId,
+                                      registarId: widget.registerId,
+                                      status: 1,
+                                      tenantId: widget.tenantId,
+                                    ),
+                                  );
+                            }
+                          : null,
                       child: Text(
                         localizations.translate(i18.attendance.markAttendance),
                       ),
-                      onPressed: () {
-                        context.read<AttendanceIndividualBloc>().add(
-                              UploadAttendanceEvent(
-                                entryTime: widget.entryTime,
-                                exitTime: widget.exitTime,
-                                projectId: context.projectId,
-                                registarId: widget.registerId,
-                                status: 1,
-                                tenantId: widget.tenantId,
-                              ),
-                            );
-                      },
                     ),
                   ),
                   mainAxisAlignment: MainAxisAlignment.start,

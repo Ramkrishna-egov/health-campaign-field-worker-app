@@ -113,20 +113,21 @@ class _AttendanceDateSessionSelectionPageState
                     form.control(_sessionRadio).value.key.toString(),
                     "exitType",
                   );
-                  context.read<AttendanceIndividualBloc>().add(
-                        AttendanceIndividualLogSearchEvent(
-                          attendeeId:
-                              widget.attendanceMarkIndividualModelAttendee,
-                          limit: 10,
-                          offset: 0,
-                          currentDate: s.millisecondsSinceEpoch,
-                          entryTime: entryTime,
-                          exitTime: exitTime,
-                          projectId: context.projectId,
-                          registerId: widget.id,
-                          tenantId: widget.tenantId,
-                        ),
-                      );
+                  //  TODO: testing
+                  // context.read<AttendanceIndividualBloc>().add(
+                  //       AttendanceIndividualLogSearchEvent(
+                  //         attendeeId:
+                  //             widget.attendanceMarkIndividualModelAttendee,
+                  //         limit: 10,
+                  //         offset: 0,
+                  //         currentDate: s.millisecondsSinceEpoch,
+                  //         entryTime: entryTime,
+                  //         exitTime: exitTime,
+                  //         projectId: context.projectId,
+                  //         registerId: widget.id,
+                  //         tenantId: widget.tenantId,
+                  //       ),
+                  //     );
                   context.router.push(MarkAttendanceRoute(
                     attendeeIds: widget.attendanceMarkIndividualModelAttendee,
                     registerId: widget.id,

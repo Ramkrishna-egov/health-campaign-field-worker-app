@@ -95,14 +95,18 @@ class AttendanceIndividualBloc
         _AttendanceRowModelLoaded(
           attendanceCollectionModel: emitData,
           // attendanceRowModelList: data,
-          countData: 10,
+          countData: emitData.length,
           limitData: event.limit,
           offsetData: event.offset,
-          currentOffset: event.offset,
+          currentOffset: emitData.length,
         ),
       );
     } else {
+      int counter = 0;
       List<AttendeeCollectionModel> emitData = filterData.map((e) {
+        if (e.status == -1) {
+          counter = counter + 1;
+        }
         AttendeeCollectionModel s = AttendeeCollectionModel(
           id: e.id,
           entryTime: e.entryTime,
@@ -121,10 +125,10 @@ class AttendanceIndividualBloc
         _AttendanceRowModelLoaded(
           attendanceCollectionModel: emitData,
           // attendanceRowModelList: data,
-          countData: 10,
+          countData: emitData.length,
           limitData: event.limit,
           offsetData: event.offset,
-          currentOffset: event.offset,
+          currentOffset: counter,
         ),
       );
     }
@@ -136,12 +140,20 @@ class AttendanceIndividualBloc
   ) async {
     await state.maybeMap(
       loaded: (value) async {
+        int counter = 0;
         value.attendanceCollectionModel;
         AbsentAttendee s = await attendanceRegisterRepository
             .updateAttendeeInLocalDB(id: event.id);
         List<AttendeeCollectionModel> updatedList =
             value.attendanceCollectionModel!.map((e) {
+          if (e.status == -1) {
+            counter = counter + 1;
+          }
+
           if (e.id == event.id) {
+            if (e.status == -1) {
+              counter = counter - 1;
+            }
             AttendeeCollectionModel s = AttendeeCollectionModel(
               id: e.id,
               entryTime: e.entryTime,
@@ -163,7 +175,10 @@ class AttendanceIndividualBloc
           }
         }).toList();
 
-        emit(value.copyWith(attendanceCollectionModel: updatedList));
+        emit(value.copyWith(
+          attendanceCollectionModel: updatedList,
+          currentOffset: counter,
+        ));
       },
       orElse: () {},
     );
