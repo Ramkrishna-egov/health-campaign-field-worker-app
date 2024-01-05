@@ -55,6 +55,8 @@ class StockSearchModel extends EntitySearchModel {
     this.transactionReason,
     int? dateOfEntry,
     super.boundaryCode,
+        super.additionalFields,
+    super.auditDetails,
   }): dateOfEntryTime = dateOfEntry == null
   ? null
       : DateTime.fromMillisecondsSinceEpoch(dateOfEntry),

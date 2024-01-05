@@ -70,6 +70,8 @@ class TaskSearchModel extends EntitySearchModel {
     int? actualStartDate,
     int? actualEndDate,
     super.boundaryCode,
+        super.additionalFields,
+    super.auditDetails,
   }): plannedStartDateTime = plannedStartDate == null
   ? null
       : DateTime.fromMillisecondsSinceEpoch(plannedStartDate),

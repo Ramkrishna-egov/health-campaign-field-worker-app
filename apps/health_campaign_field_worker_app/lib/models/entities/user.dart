@@ -25,6 +25,8 @@ class UserSearchModel extends EntitySearchModel {
     this.userName,
     this.uuid,
     super.boundaryCode,
+        super.additionalFields,
+    super.auditDetails,
   }):  super(isDeleted: false);
 }
 

@@ -28,6 +28,8 @@ class ServiceDefinitionSearchModel extends EntitySearchModel {
     this.code,
     this.isActive,
     super.boundaryCode,
+        super.additionalFields,
+    super.auditDetails,
   }):  super(isDeleted: false);
 }
 

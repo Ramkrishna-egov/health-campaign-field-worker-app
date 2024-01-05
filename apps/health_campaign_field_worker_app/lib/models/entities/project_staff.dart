@@ -43,6 +43,8 @@ class ProjectStaffSearchModel extends EntitySearchModel {
     int? startDate,
     int? endDate,
     super.boundaryCode,
+    super.additionalFields,
+    super.auditDetails,
   }): startDateTime = startDate == null
   ? null
       : DateTime.fromMillisecondsSinceEpoch(startDate),

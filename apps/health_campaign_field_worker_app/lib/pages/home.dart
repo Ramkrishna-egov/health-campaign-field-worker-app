@@ -96,52 +96,49 @@ class _HomePageState extends LocalizedState<HomePage> {
         GlobalKey(debugLabel: 'newwrapper');
 
     return Scaffold(
-      body: SizedBox(
-        height: MediaQuery.of(context).size.height,
-        child: DigitWalkthroughWrapper(
-          key: overlayWrapperkey,
-          overlayWidget: overlaykey,
-          keysArray: overlayWidgetStateList,
-          widgetKey: walkthroughWidgetStateList,
-          initialIndex: 0,
-          child: IgnorePointer(
-            ignoring: overlayWrapperkey.currentState?.showOverlay ?? false,
-            child: ScrollableContent(
-              slivers: [
-                SliverGrid(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                      return DigitWalkthrough(
-                        onSkip: () =>
-                            {overlayWrapperkey.currentState?.onSelectedSkip()},
-                        widgetHeight: 130,
-                        onTap: () => {
-                          walkthroughWidgetStateList[index]
-                              .currentState
-                              ?.initOffsetsPositions(),
-                          overlayWrapperkey.currentState?.onSelectedTap(),
-                        },
-                        key: walkthroughWidgetStateList[index + 1],
-                        description:
-                            'help needs to be configured', // TODO implement showcase
-                        overlayWidget: overlayWidgetStateList[index + 1],
-                        titleAlignment: TextAlign.center,
-                        skipLabel:
-                            localizations.translate(i18.common.coreCommonSkip),
-                        nextLabel:
-                            localizations.translate(i18.common.coreCommonNext),
-                        child: _getItems(context).elementAt(index),
-                      );
-                    },
-                    childCount: _getItems(context).length,
-                  ),
-                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 145,
-                    childAspectRatio: 104 / 128,
-                  ),
+     backgroundColor: DigitTheme.instance.colorScheme.background,
+      body: BlocListener<SyncBloc, SyncState>(
+        listener: (context, state) {
+          state.maybeWhen(
+            orElse: () {},
+            pendingSync: (count) {
+              final debouncer = Debouncer(seconds: 5);
+              debouncer.run(() async {
+                if (count != 0) {
+                  await localSecureStore.setManualSyncTrigger(false);
+                  if (context.mounted) {
+                    await performBackgroundService(
+                      isBackground: false,
+                      stopService: false,
+                      context: context,
+                    );
+                  }
+                } else {
+                  await localSecureStore.setManualSyncTrigger(true);
+                }
+              });
+            },
+          );
+        },
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height,
+          child: ScrollableContent(
+            slivers: [
+              SliverGrid(
+                delegate: SliverChildBuilderDelegate(
+                  (context, index) {
+                    return homeItems.elementAt(index);
+                  },
+                  childCount: homeItems.length,
                 ),
-              ],
-              header: Column(children: [
+                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 145,
+                  childAspectRatio: 104 / 128,
+                ),
+              ),
+            ],
+            header: Column(
+              children: [
                 BackNavigationHelpHeaderWidget(
                   showBackNavigation: false,
                   helpClicked: () {

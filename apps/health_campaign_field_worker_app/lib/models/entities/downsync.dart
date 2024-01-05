@@ -40,6 +40,8 @@ class DownsyncSearchModel extends EntitySearchModel {
     this.boundaryName,
     this.tenantId,
     super.boundaryCode,
+        super.additionalFields,
+    super.auditDetails,
   }):  super(isDeleted: false);
 }
 

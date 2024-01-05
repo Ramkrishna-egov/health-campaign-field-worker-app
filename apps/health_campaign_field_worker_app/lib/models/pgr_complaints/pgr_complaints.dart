@@ -13,6 +13,8 @@ class PgrComplaintModel extends EntityModel {
   const PgrComplaintModel({
     required this.service,
     this.workflow,
+       super.isDeleted  = false,
+        super.auditDetails,
   }) : super();
 }
 
@@ -50,6 +52,7 @@ class PgrComplainantModel extends EntityModel {
     this.isDeleted = false,
     this.rowVersion = 1,
     super.auditDetails,
+
   }) : super();
 
   PgrComplainantCompanion get companion {
@@ -83,6 +86,8 @@ class PgrRolesModel extends EntityModel {
   const PgrRolesModel({
     required this.name,
     required this.code,
+        super.isDeleted  = false,
+        super.auditDetails,
   }) : super();
 }
 
@@ -110,6 +115,10 @@ class PgrServiceSearchModel extends EntitySearchModel {
     this.clientReferenceId,
     this.complainantMobileNumber,
     this.complaintNumber,
+       super.isDeleted  = false,
+        super.auditDetails,
+        super.additionalFields,
+        super.boundaryCode,
   }) : super();
 }
 
@@ -126,13 +135,13 @@ class PgrServiceModel extends EntityModel {
   final String? accountId;
   final PgrServiceApplicationStatus applicationStatus;
   final String? source;
-  @override
   final bool isDeleted;
   final int rowVersion;
   final PgrAddressModel address;
   final String? additionalDetail;
 
-  const PgrServiceModel({
+
+  const PgrServiceModel( {
     required this.clientReferenceId,
     this.active = true,
     this.id,
@@ -149,7 +158,8 @@ class PgrServiceModel extends EntityModel {
     required this.address,
     this.additionalDetail,
     super.auditDetails,
-  }) : super();
+
+  }) : super(isDeleted: false);
 
   PgrServiceCompanion get companion {
     return PgrServiceCompanion(
@@ -186,6 +196,8 @@ class PgrWorkflowModel extends EntityModel {
     required this.action,
     @MappableField(key: 'assignes') this.assignees = const [],
     required this.comments,
+    super.auditDetails,
+  super.isDeleted  = false,
   }) : super();
 }
 

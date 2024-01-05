@@ -22,6 +22,8 @@ class ProjectProductVariantSearchModel extends EntitySearchModel {
     this.productVariantId,
     this.tenantId,
     super.boundaryCode,
+        super.additionalFields,
+    super.auditDetails,
   }):  super(isDeleted: false);
 }
 

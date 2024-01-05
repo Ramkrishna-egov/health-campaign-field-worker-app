@@ -48,7 +48,10 @@ class PgrAddressModel extends EntityModel {
     this.additionDetails,
     this.isDeleted,
     this.rowVersion,
-  }) : super();
+    super.auditDetails,
+    
+  }) : super(isDeleted: false);
+
 
   AddressCompanion get companion {
     return AddressCompanion(
