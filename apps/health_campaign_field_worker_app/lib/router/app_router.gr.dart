@@ -606,6 +606,8 @@ class _$AppRouter extends RootStackRouter {
               args.attendanceMarkIndividualModelAttendee,
           id: args.id,
           tenantId: args.tenantId,
+          eventStart: args.eventStart,
+          eventEnd: args.eventEnd,
           key: args.key,
           appLocalizations: args.appLocalizations,
         ),
@@ -2861,6 +2863,8 @@ class AttendanceDateSessionSelectionRoute
     required List<String> attendanceMarkIndividualModelAttendee,
     required String id,
     required String tenantId,
+    required DateTime eventStart,
+    required DateTime eventEnd,
     Key? key,
     AppLocalizations? appLocalizations,
   }) : super(
@@ -2871,6 +2875,8 @@ class AttendanceDateSessionSelectionRoute
                 attendanceMarkIndividualModelAttendee,
             id: id,
             tenantId: tenantId,
+            eventStart: eventStart,
+            eventEnd: eventEnd,
             key: key,
             appLocalizations: appLocalizations,
           ),
@@ -2884,6 +2890,8 @@ class AttendanceDateSessionSelectionRouteArgs {
     required this.attendanceMarkIndividualModelAttendee,
     required this.id,
     required this.tenantId,
+    required this.eventStart,
+    required this.eventEnd,
     this.key,
     this.appLocalizations,
   });
@@ -2894,13 +2902,17 @@ class AttendanceDateSessionSelectionRouteArgs {
 
   final String tenantId;
 
+  final DateTime eventStart;
+
+  final DateTime eventEnd;
+
   final Key? key;
 
   final AppLocalizations? appLocalizations;
 
   @override
   String toString() {
-    return 'AttendanceDateSessionSelectionRouteArgs{attendanceMarkIndividualModelAttendee: $attendanceMarkIndividualModelAttendee, id: $id, tenantId: $tenantId, key: $key, appLocalizations: $appLocalizations}';
+    return 'AttendanceDateSessionSelectionRouteArgs{attendanceMarkIndividualModelAttendee: $attendanceMarkIndividualModelAttendee, id: $id, tenantId: $tenantId, eventStart: $eventStart, eventEnd: $eventEnd, key: $key, appLocalizations: $appLocalizations}';
   }
 }
 

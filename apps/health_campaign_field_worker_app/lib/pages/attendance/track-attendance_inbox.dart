@@ -61,10 +61,10 @@ class _TrackAttendanceInboxPageState extends State<TrackAttendanceInboxPage> {
 
                 projectList = attendanceRegisters!
                     .map((e) => {
-                          "Register ID": e.registerNumber,
-                          "Project ID": context.projectId.toString() ?? "",
-                          "Project Name": e.name ?? "",
-                          " Individuals Count": e.attendanceAttendees != null
+                          "Event Type": e.serviceCode,
+                          "Description": e.name ?? "",
+                          "Event Location": context.boundary.name,
+                          "Individuals Count": e.attendanceAttendees != null
                               ? e.attendanceAttendees
                                   ?.where((att) =>
                                       att.denrollmentDate == null ||
@@ -84,6 +84,7 @@ class _TrackAttendanceInboxPageState extends State<TrackAttendanceInboxPage> {
                               e.endDate!,
                             ),
                           ),
+                          "Event status": e.status,
                         })
                     .toList();
               },
@@ -110,6 +111,12 @@ class _TrackAttendanceInboxPageState extends State<TrackAttendanceInboxPage> {
                       show: true,
                       attendee:
                           attendanceRegisters![i].attendanceAttendees ?? [],
+                      startdate: DateTime.fromMillisecondsSinceEpoch(
+                        attendanceRegisters[i].startDate!,
+                      ),
+                      endDate: DateTime.fromMillisecondsSinceEpoch(
+                        attendanceRegisters[i].endDate!,
+                      ),
                     ));
                   }
 
@@ -154,6 +161,8 @@ class RegistarCard extends StatelessWidget {
   final String tenatId;
   final String regisId;
   final bool show;
+  final DateTime startdate;
+  final DateTime endDate;
   final List<AttendanceMarkIndividualModelAttendee> attendee;
   const RegistarCard({
     super.key,
@@ -162,6 +171,8 @@ class RegistarCard extends StatelessWidget {
     required this.regisId,
     this.show = false,
     required this.attendee,
+    required this.startdate,
+    required this.endDate,
   });
 
   @override
@@ -183,6 +194,8 @@ class RegistarCard extends StatelessWidget {
                       tenantId: tenatId,
                       attendanceMarkIndividualModelAttendee:
                           fetchAttendeeList(attendee),
+                      eventEnd: endDate,
+                      eventStart: startdate,
                     ));
                   },
                 )

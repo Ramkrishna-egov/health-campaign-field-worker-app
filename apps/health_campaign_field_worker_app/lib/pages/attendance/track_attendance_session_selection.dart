@@ -6,14 +6,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import '../../utils/i18_key_constants.dart' as i18;
 //import 'package:digit_components/models/digit_table_model.dart';
-
-import '../../blocs/attendance/attendance_individual/individual_attendance_log.dart';
-import '../../blocs/attendance/attendance_register.dart';
 import '../../blocs/localization/app_localization.dart';
-import '../../models/attendance/attendance_mark_model/register_model.dart';
 import '../../router/app_router.dart';
 import '../../utils/attendance/date_util_attendance.dart';
-import '../../utils/utils.dart';
 import '../../widgets/attendance/custom_info_card.dart';
 import '../../widgets/header/back_navigation_help_header.dart';
 import '../../widgets/localized.dart';
@@ -22,10 +17,14 @@ class AttendanceDateSessionSelectionPage extends LocalizedStatefulWidget {
   final String id;
   final String tenantId;
   final List<String> attendanceMarkIndividualModelAttendee;
+  final DateTime eventStart;
+  final DateTime eventEnd;
   const AttendanceDateSessionSelectionPage({
     required this.attendanceMarkIndividualModelAttendee,
     required this.id,
     required this.tenantId,
+    required this.eventStart,
+    required this.eventEnd,
     super.key,
     super.appLocalizations,
   });
@@ -150,6 +149,8 @@ class _AttendanceDateSessionSelectionPageState
                           .instance.mobileTheme.textTheme.headlineLarge,
                     ),
                     DigitDateFormPicker(
+                      start: widget.eventStart,
+                      end: widget.eventEnd,
                       label:
                           " ${localizations.translate(i18.attendance.dateOfSession)}",
                       formControlName: _dateOfSession,
