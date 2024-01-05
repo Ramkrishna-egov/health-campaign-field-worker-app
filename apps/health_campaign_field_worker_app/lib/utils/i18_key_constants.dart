@@ -1265,5 +1265,7 @@ class Attendance {
 
   String get tableHeaderUserId => 'TABLE_HEADER_USERID';
 
+  String get markAttendanceLabel => "LABEL_MARK_ATTENDANCE";
+
   // String get manageStockLabel => 'HOME_MANAGE_STOCK_LABEL';
 }

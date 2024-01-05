@@ -153,11 +153,11 @@ class _AttendanceDateSessionSelectionPageState
                       label:
                           " ${localizations.translate(i18.attendance.dateOfSession)}",
                       formControlName: _dateOfSession,
-                      cancelText: "cancelText",
-                      confirmText: "confirmText",
+                      cancelText: "Cancel",
+                      confirmText: "Select date",
                     ),
                     DigitRadioButtonList<KeyValue>(
-                      errorMessage: 'please select any one',
+                      errorMessage: 'please select session',
                       formControlName: _sessionRadio,
                       options: [
                         KeyValue("morning session", 0),

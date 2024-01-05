@@ -228,7 +228,7 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                           width: MediaQuery.of(context).size.width,
                           child: Text(
                             localizations
-                                .translate(i18.attendance.markAttendance),
+                                .translate(i18.attendance.markAttendanceLabel),
                             style: DigitTheme
                                 .instance.mobileTheme.textTheme.headlineLarge,
                           ),
@@ -297,7 +297,10 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
 
   TableDataRow getAttendanceRow(AttendeeCollectionModel tableDataModel) {
     return TableDataRow([
-      TableData(label: tableDataModel.name, apiKey: tableDataModel.name),
+      TableData(
+        label: tableDataModel.name,
+        apiKey: tableDataModel.name,
+      ),
       TableData(
         apiKey: tableDataModel.status.toString(),
         widget: CircularButton(
@@ -309,7 +312,6 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
           isNotGreyed: false,
           onTap: (widget.dateTime.day == DateTime.now().day)
               ? () {
-                  print("working- ${tableDataModel.individualId}");
                   context.read<AttendanceIndividualBloc>().add(
                         AttendanceMarkEvent(
                           individualId: tableDataModel.individualId!,
