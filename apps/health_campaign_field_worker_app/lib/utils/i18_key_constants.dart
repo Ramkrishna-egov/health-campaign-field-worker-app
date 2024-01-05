@@ -99,6 +99,14 @@ class Common {
   String get coreCommonRequiredItems => 'CORE_COMMON_REQUIRED_ITEMS';
 
   String get min2CharsRequired => 'MIN_2_CHARS_REQUIRED';
+
+  String get maxCharsRequired => 'MAX_CHARS_ALLOWED';
+
+  String get maxValue => 'MAX_VALUE_ALLOWED';
+
+  String get noResultsFound => 'NO_RESULTS_FOUND';
+
+  String get coreCommonSyncInProgress => 'CORE_COMMON_SYNC_IN_PROGRESS';
   String get min3CharsRequired => 'MIN_REQUIRED_3';
 
   String get facilitySearchHeaderLabel => 'FACILITY_SEARCH_HEADER_LABEL';
