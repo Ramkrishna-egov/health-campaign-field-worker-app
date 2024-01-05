@@ -276,8 +276,8 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                   );
                 },
                 loading: () {
-                  return const Center(
-                    child: CircularProgressIndicator.adaptive(),
+                  return Center(
+                    child: Loaders.circularLoader(context),
                   );
                 },
                 error: (error) {

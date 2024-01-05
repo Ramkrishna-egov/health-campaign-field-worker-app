@@ -236,6 +236,7 @@ class AttendanceIndividualBloc
             attedeesList: m,
             registartId: event.registarId,
           );
+
           if (check) {
             emit(value.copyWith(
               flag: false,

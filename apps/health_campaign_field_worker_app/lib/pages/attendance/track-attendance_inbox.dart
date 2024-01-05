@@ -96,8 +96,8 @@ class _TrackAttendanceInboxPageState extends State<TrackAttendanceInboxPage> {
             builder: (context, state) {
               return state.maybeWhen(
                 orElse: () => Container(),
-                loading: () => const Center(
-                  child: CircularProgressIndicator.adaptive(),
+                loading: () => Center(
+                  child: Loaders.circularLoader(context),
                 ),
                 loaded: (AttendanceMarkRegisterModelResponse? attendanceModel) {
                   var list = <Widget>[];
