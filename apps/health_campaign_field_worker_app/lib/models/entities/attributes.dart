@@ -29,6 +29,7 @@ class AttributesSearchModel extends EntitySearchModel {
     this.order,
     super.boundaryCode,
     super.isDeleted,
+    super.additionalFields,
   }):  super();
 
   @MappableConstructor()
@@ -43,6 +44,8 @@ class AttributesSearchModel extends EntitySearchModel {
     this.regex,
     this.order,
     super.boundaryCode,
+    super.additionalFields,
+    super.auditDetails,
   }):  super(isDeleted: false);
 }
 

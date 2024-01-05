@@ -19,6 +19,8 @@ class TargetSearchModel extends EntitySearchModel {
   TargetSearchModel.ignoreDeleted({
     this.tenantId,
     super.boundaryCode,
+        super.additionalFields,
+    super.auditDetails,
   }):  super(isDeleted: false);
 }
 

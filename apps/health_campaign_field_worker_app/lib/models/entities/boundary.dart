@@ -19,6 +19,16 @@ class BoundarySearchModel extends EntitySearchModel {
     this.code,
     super.boundaryCode,
   }) : super();
+
+  @MappableConstructor()
+  BoundarySearchModel.ignoreDeleted({
+    this.boundaryType,
+    this.tenantId,
+    this.code,
+    super.boundaryCode,
+    super.additionalFields,
+    super.auditDetails,
+  }) : super(isDeleted: false);
 }
 
 @MappableClass(ignoreNull: true)

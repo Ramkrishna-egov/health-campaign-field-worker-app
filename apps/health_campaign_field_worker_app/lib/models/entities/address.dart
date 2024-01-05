@@ -31,7 +31,10 @@ class AddressSearchModel extends EntitySearchModel {
     this.maxRadius,
     this.tenantId,
     super.boundaryCode,
+    super.additionalFields,
+    super.auditDetails,
   }):  super(isDeleted: false);
+  
 }
 
 @MappableClass(ignoreNull: true)
@@ -84,6 +87,7 @@ class AddressModel extends EntityModel {
     this.type,
     this.locality,
     super.auditDetails,super.clientAuditDetails,
+    
     super.isDeleted = false,
   }): super();
 

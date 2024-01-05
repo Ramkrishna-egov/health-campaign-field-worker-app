@@ -206,6 +206,7 @@ class PgrServiceLocalRepository extends PgrServiceLocalBaseRepository {
         active: pgrService.active,
         source: pgrService.source,
         additionalDetail: pgrService.additionalFields,
+    
       );
     }).toList();
   }

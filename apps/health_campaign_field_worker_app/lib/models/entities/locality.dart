@@ -25,6 +25,8 @@ class LocalitySearchModel extends EntitySearchModel {
     this.name,
     this.tenantId,
     super.boundaryCode,
+        super.additionalFields,
+    super.auditDetails,
   }):  super(isDeleted: false);
 }
 

@@ -2,12 +2,495 @@
 
 part of 'sql_store.dart';
 
-// **************************************************************************
-// MoorGenerator
-// **************************************************************************
-
 // ignore_for_file: type=lint
-class Addres extends DataClass implements Insertable<Addres> {
+class $AddressTable extends at.Address with TableInfo<$AddressTable, Address> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $AddressTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _relatedClientReferenceIdMeta =
+      const VerificationMeta('relatedClientReferenceId');
+  @override
+  late final GeneratedColumn<String> relatedClientReferenceId =
+      GeneratedColumn<String>('related_client_reference_id', aliasedName, true,
+          type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _doorNoMeta = const VerificationMeta('doorNo');
+  @override
+  late final GeneratedColumn<String> doorNo = GeneratedColumn<String>(
+      'door_no', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _latitudeMeta =
+      const VerificationMeta('latitude');
+  @override
+  late final GeneratedColumn<double> latitude = GeneratedColumn<double>(
+      'latitude', aliasedName, true,
+      type: DriftSqlType.double, requiredDuringInsert: false);
+  static const VerificationMeta _longitudeMeta =
+      const VerificationMeta('longitude');
+  @override
+  late final GeneratedColumn<double> longitude = GeneratedColumn<double>(
+      'longitude', aliasedName, true,
+      type: DriftSqlType.double, requiredDuringInsert: false);
+  static const VerificationMeta _locationAccuracyMeta =
+      const VerificationMeta('locationAccuracy');
+  @override
+  late final GeneratedColumn<double> locationAccuracy = GeneratedColumn<double>(
+      'location_accuracy', aliasedName, true,
+      type: DriftSqlType.double, requiredDuringInsert: false);
+  static const VerificationMeta _addressLine1Meta =
+      const VerificationMeta('addressLine1');
+  @override
+  late final GeneratedColumn<String> addressLine1 = GeneratedColumn<String>(
+      'address_line1', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _addressLine2Meta =
+      const VerificationMeta('addressLine2');
+  @override
+  late final GeneratedColumn<String> addressLine2 = GeneratedColumn<String>(
+      'address_line2', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _landmarkMeta =
+      const VerificationMeta('landmark');
+  @override
+  late final GeneratedColumn<String> landmark = GeneratedColumn<String>(
+      'landmark', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _cityMeta = const VerificationMeta('city');
+  @override
+  late final GeneratedColumn<String> city = GeneratedColumn<String>(
+      'city', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _pincodeMeta =
+      const VerificationMeta('pincode');
+  @override
+  late final GeneratedColumn<String> pincode = GeneratedColumn<String>(
+      'pincode', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _buildingNameMeta =
+      const VerificationMeta('buildingName');
+  @override
+  late final GeneratedColumn<String> buildingName = GeneratedColumn<String>(
+      'building_name', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _streetMeta = const VerificationMeta('street');
+  @override
+  late final GeneratedColumn<String> street = GeneratedColumn<String>(
+      'street', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _boundaryTypeMeta =
+      const VerificationMeta('boundaryType');
+  @override
+  late final GeneratedColumn<String> boundaryType = GeneratedColumn<String>(
+      'boundary_type', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _boundaryMeta =
+      const VerificationMeta('boundary');
+  @override
+  late final GeneratedColumn<String> boundary = GeneratedColumn<String>(
+      'boundary', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _auditCreatedByMeta =
+      const VerificationMeta('auditCreatedBy');
+  @override
+  late final GeneratedColumn<String> auditCreatedBy = GeneratedColumn<String>(
+      'audit_created_by', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _nonRecoverableErrorMeta =
+      const VerificationMeta('nonRecoverableError');
+  @override
+  late final GeneratedColumn<bool> nonRecoverableError = GeneratedColumn<bool>(
+      'non_recoverable_error', aliasedName, true,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'CHECK ("non_recoverable_error" IN (0, 1))'),
+      defaultValue: const Constant(false));
+  static const VerificationMeta _auditCreatedTimeMeta =
+      const VerificationMeta('auditCreatedTime');
+  @override
+  late final GeneratedColumn<int> auditCreatedTime = GeneratedColumn<int>(
+      'audit_created_time', aliasedName, true,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _clientCreatedTimeMeta =
+      const VerificationMeta('clientCreatedTime');
+  @override
+  late final GeneratedColumn<int> clientCreatedTime = GeneratedColumn<int>(
+      'client_created_time', aliasedName, true,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _clientModifiedByMeta =
+      const VerificationMeta('clientModifiedBy');
+  @override
+  late final GeneratedColumn<String> clientModifiedBy = GeneratedColumn<String>(
+      'client_modified_by', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _clientCreatedByMeta =
+      const VerificationMeta('clientCreatedBy');
+  @override
+  late final GeneratedColumn<String> clientCreatedBy = GeneratedColumn<String>(
+      'client_created_by', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _clientModifiedTimeMeta =
+      const VerificationMeta('clientModifiedTime');
+  @override
+  late final GeneratedColumn<int> clientModifiedTime = GeneratedColumn<int>(
+      'client_modified_time', aliasedName, true,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _auditModifiedByMeta =
+      const VerificationMeta('auditModifiedBy');
+  @override
+  late final GeneratedColumn<String> auditModifiedBy = GeneratedColumn<String>(
+      'audit_modified_by', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _auditModifiedTimeMeta =
+      const VerificationMeta('auditModifiedTime');
+  @override
+  late final GeneratedColumn<int> auditModifiedTime = GeneratedColumn<int>(
+      'audit_modified_time', aliasedName, true,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _localityBoundaryCodeMeta =
+      const VerificationMeta('localityBoundaryCode');
+  @override
+  late final GeneratedColumn<String> localityBoundaryCode =
+      GeneratedColumn<String>('locality_boundary_code', aliasedName, true,
+          type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _localityBoundaryNameMeta =
+      const VerificationMeta('localityBoundaryName');
+  @override
+  late final GeneratedColumn<String> localityBoundaryName =
+      GeneratedColumn<String>('locality_boundary_name', aliasedName, true,
+          type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _tenantIdMeta =
+      const VerificationMeta('tenantId');
+  @override
+  late final GeneratedColumn<String> tenantId = GeneratedColumn<String>(
+      'tenant_id', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _isDeletedMeta =
+      const VerificationMeta('isDeleted');
+  @override
+  late final GeneratedColumn<bool> isDeleted = GeneratedColumn<bool>(
+      'is_deleted', aliasedName, true,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('CHECK ("is_deleted" IN (0, 1))'),
+      defaultValue: const Constant(false));
+  static const VerificationMeta _rowVersionMeta =
+      const VerificationMeta('rowVersion');
+  @override
+  late final GeneratedColumn<int> rowVersion = GeneratedColumn<int>(
+      'row_version', aliasedName, true,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _typeMeta = const VerificationMeta('type');
+  @override
+  late final GeneratedColumnWithTypeConverter<AddressType?, int> type =
+      GeneratedColumn<int>('type', aliasedName, true,
+              type: DriftSqlType.int, requiredDuringInsert: false)
+          .withConverter<AddressType?>($AddressTable.$convertertypen);
+  static const VerificationMeta _additionalFieldsMeta =
+      const VerificationMeta('additionalFields');
+  @override
+  late final GeneratedColumn<String> additionalFields = GeneratedColumn<String>(
+      'additional_fields', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        relatedClientReferenceId,
+        doorNo,
+        latitude,
+        longitude,
+        locationAccuracy,
+        addressLine1,
+        addressLine2,
+        landmark,
+        city,
+        pincode,
+        buildingName,
+        street,
+        boundaryType,
+        boundary,
+        auditCreatedBy,
+        nonRecoverableError,
+        auditCreatedTime,
+        clientCreatedTime,
+        clientModifiedBy,
+        clientCreatedBy,
+        clientModifiedTime,
+        auditModifiedBy,
+        auditModifiedTime,
+        localityBoundaryCode,
+        localityBoundaryName,
+        tenantId,
+        isDeleted,
+        rowVersion,
+        type,
+        additionalFields
+      ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'address';
+  @override
+  VerificationContext validateIntegrity(Insertable<Address> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('related_client_reference_id')) {
+      context.handle(
+          _relatedClientReferenceIdMeta,
+          relatedClientReferenceId.isAcceptableOrUnknown(
+              data['related_client_reference_id']!,
+              _relatedClientReferenceIdMeta));
+    }
+    if (data.containsKey('door_no')) {
+      context.handle(_doorNoMeta,
+          doorNo.isAcceptableOrUnknown(data['door_no']!, _doorNoMeta));
+    }
+    if (data.containsKey('latitude')) {
+      context.handle(_latitudeMeta,
+          latitude.isAcceptableOrUnknown(data['latitude']!, _latitudeMeta));
+    }
+    if (data.containsKey('longitude')) {
+      context.handle(_longitudeMeta,
+          longitude.isAcceptableOrUnknown(data['longitude']!, _longitudeMeta));
+    }
+    if (data.containsKey('location_accuracy')) {
+      context.handle(
+          _locationAccuracyMeta,
+          locationAccuracy.isAcceptableOrUnknown(
+              data['location_accuracy']!, _locationAccuracyMeta));
+    }
+    if (data.containsKey('address_line1')) {
+      context.handle(
+          _addressLine1Meta,
+          addressLine1.isAcceptableOrUnknown(
+              data['address_line1']!, _addressLine1Meta));
+    }
+    if (data.containsKey('address_line2')) {
+      context.handle(
+          _addressLine2Meta,
+          addressLine2.isAcceptableOrUnknown(
+              data['address_line2']!, _addressLine2Meta));
+    }
+    if (data.containsKey('landmark')) {
+      context.handle(_landmarkMeta,
+          landmark.isAcceptableOrUnknown(data['landmark']!, _landmarkMeta));
+    }
+    if (data.containsKey('city')) {
+      context.handle(
+          _cityMeta, city.isAcceptableOrUnknown(data['city']!, _cityMeta));
+    }
+    if (data.containsKey('pincode')) {
+      context.handle(_pincodeMeta,
+          pincode.isAcceptableOrUnknown(data['pincode']!, _pincodeMeta));
+    }
+    if (data.containsKey('building_name')) {
+      context.handle(
+          _buildingNameMeta,
+          buildingName.isAcceptableOrUnknown(
+              data['building_name']!, _buildingNameMeta));
+    }
+    if (data.containsKey('street')) {
+      context.handle(_streetMeta,
+          street.isAcceptableOrUnknown(data['street']!, _streetMeta));
+    }
+    if (data.containsKey('boundary_type')) {
+      context.handle(
+          _boundaryTypeMeta,
+          boundaryType.isAcceptableOrUnknown(
+              data['boundary_type']!, _boundaryTypeMeta));
+    }
+    if (data.containsKey('boundary')) {
+      context.handle(_boundaryMeta,
+          boundary.isAcceptableOrUnknown(data['boundary']!, _boundaryMeta));
+    }
+    if (data.containsKey('audit_created_by')) {
+      context.handle(
+          _auditCreatedByMeta,
+          auditCreatedBy.isAcceptableOrUnknown(
+              data['audit_created_by']!, _auditCreatedByMeta));
+    }
+    if (data.containsKey('non_recoverable_error')) {
+      context.handle(
+          _nonRecoverableErrorMeta,
+          nonRecoverableError.isAcceptableOrUnknown(
+              data['non_recoverable_error']!, _nonRecoverableErrorMeta));
+    }
+    if (data.containsKey('audit_created_time')) {
+      context.handle(
+          _auditCreatedTimeMeta,
+          auditCreatedTime.isAcceptableOrUnknown(
+              data['audit_created_time']!, _auditCreatedTimeMeta));
+    }
+    if (data.containsKey('client_created_time')) {
+      context.handle(
+          _clientCreatedTimeMeta,
+          clientCreatedTime.isAcceptableOrUnknown(
+              data['client_created_time']!, _clientCreatedTimeMeta));
+    }
+    if (data.containsKey('client_modified_by')) {
+      context.handle(
+          _clientModifiedByMeta,
+          clientModifiedBy.isAcceptableOrUnknown(
+              data['client_modified_by']!, _clientModifiedByMeta));
+    }
+    if (data.containsKey('client_created_by')) {
+      context.handle(
+          _clientCreatedByMeta,
+          clientCreatedBy.isAcceptableOrUnknown(
+              data['client_created_by']!, _clientCreatedByMeta));
+    }
+    if (data.containsKey('client_modified_time')) {
+      context.handle(
+          _clientModifiedTimeMeta,
+          clientModifiedTime.isAcceptableOrUnknown(
+              data['client_modified_time']!, _clientModifiedTimeMeta));
+    }
+    if (data.containsKey('audit_modified_by')) {
+      context.handle(
+          _auditModifiedByMeta,
+          auditModifiedBy.isAcceptableOrUnknown(
+              data['audit_modified_by']!, _auditModifiedByMeta));
+    }
+    if (data.containsKey('audit_modified_time')) {
+      context.handle(
+          _auditModifiedTimeMeta,
+          auditModifiedTime.isAcceptableOrUnknown(
+              data['audit_modified_time']!, _auditModifiedTimeMeta));
+    }
+    if (data.containsKey('locality_boundary_code')) {
+      context.handle(
+          _localityBoundaryCodeMeta,
+          localityBoundaryCode.isAcceptableOrUnknown(
+              data['locality_boundary_code']!, _localityBoundaryCodeMeta));
+    }
+    if (data.containsKey('locality_boundary_name')) {
+      context.handle(
+          _localityBoundaryNameMeta,
+          localityBoundaryName.isAcceptableOrUnknown(
+              data['locality_boundary_name']!, _localityBoundaryNameMeta));
+    }
+    if (data.containsKey('tenant_id')) {
+      context.handle(_tenantIdMeta,
+          tenantId.isAcceptableOrUnknown(data['tenant_id']!, _tenantIdMeta));
+    }
+    if (data.containsKey('is_deleted')) {
+      context.handle(_isDeletedMeta,
+          isDeleted.isAcceptableOrUnknown(data['is_deleted']!, _isDeletedMeta));
+    }
+    if (data.containsKey('row_version')) {
+      context.handle(
+          _rowVersionMeta,
+          rowVersion.isAcceptableOrUnknown(
+              data['row_version']!, _rowVersionMeta));
+    }
+    context.handle(_typeMeta, const VerificationResult.success());
+    if (data.containsKey('additional_fields')) {
+      context.handle(
+          _additionalFieldsMeta,
+          additionalFields.isAcceptableOrUnknown(
+              data['additional_fields']!, _additionalFieldsMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey =>
+      {relatedClientReferenceId, auditCreatedBy};
+  @override
+  Address map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return Address(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id']),
+      relatedClientReferenceId: attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}related_client_reference_id']),
+      doorNo: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}door_no']),
+      latitude: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}latitude']),
+      longitude: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}longitude']),
+      locationAccuracy: attachedDatabase.typeMapping.read(
+          DriftSqlType.double, data['${effectivePrefix}location_accuracy']),
+      addressLine1: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}address_line1']),
+      addressLine2: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}address_line2']),
+      landmark: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}landmark']),
+      city: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}city']),
+      pincode: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}pincode']),
+      buildingName: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}building_name']),
+      street: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}street']),
+      boundaryType: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}boundary_type']),
+      boundary: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}boundary']),
+      auditCreatedBy: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}audit_created_by']),
+      nonRecoverableError: attachedDatabase.typeMapping.read(
+          DriftSqlType.bool, data['${effectivePrefix}non_recoverable_error']),
+      auditCreatedTime: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}audit_created_time']),
+      clientCreatedTime: attachedDatabase.typeMapping.read(
+          DriftSqlType.int, data['${effectivePrefix}client_created_time']),
+      clientModifiedBy: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}client_modified_by']),
+      clientCreatedBy: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}client_created_by']),
+      clientModifiedTime: attachedDatabase.typeMapping.read(
+          DriftSqlType.int, data['${effectivePrefix}client_modified_time']),
+      auditModifiedBy: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}audit_modified_by']),
+      auditModifiedTime: attachedDatabase.typeMapping.read(
+          DriftSqlType.int, data['${effectivePrefix}audit_modified_time']),
+      localityBoundaryCode: attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}locality_boundary_code']),
+      localityBoundaryName: attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}locality_boundary_name']),
+      tenantId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}tenant_id']),
+      isDeleted: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}is_deleted']),
+      rowVersion: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}row_version']),
+      type: $AddressTable.$convertertypen.fromSql(attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}type'])),
+      additionalFields: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}additional_fields']),
+    );
+  }
+
+  @override
+  $AddressTable createAlias(String alias) {
+    return $AddressTable(attachedDatabase, alias);
+  }
+
+  static JsonTypeConverter2<AddressType, int, int> $convertertype =
+      const EnumIndexConverter<AddressType>(AddressType.values);
+  static JsonTypeConverter2<AddressType?, int?, int?> $convertertypen =
+      JsonTypeConverter2.asNullable($convertertype);
+}
+
+class Address extends DataClass implements Insertable<Address> {
   final String? id;
   final String? relatedClientReferenceId;
   final String? doorNo;
@@ -39,7 +522,7 @@ class Addres extends DataClass implements Insertable<Addres> {
   final int? rowVersion;
   final AddressType? type;
   final String? additionalFields;
-  Addres(
+  const Address(
       {this.id,
       this.relatedClientReferenceId,
       this.doorNo,
@@ -329,10 +812,10 @@ class Addres extends DataClass implements Insertable<Addres> {
     );
   }
 
-  factory Addres.fromJson(Map<String, dynamic> json,
+  factory Address.fromJson(Map<String, dynamic> json,
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return Addres(
+    return Address(
       id: serializer.fromJson<String?>(json['id']),
       relatedClientReferenceId:
           serializer.fromJson<String?>(json['relatedClientReferenceId']),
@@ -409,71 +892,101 @@ class Addres extends DataClass implements Insertable<Addres> {
     };
   }
 
-  Addres copyWith(
-          {String? id,
-          String? relatedClientReferenceId,
-          String? doorNo,
-          double? latitude,
-          double? longitude,
-          double? locationAccuracy,
-          String? addressLine1,
-          String? addressLine2,
-          String? landmark,
-          String? city,
-          String? pincode,
-          String? buildingName,
-          String? street,
-          String? boundaryType,
-          String? boundary,
-          String? auditCreatedBy,
-          bool? nonRecoverableError,
-          int? clientCreatedTime,
-          String? clientModifiedBy,
-          String? clientCreatedBy,
-          int? clientModifiedTime,
-          int? auditCreatedTime,
-          String? auditModifiedBy,
-          int? auditModifiedTime,
-          String? localityBoundaryCode,
-          String? localityBoundaryName,
-          String? tenantId,
-          bool? isDeleted,
-          int? rowVersion,
-          AddressType? type,
-          String? additionalFields}) =>
-      Addres(
-        id: id ?? this.id,
-        relatedClientReferenceId:
-            relatedClientReferenceId ?? this.relatedClientReferenceId,
-        doorNo: doorNo ?? this.doorNo,
-        latitude: latitude ?? this.latitude,
-        longitude: longitude ?? this.longitude,
-        locationAccuracy: locationAccuracy ?? this.locationAccuracy,
-        addressLine1: addressLine1 ?? this.addressLine1,
-        addressLine2: addressLine2 ?? this.addressLine2,
-        landmark: landmark ?? this.landmark,
-        city: city ?? this.city,
-        pincode: pincode ?? this.pincode,
-        buildingName: buildingName ?? this.buildingName,
-        street: street ?? this.street,
-        boundaryType: boundaryType ?? this.boundaryType,
-        boundary: boundary ?? this.boundary,
-        auditCreatedBy: auditCreatedBy ?? this.auditCreatedBy,
-        nonRecoverableError: nonRecoverableError ?? this.nonRecoverableError,
-        clientCreatedTime: clientCreatedTime ?? this.clientCreatedTime,
-        clientModifiedBy: clientModifiedBy ?? this.clientModifiedBy,
-        clientCreatedBy: clientCreatedBy ?? this.clientCreatedBy,
-        clientModifiedTime: clientModifiedTime ?? this.clientModifiedTime,
-        auditCreatedTime: auditCreatedTime ?? this.auditCreatedTime,
-        auditModifiedBy: auditModifiedBy ?? this.auditModifiedBy,
-        auditModifiedTime: auditModifiedTime ?? this.auditModifiedTime,
-        localityBoundaryCode: localityBoundaryCode ?? this.localityBoundaryCode,
-        localityBoundaryName: localityBoundaryName ?? this.localityBoundaryName,
-        tenantId: tenantId ?? this.tenantId,
-        isDeleted: isDeleted ?? this.isDeleted,
-        rowVersion: rowVersion ?? this.rowVersion,
-        type: type ?? this.type,
-        additionalFields: additionalFields ?? this.additionalFields,
+  Address copyWith(
+          {Value<String?> id = const Value.absent(),
+          Value<String?> relatedClientReferenceId = const Value.absent(),
+          Value<String?> doorNo = const Value.absent(),
+          Value<double?> latitude = const Value.absent(),
+          Value<double?> longitude = const Value.absent(),
+          Value<double?> locationAccuracy = const Value.absent(),
+          Value<String?> addressLine1 = const Value.absent(),
+          Value<String?> addressLine2 = const Value.absent(),
+          Value<String?> landmark = const Value.absent(),
+          Value<String?> city = const Value.absent(),
+          Value<String?> pincode = const Value.absent(),
+          Value<String?> buildingName = const Value.absent(),
+          Value<String?> street = const Value.absent(),
+          Value<String?> boundaryType = const Value.absent(),
+          Value<String?> boundary = const Value.absent(),
+          Value<String?> auditCreatedBy = const Value.absent(),
+          Value<bool?> nonRecoverableError = const Value.absent(),
+          Value<int?> auditCreatedTime = const Value.absent(),
+          Value<int?> clientCreatedTime = const Value.absent(),
+          Value<String?> clientModifiedBy = const Value.absent(),
+          Value<String?> clientCreatedBy = const Value.absent(),
+          Value<int?> clientModifiedTime = const Value.absent(),
+          Value<String?> auditModifiedBy = const Value.absent(),
+          Value<int?> auditModifiedTime = const Value.absent(),
+          Value<String?> localityBoundaryCode = const Value.absent(),
+          Value<String?> localityBoundaryName = const Value.absent(),
+          Value<String?> tenantId = const Value.absent(),
+          Value<bool?> isDeleted = const Value.absent(),
+          Value<int?> rowVersion = const Value.absent(),
+          Value<AddressType?> type = const Value.absent(),
+          Value<String?> additionalFields = const Value.absent()}) =>
+      Address(
+        id: id.present ? id.value : this.id,
+        relatedClientReferenceId: relatedClientReferenceId.present
+            ? relatedClientReferenceId.value
+            : this.relatedClientReferenceId,
+        doorNo: doorNo.present ? doorNo.value : this.doorNo,
+        latitude: latitude.present ? latitude.value : this.latitude,
+        longitude: longitude.present ? longitude.value : this.longitude,
+        locationAccuracy: locationAccuracy.present
+            ? locationAccuracy.value
+            : this.locationAccuracy,
+        addressLine1:
+            addressLine1.present ? addressLine1.value : this.addressLine1,
+        addressLine2:
+            addressLine2.present ? addressLine2.value : this.addressLine2,
+        landmark: landmark.present ? landmark.value : this.landmark,
+        city: city.present ? city.value : this.city,
+        pincode: pincode.present ? pincode.value : this.pincode,
+        buildingName:
+            buildingName.present ? buildingName.value : this.buildingName,
+        street: street.present ? street.value : this.street,
+        boundaryType:
+            boundaryType.present ? boundaryType.value : this.boundaryType,
+        boundary: boundary.present ? boundary.value : this.boundary,
+        auditCreatedBy:
+            auditCreatedBy.present ? auditCreatedBy.value : this.auditCreatedBy,
+        nonRecoverableError: nonRecoverableError.present
+            ? nonRecoverableError.value
+            : this.nonRecoverableError,
+        auditCreatedTime: auditCreatedTime.present
+            ? auditCreatedTime.value
+            : this.auditCreatedTime,
+        clientCreatedTime: clientCreatedTime.present
+            ? clientCreatedTime.value
+            : this.clientCreatedTime,
+        clientModifiedBy: clientModifiedBy.present
+            ? clientModifiedBy.value
+            : this.clientModifiedBy,
+        clientCreatedBy: clientCreatedBy.present
+            ? clientCreatedBy.value
+            : this.clientCreatedBy,
+        clientModifiedTime: clientModifiedTime.present
+            ? clientModifiedTime.value
+            : this.clientModifiedTime,
+        auditModifiedBy: auditModifiedBy.present
+            ? auditModifiedBy.value
+            : this.auditModifiedBy,
+        auditModifiedTime: auditModifiedTime.present
+            ? auditModifiedTime.value
+            : this.auditModifiedTime,
+        localityBoundaryCode: localityBoundaryCode.present
+            ? localityBoundaryCode.value
+            : this.localityBoundaryCode,
+        localityBoundaryName: localityBoundaryName.present
+            ? localityBoundaryName.value
+            : this.localityBoundaryName,
+        tenantId: tenantId.present ? tenantId.value : this.tenantId,
+        isDeleted: isDeleted.present ? isDeleted.value : this.isDeleted,
+        rowVersion: rowVersion.present ? rowVersion.value : this.rowVersion,
+        type: type.present ? type.value : this.type,
+        additionalFields: additionalFields.present
+            ? additionalFields.value
+            : this.additionalFields,
       );
   @override
   String toString() {
@@ -550,7 +1063,7 @@ class Addres extends DataClass implements Insertable<Addres> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is Addres &&
+      (other is Address &&
           other.id == this.id &&
           other.relatedClientReferenceId == this.relatedClientReferenceId &&
           other.doorNo == this.doorNo &&
@@ -584,7 +1097,7 @@ class Addres extends DataClass implements Insertable<Addres> {
           other.additionalFields == this.additionalFields);
 }
 
-class AddressCompanion extends UpdateCompanion<Addres> {
+class AddressCompanion extends UpdateCompanion<Address> {
   final Value<String?> id;
   final Value<String?> relatedClientReferenceId;
   final Value<String?> doorNo;
@@ -682,38 +1195,39 @@ class AddressCompanion extends UpdateCompanion<Addres> {
     this.type = const Value.absent(),
     this.additionalFields = const Value.absent(),
   });
-  static Insertable<Addres> custom({
-    Expression<String?>? id,
-    Expression<String?>? relatedClientReferenceId,
-    Expression<String?>? doorNo,
-    Expression<double?>? latitude,
-    Expression<double?>? longitude,
-    Expression<double?>? locationAccuracy,
-    Expression<String?>? addressLine1,
-    Expression<String?>? addressLine2,
-    Expression<String?>? landmark,
-    Expression<String?>? city,
-    Expression<String?>? pincode,
-    Expression<String?>? buildingName,
-    Expression<String?>? street,
-    Expression<String?>? boundaryType,
-    Expression<String?>? boundary,
-    Expression<String?>? auditCreatedBy,
-    Expression<bool?>? nonRecoverableError,
-    Expression<int?>? clientCreatedTime,
-    Expression<String?>? clientModifiedBy,
-    Expression<String?>? clientCreatedBy,
-    Expression<int?>? clientModifiedTime,
-    Expression<int?>? auditCreatedTime,
-    Expression<String?>? auditModifiedBy,
-    Expression<int?>? auditModifiedTime,
-    Expression<String?>? localityBoundaryCode,
-    Expression<String?>? localityBoundaryName,
-    Expression<String?>? tenantId,
-    Expression<bool?>? isDeleted,
-    Expression<int?>? rowVersion,
-    Expression<AddressType?>? type,
-    Expression<String?>? additionalFields,
+  static Insertable<Address> custom({
+    Expression<String>? id,
+    Expression<String>? relatedClientReferenceId,
+    Expression<String>? doorNo,
+    Expression<double>? latitude,
+    Expression<double>? longitude,
+    Expression<double>? locationAccuracy,
+    Expression<String>? addressLine1,
+    Expression<String>? addressLine2,
+    Expression<String>? landmark,
+    Expression<String>? city,
+    Expression<String>? pincode,
+    Expression<String>? buildingName,
+    Expression<String>? street,
+    Expression<String>? boundaryType,
+    Expression<String>? boundary,
+    Expression<String>? auditCreatedBy,
+    Expression<bool>? nonRecoverableError,
+    Expression<int>? auditCreatedTime,
+    Expression<int>? clientCreatedTime,
+    Expression<String>? clientModifiedBy,
+    Expression<String>? clientCreatedBy,
+    Expression<int>? clientModifiedTime,
+    Expression<String>? auditModifiedBy,
+    Expression<int>? auditModifiedTime,
+    Expression<String>? localityBoundaryCode,
+    Expression<String>? localityBoundaryName,
+    Expression<String>? tenantId,
+    Expression<bool>? isDeleted,
+    Expression<int>? rowVersion,
+    Expression<int>? type,
+    Expression<String>? additionalFields,
+    Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,

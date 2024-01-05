@@ -1,3 +1,4 @@
+@MappableLib(generateInitializerForScope: InitializerScope.package,)
 library models;
 
 import 'package:dart_mappable/dart_mappable.dart';
@@ -48,7 +49,8 @@ export 'oplog/oplog_entry.dart';
 export 'pgr_complaints/pgr_address.dart';
 export 'pgr_complaints/pgr_complaints.dart';
 export 'pgr_complaints/pgr_complaints_response.dart';
-export 'entities/roles_type.dart';
+
+part 'data_model.mapper.dart';
 
 abstract class DataModel {
   final String? boundaryCode;
@@ -60,8 +62,10 @@ abstract class DataModel {
   });
 }
 
-@MappableClass()
-abstract class EntityModel extends DataModel {
+@MappableClass(includeSubClasses: [
+  BoundaryModel
+])
+abstract class EntityModel extends DataModel with EntityModelMappable {
   final AuditDetails? auditDetails;
   final ClientAuditDetails? clientAuditDetails;
   const EntityModel({
@@ -71,8 +75,12 @@ abstract class EntityModel extends DataModel {
   });
 }
 
-@MappableClass(ignoreNull: true)
-abstract class EntitySearchModel extends DataModel {
+@MappableClass(ignoreNull: true, includeSubClasses: [
+  AddressSearchModel,
+
+])
+abstract class EntitySearchModel extends DataModel
+    with EntitySearchModelMappable {
   final AuditDetails? auditDetails;
   final AdditionalFields? additionalFields;
 
@@ -91,8 +99,9 @@ abstract class EntitySearchModel extends DataModel {
   }) : super(isDeleted: false);
 }
 
-@MappableClass()
-abstract class AdditionalFields {
+@MappableClass(
+    includeSubClasses: [AddressAdditionalFields],)
+abstract class AdditionalFields with AdditionalFieldsMappable {
   final String schema;
   final int version;
   final List<AdditionalField> fields;

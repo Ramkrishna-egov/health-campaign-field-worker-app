@@ -34,6 +34,8 @@ class ServiceSearchModel extends EntitySearchModel {
     this.createdAt,
     this.tenantId,
     super.boundaryCode,
+        super.additionalFields,
+    super.auditDetails,
   }):  super(isDeleted: false);
 }
 

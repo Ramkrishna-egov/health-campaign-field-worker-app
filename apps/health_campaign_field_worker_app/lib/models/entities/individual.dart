@@ -37,6 +37,8 @@ class IndividualSearchModel extends EntitySearchModel {
     this.gender,
     this.identifiers,
     super.boundaryCode,
+        super.additionalFields,
+    super.auditDetails,
   }):  super(isDeleted: false);
 }
 
