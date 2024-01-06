@@ -256,8 +256,12 @@ class _DeliverInterventionPageState
                                                           DigitDialogActions(
                                                         label: localizations
                                                             .translate(
-                                                          i18.common
-                                                              .coreCommonSubmit,
+                                                          isReferral
+                                                              ? i18
+                                                                  .deliverIntervention
+                                                                  .referDialogSubmit
+                                                              : i18.common
+                                                                  .coreCommonSubmit,
                                                         ),
                                                         action: (ctx) {
                                                           Navigator.of(
@@ -315,6 +319,14 @@ class _DeliverInterventionPageState
                                                                             as FormArray)
                                                                         .value)?[0])
                                                                     .toString(),
+                                                            productVariantId:
+                                                                ((form.control(_resourceDeliveredKey)
+                                                                                as FormArray)
+                                                                            .value
+                                                                        as List<
+                                                                            ProductVariantModel?>)
+                                                                    .first
+                                                                    ?.id,
                                                           ),
                                                         );
                                                       } else {

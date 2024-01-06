@@ -205,6 +205,7 @@ class _RecordPastDeliveryDetailsPageState
                               router.push(
                                 SideEffectsRoute(
                                   tasks: [(futureTaskList ?? []).last],
+                                  fromSurvey: true,
                                 ),
                               );
                             },

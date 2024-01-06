@@ -25,6 +25,7 @@ class ReferBeneficiaryPage extends LocalizedStatefulWidget {
   final IndividualModel individual;
   final bool isReadministrationUnSuccessful;
   final String quantityWasted;
+  final String? productVariantId;
 
   const ReferBeneficiaryPage({
     super.key,
@@ -34,6 +35,7 @@ class ReferBeneficiaryPage extends LocalizedStatefulWidget {
     required this.individual,
     this.isReadministrationUnSuccessful = false,
     this.quantityWasted = "00",
+    this.productVariantId,
   });
   @override
   State<ReferBeneficiaryPage> createState() => _ReferBeneficiaryPageState();
@@ -262,6 +264,13 @@ class _ReferBeneficiaryPageState extends LocalizedState<ReferBeneficiaryPage> {
                                                       const AdditionalField(
                                                         'unsuccessfullDelivery',
                                                         'true',
+                                                      ),
+                                                    if (widget
+                                                            .productVariantId !=
+                                                        null)
+                                                      AdditionalField(
+                                                        'productVariantId',
+                                                        widget.productVariantId,
                                                       ),
                                                   ],
                                                 ),

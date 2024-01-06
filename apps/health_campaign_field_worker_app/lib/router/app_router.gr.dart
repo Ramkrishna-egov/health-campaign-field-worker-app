@@ -321,6 +321,7 @@ class _$AppRouter extends RootStackRouter {
           appLocalizations: args.appLocalizations,
           tasks: args.tasks,
           isEditing: args.isEditing,
+          fromSurvey: args.fromSurvey,
         ),
       );
     },
@@ -336,6 +337,7 @@ class _$AppRouter extends RootStackRouter {
           individual: args.individual,
           isReadministrationUnSuccessful: args.isReadministrationUnSuccessful,
           quantityWasted: args.quantityWasted,
+          productVariantId: args.productVariantId,
         ),
       );
     },
@@ -1825,6 +1827,7 @@ class SideEffectsRoute extends PageRouteInfo<SideEffectsRouteArgs> {
     AppLocalizations? appLocalizations,
     required List<TaskModel> tasks,
     bool isEditing = false,
+    bool fromSurvey = false,
   }) : super(
           SideEffectsRoute.name,
           path: 'side-effects',
@@ -1833,6 +1836,7 @@ class SideEffectsRoute extends PageRouteInfo<SideEffectsRouteArgs> {
             appLocalizations: appLocalizations,
             tasks: tasks,
             isEditing: isEditing,
+            fromSurvey: fromSurvey,
           ),
         );
 
@@ -1845,6 +1849,7 @@ class SideEffectsRouteArgs {
     this.appLocalizations,
     required this.tasks,
     this.isEditing = false,
+    this.fromSurvey = false,
   });
 
   final Key? key;
@@ -1855,9 +1860,11 @@ class SideEffectsRouteArgs {
 
   final bool isEditing;
 
+  final bool fromSurvey;
+
   @override
   String toString() {
-    return 'SideEffectsRouteArgs{key: $key, appLocalizations: $appLocalizations, tasks: $tasks, isEditing: $isEditing}';
+    return 'SideEffectsRouteArgs{key: $key, appLocalizations: $appLocalizations, tasks: $tasks, isEditing: $isEditing, fromSurvey: $fromSurvey}';
   }
 }
 
@@ -1872,6 +1879,7 @@ class ReferBeneficiaryRoute extends PageRouteInfo<ReferBeneficiaryRouteArgs> {
     required IndividualModel individual,
     bool isReadministrationUnSuccessful = false,
     String quantityWasted = "00",
+    String? productVariantId,
   }) : super(
           ReferBeneficiaryRoute.name,
           path: 'refer-beneficiary',
@@ -1883,6 +1891,7 @@ class ReferBeneficiaryRoute extends PageRouteInfo<ReferBeneficiaryRouteArgs> {
             individual: individual,
             isReadministrationUnSuccessful: isReadministrationUnSuccessful,
             quantityWasted: quantityWasted,
+            productVariantId: productVariantId,
           ),
         );
 
@@ -1898,6 +1907,7 @@ class ReferBeneficiaryRouteArgs {
     required this.individual,
     this.isReadministrationUnSuccessful = false,
     this.quantityWasted = "00",
+    this.productVariantId,
   });
 
   final Key? key;
@@ -1914,9 +1924,11 @@ class ReferBeneficiaryRouteArgs {
 
   final String quantityWasted;
 
+  final String? productVariantId;
+
   @override
   String toString() {
-    return 'ReferBeneficiaryRouteArgs{key: $key, appLocalizations: $appLocalizations, isEditing: $isEditing, projectBeneficiaryClientRefId: $projectBeneficiaryClientRefId, individual: $individual, isReadministrationUnSuccessful: $isReadministrationUnSuccessful, quantityWasted: $quantityWasted}';
+    return 'ReferBeneficiaryRouteArgs{key: $key, appLocalizations: $appLocalizations, isEditing: $isEditing, projectBeneficiaryClientRefId: $projectBeneficiaryClientRefId, individual: $individual, isReadministrationUnSuccessful: $isReadministrationUnSuccessful, quantityWasted: $quantityWasted, productVariantId: $productVariantId}';
   }
 }
 
