@@ -1283,5 +1283,7 @@ class Attendance {
 
   String get checkAttendanceMark => "CHECK_ATTENDANCE_MARK";
 
+  String get backToAttendanceManager => "BACK_TO_ATTENDANCE_MANAGER";
+
   // String get manageStockLabel => 'HOME_MANAGE_STOCK_LABEL';
 }

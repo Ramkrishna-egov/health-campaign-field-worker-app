@@ -117,213 +117,240 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
 
         return true;
       },
-      child: Scaffold(
-        body: BlocListener<MarkAttendanceBloc, MarkAttendanceState>(
-          listener: (context, state) {
-            state.maybeMap(
-              orElse: () {},
-              loaded: (value) {
-                if (value.flagStatus) {
+      child: GestureDetector(
+        onTap: () {
+          FocusManager.instance.primaryFocus?.unfocus();
+        },
+        child: Scaffold(
+          body: BlocListener<MarkAttendanceBloc, MarkAttendanceState>(
+            listener: (context, state) {
+              state.maybeMap(
+                orElse: () {},
+                loaded: (value) {
+                  if (value.flagStatus) {
+                    Navigator.of(
+                      context,
+                      rootNavigator: true,
+                    ).popUntil(
+                      (route) => route is! PopupRoute,
+                    );
+                    //context.router.popAndPush(AcknowledgementRoute());
+                    context.router.popAndPush(
+                      AttendanceAcknowledgementRoute(
+                        enableViewHousehold: true,
+                        secondaryLabel: localizations.translate(
+                          i18.attendance.backToAttendanceManager,
+                        ),
+                        actionLabel: localizations.translate(
+                          i18.acknowledgementSuccess.goToHome,
+                        ),
+                        label: localizations.translate(
+                          i18.acknowledgementSuccess.acknowledgementLabelText,
+                        ),
+                        description: localizations.translate(
+                          i18.acknowledgementSuccess
+                              .acknowledgementDescriptionText,
+                        ),
+                      ),
+                    );
+                  } else {}
+                },
+                loading: (value) {
                   Navigator.of(
                     context,
                     rootNavigator: true,
                   ).popUntil(
                     (route) => route is! PopupRoute,
                   );
-                  context.router.popAndPush(AcknowledgementRoute());
-                } else {}
-              },
-              loading: (value) {
-                Navigator.of(
-                  context,
-                  rootNavigator: true,
-                ).popUntil(
-                  (route) => route is! PopupRoute,
-                );
-                Loaders.showLoadingDialog(context);
-              },
-              error: (value) {
-                Navigator.of(
-                  context,
-                  rootNavigator: true,
-                ).popUntil(
-                  (route) => route is! PopupRoute,
-                );
-                showErrorDialog(context, localizations, false);
-              },
-            );
-          },
-          child: BlocBuilder<MarkAttendanceBloc, MarkAttendanceState>(
-            builder: (context, state) {
-              return BlocBuilder<AttendanceIndividualBloc,
-                  AttendanceIndividualState>(
-                buildWhen: (p, c) {
-                  return p != c ? true : false;
+                  Loaders.showLoadingDialog(context);
                 },
-                builder: (context, state) {
-                  return state.maybeWhen(
-                    orElse: () {
-                      return const SizedBox.shrink();
-                    },
-                    loaded: (
-                      attendanceSearchModelList,
-                      attendanceCollectionModel,
-                      offsetData,
-                      currentOffset,
-                      countData,
-                      limitData,
-                      flag,
-                    ) {
-                      List<TableDataRow> tableData = [];
-
-                      tableData = attendanceSearchModelList!.isNotEmpty
-                          ? getAttendanceData(attendanceSearchModelList)
-                          : getAttendanceData(attendanceCollectionModel!);
-
-                      return ScrollableContent(
-                        footer: SizedBox(
-                          height: 50,
-                          child: DigitElevatedButton(
-                            onPressed: () {
-                              if (currentOffset == 0) {
-                                markConfirmationDialog(
-                                  context.read<MarkAttendanceBloc>(),
-                                  localizations,
-                                );
-                              } else {
-                                showWarningDialog(context, localizations);
-                              }
-                            },
-                            child: Text(
-                              localizations
-                                  .translate(i18.attendance.markAttendance),
-                            ),
-                          ),
-                        ),
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        header: const BackNavigationHelpHeaderWidget(
-                          showHelp: true,
-                        ),
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: SizedBox(
-                              width: MediaQuery.of(context).size.width,
-                              child: Text(
-                                localizations.translate(
-                                  i18.attendance.markAttendanceLabel,
-                                ),
-                                style: DigitTheme.instance.mobileTheme.textTheme
-                                    .headlineLarge,
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: SizedBox(
-                              width: MediaQuery.of(context).size.width,
-                              child: Text(
-                                DateFormat("dd MMMM yyyy")
-                                    .format(widget.dateTime)
-                                    .toString(),
-                                style: DigitTheme.instance.mobileTheme.textTheme
-                                    .headlineMedium,
-                              ),
-                            ),
-                          ),
-                          DigitCard(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                DigitTextField(
-                                  controller: controller,
-                                  label: '',
-                                  prefixIcon: const Icon(Icons.search),
-                                  isFilled: true,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(bottom: 8.0),
-                                  child: DigitTable(
-                                    height: (100.0 + (tableData.length * 53.0)),
-                                    headerList: headerList(
-                                      widget.dateTime,
-                                      localizations,
-                                    ),
-                                    tableData: tableData,
-                                    columnWidth: 100,
-                                    scrollPhysics:
-                                        const NeverScrollableScrollPhysics(),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      );
-                    },
-                    loading: () {
-                      return Center(
-                        child: Loaders.circularLoader(context),
-                      );
-                    },
-                    error: (error) {
-                      return Center(
-                        child: Card(
-                          child: SizedBox(
-                            height: 120,
-                            width: 200,
-                            child: Column(
-                              children: [
-                                Icon(
-                                  Icons.error_outline_outlined,
-                                  size: 40,
-                                  color: DigitTheme.instance.colorScheme.error,
-                                ),
-                                Text(
-                                  "Something went wrong!!!",
-                                  style: DigitTheme.instance.mobileTheme
-                                      .textTheme.headlineMedium,
-                                  textAlign: TextAlign.center,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: SizedBox(
-                                    width: 80,
-                                    height: 40,
-                                    child: DigitElevatedButton(
-                                      child: const Text("Retry"),
-                                      onPressed: () {
-                                        context
-                                            .read<AttendanceIndividualBloc>()
-                                            .add(
-                                              AttendanceIndividualLogSearchEvent(
-                                                attendeeId: widget.attendeeIds,
-                                                limit: 10,
-                                                offset: 0,
-                                                currentDate: widget.dateTime
-                                                    .millisecondsSinceEpoch,
-                                                entryTime: widget.entryTime,
-                                                exitTime: widget.exitTime,
-                                                projectId: context.projectId,
-                                                registerId: widget.registerId,
-                                                tenantId: widget.tenantId,
-                                              ),
-                                            );
-                                      },
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      );
-                    },
+                error: (value) {
+                  Navigator.of(
+                    context,
+                    rootNavigator: true,
+                  ).popUntil(
+                    (route) => route is! PopupRoute,
                   );
+                  showErrorDialog(context, localizations, false);
                 },
               );
             },
+            child: BlocBuilder<MarkAttendanceBloc, MarkAttendanceState>(
+              builder: (context, state) {
+                return BlocBuilder<AttendanceIndividualBloc,
+                    AttendanceIndividualState>(
+                  buildWhen: (p, c) {
+                    return p != c ? true : false;
+                  },
+                  builder: (context, state) {
+                    return state.maybeWhen(
+                      orElse: () {
+                        return const SizedBox.shrink();
+                      },
+                      loaded: (
+                        attendanceSearchModelList,
+                        attendanceCollectionModel,
+                        offsetData,
+                        currentOffset,
+                        countData,
+                        limitData,
+                        flag,
+                      ) {
+                        List<TableDataRow> tableData = [];
+
+                        tableData = attendanceSearchModelList!.isNotEmpty
+                            ? getAttendanceData(attendanceSearchModelList)
+                            : getAttendanceData(attendanceCollectionModel!);
+
+                        return ScrollableContent(
+                          footer: SizedBox(
+                            height: 50,
+                            child: DigitElevatedButton(
+                              onPressed: () {
+                                FocusManager.instance.primaryFocus?.unfocus();
+                                if (currentOffset == 0) {
+                                  markConfirmationDialog(
+                                    context.read<MarkAttendanceBloc>(),
+                                    localizations,
+                                  );
+                                } else {
+                                  showWarningDialog(context, localizations);
+                                }
+                              },
+                              child: Text(
+                                localizations
+                                    .translate(i18.attendance.markAttendance),
+                              ),
+                            ),
+                          ),
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          header: const BackNavigationHelpHeaderWidget(
+                            showHelp: true,
+                          ),
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child: SizedBox(
+                                width: MediaQuery.of(context).size.width,
+                                child: Text(
+                                  localizations.translate(
+                                    i18.attendance.markAttendanceLabel,
+                                  ),
+                                  style: DigitTheme.instance.mobileTheme
+                                      .textTheme.headlineLarge,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child: SizedBox(
+                                width: MediaQuery.of(context).size.width,
+                                child: Text(
+                                  DateFormat("dd MMMM yyyy")
+                                      .format(widget.dateTime)
+                                      .toString(),
+                                  style: DigitTheme.instance.mobileTheme
+                                      .textTheme.headlineMedium,
+                                ),
+                              ),
+                            ),
+                            DigitCard(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  DigitTextField(
+                                    controller: controller,
+                                    label: '',
+                                    prefixIcon: const Icon(Icons.search),
+                                    isFilled: true,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 8.0),
+                                    child: DigitTable(
+                                      height:
+                                          (100.0 + (tableData.length * 53.0)),
+                                      headerList: headerList(
+                                        widget.dateTime,
+                                        localizations,
+                                      ),
+                                      tableData: tableData,
+                                      columnWidth: 100,
+                                      scrollPhysics:
+                                          const NeverScrollableScrollPhysics(),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                      loading: () {
+                        return Center(
+                          child: Loaders.circularLoader(context),
+                        );
+                      },
+                      error: (error) {
+                        return Center(
+                          child: Card(
+                            child: SizedBox(
+                              height: 120,
+                              width: 200,
+                              child: Column(
+                                children: [
+                                  Icon(
+                                    Icons.error_outline_outlined,
+                                    size: 40,
+                                    color:
+                                        DigitTheme.instance.colorScheme.error,
+                                  ),
+                                  Text(
+                                    "Something went wrong!!!",
+                                    style: DigitTheme.instance.mobileTheme
+                                        .textTheme.headlineMedium,
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: SizedBox(
+                                      width: 80,
+                                      height: 40,
+                                      child: DigitElevatedButton(
+                                        child: const Text("Retry"),
+                                        onPressed: () {
+                                          context
+                                              .read<AttendanceIndividualBloc>()
+                                              .add(
+                                                AttendanceIndividualLogSearchEvent(
+                                                  attendeeId:
+                                                      widget.attendeeIds,
+                                                  limit: 10,
+                                                  offset: 0,
+                                                  currentDate: widget.dateTime
+                                                      .millisecondsSinceEpoch,
+                                                  entryTime: widget.entryTime,
+                                                  exitTime: widget.exitTime,
+                                                  projectId: context.projectId,
+                                                  registerId: widget.registerId,
+                                                  tenantId: widget.tenantId,
+                                                ),
+                                              );
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                );
+              },
+            ),
           ),
         ),
       ),

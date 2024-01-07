@@ -629,6 +629,29 @@ class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    AttendanceAcknowledgementRoute.name: (routeData) {
+      final args = routeData.argsAs<AttendanceAcknowledgementRouteArgs>();
+      return MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: AttendanceAcknowledgementPage(
+          key: args.key,
+          appLocalizations: args.appLocalizations,
+          label: args.label,
+          subLabel: args.subLabel,
+          description: args.description,
+          descriptionWidget: args.descriptionWidget,
+          action: args.action,
+          actionLabel: args.actionLabel,
+          icon: args.icon,
+          color: args.color,
+          enableBackToSearch: args.enableBackToSearch,
+          enableViewHousehold: args.enableViewHousehold,
+          secondaryAction: args.secondaryAction,
+          secondaryLabel: args.secondaryLabel,
+          isActionLabel: args.isActionLabel,
+        ),
+      );
+    },
   };
 
   @override
@@ -979,6 +1002,11 @@ class _$AppRouter extends RootStackRouter {
                 RouteConfig(
                   MarkAttendanceRoute.name,
                   path: 'mark-attendance',
+                  parent: TrackAttendanceWrapperRoute.name,
+                ),
+                RouteConfig(
+                  AttendanceAcknowledgementRoute.name,
+                  path: 'acknowledge-page',
                   parent: TrackAttendanceWrapperRoute.name,
                 ),
               ],
@@ -2977,5 +3005,105 @@ class MarkAttendanceRouteArgs {
   @override
   String toString() {
     return 'MarkAttendanceRouteArgs{exitTime: $exitTime, entryTime: $entryTime, dateTime: $dateTime, attendeeIds: $attendeeIds, registerId: $registerId, tenantId: $tenantId, key: $key, appLocalizations: $appLocalizations}';
+  }
+}
+
+/// generated route for
+/// [AttendanceAcknowledgementPage]
+class AttendanceAcknowledgementRoute
+    extends PageRouteInfo<AttendanceAcknowledgementRouteArgs> {
+  AttendanceAcknowledgementRoute({
+    Key? key,
+    AppLocalizations? appLocalizations,
+    required String label,
+    String? subLabel,
+    String? description,
+    Widget? descriptionWidget,
+    void Function()? action,
+    String? actionLabel,
+    IconData? icon,
+    Color? color,
+    bool enableBackToSearch = true,
+    bool enableViewHousehold = false,
+    void Function()? secondaryAction,
+    String? secondaryLabel,
+    bool isActionLabel = true,
+  }) : super(
+          AttendanceAcknowledgementRoute.name,
+          path: 'acknowledge-page',
+          args: AttendanceAcknowledgementRouteArgs(
+            key: key,
+            appLocalizations: appLocalizations,
+            label: label,
+            subLabel: subLabel,
+            description: description,
+            descriptionWidget: descriptionWidget,
+            action: action,
+            actionLabel: actionLabel,
+            icon: icon,
+            color: color,
+            enableBackToSearch: enableBackToSearch,
+            enableViewHousehold: enableViewHousehold,
+            secondaryAction: secondaryAction,
+            secondaryLabel: secondaryLabel,
+            isActionLabel: isActionLabel,
+          ),
+        );
+
+  static const String name = 'AttendanceAcknowledgementRoute';
+}
+
+class AttendanceAcknowledgementRouteArgs {
+  const AttendanceAcknowledgementRouteArgs({
+    this.key,
+    this.appLocalizations,
+    required this.label,
+    this.subLabel,
+    this.description,
+    this.descriptionWidget,
+    this.action,
+    this.actionLabel,
+    this.icon,
+    this.color,
+    this.enableBackToSearch = true,
+    this.enableViewHousehold = false,
+    this.secondaryAction,
+    this.secondaryLabel,
+    this.isActionLabel = true,
+  });
+
+  final Key? key;
+
+  final AppLocalizations? appLocalizations;
+
+  final String label;
+
+  final String? subLabel;
+
+  final String? description;
+
+  final Widget? descriptionWidget;
+
+  final void Function()? action;
+
+  final String? actionLabel;
+
+  final IconData? icon;
+
+  final Color? color;
+
+  final bool enableBackToSearch;
+
+  final bool enableViewHousehold;
+
+  final void Function()? secondaryAction;
+
+  final String? secondaryLabel;
+
+  final bool isActionLabel;
+
+  @override
+  String toString() {
+    return 'AttendanceAcknowledgementRouteArgs{key: $key, appLocalizations: $appLocalizations, label: $label, subLabel: $subLabel, description: $description, descriptionWidget: $descriptionWidget, action: $action, actionLabel: $actionLabel, icon: $icon, color: $color, enableBackToSearch: $enableBackToSearch, enableViewHousehold: $enableViewHousehold, secondaryAction: $secondaryAction, secondaryLabel: $secondaryLabel, isActionLabel: $isActionLabel}';
   }
 }
