@@ -1271,5 +1271,17 @@ class Attendance {
 
   String get retryButton => "RETRY_BUTTON";
 
+  String get proceed => "PROCEED_BUTTON";
+
+  String get confirmationLabel => "CONFIRMATION_LABEL";
+
+  String get confirmationDesc => "CONFIRMATION_DESCRIPTION";
+
+  String get confirmationDescNote => "CONFIRMATION_DESCRIPTION_NOTE";
+
+  String get goBackButton => "GO_BACK_BUTTON";
+
+  String get checkAttendanceMark => "CHECK_ATTENDANCE_MARK";
+
   // String get manageStockLabel => 'HOME_MANAGE_STOCK_LABEL';
 }

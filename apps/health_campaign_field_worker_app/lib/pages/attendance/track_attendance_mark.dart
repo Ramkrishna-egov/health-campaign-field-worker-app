@@ -186,16 +186,10 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                           child: DigitElevatedButton(
                             onPressed: () {
                               if (currentOffset == 0) {
-                                context.read<MarkAttendanceBloc>().add(
-                                      UploadAttendanceMarkEvent(
-                                        entryTime: widget.entryTime,
-                                        exitTime: widget.exitTime,
-                                        projectId: context.projectId,
-                                        registarId: widget.registerId,
-                                        status: 1,
-                                        tenantId: widget.tenantId,
-                                      ),
-                                    );
+                                markConfirmationDialog(
+                                  context.read<MarkAttendanceBloc>(),
+                                  localizations,
+                                );
                               } else {
                                 showWarningDialog(context, localizations);
                               }
@@ -421,6 +415,10 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
         apiKey: tableDataModel.name,
       ),
       TableData(
+        label: tableDataModel.individualId,
+        apiKey: tableDataModel.individualId,
+      ),
+      TableData(
         apiKey: tableDataModel.status.toString(),
         widget: CircularButton(
           icon: Icons.circle_rounded,
@@ -434,7 +432,7 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                   context.read<AttendanceIndividualBloc>().add(
                         AttendanceMarkEvent(
                           individualId: tableDataModel.individualId!,
-                          registarId: '2',
+                          registarId: tableDataModel!.registerId!,
                           status: tableDataModel.individualId,
                           id: tableDataModel.id!,
                         ),
@@ -442,14 +440,6 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                 }
               : null,
         ),
-      ),
-      TableData(
-        label: tableDataModel.individualId,
-        apiKey: tableDataModel.individualId,
-      ),
-      TableData(
-        label: tableDataModel.id.toString(),
-        apiKey: tableDataModel.id.toString(),
       ),
     ]);
   }
@@ -461,17 +451,13 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
         cellKey: 'name',
       ),
       TableHeader(
-        //DateFormat("dd MMMM yyyy").format(s).toString(),
-        localizations.translate(i18.attendance.tableHeaderAttendance),
-        cellKey: 'date',
-      ),
-      TableHeader(
         localizations.translate(i18.attendance.tableHeaderUserId),
         cellKey: "userId",
       ),
       TableHeader(
-        "sl",
-        cellKey: "sl",
+        //DateFormat("dd MMMM yyyy").format(s).toString(),
+        localizations.translate(i18.attendance.tableHeaderAttendance),
+        cellKey: 'date',
       ),
     ];
   }
@@ -501,7 +487,10 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                       bottom: 8.0,
                     ),
                     child: Text(
-                      "Please Make sure that all attendees are marked attendance",
+                      k.translate(
+                        i18.attendance.checkAttendanceMark,
+                      ),
+                      //"Please Make sure that all attendees are marked attendance",
                       style: DigitTheme
                           .instance.mobileTheme.textTheme.headlineMedium,
                       textAlign: TextAlign.center,
@@ -519,6 +508,99 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Future<dynamic> markConfirmationDialog(
+    MarkAttendanceBloc data,
+    dynamic k,
+  ) async {
+    return showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) {
+        return Dialog(
+          child: Card(
+            child: SizedBox(
+              height: 250,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 4.0,
+                      bottom: 8.0,
+                    ),
+                    child: Text(
+                      k.translate(i18.attendance.confirmationLabel),
+                      style: DigitTheme
+                          .instance.mobileTheme.textTheme.headlineMedium,
+                      textAlign: TextAlign.left,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 4.0,
+                      bottom: 4.0,
+                    ),
+                    child: Text(
+                      k.translate(i18.attendance.confirmationDesc),
+                      // "The Attendance details for the Session have been pre-populated.Please confirm before submitting.",
+                      style:
+                          DigitTheme.instance.mobileTheme.textTheme.bodyMedium,
+                      textAlign: TextAlign.left,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 4.0,
+                      bottom: 8.0,
+                    ),
+                    child: Text(
+                      k.translate(i18.attendance.confirmationDescNote),
+                      // "Note: You can not edit attendance details for the past days",
+                      style:
+                          DigitTheme.instance.mobileTheme.textTheme.bodyMedium,
+                      textAlign: TextAlign.left,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 100,
+                    height: 40,
+                    child: DigitElevatedButton(
+                      child: Text(
+                        k.translate(i18.attendance.proceed),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        data.add(
+                          UploadAttendanceMarkEvent(
+                            entryTime: widget.entryTime,
+                            exitTime: widget.exitTime,
+                            projectId: context.projectId,
+                            registarId: widget.registerId,
+                            status: 1,
+                            tenantId: widget.tenantId,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text(
+                      k.translate(i18.attendance.goBackButton),
                     ),
                   ),
                 ],

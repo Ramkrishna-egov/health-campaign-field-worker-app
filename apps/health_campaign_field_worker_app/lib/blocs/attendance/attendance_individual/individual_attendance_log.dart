@@ -88,6 +88,7 @@ class AttendanceIndividualBloc
             eventEndDate: e.eventEndDate,
             status: e.status,
             id: e.id,
+            registerId: event.registerId,
           );
 
           return s;
@@ -119,6 +120,7 @@ class AttendanceIndividualBloc
             eventStartDate: e.eventStartDate,
             eventEndDate: e.eventEndDate,
             status: e.status,
+            registerId: event.registerId,
           );
 
           return s;
@@ -163,6 +165,7 @@ class AttendanceIndividualBloc
               counter = counter - 1;
             }
             AttendeeCollectionModel s = AttendeeCollectionModel(
+              registerId: e.registerId,
               id: e.id,
               entryTime: e.entryTime,
               name: e.name,
@@ -194,6 +197,7 @@ class AttendanceIndividualBloc
                 counter = counter - 1;
               }
               AttendeeCollectionModel s = AttendeeCollectionModel(
+                registerId: e.registerId,
                 id: e.id,
                 entryTime: e.entryTime,
                 name: e.name,
