@@ -1267,5 +1267,9 @@ class Attendance {
 
   String get markAttendanceLabel => "LABEL_MARK_ATTENDANCE";
 
+  String get closeButton => "CLOSE_BUTTON";
+
+  String get retryButton => "RETRY_BUTTON";
+
   // String get manageStockLabel => 'HOME_MANAGE_STOCK_LABEL';
 }

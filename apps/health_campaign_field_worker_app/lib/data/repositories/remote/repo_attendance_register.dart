@@ -8,10 +8,8 @@ import 'package:flutter/services.dart';
 import 'package:isar/isar.dart';
 import '../../../models/attendance/attendance_mark_model/attendee_indv_model.dart';
 import '../../../models/attendance/attendance_mark_model/register_model.dart';
-import '../../../models/attendance/attendance_model/attendance_attendee_log.dart';
-import '../../../models/attendance/attendance_model/attendance_attendee_model.dart';
+
 import '../../../models/attendance/attendance_model/attendee_wraper_log_model.dart';
-import '../../../models/attendance/attendance_registry_model.dart';
 import '../../../utils/utils.dart';
 import '../../local_store/no_sql/schema/absent_attendee.dart';
 import '../../local_store/secure_store/secure_store.dart';
@@ -70,6 +68,7 @@ class AttendanceRegisterRepository {
         offset: offset,
         tenantId: tenantId,
       );
+      final auth = await LocalSecureStore.instance.accessToken;
       var res = await client.post(
         // "attendance/v1/_search",
         // queryParameters: {
@@ -79,7 +78,7 @@ class AttendanceRegisterRepository {
         g,
         data: {
           "RequestInfo": {
-            "authToken": "cf05ac59-62e8-4096-ba04-aa30850ef633",
+            "authToken": auth.toString(),
           },
           "Individual": {
             // "id": [
@@ -90,7 +89,7 @@ class AttendanceRegisterRepository {
         },
       );
 
-      var data = await rootBundle.loadString("assets/attendees.json");
+      // var data = await rootBundle.loadString("assets/attendees.json");
 
       return AttendanceMarkIndividualModel.fromJson(
         json.decode(
