@@ -206,20 +206,32 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                           footer: SizedBox(
                             height: 50,
                             child: DigitElevatedButton(
-                              onPressed: () {
-                                FocusManager.instance.primaryFocus?.unfocus();
-                                if (currentOffset == 0) {
-                                  markConfirmationDialog(
-                                    context.read<MarkAttendanceBloc>(),
-                                    localizations,
-                                  );
-                                } else {
-                                  showWarningDialog(context, localizations);
-                                }
-                              },
+                              onPressed: (widget.dateTime.day ==
+                                      DateTime.now().day)
+                                  ? () {
+                                      FocusManager.instance.primaryFocus
+                                          ?.unfocus();
+                                      if (currentOffset == 0) {
+                                        markConfirmationDialog(
+                                          context.read<MarkAttendanceBloc>(),
+                                          localizations,
+                                        );
+                                      } else {
+                                        showWarningDialog(
+                                          context,
+                                          localizations,
+                                        );
+                                      }
+                                    }
+                                  : () {
+                                      context.router.pop();
+                                    },
                               child: Text(
-                                localizations
-                                    .translate(i18.attendance.markAttendance),
+                                localizations.translate(
+                                  (widget.dateTime.day == DateTime.now().day)
+                                      ? i18.attendance.markAttendance
+                                      : i18.attendance.closeButton,
+                                ),
                               ),
                             ),
                           ),
