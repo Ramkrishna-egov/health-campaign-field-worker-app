@@ -272,6 +272,7 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   DigitTextField(
+                                    hintText: "Search by Name",
                                     controller: controller,
                                     label: '',
                                     prefixIcon: const Icon(Icons.search),
