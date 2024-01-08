@@ -4,12 +4,10 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/services.dart';
 import 'package:isar/isar.dart';
 import '../../../models/attendance/attendance_mark_model/attendee_indv_model.dart';
 import '../../../models/attendance/attendance_mark_model/register_model.dart';
 
-import '../../../models/attendance/attendance_model/attendee_wraper_log_model.dart';
 import '../../../utils/utils.dart';
 import '../../local_store/no_sql/schema/absent_attendee.dart';
 import '../../local_store/secure_store/secure_store.dart';
@@ -103,26 +101,26 @@ class AttendanceRegisterRepository {
 
 // fetch list of individuals attendance log
 
-  Future<AttendeeLogWrappperResponse> fetchAttendeesLog({
-    required String registartId,
-    required int fromTime,
-    required toTime,
-    required List<String> individualId,
-  }) async {
-    try {
-      var data = await rootBundle.loadString("assets/attendee_log.json");
+  // Future<AttendeeLogWrappperResponse> fetchAttendeesLog({
+  //   required String registartId,
+  //   required int fromTime,
+  //   required toTime,
+  //   required List<String> individualId,
+  // }) async {
+  //   try {
+  //     var data = await rootBundle.loadString("assets/attendee_log.json");
 
-      AttendeeLogWrappperResponse dec = AttendeeLogWrappperResponse.fromJson(
-        json.decode(
-          data.toString(),
-        ),
-      );
+  //     AttendeeLogWrappperResponse dec = AttendeeLogWrappperResponse.fromJson(
+  //       json.decode(
+  //         data.toString(),
+  //       ),
+  //     );
 
-      return dec;
-    } on DioError catch (ex) {
-      rethrow;
-    }
-  }
+  //     return dec;
+  //   } on DioError catch (ex) {
+  //     rethrow;
+  //   }
+  // }
 
 // create attendance log
 // {

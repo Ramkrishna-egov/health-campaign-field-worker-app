@@ -33,6 +33,8 @@ class AttendanceMarkRegisterModel with _$AttendanceMarkRegisterModel {
         List<AttendanceMarkIndividualModelAttendee>? attendanceAttendees,
     @JsonKey(name: 'auditDetails')
         AuditDetails? auditDetails,
+    @JsonKey(name: 'additionalDetails')
+        AdditionalDetails? additionalDetails,
   }) = _AttendanceMarkRegisterModel;
 
   factory AttendanceMarkRegisterModel.fromJson(
@@ -72,4 +74,16 @@ class AuditDetails with _$AuditDetails {
     Map<String, dynamic> json,
   ) =>
       _$AuditDetailsFromJson(json);
+}
+
+@freezed
+class AdditionalDetails with _$AdditionalDetails {
+  const factory AdditionalDetails({
+    String? description,
+  }) = _AdditionalDetails;
+
+  factory AdditionalDetails.fromJson(
+    Map<String, dynamic> json,
+  ) =>
+      _$AdditionalDetailsFromJson(json);
 }

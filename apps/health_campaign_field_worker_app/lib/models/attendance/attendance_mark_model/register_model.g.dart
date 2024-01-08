@@ -41,6 +41,10 @@ _$_AttendanceMarkRegisterModel _$$_AttendanceMarkRegisterModelFromJson(
       auditDetails: json['auditDetails'] == null
           ? null
           : AuditDetails.fromJson(json['auditDetails'] as Map<String, dynamic>),
+      additionalDetails: json['additionalDetails'] == null
+          ? null
+          : AdditionalDetails.fromJson(
+              json['additionalDetails'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_AttendanceMarkRegisterModelToJson(
@@ -57,6 +61,7 @@ Map<String, dynamic> _$$_AttendanceMarkRegisterModelToJson(
       'status': instance.status,
       'attendees': instance.attendanceAttendees,
       'auditDetails': instance.auditDetails,
+      'additionalDetails': instance.additionalDetails,
     };
 
 _$_AttendanceMarkIndividualModelAttendee
@@ -96,4 +101,15 @@ Map<String, dynamic> _$$_AuditDetailsToJson(_$_AuditDetails instance) =>
       'lastModifiedBy': instance.lastModifiedBy,
       'createdTime': instance.createdTime,
       'lastModifiedTime': instance.lastModifiedTime,
+    };
+
+_$_AdditionalDetails _$$_AdditionalDetailsFromJson(Map<String, dynamic> json) =>
+    _$_AdditionalDetails(
+      description: json['description'] as String?,
+    );
+
+Map<String, dynamic> _$$_AdditionalDetailsToJson(
+        _$_AdditionalDetails instance) =>
+    <String, dynamic>{
+      'description': instance.description,
     };

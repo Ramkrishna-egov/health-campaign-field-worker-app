@@ -62,7 +62,7 @@ class _TrackAttendanceInboxPageState extends State<TrackAttendanceInboxPage> {
                 projectList = attendanceRegisters!
                     .map((e) => {
                           "Event Type": e.serviceCode,
-                          "Description": e.name ?? "",
+                          "Description": e.additionalDetails!.description ?? "",
                           "Event Location": context.boundary.name,
                           "Individuals Count": e.attendanceAttendees != null
                               ? e.attendanceAttendees
