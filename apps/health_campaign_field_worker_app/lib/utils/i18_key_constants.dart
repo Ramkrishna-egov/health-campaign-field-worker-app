@@ -1287,5 +1287,11 @@ class Attendance {
 
   String get attendanceRegistarLabel => "ATTENDANCE_REGISTAR_LABEL";
 
+  String get somethingWentWrong => "SOMETHING_WENT_WRONG";
+
+  String get pleaseTryAgain => "PLEASE_TRY_AGAIN";
+
+  String get retry => "CORE_COMMON_NULL";
+
   // String get manageStockLabel => 'HOME_MANAGE_STOCK_LABEL';
 }

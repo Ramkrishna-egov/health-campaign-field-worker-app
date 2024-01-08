@@ -318,7 +318,7 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                                         DigitTheme.instance.colorScheme.error,
                                   ),
                                   Text(
-                                    "Something went wrong!!!",
+                                    "${i18.attendance.somethingWentWrong}!!!",
                                     style: DigitTheme.instance.mobileTheme
                                         .textTheme.headlineMedium,
                                     textAlign: TextAlign.center,
@@ -329,7 +329,7 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                                       width: 80,
                                       height: 40,
                                       child: DigitElevatedButton(
-                                        child: const Text("Retry"),
+                                        child: Text(i18.attendance.retry),
                                         onPressed: () {
                                           context
                                               .read<AttendanceIndividualBloc>()
@@ -394,7 +394,7 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                       bottom: 8.0,
                     ),
                     child: Text(
-                      "Something went wrong \n Please try again!!",
+                      "${i18.attendance.somethingWentWrong} \n ${i18.attendance.pleaseTryAgain}!!",
                       style: DigitTheme
                           .instance.mobileTheme.textTheme.headlineMedium,
                       textAlign: TextAlign.center,
