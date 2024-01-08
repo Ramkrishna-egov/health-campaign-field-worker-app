@@ -551,7 +551,8 @@ class _StockDetailsPageState extends LocalizedState<StockDetailsPage> {
                                     label: localizations.translate(
                                       i18.stockDetails.transportTypeLabel,
                                     ),
-                                    valueMapper: (e) => e,
+                                    valueMapper: (e) =>
+                                        localizations.translate(e),
                                     onChanged: (value) {
                                       setState(() {
                                         form.control(_typeOfTransportKey);
@@ -561,7 +562,7 @@ class _StockDetailsPageState extends LocalizedState<StockDetailsPage> {
                                         transportTypeOptions.firstOrNull?.name,
                                     menuItems: transportTypeOptions.map(
                                       (e) {
-                                        return localizations.translate(e.name);
+                                        return e.code;
                                       },
                                     ).toList(),
                                     formControlName: _typeOfTransportKey,
