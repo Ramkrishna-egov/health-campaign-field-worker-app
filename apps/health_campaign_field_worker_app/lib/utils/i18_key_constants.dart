@@ -110,6 +110,8 @@ class Common {
   String get min3CharsRequired => 'MIN_REQUIRED_3';
 
   String get facilitySearchHeaderLabel => 'FACILITY_SEARCH_HEADER_LABEL';
+  String get projectFacilitySearchHeaderLabel =>
+      'PROJECT_FACILITY_SEARCH_HEADER_LABEL';
 
   String get coreCommonWarning => 'CORE_COMMON_WARNING';
 
