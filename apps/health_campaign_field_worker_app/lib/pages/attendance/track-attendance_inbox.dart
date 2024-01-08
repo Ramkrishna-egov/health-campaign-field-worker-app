@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import '../../blocs/attendance/attendance_register.dart';
+import '../../blocs/localization/app_localization.dart';
 import '../../models/attendance/attendance_mark_model/register_model.dart';
 import '../../router/app_router.dart';
+import '../../utils/environment_config.dart';
 import '../../utils/utils.dart';
 import '../../widgets/header/back_navigation_help_header.dart';
 import '../../widgets/localized.dart';
+import '../../utils/i18_key_constants.dart' as i18;
 
 class TrackAttendanceInboxPage extends LocalizedStatefulWidget {
   const TrackAttendanceInboxPage({
@@ -29,7 +32,8 @@ class _TrackAttendanceInboxPageState extends State<TrackAttendanceInboxPage> {
     context.read<AttendanceProjectsSearchBloc>().add(
           SearchAttendanceProjectsEvent(
             projectid: context.projectId,
-            tenantId: 'lb',
+            tenantId: envConfig.variables.tenantId,
+            // tenantId: 'lb',
           ),
         );
     super.initState();
@@ -37,6 +41,8 @@ class _TrackAttendanceInboxPageState extends State<TrackAttendanceInboxPage> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+
     return Scaffold(
       body: SingleChildScrollView(
         child: BlocListener<AttendanceProjectsSearchBloc,
@@ -64,7 +70,7 @@ class _TrackAttendanceInboxPageState extends State<TrackAttendanceInboxPage> {
                               ? e.additionalDetails!.description ?? ""
                               : "",
                           "Event Location": context.boundary.name,
-                          "Individuals Count": e.attendanceAttendees != null
+                          "Total Attendees": e.attendanceAttendees != null
                               ? e.attendanceAttendees
                                   ?.where((att) =>
                                       att.denrollmentDate == null ||
@@ -117,6 +123,7 @@ class _TrackAttendanceInboxPageState extends State<TrackAttendanceInboxPage> {
                       endDate: DateTime.fromMillisecondsSinceEpoch(
                         attendanceRegisters[i].endDate!,
                       ),
+                      localizations: localizations,
                     ));
                   }
 
@@ -127,7 +134,7 @@ class _TrackAttendanceInboxPageState extends State<TrackAttendanceInboxPage> {
                       Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Text(
-                          'Attendance Registers(${projectList.length})',
+                          "${localizations.translate(i18.attendance.attendanceRegistarLabel)}(${projectList.length})",
                           style: DigitTheme
                               .instance.mobileTheme.textTheme.headlineLarge
                               ?.apply(color: const DigitColors().black),
@@ -164,6 +171,8 @@ class RegistarCard extends StatelessWidget {
   final DateTime startdate;
   final DateTime endDate;
   final List<AttendanceMarkIndividualModelAttendee> attendee;
+
+  final AppLocalizations localizations;
   const RegistarCard({
     super.key,
     required this.data,
@@ -173,6 +182,7 @@ class RegistarCard extends StatelessWidget {
     required this.attendee,
     required this.startdate,
     required this.endDate,
+    required this.localizations,
   });
 
   @override
@@ -185,7 +195,8 @@ class RegistarCard extends StatelessWidget {
           ),
           show
               ? DigitElevatedButton(
-                  child: const Text("Mark Attendance"),
+                  child: Text(localizations
+                      .translate(i18.attendance.markAttendanceLabel)),
                   onPressed: () {
                     context.router.push(AttendanceDateSessionSelectionRoute(
                       //id: registarId

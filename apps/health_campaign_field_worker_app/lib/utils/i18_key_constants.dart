@@ -1285,5 +1285,7 @@ class Attendance {
 
   String get backToAttendanceManager => "BACK_TO_ATTENDANCE_MANAGER";
 
+  String get attendanceRegistarLabel => "ATTENDANCE_REGISTAR_LABEL";
+
   // String get manageStockLabel => 'HOME_MANAGE_STOCK_LABEL';
 }
