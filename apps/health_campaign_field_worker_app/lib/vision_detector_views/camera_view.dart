@@ -1,11 +1,10 @@
 import 'dart:io';
 
 import 'package:camera/camera.dart';
+import 'package:digit_components/theme/digit_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mlkit_commons/google_mlkit_commons.dart';
-
-import '../widgets/showcase/showcase_wrappers.dart';
 
 class CameraView extends StatefulWidget {
   const CameraView({
@@ -85,8 +84,8 @@ class _CameraViewState extends State<CameraView> {
         children: <Widget>[
           Center(
             child: _changingCameraLens
-                ? Center(
-                    child: const Text('Changing camera lens'),
+                ? const Center(
+                    child: Text('Changing camera lens'),
                   )
                 : CameraPreview(
                     _controller!,
@@ -113,7 +112,7 @@ class _CameraViewState extends State<CameraView> {
             heroTag: Object(),
             onPressed: () => Navigator.of(context).pop(),
             backgroundColor: Colors.black54,
-            child: Icon(
+            child: const Icon(
               Icons.arrow_back_ios_outlined,
               size: 20,
             ),
@@ -197,7 +196,7 @@ class _CameraViewState extends State<CameraView> {
                     child: Center(
                       child: Text(
                         '${_currentZoomLevel.toStringAsFixed(1)}x',
-                        style: TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.white),
                       ),
                     ),
                   ),
@@ -216,17 +215,16 @@ class _CameraViewState extends State<CameraView> {
             maxHeight: 250,
           ),
           child: Column(children: [
-
             Expanded(
               child: Container(
                 width: MediaQuery.of(context).size.width / 1.2,
                 margin: const EdgeInsets.all(15.0),
                 padding: const EdgeInsets.all(3.0),
                 decoration: BoxDecoration(
-
                   border: Border.all(
-                    width: kPadding/2,
-                    color: Colors.red,),
+                    width: kPadding / 2,
+                    color: Colors.red,
+                  ),
                 ),
               ),
             ),
