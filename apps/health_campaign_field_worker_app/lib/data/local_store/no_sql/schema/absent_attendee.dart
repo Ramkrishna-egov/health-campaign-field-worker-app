@@ -16,4 +16,5 @@ class AbsentAttendee {
   late int status;
   late String name;
   late int currentDate;
+  late String userName;
 }

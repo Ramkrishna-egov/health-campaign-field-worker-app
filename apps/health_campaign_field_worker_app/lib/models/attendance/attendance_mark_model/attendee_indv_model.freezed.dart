@@ -196,8 +196,8 @@ mixin _$AttendanceMarkIndividual {
   String? get clientReferenceId => throw _privateConstructorUsedError;
   @JsonKey(name: 'name')
   NameData? get name => throw _privateConstructorUsedError;
-  List<AttendanceMarkIndividualModel>? get attendanceRegister =>
-      throw _privateConstructorUsedError;
+  @JsonKey(name: 'userDetails')
+  UserDetails? get userDetails => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -217,9 +217,10 @@ abstract class $AttendanceMarkIndividualCopyWith<$Res> {
       String? tenantId,
       String? clientReferenceId,
       @JsonKey(name: 'name') NameData? name,
-      List<AttendanceMarkIndividualModel>? attendanceRegister});
+      @JsonKey(name: 'userDetails') UserDetails? userDetails});
 
   $NameDataCopyWith<$Res>? get name;
+  $UserDetailsCopyWith<$Res>? get userDetails;
 }
 
 /// @nodoc
@@ -241,7 +242,7 @@ class _$AttendanceMarkIndividualCopyWithImpl<$Res,
     Object? tenantId = freezed,
     Object? clientReferenceId = freezed,
     Object? name = freezed,
-    Object? attendanceRegister = freezed,
+    Object? userDetails = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -264,10 +265,10 @@ class _$AttendanceMarkIndividualCopyWithImpl<$Res,
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as NameData?,
-      attendanceRegister: freezed == attendanceRegister
-          ? _value.attendanceRegister
-          : attendanceRegister // ignore: cast_nullable_to_non_nullable
-              as List<AttendanceMarkIndividualModel>?,
+      userDetails: freezed == userDetails
+          ? _value.userDetails
+          : userDetails // ignore: cast_nullable_to_non_nullable
+              as UserDetails?,
     ) as $Val);
   }
 
@@ -280,6 +281,18 @@ class _$AttendanceMarkIndividualCopyWithImpl<$Res,
 
     return $NameDataCopyWith<$Res>(_value.name!, (value) {
       return _then(_value.copyWith(name: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserDetailsCopyWith<$Res>? get userDetails {
+    if (_value.userDetails == null) {
+      return null;
+    }
+
+    return $UserDetailsCopyWith<$Res>(_value.userDetails!, (value) {
+      return _then(_value.copyWith(userDetails: value) as $Val);
     });
   }
 }
@@ -299,10 +312,12 @@ abstract class _$$_AttendanceMarkIndividualCopyWith<$Res>
       String? tenantId,
       String? clientReferenceId,
       @JsonKey(name: 'name') NameData? name,
-      List<AttendanceMarkIndividualModel>? attendanceRegister});
+      @JsonKey(name: 'userDetails') UserDetails? userDetails});
 
   @override
   $NameDataCopyWith<$Res>? get name;
+  @override
+  $UserDetailsCopyWith<$Res>? get userDetails;
 }
 
 /// @nodoc
@@ -322,7 +337,7 @@ class __$$_AttendanceMarkIndividualCopyWithImpl<$Res>
     Object? tenantId = freezed,
     Object? clientReferenceId = freezed,
     Object? name = freezed,
-    Object? attendanceRegister = freezed,
+    Object? userDetails = freezed,
   }) {
     return _then(_$_AttendanceMarkIndividual(
       id: freezed == id
@@ -345,10 +360,10 @@ class __$$_AttendanceMarkIndividualCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as NameData?,
-      attendanceRegister: freezed == attendanceRegister
-          ? _value._attendanceRegister
-          : attendanceRegister // ignore: cast_nullable_to_non_nullable
-              as List<AttendanceMarkIndividualModel>?,
+      userDetails: freezed == userDetails
+          ? _value.userDetails
+          : userDetails // ignore: cast_nullable_to_non_nullable
+              as UserDetails?,
     ));
   }
 }
@@ -362,8 +377,7 @@ class _$_AttendanceMarkIndividual implements _AttendanceMarkIndividual {
       this.tenantId,
       this.clientReferenceId,
       @JsonKey(name: 'name') this.name,
-      final List<AttendanceMarkIndividualModel>? attendanceRegister})
-      : _attendanceRegister = attendanceRegister;
+      @JsonKey(name: 'userDetails') this.userDetails});
 
   factory _$_AttendanceMarkIndividual.fromJson(Map<String, dynamic> json) =>
       _$$_AttendanceMarkIndividualFromJson(json);
@@ -379,18 +393,13 @@ class _$_AttendanceMarkIndividual implements _AttendanceMarkIndividual {
   @override
   @JsonKey(name: 'name')
   final NameData? name;
-  final List<AttendanceMarkIndividualModel>? _attendanceRegister;
   @override
-  List<AttendanceMarkIndividualModel>? get attendanceRegister {
-    final value = _attendanceRegister;
-    if (value == null) return null;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
+  @JsonKey(name: 'userDetails')
+  final UserDetails? userDetails;
 
   @override
   String toString() {
-    return 'AttendanceMarkIndividual(id: $id, individualId: $individualId, tenantId: $tenantId, clientReferenceId: $clientReferenceId, name: $name, attendanceRegister: $attendanceRegister)';
+    return 'AttendanceMarkIndividual(id: $id, individualId: $individualId, tenantId: $tenantId, clientReferenceId: $clientReferenceId, name: $name, userDetails: $userDetails)';
   }
 
   @override
@@ -406,20 +415,14 @@ class _$_AttendanceMarkIndividual implements _AttendanceMarkIndividual {
             (identical(other.clientReferenceId, clientReferenceId) ||
                 other.clientReferenceId == clientReferenceId) &&
             (identical(other.name, name) || other.name == name) &&
-            const DeepCollectionEquality()
-                .equals(other._attendanceRegister, _attendanceRegister));
+            (identical(other.userDetails, userDetails) ||
+                other.userDetails == userDetails));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      individualId,
-      tenantId,
-      clientReferenceId,
-      name,
-      const DeepCollectionEquality().hash(_attendanceRegister));
+  int get hashCode => Object.hash(runtimeType, id, individualId, tenantId,
+      clientReferenceId, name, userDetails);
 
   @JsonKey(ignore: true)
   @override
@@ -443,7 +446,7 @@ abstract class _AttendanceMarkIndividual implements AttendanceMarkIndividual {
           final String? tenantId,
           final String? clientReferenceId,
           @JsonKey(name: 'name') final NameData? name,
-          final List<AttendanceMarkIndividualModel>? attendanceRegister}) =
+          @JsonKey(name: 'userDetails') final UserDetails? userDetails}) =
       _$_AttendanceMarkIndividual;
 
   factory _AttendanceMarkIndividual.fromJson(Map<String, dynamic> json) =
@@ -461,7 +464,8 @@ abstract class _AttendanceMarkIndividual implements AttendanceMarkIndividual {
   @JsonKey(name: 'name')
   NameData? get name;
   @override
-  List<AttendanceMarkIndividualModel>? get attendanceRegister;
+  @JsonKey(name: 'userDetails')
+  UserDetails? get userDetails;
   @override
   @JsonKey(ignore: true)
   _$$_AttendanceMarkIndividualCopyWith<_$_AttendanceMarkIndividual>
@@ -638,4 +642,380 @@ abstract class _NameData implements NameData {
   @JsonKey(ignore: true)
   _$$_NameDataCopyWith<_$_NameData> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+UserDetails _$UserDetailsFromJson(Map<String, dynamic> json) {
+  return _UserDetails.fromJson(json);
+}
+
+/// @nodoc
+mixin _$UserDetails {
+  String? get username => throw _privateConstructorUsedError;
+  String? get tenantId => throw _privateConstructorUsedError;
+  String? get type => throw _privateConstructorUsedError;
+  @JsonKey(name: 'roles')
+  List<Role>? get role => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $UserDetailsCopyWith<UserDetails> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $UserDetailsCopyWith<$Res> {
+  factory $UserDetailsCopyWith(
+          UserDetails value, $Res Function(UserDetails) then) =
+      _$UserDetailsCopyWithImpl<$Res, UserDetails>;
+  @useResult
+  $Res call(
+      {String? username,
+      String? tenantId,
+      String? type,
+      @JsonKey(name: 'roles') List<Role>? role});
+}
+
+/// @nodoc
+class _$UserDetailsCopyWithImpl<$Res, $Val extends UserDetails>
+    implements $UserDetailsCopyWith<$Res> {
+  _$UserDetailsCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? username = freezed,
+    Object? tenantId = freezed,
+    Object? type = freezed,
+    Object? role = freezed,
+  }) {
+    return _then(_value.copyWith(
+      username: freezed == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String?,
+      tenantId: freezed == tenantId
+          ? _value.tenantId
+          : tenantId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String?,
+      role: freezed == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as List<Role>?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_UserDetailsCopyWith<$Res>
+    implements $UserDetailsCopyWith<$Res> {
+  factory _$$_UserDetailsCopyWith(
+          _$_UserDetails value, $Res Function(_$_UserDetails) then) =
+      __$$_UserDetailsCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String? username,
+      String? tenantId,
+      String? type,
+      @JsonKey(name: 'roles') List<Role>? role});
+}
+
+/// @nodoc
+class __$$_UserDetailsCopyWithImpl<$Res>
+    extends _$UserDetailsCopyWithImpl<$Res, _$_UserDetails>
+    implements _$$_UserDetailsCopyWith<$Res> {
+  __$$_UserDetailsCopyWithImpl(
+      _$_UserDetails _value, $Res Function(_$_UserDetails) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? username = freezed,
+    Object? tenantId = freezed,
+    Object? type = freezed,
+    Object? role = freezed,
+  }) {
+    return _then(_$_UserDetails(
+      username: freezed == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String?,
+      tenantId: freezed == tenantId
+          ? _value.tenantId
+          : tenantId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String?,
+      role: freezed == role
+          ? _value._role
+          : role // ignore: cast_nullable_to_non_nullable
+              as List<Role>?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_UserDetails implements _UserDetails {
+  _$_UserDetails(
+      {this.username,
+      this.tenantId,
+      this.type,
+      @JsonKey(name: 'roles') final List<Role>? role})
+      : _role = role;
+
+  factory _$_UserDetails.fromJson(Map<String, dynamic> json) =>
+      _$$_UserDetailsFromJson(json);
+
+  @override
+  final String? username;
+  @override
+  final String? tenantId;
+  @override
+  final String? type;
+  final List<Role>? _role;
+  @override
+  @JsonKey(name: 'roles')
+  List<Role>? get role {
+    final value = _role;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  String toString() {
+    return 'UserDetails(username: $username, tenantId: $tenantId, type: $type, role: $role)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_UserDetails &&
+            (identical(other.username, username) ||
+                other.username == username) &&
+            (identical(other.tenantId, tenantId) ||
+                other.tenantId == tenantId) &&
+            (identical(other.type, type) || other.type == type) &&
+            const DeepCollectionEquality().equals(other._role, _role));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, username, tenantId, type,
+      const DeepCollectionEquality().hash(_role));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UserDetailsCopyWith<_$_UserDetails> get copyWith =>
+      __$$_UserDetailsCopyWithImpl<_$_UserDetails>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_UserDetailsToJson(
+      this,
+    );
+  }
+}
+
+abstract class _UserDetails implements UserDetails {
+  factory _UserDetails(
+      {final String? username,
+      final String? tenantId,
+      final String? type,
+      @JsonKey(name: 'roles') final List<Role>? role}) = _$_UserDetails;
+
+  factory _UserDetails.fromJson(Map<String, dynamic> json) =
+      _$_UserDetails.fromJson;
+
+  @override
+  String? get username;
+  @override
+  String? get tenantId;
+  @override
+  String? get type;
+  @override
+  @JsonKey(name: 'roles')
+  List<Role>? get role;
+  @override
+  @JsonKey(ignore: true)
+  _$$_UserDetailsCopyWith<_$_UserDetails> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Role _$RoleFromJson(Map<String, dynamic> json) {
+  return _Role.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Role {
+  String? get name => throw _privateConstructorUsedError;
+  String? get code => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $RoleCopyWith<Role> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $RoleCopyWith<$Res> {
+  factory $RoleCopyWith(Role value, $Res Function(Role) then) =
+      _$RoleCopyWithImpl<$Res, Role>;
+  @useResult
+  $Res call({String? name, String? code, String? description});
+}
+
+/// @nodoc
+class _$RoleCopyWithImpl<$Res, $Val extends Role>
+    implements $RoleCopyWith<$Res> {
+  _$RoleCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? name = freezed,
+    Object? code = freezed,
+    Object? description = freezed,
+  }) {
+    return _then(_value.copyWith(
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      code: freezed == code
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as String?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_RoleCopyWith<$Res> implements $RoleCopyWith<$Res> {
+  factory _$$_RoleCopyWith(_$_Role value, $Res Function(_$_Role) then) =
+      __$$_RoleCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String? name, String? code, String? description});
+}
+
+/// @nodoc
+class __$$_RoleCopyWithImpl<$Res> extends _$RoleCopyWithImpl<$Res, _$_Role>
+    implements _$$_RoleCopyWith<$Res> {
+  __$$_RoleCopyWithImpl(_$_Role _value, $Res Function(_$_Role) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? name = freezed,
+    Object? code = freezed,
+    Object? description = freezed,
+  }) {
+    return _then(_$_Role(
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      code: freezed == code
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as String?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_Role implements _Role {
+  _$_Role({this.name, this.code, this.description});
+
+  factory _$_Role.fromJson(Map<String, dynamic> json) => _$$_RoleFromJson(json);
+
+  @override
+  final String? name;
+  @override
+  final String? code;
+  @override
+  final String? description;
+
+  @override
+  String toString() {
+    return 'Role(name: $name, code: $code, description: $description)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Role &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.code, code) || other.code == code) &&
+            (identical(other.description, description) ||
+                other.description == description));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, name, code, description);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_RoleCopyWith<_$_Role> get copyWith =>
+      __$$_RoleCopyWithImpl<_$_Role>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_RoleToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Role implements Role {
+  factory _Role(
+      {final String? name,
+      final String? code,
+      final String? description}) = _$_Role;
+
+  factory _Role.fromJson(Map<String, dynamic> json) = _$_Role.fromJson;
+
+  @override
+  String? get name;
+  @override
+  String? get code;
+  @override
+  String? get description;
+  @override
+  @JsonKey(ignore: true)
+  _$$_RoleCopyWith<_$_Role> get copyWith => throw _privateConstructorUsedError;
 }

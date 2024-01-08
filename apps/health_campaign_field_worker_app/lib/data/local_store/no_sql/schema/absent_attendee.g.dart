@@ -71,6 +71,11 @@ const AbsentAttendeeSchema = CollectionSchema(
       id: 10,
       name: r'tenantId',
       type: IsarType.string,
+    ),
+    r'userName': PropertySchema(
+      id: 11,
+      name: r'userName',
+      type: IsarType.string,
     )
   },
   estimateSize: _absentAttendeeEstimateSize,
@@ -98,6 +103,7 @@ int _absentAttendeeEstimateSize(
   bytesCount += 3 + object.projectId.length * 3;
   bytesCount += 3 + object.registerId.length * 3;
   bytesCount += 3 + object.tenantId.length * 3;
+  bytesCount += 3 + object.userName.length * 3;
   return bytesCount;
 }
 
@@ -118,6 +124,7 @@ void _absentAttendeeSerialize(
   writer.writeString(offsets[8], object.registerId);
   writer.writeLong(offsets[9], object.status);
   writer.writeString(offsets[10], object.tenantId);
+  writer.writeString(offsets[11], object.userName);
 }
 
 AbsentAttendee _absentAttendeeDeserialize(
@@ -139,6 +146,7 @@ AbsentAttendee _absentAttendeeDeserialize(
   object.registerId = reader.readString(offsets[8]);
   object.status = reader.readLong(offsets[9]);
   object.tenantId = reader.readString(offsets[10]);
+  object.userName = reader.readString(offsets[11]);
   return object;
 }
 
@@ -170,6 +178,8 @@ P _absentAttendeeDeserializeProp<P>(
     case 9:
       return (reader.readLong(offset)) as P;
     case 10:
+      return (reader.readString(offset)) as P;
+    case 11:
       return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -1342,6 +1352,142 @@ extension AbsentAttendeeQueryFilter
       ));
     });
   }
+
+  QueryBuilder<AbsentAttendee, AbsentAttendee, QAfterFilterCondition>
+      userNameEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'userName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AbsentAttendee, AbsentAttendee, QAfterFilterCondition>
+      userNameGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'userName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AbsentAttendee, AbsentAttendee, QAfterFilterCondition>
+      userNameLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'userName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AbsentAttendee, AbsentAttendee, QAfterFilterCondition>
+      userNameBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'userName',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AbsentAttendee, AbsentAttendee, QAfterFilterCondition>
+      userNameStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'userName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AbsentAttendee, AbsentAttendee, QAfterFilterCondition>
+      userNameEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'userName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AbsentAttendee, AbsentAttendee, QAfterFilterCondition>
+      userNameContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'userName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AbsentAttendee, AbsentAttendee, QAfterFilterCondition>
+      userNameMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'userName',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AbsentAttendee, AbsentAttendee, QAfterFilterCondition>
+      userNameIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'userName',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<AbsentAttendee, AbsentAttendee, QAfterFilterCondition>
+      userNameIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'userName',
+        value: '',
+      ));
+    });
+  }
 }
 
 extension AbsentAttendeeQueryObject
@@ -1496,6 +1642,19 @@ extension AbsentAttendeeQuerySortBy
       sortByTenantIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'tenantId', Sort.desc);
+    });
+  }
+
+  QueryBuilder<AbsentAttendee, AbsentAttendee, QAfterSortBy> sortByUserName() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'userName', Sort.asc);
+    });
+  }
+
+  QueryBuilder<AbsentAttendee, AbsentAttendee, QAfterSortBy>
+      sortByUserNameDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'userName', Sort.desc);
     });
   }
 }
@@ -1660,6 +1819,19 @@ extension AbsentAttendeeQuerySortThenBy
       return query.addSortBy(r'tenantId', Sort.desc);
     });
   }
+
+  QueryBuilder<AbsentAttendee, AbsentAttendee, QAfterSortBy> thenByUserName() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'userName', Sort.asc);
+    });
+  }
+
+  QueryBuilder<AbsentAttendee, AbsentAttendee, QAfterSortBy>
+      thenByUserNameDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'userName', Sort.desc);
+    });
+  }
 }
 
 extension AbsentAttendeeQueryWhereDistinct
@@ -1738,6 +1910,13 @@ extension AbsentAttendeeQueryWhereDistinct
       return query.addDistinctBy(r'tenantId', caseSensitive: caseSensitive);
     });
   }
+
+  QueryBuilder<AbsentAttendee, AbsentAttendee, QDistinct> distinctByUserName(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'userName', caseSensitive: caseSensitive);
+    });
+  }
 }
 
 extension AbsentAttendeeQueryProperty
@@ -1812,6 +1991,12 @@ extension AbsentAttendeeQueryProperty
   QueryBuilder<AbsentAttendee, String, QQueryOperations> tenantIdProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'tenantId');
+    });
+  }
+
+  QueryBuilder<AbsentAttendee, String, QQueryOperations> userNameProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'userName');
     });
   }
 }

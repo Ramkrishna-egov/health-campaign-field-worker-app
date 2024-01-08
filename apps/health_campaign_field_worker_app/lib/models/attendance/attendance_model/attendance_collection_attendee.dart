@@ -6,6 +6,7 @@ part 'attendance_collection_attendee.g.dart';
 @freezed
 class AttendeeCollectionModel with _$AttendeeCollectionModel {
   factory AttendeeCollectionModel({
+    String? userName,
     String? name,
     int? id,
     String? registerId,

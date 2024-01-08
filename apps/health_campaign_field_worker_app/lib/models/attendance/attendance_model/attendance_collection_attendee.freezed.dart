@@ -21,6 +21,7 @@ AttendeeCollectionModel _$AttendeeCollectionModelFromJson(
 
 /// @nodoc
 mixin _$AttendeeCollectionModel {
+  String? get userName => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   int? get id => throw _privateConstructorUsedError;
   String? get registerId => throw _privateConstructorUsedError;
@@ -46,7 +47,8 @@ abstract class $AttendeeCollectionModelCopyWith<$Res> {
       _$AttendeeCollectionModelCopyWithImpl<$Res, AttendeeCollectionModel>;
   @useResult
   $Res call(
-      {String? name,
+      {String? userName,
+      String? name,
       int? id,
       String? registerId,
       String? individualId,
@@ -73,6 +75,7 @@ class _$AttendeeCollectionModelCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? userName = freezed,
     Object? name = freezed,
     Object? id = freezed,
     Object? registerId = freezed,
@@ -86,6 +89,10 @@ class _$AttendeeCollectionModelCopyWithImpl<$Res,
     Object? status = null,
   }) {
     return _then(_value.copyWith(
+      userName: freezed == userName
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as String?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -143,7 +150,8 @@ abstract class _$$_AttendeeCollectionModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? name,
+      {String? userName,
+      String? name,
       int? id,
       String? registerId,
       String? individualId,
@@ -168,6 +176,7 @@ class __$$_AttendeeCollectionModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? userName = freezed,
     Object? name = freezed,
     Object? id = freezed,
     Object? registerId = freezed,
@@ -181,6 +190,10 @@ class __$$_AttendeeCollectionModelCopyWithImpl<$Res>
     Object? status = null,
   }) {
     return _then(_$_AttendeeCollectionModel(
+      userName: freezed == userName
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as String?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -233,7 +246,8 @@ class __$$_AttendeeCollectionModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_AttendeeCollectionModel implements _AttendeeCollectionModel {
   _$_AttendeeCollectionModel(
-      {this.name,
+      {this.userName,
+      this.name,
       this.id,
       this.registerId,
       this.individualId,
@@ -248,6 +262,8 @@ class _$_AttendeeCollectionModel implements _AttendeeCollectionModel {
   factory _$_AttendeeCollectionModel.fromJson(Map<String, dynamic> json) =>
       _$$_AttendeeCollectionModelFromJson(json);
 
+  @override
+  final String? userName;
   @override
   final String? name;
   @override
@@ -278,7 +294,7 @@ class _$_AttendeeCollectionModel implements _AttendeeCollectionModel {
 
   @override
   String toString() {
-    return 'AttendeeCollectionModel(name: $name, id: $id, registerId: $registerId, individualId: $individualId, tenantId: $tenantId, entryTime: $entryTime, exitTime: $exitTime, eventStartDate: $eventStartDate, eventEndDate: $eventEndDate, type: $type, status: $status)';
+    return 'AttendeeCollectionModel(userName: $userName, name: $name, id: $id, registerId: $registerId, individualId: $individualId, tenantId: $tenantId, entryTime: $entryTime, exitTime: $exitTime, eventStartDate: $eventStartDate, eventEndDate: $eventEndDate, type: $type, status: $status)';
   }
 
   @override
@@ -286,6 +302,8 @@ class _$_AttendeeCollectionModel implements _AttendeeCollectionModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AttendeeCollectionModel &&
+            (identical(other.userName, userName) ||
+                other.userName == userName) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.registerId, registerId) ||
@@ -310,6 +328,7 @@ class _$_AttendeeCollectionModel implements _AttendeeCollectionModel {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      userName,
       name,
       id,
       registerId,
@@ -340,7 +359,8 @@ class _$_AttendeeCollectionModel implements _AttendeeCollectionModel {
 
 abstract class _AttendeeCollectionModel implements AttendeeCollectionModel {
   factory _AttendeeCollectionModel(
-      {final String? name,
+      {final String? userName,
+      final String? name,
       final int? id,
       final String? registerId,
       final String? individualId,
@@ -355,6 +375,8 @@ abstract class _AttendeeCollectionModel implements AttendeeCollectionModel {
   factory _AttendeeCollectionModel.fromJson(Map<String, dynamic> json) =
       _$_AttendeeCollectionModel.fromJson;
 
+  @override
+  String? get userName;
   @override
   String? get name;
   @override

@@ -31,10 +31,9 @@ _$_AttendanceMarkIndividual _$$_AttendanceMarkIndividualFromJson(
       name: json['name'] == null
           ? null
           : NameData.fromJson(json['name'] as Map<String, dynamic>),
-      attendanceRegister: (json['attendanceRegister'] as List<dynamic>?)
-          ?.map((e) =>
-              AttendanceMarkIndividualModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      userDetails: json['userDetails'] == null
+          ? null
+          : UserDetails.fromJson(json['userDetails'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_AttendanceMarkIndividualToJson(
@@ -45,7 +44,7 @@ Map<String, dynamic> _$$_AttendanceMarkIndividualToJson(
       'tenantId': instance.tenantId,
       'clientReferenceId': instance.clientReferenceId,
       'name': instance.name,
-      'attendanceRegister': instance.attendanceRegister,
+      'userDetails': instance.userDetails,
     };
 
 _$_NameData _$$_NameDataFromJson(Map<String, dynamic> json) => _$_NameData(
@@ -59,4 +58,34 @@ Map<String, dynamic> _$$_NameDataToJson(_$_NameData instance) =>
       'givenName': instance.givenName,
       'familyName': instance.familyName,
       'otherNames': instance.otherNames,
+    };
+
+_$_UserDetails _$$_UserDetailsFromJson(Map<String, dynamic> json) =>
+    _$_UserDetails(
+      username: json['username'] as String?,
+      tenantId: json['tenantId'] as String?,
+      type: json['type'] as String?,
+      role: (json['roles'] as List<dynamic>?)
+          ?.map((e) => Role.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$$_UserDetailsToJson(_$_UserDetails instance) =>
+    <String, dynamic>{
+      'username': instance.username,
+      'tenantId': instance.tenantId,
+      'type': instance.type,
+      'roles': instance.role,
+    };
+
+_$_Role _$$_RoleFromJson(Map<String, dynamic> json) => _$_Role(
+      name: json['name'] as String?,
+      code: json['code'] as String?,
+      description: json['description'] as String?,
+    );
+
+Map<String, dynamic> _$$_RoleToJson(_$_Role instance) => <String, dynamic>{
+      'name': instance.name,
+      'code': instance.code,
+      'description': instance.description,
     };

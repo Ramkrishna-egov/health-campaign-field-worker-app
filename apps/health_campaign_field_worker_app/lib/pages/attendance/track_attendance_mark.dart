@@ -454,8 +454,8 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
         apiKey: tableDataModel.name,
       ),
       TableData(
-        label: tableDataModel.individualId,
-        apiKey: tableDataModel.individualId,
+        label: tableDataModel.userName,
+        apiKey: tableDataModel.userName,
       ),
       TableData(
         apiKey: tableDataModel.status.toString(),

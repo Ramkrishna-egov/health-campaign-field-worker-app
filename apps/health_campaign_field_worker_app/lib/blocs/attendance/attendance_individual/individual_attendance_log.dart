@@ -70,7 +70,8 @@ class AttendanceIndividualBloc
               ..status = -1
               ..currentDate = 12334567
               ..registerId = event.registerId
-              ..tenantId = event.tenantId;
+              ..tenantId = event.tenantId
+              ..userName = e.userDetails!.username ?? "";
 
             return absentAttendee;
           },
@@ -89,6 +90,7 @@ class AttendanceIndividualBloc
             status: e.status,
             id: e.id,
             registerId: event.registerId,
+            userName: e.userName,
           );
 
           return s;
@@ -121,6 +123,7 @@ class AttendanceIndividualBloc
             eventEndDate: e.eventEndDate,
             status: e.status,
             registerId: event.registerId,
+            userName: e.userName,
           );
 
           return s;
@@ -165,6 +168,7 @@ class AttendanceIndividualBloc
               counter = counter - 1;
             }
             AttendeeCollectionModel s = AttendeeCollectionModel(
+              userName: e.userName,
               registerId: e.registerId,
               id: e.id,
               entryTime: e.entryTime,
@@ -197,6 +201,7 @@ class AttendanceIndividualBloc
                 counter = counter - 1;
               }
               AttendeeCollectionModel s = AttendeeCollectionModel(
+                userName: e.userName,
                 registerId: e.registerId,
                 id: e.id,
                 entryTime: e.entryTime,

@@ -24,7 +24,8 @@ class AttendanceMarkIndividual with _$AttendanceMarkIndividual {
     String? tenantId,
     String? clientReferenceId,
     @JsonKey(name: 'name') NameData? name,
-    List<AttendanceMarkIndividualModel>? attendanceRegister,
+    @JsonKey(name: 'userDetails') UserDetails? userDetails,
+    // List<AttendanceMarkIndividualModel>? attendanceRegister,
   }) = _AttendanceMarkIndividual;
 
   factory AttendanceMarkIndividual.fromJson(
@@ -45,4 +46,33 @@ class NameData with _$NameData {
     Map<String, dynamic> json,
   ) =>
       _$NameDataFromJson(json);
+}
+
+@freezed
+class UserDetails with _$UserDetails {
+  factory UserDetails({
+    String? username,
+    String? tenantId,
+    String? type,
+    @JsonKey(name: 'roles') List<Role>? role,
+  }) = _UserDetails;
+
+  factory UserDetails.fromJson(
+    Map<String, dynamic> json,
+  ) =>
+      _$UserDetailsFromJson(json);
+}
+
+@freezed
+class Role with _$Role {
+  factory Role({
+    String? name,
+    String? code,
+    String? description,
+  }) = _Role;
+
+  factory Role.fromJson(
+    Map<String, dynamic> json,
+  ) =>
+      _$RoleFromJson(json);
 }
