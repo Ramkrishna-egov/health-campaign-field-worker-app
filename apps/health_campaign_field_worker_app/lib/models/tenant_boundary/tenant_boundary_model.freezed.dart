@@ -573,6 +573,7 @@ mixin _$BoundaryModel {
   String get localName => throw _privateConstructorUsedError;
   String? get longitude => throw _privateConstructorUsedError;
   String? get latitude => throw _privateConstructorUsedError;
+  String? get area => throw _privateConstructorUsedError;
   String get label => throw _privateConstructorUsedError;
   String get code => throw _privateConstructorUsedError;
   @JsonKey(includeIfNull: false)
@@ -597,6 +598,7 @@ abstract class $BoundaryModelCopyWith<$Res> {
       @JsonKey(name: 'localname') String localName,
       String? longitude,
       String? latitude,
+      String? area,
       String label,
       String code,
       @JsonKey(includeIfNull: false) List<BoundaryModel>? children});
@@ -621,6 +623,7 @@ class _$BoundaryModelCopyWithImpl<$Res, $Val extends BoundaryModel>
     Object? localName = null,
     Object? longitude = freezed,
     Object? latitude = freezed,
+    Object? area = freezed,
     Object? label = null,
     Object? code = null,
     Object? children = freezed,
@@ -649,6 +652,10 @@ class _$BoundaryModelCopyWithImpl<$Res, $Val extends BoundaryModel>
       latitude: freezed == latitude
           ? _value.latitude
           : latitude // ignore: cast_nullable_to_non_nullable
+              as String?,
+      area: freezed == area
+          ? _value.area
+          : area // ignore: cast_nullable_to_non_nullable
               as String?,
       label: null == label
           ? _value.label
@@ -681,6 +688,7 @@ abstract class _$$_BoundaryModelCopyWith<$Res>
       @JsonKey(name: 'localname') String localName,
       String? longitude,
       String? latitude,
+      String? area,
       String label,
       String code,
       @JsonKey(includeIfNull: false) List<BoundaryModel>? children});
@@ -703,6 +711,7 @@ class __$$_BoundaryModelCopyWithImpl<$Res>
     Object? localName = null,
     Object? longitude = freezed,
     Object? latitude = freezed,
+    Object? area = freezed,
     Object? label = null,
     Object? code = null,
     Object? children = freezed,
@@ -732,6 +741,10 @@ class __$$_BoundaryModelCopyWithImpl<$Res>
           ? _value.latitude
           : latitude // ignore: cast_nullable_to_non_nullable
               as String?,
+      area: freezed == area
+          ? _value.area
+          : area // ignore: cast_nullable_to_non_nullable
+              as String?,
       label: null == label
           ? _value.label
           : label // ignore: cast_nullable_to_non_nullable
@@ -759,6 +772,7 @@ class _$_BoundaryModel implements _BoundaryModel {
       @JsonKey(name: 'localname') required this.localName,
       this.longitude,
       this.latitude,
+      this.area,
       required this.label,
       required this.code,
       @JsonKey(includeIfNull: false) final List<BoundaryModel>? children})
@@ -781,6 +795,8 @@ class _$_BoundaryModel implements _BoundaryModel {
   @override
   final String? latitude;
   @override
+  final String? area;
+  @override
   final String label;
   @override
   final String code;
@@ -796,7 +812,7 @@ class _$_BoundaryModel implements _BoundaryModel {
 
   @override
   String toString() {
-    return 'BoundaryModel(id: $id, boundaryNum: $boundaryNum, name: $name, localName: $localName, longitude: $longitude, latitude: $latitude, label: $label, code: $code, children: $children)';
+    return 'BoundaryModel(id: $id, boundaryNum: $boundaryNum, name: $name, localName: $localName, longitude: $longitude, latitude: $latitude, area: $area, label: $label, code: $code, children: $children)';
   }
 
   @override
@@ -814,6 +830,7 @@ class _$_BoundaryModel implements _BoundaryModel {
                 other.longitude == longitude) &&
             (identical(other.latitude, latitude) ||
                 other.latitude == latitude) &&
+            (identical(other.area, area) || other.area == area) &&
             (identical(other.label, label) || other.label == label) &&
             (identical(other.code, code) || other.code == code) &&
             const DeepCollectionEquality().equals(other._children, _children));
@@ -829,6 +846,7 @@ class _$_BoundaryModel implements _BoundaryModel {
       localName,
       longitude,
       latitude,
+      area,
       label,
       code,
       const DeepCollectionEquality().hash(_children));
@@ -855,6 +873,7 @@ abstract class _BoundaryModel implements BoundaryModel {
           @JsonKey(name: 'localname') required final String localName,
           final String? longitude,
           final String? latitude,
+          final String? area,
           required final String label,
           required final String code,
           @JsonKey(includeIfNull: false) final List<BoundaryModel>? children}) =
@@ -876,6 +895,8 @@ abstract class _BoundaryModel implements BoundaryModel {
   String? get longitude;
   @override
   String? get latitude;
+  @override
+  String? get area;
   @override
   String get label;
   @override
