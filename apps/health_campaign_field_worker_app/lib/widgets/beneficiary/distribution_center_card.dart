@@ -20,11 +20,13 @@ class DistributionCenterCard extends StatelessWidget {
           ),
           child: Align(
             alignment: Alignment.topLeft,
-            child: Text(
-              "Distribution Center: ${context.boundaryOrNull!.name!}",
-              style: Theme.of(context).textTheme.headlineMedium,
-              textAlign: TextAlign.left,
-            ),
+            child: context.boundaryOrNull?.area != null
+                ? Text(
+                    "Distribution Center: ${context.boundaryOrNull?.area}",
+                    style: Theme.of(context).textTheme.headlineMedium,
+                    textAlign: TextAlign.left,
+                  )
+                : const Offstage(),
           ),
         );
       },
