@@ -238,7 +238,7 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           header: const BackNavigationHelpHeaderWidget(
-                            showHelp: true,
+                            showHelp: false,
                           ),
                           children: [
                             Padding(

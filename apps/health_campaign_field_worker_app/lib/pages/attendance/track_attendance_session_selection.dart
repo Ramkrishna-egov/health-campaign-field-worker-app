@@ -78,11 +78,11 @@ class _AttendanceDateSessionSelectionPageState
         builder: (context, form, child) {
           return ScrollableContent(
             header: const BackNavigationHelpHeaderWidget(
-              showHelp: true,
+              showHelp: false,
             ),
             footer: DigitElevatedButton(
               child: Text(
-                " ${localizations.translate(i18.attendance.viewAttendance)}",
+                localizations.translate(i18.attendance.viewAttendance),
               ),
               onPressed: () {
                 if (form.control(_sessionRadio).value == null) {
@@ -94,10 +94,6 @@ class _AttendanceDateSessionSelectionPageState
                   return;
                 } else {
                   DateTime s = form.control(_dateOfSession).value;
-
-                  // debugPrint(widget.tenantId);
-                  // debugPrint(s.microsecondsSinceEpoch.toString());
-                  // print(form.control(_sessionRadio).value.key.toString());
 
                   final entryTime =
                       AttendanceDateTimeManagement.getMillisecondEpoch(
@@ -130,7 +126,7 @@ class _AttendanceDateSessionSelectionPageState
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      " ${localizations.translate(i18.attendance.selectSession)}",
+                      localizations.translate(i18.attendance.selectSession),
                       style: DigitTheme
                           .instance.mobileTheme.textTheme.headlineLarge,
                     ),
@@ -138,13 +134,13 @@ class _AttendanceDateSessionSelectionPageState
                       start: widget.eventStart,
                       end: widget.eventEnd,
                       label:
-                          " ${localizations.translate(i18.attendance.dateOfSession)}",
+                          localizations.translate(i18.attendance.dateOfSession),
                       formControlName: _dateOfSession,
                       cancelText: "Cancel",
                       confirmText: "Select date",
                     ),
                     DigitRadioButtonList<KeyValue>(
-                      errorMessage: 'please select session',
+                      errorMessage: 'Please Select Session',
                       formControlName: _sessionRadio,
                       options: [
                         KeyValue("morning session", 0),
@@ -154,12 +150,13 @@ class _AttendanceDateSessionSelectionPageState
                         return value.label;
                       },
                     ),
-                    CustomInfoCard(
-                      title:
-                          " ${localizations.translate(i18.attendance.missedAttendanceInfo)}",
-                      description:
-                          " ${localizations.translate(i18.attendance.missedAttendanceDesc)}",
-                    ),
+                    // temporarily commented
+                    // CustomInfoCard(
+                    //   title:
+                    //       " ${localizations.translate(i18.attendance.missedAttendanceInfo)}",
+                    //   description:
+                    //       " ${localizations.translate(i18.attendance.missedAttendanceDesc)}",
+                    // ),
                   ],
                 ),
               ),
