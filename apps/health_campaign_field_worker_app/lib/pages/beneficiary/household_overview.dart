@@ -82,83 +82,6 @@ class _HouseholdOverviewPageState
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                       ),
-                                      DigitIconButton(
-                                        onPressed: () => DigitActionDialog.show(
-                                          context,
-                                          widget: ActionCard(
-                                            items: [
-                                              ActionCardModel(
-                                                icon: Icons.edit,
-                                                label: localizations.translate(
-                                                  i18.householdOverView
-                                                      .householdOverViewEditLabel,
-                                                ),
-                                                action: () async {
-                                                  final projectId =
-                                                      context.projectId;
-
-                                                  final bloc = context.read<
-                                                      HouseholdOverviewBloc>();
-                                                  Navigator.of(
-                                                    context,
-                                                    rootNavigator: true,
-                                                  ).pop();
-
-                                                  HouseholdMemberWrapper
-                                                      wrapper = state
-                                                          .householdMemberWrapper;
-
-                                                  final timestamp = wrapper
-                                                      .projectBeneficiaries
-                                                      .first
-                                                      .dateOfRegistration;
-                                                  // [TODO ]
-                                                  final date = DateTime
-                                                      .fromMillisecondsSinceEpoch(
-                                                    timestamp,
-                                                  );
-
-                                                  final address =
-                                                      wrapper.household.address;
-
-                                                  if (address == null) return;
-
-                                                  await context.router.root
-                                                      .push(
-                                                    BeneficiaryRegistrationWrapperRoute(
-                                                      initialState:
-                                                          BeneficiaryRegistrationEditHouseholdState(
-                                                        addressModel: address,
-                                                        individualModel:
-                                                            wrapper.members,
-                                                        householdModel:
-                                                            wrapper.household,
-                                                        registrationDate: date,
-                                                      ),
-                                                      children: [
-                                                        HouseholdLocationRoute(),
-                                                      ],
-                                                    ),
-                                                  );
-
-                                                  bloc.add(
-                                                    HouseholdOverviewReloadEvent(
-                                                      projectId: projectId,
-                                                      projectBeneficiaryType:
-                                                          beneficiaryType,
-                                                    ),
-                                                  );
-                                                },
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        iconText: localizations.translate(
-                                          i18.householdOverView
-                                              .householdOverViewEditIconText,
-                                        ),
-                                        icon: Icons.edit,
-                                      ),
                                     ],
                                   ),
                                   BlocBuilder<DeliverInterventionBloc,
@@ -220,7 +143,8 @@ class _HouseholdOverviewPageState
                                       localizations.translate(
                                         i18.householdLocation
                                             .administrationAreaFormLabel,
-                                      ): context.boundary.name,
+                                      ): state.householdMemberWrapper.household
+                                          .address?.addressLine1,
                                       localizations.translate(
                                         i18.deliverIntervention.memberCountText,
                                       ): state.householdMemberWrapper.household
