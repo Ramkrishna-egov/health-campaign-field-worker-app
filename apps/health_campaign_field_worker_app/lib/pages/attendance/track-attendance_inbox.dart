@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import '../../blocs/attendance/attendance_register.dart';
-import '../../blocs/localization/app_localization.dart';
 import '../../models/attendance/attendance_mark_model/register_model.dart';
-import '../../models/attendance/attendance_registry_model.dart';
 import '../../router/app_router.dart';
 import '../../utils/utils.dart';
 import '../../widgets/header/back_navigation_help_header.dart';
@@ -62,7 +60,9 @@ class _TrackAttendanceInboxPageState extends State<TrackAttendanceInboxPage> {
                 projectList = attendanceRegisters!
                     .map((e) => {
                           "Event Type": e.serviceCode,
-                          "Description": e.additionalDetails!.description ?? "",
+                          "Description": (e.additionalDetails != null)
+                              ? e.additionalDetails!.description ?? ""
+                              : "",
                           "Event Location": context.boundary.name,
                           "Individuals Count": e.attendanceAttendees != null
                               ? e.attendanceAttendees
