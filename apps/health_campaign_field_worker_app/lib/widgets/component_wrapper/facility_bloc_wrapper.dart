@@ -46,7 +46,9 @@ class FacilityBlocWrapper extends StatelessWidget {
               projectFacilityDataRepository: projectFacilityRepository,
             )..add(
                 ProjectFacilityLoadEvent(
-                  query: ProjectFacilitySearchModel(),
+                  query: ProjectFacilitySearchModel(
+                    projectId: [context.projectId],
+                  ),
                 ),
               ),
             child: child,
