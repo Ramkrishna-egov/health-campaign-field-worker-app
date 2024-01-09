@@ -282,7 +282,8 @@ class _ComplaintsDetailsPageState
                                 i18.householdLocation
                                     .administrationAreaFormLabel,
                               ),
-                              maxLength: 64,
+
+                              //maxLength: 64,
                               isRequired: true,
                               readOnly: true,
                             ),

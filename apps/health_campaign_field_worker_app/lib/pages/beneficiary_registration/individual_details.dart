@@ -1,14 +1,11 @@
 import 'package:collection/collection.dart';
 import 'package:digit_components/digit_components.dart';
-import 'package:digit_components/utils/date_utils.dart';
 import 'package:digit_components/widgets/atoms/digit_checkbox.dart';
 import 'package:digit_components/widgets/atoms/digit_toaster.dart';
-import 'package:digit_components/widgets/digit_dob_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:health_campaign_field_worker_app/widgets/beneficiary/distribution_center_card.dart';
-import 'package:intl/intl.dart';
+import '../../widgets/beneficiary/distribution_center_card.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../blocs/app_initialization/app_initialization.dart';
@@ -124,14 +121,20 @@ class _IndividualDetailsPageState
                           );
                           final scannerBloc = context.read<ScannerBloc>();
 
-                          if (scannerBloc.state.duplicate) {
+                          if (scannerBloc.state.duplicate ||
+                              scannerBloc.state.qrcodes.isEmpty) {
                             DigitToast.show(
                               context,
                               options: DigitToastOptions(
-                                localizations.translate(
-                                  i18.deliverIntervention
-                                      .resourceAlreadyScanned,
-                                ),
+                                scannerBloc.state.duplicate
+                                    ? localizations.translate(
+                                        i18.deliverIntervention
+                                            .resourceAlreadyScanned,
+                                      )
+                                    : localizations.translate(
+                                        i18.deliverIntervention
+                                            .resourceScanningMandatory,
+                                      ),
                                 true,
                                 theme,
                               ),
@@ -205,15 +208,21 @@ class _IndividualDetailsPageState
                               : null;
 
                           if (tag != null &&
-                              tag != projectBeneficiaryModel?.tag &&
-                              scannerBloc.state.duplicate) {
+                                  tag != projectBeneficiaryModel?.tag &&
+                                  scannerBloc.state.duplicate ||
+                              scannerBloc.state.qrcodes.isEmpty) {
                             DigitToast.show(
                               context,
                               options: DigitToastOptions(
-                                localizations.translate(
-                                  i18.deliverIntervention
-                                      .resourceAlreadyScanned,
-                                ),
+                                scannerBloc.state.duplicate
+                                    ? localizations.translate(
+                                        i18.deliverIntervention
+                                            .resourceAlreadyScanned,
+                                      )
+                                    : localizations.translate(
+                                        i18.deliverIntervention
+                                            .resourceScanningMandatory,
+                                      ),
                                 true,
                                 theme,
                               ),
@@ -262,14 +271,20 @@ class _IndividualDetailsPageState
                           if (context.mounted) {
                             final scannerBloc = context.read<ScannerBloc>();
 
-                            if (scannerBloc.state.duplicate) {
+                            if (scannerBloc.state.duplicate ||
+                                scannerBloc.state.qrcodes.isEmpty) {
                               DigitToast.show(
                                 context,
                                 options: DigitToastOptions(
-                                  localizations.translate(
-                                    i18.deliverIntervention
-                                        .resourceAlreadyScanned,
-                                  ),
+                                  scannerBloc.state.duplicate
+                                      ? localizations.translate(
+                                          i18.deliverIntervention
+                                              .resourceAlreadyScanned,
+                                        )
+                                      : localizations.translate(
+                                          i18.deliverIntervention
+                                              .resourceScanningMandatory,
+                                        ),
                                   true,
                                   theme,
                                 ),
@@ -476,7 +491,11 @@ class _IndividualDetailsPageState
                             : DigitOutlineIconButton(
                                 onPressed: () {
                                   context.read<ScannerBloc>().add(
-                                      const ScannerEvent.handleScanner([], []));
+                                        const ScannerEvent.handleScanner(
+                                          [],
+                                          [],
+                                        ),
+                                      );
                                   context.router.push(QRScannerRoute(
                                     quantity: 1,
                                     isGS1code: false,
