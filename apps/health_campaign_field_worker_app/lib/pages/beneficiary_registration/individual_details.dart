@@ -453,6 +453,12 @@ class _IndividualDetailsPageState
                                     color: theme.colorScheme.secondary,
                                     icon: const Icon(Icons.edit),
                                     onPressed: () {
+                                      context.read<ScannerBloc>().add(
+                                            const ScannerEvent.handleScanner(
+                                              [],
+                                              [],
+                                            ),
+                                          );
                                       // TODO : [Need to handle the Scanner event];
                                       // context.read<ScannerBloc>().add(ScannerScanEvent())
                                       context.router.push(QRScannerRoute(
@@ -469,6 +475,8 @@ class _IndividualDetailsPageState
                               )
                             : DigitOutlineIconButton(
                                 onPressed: () {
+                                  context.read<ScannerBloc>().add(
+                                      const ScannerEvent.handleScanner([], []));
                                   context.router.push(QRScannerRoute(
                                     quantity: 1,
                                     isGS1code: false,

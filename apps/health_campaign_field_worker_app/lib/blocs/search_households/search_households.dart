@@ -142,30 +142,60 @@ class SearchHouseholdsBloc
 /* [TODO: Need to handle the Tag search based on Beneficary Type
  current implementation is based on the individual based project
  ] */
+    List<IndividualModel> individuals = [];
+    List<HouseholdModel> households = [];
 
-    final List<IndividualModel> individuals = await individual.search(
-      IndividualSearchModel(
+    if (beneficiaryType == BeneficiaryType.household) {
+      households = await household.search(HouseholdSearchModel(
         clientReferenceId:
             beneficiaries.map((e) => e.beneficiaryClientReferenceId!).toList(),
-      ),
-    );
+      ));
+      print(households.length);
+    } else {
+      individuals = await individual.search(
+        IndividualSearchModel(
+          clientReferenceId: beneficiaries
+              .map((e) => e.beneficiaryClientReferenceId!)
+              .toList(),
+        ),
+      );
+      print(individuals.length);
+    }
 
     // Initialize a list to store household member wrappers.
     final containers = <HouseholdMemberWrapper>[];
-    if (individuals.isNotEmpty) {
-      final member = await householdMember.search(
-        HouseholdMemberSearchModel(
-          individualClientReferenceId:
-              individuals.map((e) => e.clientReferenceId).toList().first,
-        ),
-      );
+    if (individuals.isNotEmpty || households.isNotEmpty) {
+      final hhMembers = beneficiaryType == BeneficiaryType.individual
+          ? await householdMember.search(
+              HouseholdMemberSearchModel(
+                clientReferenceId:
+                    individuals.map((e) => e.clientReferenceId).toList(),
+              ),
+            )
+          : await householdMember.search(
+              HouseholdMemberSearchModel(
+                clientReferenceId:
+                    households.map((e) => e.clientReferenceId).toList(),
+              ),
+            );
+      final head = hhMembers.firstWhere((element) => element.isHeadOfHousehold);
 
       final members = await householdMember.search(
         HouseholdMemberSearchModel(
-          householdClientReferenceId: member.first.householdClientReferenceId,
+          householdClientReferenceId: head.householdClientReferenceId,
           isHeadOfHousehold: true,
         ),
       );
+
+      final individualList = beneficiaryType == BeneficiaryType.household
+          ? await individual.search(
+              IndividualSearchModel(
+                clientReferenceId: hhMembers
+                    .map((e) => e.individualClientReferenceId!)
+                    .toList(),
+              ),
+            )
+          : individuals;
 
       final householdList = await household.search(HouseholdSearchModel(
         clientReferenceId: [members.first.householdClientReferenceId!],
@@ -174,6 +204,10 @@ class SearchHouseholdsBloc
       // Search for tasks and side effects based on project beneficiaries.
       final tasks = await fetchTaskbyProjectBeneficiary(beneficiaries);
 
+      final referrals = await referralDataRepository.search(ReferralSearchModel(
+        projectBeneficiaryClientReferenceId:
+            beneficiaries.map((e) => e.clientReferenceId).toList(),
+      ));
       final sideEffects =
           await sideEffectDataRepository.search(SideEffectSearchModel(
         taskClientReferenceId: tasks.map((e) => e.clientReferenceId).toList(),
@@ -184,11 +218,12 @@ class SearchHouseholdsBloc
       containers.add(
         HouseholdMemberWrapper(
           household: householdList.first,
-          headOfHousehold: individuals.first,
-          members: individuals,
+          headOfHousehold: individualList.first,
+          members: individualList,
           projectBeneficiaries: beneficiaries,
           tasks: tasks.isEmpty ? null : tasks,
           sideEffects: sideEffects.isEmpty ? null : sideEffects,
+          referrals: referrals.isEmpty ? null : referrals,
         ),
       );
     }
