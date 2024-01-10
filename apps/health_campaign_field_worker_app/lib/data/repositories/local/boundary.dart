@@ -70,6 +70,7 @@ class BoundaryLocalRepository extends BoundaryLocalBaseRepository {
         materializedPath: data.materializedPath,
         latitude: data.latitude,
         longitude: data.longitude,
+        area: data.area,
       );
     }).toList();
 

@@ -29,6 +29,7 @@ class BoundaryModel extends EntityModel {
   final String? latitude;
   final int? boundaryNum;
   final String? longitude;
+  final String? area;
   final String? materializedPath;
   final String? tenantId;
   @override
@@ -42,6 +43,7 @@ class BoundaryModel extends EntityModel {
     this.label,
     this.latitude,
     this.longitude,
+    this.area,
     this.materializedPath,
     this.tenantId,
     this.isDeleted,
@@ -63,6 +65,7 @@ class BoundaryModel extends EntityModel {
       boundaryNum: Value(boundaryNum),
       latitude: Value(latitude),
       longitude: Value(longitude),
+      area: Value(area),
       materializedPath: Value(materializedPath),
       tenantId: Value(tenantId),
       isDeleted: Value(isDeleted),

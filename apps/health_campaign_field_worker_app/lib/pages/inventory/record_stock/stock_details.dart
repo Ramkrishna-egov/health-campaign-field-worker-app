@@ -9,6 +9,7 @@ import '../../../blocs/app_initialization/app_initialization.dart';
 import '../../../blocs/facility/facility.dart';
 import '../../../blocs/product_variant/product_variant.dart';
 import '../../../blocs/record_stock/record_stock.dart';
+import '../../../blocs/scanner/scanner.dart';
 import '../../../data/local_store/no_sql/schema/app_configuration.dart';
 import '../../../models/data_model.dart';
 import '../../../router/app_router.dart';
@@ -48,7 +49,6 @@ class _StockDetailsPageState extends LocalizedState<StockDetailsPage> {
         validators: [Validators.required],
       ),
       _transactionQuantityKey: FormControl<int>(validators: [
-        Validators.required,
         Validators.number,
         Validators.min(0),
         Validators.max(context.maximumQuantity),
@@ -62,7 +62,6 @@ class _StockDetailsPageState extends LocalizedState<StockDetailsPage> {
       ),
       _waybillQuantityKey: FormControl<int>(
         validators: [
-          Validators.required,
           Validators.number,
           Validators.min(0),
           Validators.max(context.maximumQuantity),
@@ -181,6 +180,32 @@ class _StockDetailsPageState extends LocalizedState<StockDetailsPage> {
                                     if (!form.valid) {
                                       return;
                                     }
+
+                                    final List<AdditionalField>
+                                        additionalFields = [];
+                                    final scannerState =
+                                        context.read<ScannerBloc>().state;
+                                    if (scannerState.barcodes.isNotEmpty) {
+                                      for (var element
+                                          in scannerState.barcodes) {
+                                        List<String> keys = [];
+                                        List<String> values = [];
+                                        for (var e
+                                            in element.elements.entries) {
+                                          e.value.rawData;
+                                          keys.add(e.key.toString());
+                                          values.add(e.value.data.toString());
+                                        }
+
+                                        additionalFields.add(
+                                          AdditionalField(
+                                            keys.join('|'),
+                                            values.join('|'),
+                                          ),
+                                        );
+                                      }
+                                    }
+
                                     FocusManager.instance.primaryFocus
                                         ?.unfocus();
 
@@ -262,6 +287,39 @@ class _StockDetailsPageState extends LocalizedState<StockDetailsPage> {
 
                                     transactingPartyType ??= 'WAREHOUSE';
 
+                                    if (waybillQuantity != null) {
+                                      additionalFields.add(AdditionalField(
+                                        'waybill_quantity',
+                                        waybillQuantity.toString(),
+                                      ));
+                                    }
+
+                                    if (vehicleNumber != null) {
+                                      additionalFields.add(AdditionalField(
+                                        'vehicle_number',
+                                        vehicleNumber,
+                                      ));
+                                    }
+
+                                    if (comments != null) {
+                                      additionalFields.add(AdditionalField(
+                                        'comments',
+                                        comments,
+                                      ));
+                                    }
+                                    if (transportType != null) {
+                                      additionalFields.add(AdditionalField(
+                                        'transport_type',
+                                        transportType,
+                                      ));
+                                    }
+                                    if (hasLocationData) {
+                                      additionalFields
+                                          .add(AdditionalField('lat', lat));
+                                      additionalFields
+                                          .add(AdditionalField('lng', lng));
+                                    }
+
                                     final stockModel = StockModel(
                                       clientReferenceId: IdGen.i.identifier,
                                       productVariantId: productVariant.id,
@@ -288,44 +346,13 @@ class _StockDetailsPageState extends LocalizedState<StockDetailsPage> {
                                         lastModifiedTime:
                                             context.millisecondsSinceEpoch(),
                                       ),
-                                      additionalFields: [
-                                                waybillQuantity,
-                                                vehicleNumber,
-                                                comments,
-                                                transportType,
-                                              ].any((element) =>
-                                                  element != null) ||
-                                              hasLocationData
-                                          ? StockAdditionalFields(
-                                              version: 1,
-                                              fields: [
-                                                if (waybillQuantity != null)
-                                                  AdditionalField(
-                                                    'waybill_quantity',
-                                                    waybillQuantity.toString(),
-                                                  ),
-                                                if (vehicleNumber != null)
-                                                  AdditionalField(
-                                                    'vehicle_number',
-                                                    vehicleNumber,
-                                                  ),
-                                                if (comments != null)
-                                                  AdditionalField(
-                                                    'comments',
-                                                    comments,
-                                                  ),
-                                                if (comments != null)
-                                                  AdditionalField(
-                                                    'transport_type',
-                                                    transportType,
-                                                  ),
-                                                if (hasLocationData) ...[
-                                                  AdditionalField('lat', lat),
-                                                  AdditionalField('lng', lng),
-                                                ],
-                                              ],
-                                            )
-                                          : null,
+                                      additionalFields:
+                                          additionalFields.isNotEmpty
+                                              ? StockAdditionalFields(
+                                                  version: 1,
+                                                  fields: additionalFields,
+                                                )
+                                              : null,
                                     );
 
                                     bloc.add(
@@ -485,9 +512,6 @@ class _StockDetailsPageState extends LocalizedState<StockDetailsPage> {
                                 "number": (object) => localizations.translate(
                                       '${quantityCountLabel}_VALIDATION',
                                     ),
-                                "required": (object) => localizations.translate(
-                                      i18.common.corecommonRequired,
-                                    ),
                                 "max": (object) => "${localizations.translate(
                                       '${quantityCountLabel}_MAX_ERROR',
                                     )} ${context.maximumQuantity}",
@@ -523,11 +547,8 @@ class _StockDetailsPageState extends LocalizedState<StockDetailsPage> {
                               formControlName: _waybillQuantityKey,
                               isRequired: true,
                               validationMessages: {
-                                "required": (object) => localizations.translate(
-                                      i18.common.corecommonRequired,
-                                    ),
                                 "number": (object) => localizations.translate(
-                                      '${quantityCountLabel}_ERROR',
+                                      '${quantityCountLabel}_VALIDATION',
                                     ),
                                 "max": (object) => "${localizations.translate(
                                       '${quantityCountLabel}_MAX_ERROR',
@@ -551,7 +572,8 @@ class _StockDetailsPageState extends LocalizedState<StockDetailsPage> {
                                     label: localizations.translate(
                                       i18.stockDetails.transportTypeLabel,
                                     ),
-                                    valueMapper: (e) => e,
+                                    valueMapper: (e) =>
+                                        localizations.translate(e),
                                     onChanged: (value) {
                                       setState(() {
                                         form.control(_typeOfTransportKey);
@@ -561,7 +583,7 @@ class _StockDetailsPageState extends LocalizedState<StockDetailsPage> {
                                         transportTypeOptions.firstOrNull?.name,
                                     menuItems: transportTypeOptions.map(
                                       (e) {
-                                        return localizations.translate(e.name);
+                                        return e.code;
                                       },
                                     ).toList(),
                                     formControlName: _typeOfTransportKey,
@@ -592,6 +614,24 @@ class _StockDetailsPageState extends LocalizedState<StockDetailsPage> {
                                       i18.common.min2CharsRequired,
                                     ),
                               },
+                            ),
+                            DigitOutlineIconButton(
+                              buttonStyle: OutlinedButton.styleFrom(
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.zero,
+                                ),
+                              ),
+                              onPressed: () {
+                                context.router.push(QRScannerRoute(
+                                  quantity: 5,
+                                  isGS1code: true,
+                                  sinlgleValue: false,
+                                ));
+                              },
+                              icon: Icons.qr_code,
+                              label: localizations.translate(
+                                i18.common.scanBales,
+                              ),
                             ),
                           ],
                         ),
