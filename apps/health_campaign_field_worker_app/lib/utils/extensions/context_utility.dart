@@ -27,19 +27,15 @@ extension ContextUtilityExtensions on BuildContext {
   String get projectId => selectedProject.id;
 
   int get maximumQuantity {
-    int totalNumber = selectedProject.targets!
-            .where((element) =>
-                element.beneficiaryType == BeneficiaryType.individual)
-            .toList()
-            .isNotEmpty
-        ? selectedProject.targets!
-            .where((element) =>
-                element.beneficiaryType == BeneficiaryType.individual)
-            .toList()
-            .first
-            .totalNo!
-            .toInt()
-        : 10000;
+    int totalNumber = 0;
+    List<TargetModel> filterData = selectedProject.targets!
+        .where(
+          (element) => element.beneficiaryType == BeneficiaryType.individual,
+        )
+        .toList();
+
+    totalNumber =
+        filterData.isNotEmpty ? filterData.first.totalNo!.toInt() : 10000;
 
     int expectedCount = (totalNumber * 1.3) ~/ 2;
 
