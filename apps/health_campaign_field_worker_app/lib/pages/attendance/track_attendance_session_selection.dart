@@ -1,15 +1,12 @@
 import 'package:digit_components/digit_components.dart';
 import 'package:digit_components/widgets/atoms/digit_radio_button_list.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import '../../utils/i18_key_constants.dart' as i18;
 //import 'package:digit_components/models/digit_table_model.dart';
 import '../../blocs/localization/app_localization.dart';
 import '../../router/app_router.dart';
 import '../../utils/attendance/date_util_attendance.dart';
-import '../../widgets/attendance/custom_info_card.dart';
 import '../../widgets/header/back_navigation_help_header.dart';
 import '../../widgets/localized.dart';
 
@@ -41,21 +38,11 @@ class _AttendanceDateSessionSelectionPageState
   List<String> attendeeList = [];
   @override
   void initState() {
-    // context.read<AttendanceIndividualProjectSearchBloc>().add(
-    //       SearchIndividualAttendanceProjectEvent(
-    //         id: widget.id,
-    //         tenantId: widget.tenantId,
-    //       ),
-    //     );
-
     super.initState();
   }
 
   @override
   void deactivate() {
-    // context.read<MusterRollEstimateBloc>().add(
-    //       const DisposeEstimateMusterRollEvent(),
-    //     );
     super.deactivate();
   }
 

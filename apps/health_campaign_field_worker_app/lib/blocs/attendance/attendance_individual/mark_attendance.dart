@@ -113,9 +113,4 @@ class MarkAttendanceState with _$MarkAttendanceState {
     @Default('') String responseMsg,
   }) = _Loaded;
   const factory MarkAttendanceState.error(String? error) = _Error;
-  // const factory AttendanceProjectsSearchState({
-  //   @Default(false) bool loading,
-  //   AttendanceRegistersModel? attendanceRegistersModel,
-  //   AttendanceRegistersModel? individualAttendanceRegisterModel,
-  // }) = _AttendanceProjectsSearchState;
 }

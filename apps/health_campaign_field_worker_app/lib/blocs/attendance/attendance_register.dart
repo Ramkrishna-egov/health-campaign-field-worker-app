@@ -71,9 +71,4 @@ class AttendanceProjectsSearchState with _$AttendanceProjectsSearchState {
     AttendanceMarkRegisterModelResponse? attendanceRegistersModel,
   ) = _Loaded;
   const factory AttendanceProjectsSearchState.error(String? error) = _Error;
-  // const factory AttendanceProjectsSearchState({
-  //   @Default(false) bool loading,
-  //   AttendanceRegistersModel? attendanceRegistersModel,
-  //   AttendanceRegistersModel? individualAttendanceRegisterModel,
-  // }) = _AttendanceProjectsSearchState;
 }

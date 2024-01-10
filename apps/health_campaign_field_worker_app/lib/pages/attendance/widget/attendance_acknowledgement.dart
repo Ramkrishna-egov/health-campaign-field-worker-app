@@ -112,36 +112,6 @@ class _AttendanceAcknowledgementPageState
                   ),
                   child: Column(
                     children: [
-                      // if (widget.enableViewHousehold)
-                      //   Column(
-                      //     children: [
-                      //       DigitElevatedButton(
-                      //         onPressed: widget.secondaryAction,
-                      //         child: Text(widget.secondaryLabel ?? ""),
-                      //       ),
-                      //       const SizedBox(
-                      //         height: kPadding,
-                      //       ),
-                      //       DigitOutLineButton(
-                      //         onPressed: widget.action,
-                      //         label: widget.actionLabel ?? '',
-                      //         buttonStyle: OutlinedButton.styleFrom(
-                      //           backgroundColor: Colors.white,
-                      //           side: BorderSide(
-                      //             width: 1.0,
-                      //             color:
-                      //                 Theme.of(context).colorScheme.secondary,
-                      //           ),
-                      //           minimumSize: Size(
-                      //             MediaQuery.of(context).size.width / 1,
-                      //             50,
-                      //           ),
-                      //           shape: null,
-                      //         ),
-                      //       ),
-                      //     ],
-                      //   )
-                      // else if (widget.isActionLabel)
                       Column(
                         children: [
                           DigitElevatedButton(

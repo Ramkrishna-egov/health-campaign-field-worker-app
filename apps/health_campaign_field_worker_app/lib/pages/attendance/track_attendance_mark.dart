@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:digit_components/digit_components.dart';
 import 'package:digit_components/models/digit_table_model.dart';
-import 'package:digit_components/widgets/digit_sync_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -11,10 +10,8 @@ import '../../blocs/attendance/attendance_individual/individual_attendance_log.d
 import '../../blocs/attendance/attendance_individual/mark_attendance.dart';
 import '../../blocs/localization/app_localization.dart';
 import '../../models/attendance/attendance_model/attendance_collection_attendee.dart';
-import '../../models/attendance/attendance_model/attendance_row_model.dart';
 import '../../router/app_router.dart';
 import '../../utils/extensions/extensions.dart';
-import '../../widgets/attendance/attendance_pagination.dart';
 import '../../widgets/attendance/circular_button.dart';
 import '../../widgets/header/back_navigation_help_header.dart';
 import '../../widgets/localized.dart';
@@ -134,7 +131,7 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                     ).popUntil(
                       (route) => route is! PopupRoute,
                     );
-                    //context.router.popAndPush(AcknowledgementRoute());
+
                     context.router.popAndPush(
                       AttendanceAcknowledgementRoute(
                         enableViewHousehold: true,

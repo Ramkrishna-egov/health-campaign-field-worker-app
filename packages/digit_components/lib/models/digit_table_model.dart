@@ -35,19 +35,3 @@ class TableData {
     String? apiKey,
   });
 }
-
-// class TableData {
-//   final String? label;
-//   final Widget? widget;
-//   final TextStyle? style;
-//   final String? apiKey;
-//   bool? hide = false;
-//   ValueChanged<TableData>? callBack;
-//   TableData(
-//       {this.label,
-//       this.widget,
-//       this.style,
-//       this.callBack,
-//       this.apiKey,
-//       this.hide});
-// }

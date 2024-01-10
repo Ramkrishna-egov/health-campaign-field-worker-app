@@ -39,7 +39,6 @@ class AttendanceRegisterRepository {
           },
         },
       );
-      // var data = await rootBundle.loadString("assets/registar_data.json");
 
       return AttendanceMarkRegisterModelResponse.fromJson(
         json.decode(
@@ -68,26 +67,16 @@ class AttendanceRegisterRepository {
       );
       final auth = await LocalSecureStore.instance.accessToken;
       var res = await client.post(
-        // "attendance/v1/_search",
-        // queryParameters: {
-        //   "tenantId": "lb",
-        //   "referenceId": "823f9d7c-4a19-4e46-ab5e-bc21685f515d",
-        // },
         g,
         data: {
           "RequestInfo": {
             "authToken": auth.toString(),
           },
           "Individual": {
-            // "id": [
-            //   "ba13b724-093a-4e05-b7b0-048159cd7908",
-            // ],
             "id": attendeeids,
           },
         },
       );
-
-      // var data = await rootBundle.loadString("assets/attendees.json");
 
       return AttendanceMarkIndividualModel.fromJson(
         json.decode(
@@ -98,60 +87,6 @@ class AttendanceRegisterRepository {
       rethrow;
     }
   }
-
-// fetch list of individuals attendance log
-
-  // Future<AttendeeLogWrappperResponse> fetchAttendeesLog({
-  //   required String registartId,
-  //   required int fromTime,
-  //   required toTime,
-  //   required List<String> individualId,
-  // }) async {
-  //   try {
-  //     var data = await rootBundle.loadString("assets/attendee_log.json");
-
-  //     AttendeeLogWrappperResponse dec = AttendeeLogWrappperResponse.fromJson(
-  //       json.decode(
-  //         data.toString(),
-  //       ),
-  //     );
-
-  //     return dec;
-  //   } on DioError catch (ex) {
-  //     rethrow;
-  //   }
-  // }
-
-// create attendance log
-// {
-//   "requestInfo": {
-//     "apiId": "string",
-//     "ver": "string",
-//     "ts": 0,
-//     "action": "string",
-//     "did": "string",
-//     "key": "string",
-//     "msgId": "string",
-//     "requesterId": "string",
-//     "authToken": "string"
-//   },
-//   "attendance": [
-//     {
-//       "registerId": "string",
-//       "individualId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-//       "tenantId": "pb.amritsar",
-//       "time": 0,
-//       "type": "string",
-//       "status": "ACTIVE",
-//       "documentIds": [
-//         "string"
-//       ],
-//       "additionalDetails": {}
-//     }
-//   ]
-// }
-
-//
 
   Future<bool> createAttendanceLog({
     required String registartId,
