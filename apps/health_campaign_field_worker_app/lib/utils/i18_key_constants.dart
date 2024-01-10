@@ -675,6 +675,8 @@ class DeliverIntervention {
   String get deliveryNoOfMembersLable => 'DELIVERY_NO_OF_MEMBERS_LABEL';
 
   String get deliveryNoOfResourcesLable => 'DELIVERY_NO_OF_RESOURCES_LABEL';
+
+  String get resourceScanningMandatory => 'RESOURCE_SCANNING_MANDATORY';
 }
 
 class ProjectSelection {

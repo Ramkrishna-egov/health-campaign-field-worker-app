@@ -519,9 +519,7 @@ class _StockReconciliationPageState
                                             .stockReconciliationDetails
                                             .manualCountMinError,
                                         "max": (object) =>
-                                            localizations.translate(i18
-                                                .stockReconciliationDetails
-                                                .manualCountMaxError),
+                                            "${localizations.translate(i18.stockReconciliationDetails.manualCountMaxError)}${context.maximumQuantity}",
                                       },
                                       onChanged: (control) {
                                         final manualStockCount = control.value;

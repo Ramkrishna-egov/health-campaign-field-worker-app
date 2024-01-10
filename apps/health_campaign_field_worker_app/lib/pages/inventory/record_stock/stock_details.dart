@@ -51,7 +51,7 @@ class _StockDetailsPageState extends LocalizedState<StockDetailsPage> {
       _transactionQuantityKey: FormControl<int>(validators: [
         Validators.number,
         Validators.min(0),
-        Validators.max(10000),
+        Validators.max(context.maximumQuantity),
       ]),
       _transactionReasonKey: FormControl<TransactionReason>(),
       _waybillNumberKey: FormControl<String>(
@@ -64,7 +64,7 @@ class _StockDetailsPageState extends LocalizedState<StockDetailsPage> {
         validators: [
           Validators.number,
           Validators.min(0),
-          Validators.max(10000),
+          Validators.max(context.maximumQuantity),
         ],
       ),
       _vehicleNumberKey: FormControl<String>(
@@ -512,9 +512,9 @@ class _StockDetailsPageState extends LocalizedState<StockDetailsPage> {
                                 "number": (object) => localizations.translate(
                                       '${quantityCountLabel}_VALIDATION',
                                     ),
-                                "max": (object) => localizations.translate(
+                                "max": (object) => "${localizations.translate(
                                       '${quantityCountLabel}_MAX_ERROR',
-                                    ),
+                                    )} ${context.maximumQuantity}",
                                 "min": (object) => localizations.translate(
                                       '${quantityCountLabel}_MIN_ERROR',
                                     ),
@@ -550,9 +550,9 @@ class _StockDetailsPageState extends LocalizedState<StockDetailsPage> {
                                 "number": (object) => localizations.translate(
                                       '${quantityCountLabel}_VALIDATION',
                                     ),
-                                "max": (object) => localizations.translate(
+                                "max": (object) => "${localizations.translate(
                                       '${quantityCountLabel}_MAX_ERROR',
-                                    ),
+                                    )} ${context.maximumQuantity}",
                                 "min": (object) => localizations.translate(
                                       '${quantityCountLabel}_MIN_ERROR',
                                     ),
