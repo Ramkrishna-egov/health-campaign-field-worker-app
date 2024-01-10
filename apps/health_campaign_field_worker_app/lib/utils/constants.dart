@@ -9,6 +9,7 @@ import 'package:path_provider/path_provider.dart';
 
 import '../blocs/app_initialization/app_initialization.dart';
 import '../data/data_repository.dart';
+import '../data/local_store/no_sql/schema/absent_attendee.dart';
 import '../data/local_store/no_sql/schema/app_configuration.dart';
 import '../data/local_store/no_sql/schema/localization.dart';
 import '../data/local_store/no_sql/schema/oplog.dart';
@@ -93,6 +94,7 @@ class Constants {
           OpLogSchema,
           ProjectTypeListCycleSchema,
           RowVersionListSchema,
+          AbsentAttendeeSchema,
         ],
         inspector: true,
         directory: directory.path,
@@ -384,5 +386,29 @@ class DataModels {
       default:
         return DataModelType.householdMember;
     }
+  }
+}
+
+class ApiUtil {
+  static String fetchIndividuals({
+    required int limit,
+    required int offset,
+    required String tenantId,
+    bool isDeleted = false,
+  }) {
+    return "individual/v1/_search?limit=$limit&offset=$offset&tenantId=$tenantId";
+    // individual/v1/_search?limit=1000&offset=0&tenantId=lb
+  }
+
+  static String fetchRegisters(String projectId, String tenantId) {
+    return "attendance/v1/_search?tenantId=$tenantId&referenceId=$projectId";
+  }
+
+  static String fetchIndividualAttendanceLog() {
+    return "";
+  }
+
+  static String createAttendanceLog() {
+    return "attendance/log/v1/_create";
   }
 }
