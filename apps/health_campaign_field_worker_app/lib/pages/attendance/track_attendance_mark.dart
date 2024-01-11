@@ -322,7 +322,7 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                                         DigitTheme.instance.colorScheme.error,
                                   ),
                                   Text(
-                                    "${i18.attendance.somethingWentWrong}!!!",
+                                    "${localizations.translate(i18.attendance.somethingWentWrong)}!!!",
                                     style: DigitTheme.instance.mobileTheme
                                         .textTheme.headlineMedium,
                                     textAlign: TextAlign.center,
@@ -333,32 +333,45 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                                       width: 80,
                                       height: 40,
                                       child: DigitElevatedButton(
-                                        child: Text(i18.attendance.retry),
-                                        onPressed: () {
-                                          context
-                                              .read<AttendanceIndividualBloc>()
-                                              .add(
-                                                AttendanceIndividualLogSearchEvent(
-                                                  attendeeId:
-                                                      widget.attendeeIds,
-                                                  limit: 10,
-                                                  offset: 0,
-                                                  currentDate: widget.dateTime
-                                                      .millisecondsSinceEpoch,
-                                                  entryTime: widget.entryTime,
-                                                  exitTime: widget.exitTime,
-                                                  projectId: context.projectId,
-                                                  registerId: widget.registerId,
-                                                  tenantId: widget.tenantId,
-                                                  eventEndDate: widget
-                                                      .eventEndTime
-                                                      .millisecondsSinceEpoch,
-                                                  eventStartDate: widget
-                                                      .eventStartTime
-                                                      .millisecondsSinceEpoch,
-                                                ),
-                                              );
-                                        },
+                                        onPressed: widget.attendeeIds.isNotEmpty
+                                            ? () {
+                                                context
+                                                    .read<
+                                                        AttendanceIndividualBloc>()
+                                                    .add(
+                                                      AttendanceIndividualLogSearchEvent(
+                                                        attendeeId:
+                                                            widget.attendeeIds,
+                                                        limit: 10,
+                                                        offset: 0,
+                                                        currentDate: widget
+                                                            .dateTime
+                                                            .millisecondsSinceEpoch,
+                                                        entryTime:
+                                                            widget.entryTime,
+                                                        exitTime:
+                                                            widget.exitTime,
+                                                        projectId:
+                                                            context.projectId,
+                                                        registerId:
+                                                            widget.registerId,
+                                                        tenantId:
+                                                            widget.tenantId,
+                                                        eventEndDate: widget
+                                                            .eventEndTime
+                                                            .millisecondsSinceEpoch,
+                                                        eventStartDate: widget
+                                                            .eventStartTime
+                                                            .millisecondsSinceEpoch,
+                                                      ),
+                                                    );
+                                              }
+                                            : () {
+                                                Navigator.of(context).pop();
+                                              },
+                                        child: Text(localizations.translate(
+                                          i18.attendance.closeButton,
+                                        )),
                                       ),
                                     ),
                                   ),
@@ -409,7 +422,7 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                       bottom: 8.0,
                     ),
                     child: Text(
-                      "${i18.attendance.somethingWentWrong} \n ${i18.attendance.pleaseTryAgain}!!",
+                      "${k.translate(i18.attendance.somethingWentWrong)} \n ${k.translate(i18.attendance.pleaseTryAgain)}!!",
                       style: DigitTheme
                           .instance.mobileTheme.textTheme.headlineMedium,
                       textAlign: TextAlign.center,
