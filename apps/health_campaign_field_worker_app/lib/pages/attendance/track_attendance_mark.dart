@@ -24,6 +24,8 @@ class MarkAttendancePage extends LocalizedStatefulWidget {
   final DateTime dateTime;
   final int entryTime;
   final int exitTime;
+  final DateTime eventStartTime;
+  final DateTime eventEndTime;
   const MarkAttendancePage({
     required this.exitTime,
     required this.entryTime,
@@ -31,6 +33,8 @@ class MarkAttendancePage extends LocalizedStatefulWidget {
     required this.attendeeIds,
     required this.registerId,
     required this.tenantId,
+    required this.eventStartTime,
+    required this.eventEndTime,
     super.key,
     super.appLocalizations,
   });
@@ -59,6 +63,8 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
             projectId: context.projectId,
             registerId: widget.registerId,
             tenantId: widget.tenantId,
+            eventEndDate: widget.eventEndTime.millisecondsSinceEpoch,
+            eventStartDate: widget.eventStartTime.millisecondsSinceEpoch,
           ),
         );
 
@@ -168,7 +174,13 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                   ).popUntil(
                     (route) => route is! PopupRoute,
                   );
-                  showErrorDialog(context, localizations, false);
+                  showErrorDialog(
+                    context,
+                    localizations,
+                    false,
+                    eventEnd: widget.eventEndTime,
+                    eventStart: widget.eventStartTime,
+                  );
                 },
               );
             },
@@ -344,6 +356,12 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                                                   projectId: context.projectId,
                                                   registerId: widget.registerId,
                                                   tenantId: widget.tenantId,
+                                                  eventEndDate: widget
+                                                      .eventEndTime
+                                                      .millisecondsSinceEpoch,
+                                                  eventStartDate: widget
+                                                      .eventStartTime
+                                                      .millisecondsSinceEpoch,
                                                 ),
                                               );
                                         },
@@ -367,7 +385,13 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
     );
   }
 
-  Future<dynamic> showErrorDialog(BuildContext context, dynamic k, bool retry) {
+  Future<dynamic> showErrorDialog(
+    BuildContext context,
+    dynamic k,
+    bool retry, {
+    required DateTime eventStart,
+    required DateTime eventEnd,
+  }) {
     return showDialog(
       barrierDismissible: false,
       context: context,
@@ -417,6 +441,10 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                                       projectId: context.projectId,
                                       registerId: widget.registerId,
                                       tenantId: widget.tenantId,
+                                      eventStartDate:
+                                          eventStart.millisecondsSinceEpoch,
+                                      eventEndDate:
+                                          eventEnd.millisecondsSinceEpoch,
                                     ),
                                   );
                             }
@@ -472,6 +500,8 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                           registarId: tableDataModel!.registerId!,
                           status: tableDataModel.individualId,
                           id: tableDataModel.id!,
+                          eventStartDate: tableDataModel.eventStartDate,
+                          eventEndDate: tableDataModel.eventEndDate,
                         ),
                       );
                 }

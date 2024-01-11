@@ -103,6 +103,8 @@ class _AttendanceDateSessionSelectionPageState
                     dateTime: s,
                     entryTime: entryTime,
                     exitTime: exitTime,
+                    eventEndTime: widget.eventEnd,
+                    eventStartTime: widget.eventStart,
                   ));
                 }
               },

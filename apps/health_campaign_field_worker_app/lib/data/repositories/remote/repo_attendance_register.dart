@@ -153,6 +153,7 @@ class AttendanceRegisterRepository {
           : data!.status == 1
               ? 0
               : 1;
+
       await isar.writeTxn(() async {
         await isar.absentAttendees.put(data);
       });

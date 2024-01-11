@@ -63,12 +63,12 @@ class AttendanceIndividualBloc
               ..name = e.name!.givenName ?? ""
               ..entryTime = event.entryTime
               ..exitTime = event.exitTime
-              ..eventStartDate = event.currentDate
-              ..eventEndDate = event.currentDate
+              ..eventStartDate = event.eventStartDate
+              ..eventEndDate = event.eventEndDate
               ..individualId = e.id!
               ..projectId = event.projectId
               ..status = -1
-              ..currentDate = 12334567
+              ..currentDate = event.currentDate
               ..registerId = event.registerId
               ..tenantId = event.tenantId
               ..userName = e.userDetails!.username ?? "";
@@ -339,6 +339,8 @@ class AttendanceIndividualEvent with _$AttendanceIndividualEvent {
     required List<String> attendeeId,
     required int offset,
     required int limit,
+    required int eventStartDate,
+    required int eventEndDate,
   }) = AttendanceIndividualLogSearchEvent;
   const factory AttendanceIndividualEvent.individualAttendanceMark({
     @Default(0) int entryTime,
@@ -347,6 +349,8 @@ class AttendanceIndividualEvent with _$AttendanceIndividualEvent {
     required String individualId,
     required String registarId,
     required int id,
+    required int eventStartDate,
+    required int eventEndDate,
   }) = AttendanceMarkEvent;
 
   const factory AttendanceIndividualEvent.uploadAttendance({

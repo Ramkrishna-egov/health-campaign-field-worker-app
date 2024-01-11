@@ -27,10 +27,19 @@ mixin _$AttendanceIndividualEvent {
             String projectId,
             List<String> attendeeId,
             int offset,
-            int limit)
+            int limit,
+            int eventStartDate,
+            int eventEndDate)
         individualAttendanceLogSearch,
-    required TResult Function(int entryTime, int exitTime, dynamic status,
-            String individualId, String registarId, int id)
+    required TResult Function(
+            int entryTime,
+            int exitTime,
+            dynamic status,
+            String individualId,
+            String registarId,
+            int id,
+            int eventStartDate,
+            int eventEndDate)
         individualAttendanceMark,
     required TResult Function(int entryTime, int exitTime, int status,
             String tenantId, String registarId, String projectId)
@@ -52,10 +61,19 @@ mixin _$AttendanceIndividualEvent {
             String projectId,
             List<String> attendeeId,
             int offset,
-            int limit)?
+            int limit,
+            int eventStartDate,
+            int eventEndDate)?
         individualAttendanceLogSearch,
-    TResult? Function(int entryTime, int exitTime, dynamic status,
-            String individualId, String registarId, int id)?
+    TResult? Function(
+            int entryTime,
+            int exitTime,
+            dynamic status,
+            String individualId,
+            String registarId,
+            int id,
+            int eventStartDate,
+            int eventEndDate)?
         individualAttendanceMark,
     TResult? Function(int entryTime, int exitTime, int status, String tenantId,
             String registarId, String projectId)?
@@ -77,10 +95,19 @@ mixin _$AttendanceIndividualEvent {
             String projectId,
             List<String> attendeeId,
             int offset,
-            int limit)?
+            int limit,
+            int eventStartDate,
+            int eventEndDate)?
         individualAttendanceLogSearch,
-    TResult Function(int entryTime, int exitTime, dynamic status,
-            String individualId, String registarId, int id)?
+    TResult Function(
+            int entryTime,
+            int exitTime,
+            dynamic status,
+            String individualId,
+            String registarId,
+            int id,
+            int eventStartDate,
+            int eventEndDate)?
         individualAttendanceMark,
     TResult Function(int entryTime, int exitTime, int status, String tenantId,
             String registarId, String projectId)?
@@ -161,7 +188,9 @@ abstract class _$$AttendanceIndividualLogSearchEventCopyWith<$Res> {
       String projectId,
       List<String> attendeeId,
       int offset,
-      int limit});
+      int limit,
+      int eventStartDate,
+      int eventEndDate});
 }
 
 /// @nodoc
@@ -186,6 +215,8 @@ class __$$AttendanceIndividualLogSearchEventCopyWithImpl<$Res>
     Object? attendeeId = null,
     Object? offset = null,
     Object? limit = null,
+    Object? eventStartDate = null,
+    Object? eventEndDate = null,
   }) {
     return _then(_$AttendanceIndividualLogSearchEvent(
       registerId: null == registerId
@@ -224,6 +255,14 @@ class __$$AttendanceIndividualLogSearchEventCopyWithImpl<$Res>
           ? _value.limit
           : limit // ignore: cast_nullable_to_non_nullable
               as int,
+      eventStartDate: null == eventStartDate
+          ? _value.eventStartDate
+          : eventStartDate // ignore: cast_nullable_to_non_nullable
+              as int,
+      eventEndDate: null == eventEndDate
+          ? _value.eventEndDate
+          : eventEndDate // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -241,7 +280,9 @@ class _$AttendanceIndividualLogSearchEvent
       required this.projectId,
       required final List<String> attendeeId,
       required this.offset,
-      required this.limit})
+      required this.limit,
+      required this.eventStartDate,
+      required this.eventEndDate})
       : _attendeeId = attendeeId;
 
   @override
@@ -267,10 +308,14 @@ class _$AttendanceIndividualLogSearchEvent
   final int offset;
   @override
   final int limit;
+  @override
+  final int eventStartDate;
+  @override
+  final int eventEndDate;
 
   @override
   String toString() {
-    return 'AttendanceIndividualEvent.individualAttendanceLogSearch(registerId: $registerId, tenantId: $tenantId, entryTime: $entryTime, exitTime: $exitTime, currentDate: $currentDate, projectId: $projectId, attendeeId: $attendeeId, offset: $offset, limit: $limit)';
+    return 'AttendanceIndividualEvent.individualAttendanceLogSearch(registerId: $registerId, tenantId: $tenantId, entryTime: $entryTime, exitTime: $exitTime, currentDate: $currentDate, projectId: $projectId, attendeeId: $attendeeId, offset: $offset, limit: $limit, eventStartDate: $eventStartDate, eventEndDate: $eventEndDate)';
   }
 
   @override
@@ -293,7 +338,11 @@ class _$AttendanceIndividualLogSearchEvent
             const DeepCollectionEquality()
                 .equals(other._attendeeId, _attendeeId) &&
             (identical(other.offset, offset) || other.offset == offset) &&
-            (identical(other.limit, limit) || other.limit == limit));
+            (identical(other.limit, limit) || other.limit == limit) &&
+            (identical(other.eventStartDate, eventStartDate) ||
+                other.eventStartDate == eventStartDate) &&
+            (identical(other.eventEndDate, eventEndDate) ||
+                other.eventEndDate == eventEndDate));
   }
 
   @override
@@ -307,7 +356,9 @@ class _$AttendanceIndividualLogSearchEvent
       projectId,
       const DeepCollectionEquality().hash(_attendeeId),
       offset,
-      limit);
+      limit,
+      eventStartDate,
+      eventEndDate);
 
   @JsonKey(ignore: true)
   @override
@@ -329,10 +380,19 @@ class _$AttendanceIndividualLogSearchEvent
             String projectId,
             List<String> attendeeId,
             int offset,
-            int limit)
+            int limit,
+            int eventStartDate,
+            int eventEndDate)
         individualAttendanceLogSearch,
-    required TResult Function(int entryTime, int exitTime, dynamic status,
-            String individualId, String registarId, int id)
+    required TResult Function(
+            int entryTime,
+            int exitTime,
+            dynamic status,
+            String individualId,
+            String registarId,
+            int id,
+            int eventStartDate,
+            int eventEndDate)
         individualAttendanceMark,
     required TResult Function(int entryTime, int exitTime, int status,
             String tenantId, String registarId, String projectId)
@@ -342,8 +402,18 @@ class _$AttendanceIndividualLogSearchEvent
         searchAttendees,
     required TResult Function() dispose,
   }) {
-    return individualAttendanceLogSearch(registerId, tenantId, entryTime,
-        exitTime, currentDate, projectId, attendeeId, offset, limit);
+    return individualAttendanceLogSearch(
+        registerId,
+        tenantId,
+        entryTime,
+        exitTime,
+        currentDate,
+        projectId,
+        attendeeId,
+        offset,
+        limit,
+        eventStartDate,
+        eventEndDate);
   }
 
   @override
@@ -358,10 +428,19 @@ class _$AttendanceIndividualLogSearchEvent
             String projectId,
             List<String> attendeeId,
             int offset,
-            int limit)?
+            int limit,
+            int eventStartDate,
+            int eventEndDate)?
         individualAttendanceLogSearch,
-    TResult? Function(int entryTime, int exitTime, dynamic status,
-            String individualId, String registarId, int id)?
+    TResult? Function(
+            int entryTime,
+            int exitTime,
+            dynamic status,
+            String individualId,
+            String registarId,
+            int id,
+            int eventStartDate,
+            int eventEndDate)?
         individualAttendanceMark,
     TResult? Function(int entryTime, int exitTime, int status, String tenantId,
             String registarId, String projectId)?
@@ -371,8 +450,18 @@ class _$AttendanceIndividualLogSearchEvent
         searchAttendees,
     TResult? Function()? dispose,
   }) {
-    return individualAttendanceLogSearch?.call(registerId, tenantId, entryTime,
-        exitTime, currentDate, projectId, attendeeId, offset, limit);
+    return individualAttendanceLogSearch?.call(
+        registerId,
+        tenantId,
+        entryTime,
+        exitTime,
+        currentDate,
+        projectId,
+        attendeeId,
+        offset,
+        limit,
+        eventStartDate,
+        eventEndDate);
   }
 
   @override
@@ -387,10 +476,19 @@ class _$AttendanceIndividualLogSearchEvent
             String projectId,
             List<String> attendeeId,
             int offset,
-            int limit)?
+            int limit,
+            int eventStartDate,
+            int eventEndDate)?
         individualAttendanceLogSearch,
-    TResult Function(int entryTime, int exitTime, dynamic status,
-            String individualId, String registarId, int id)?
+    TResult Function(
+            int entryTime,
+            int exitTime,
+            dynamic status,
+            String individualId,
+            String registarId,
+            int id,
+            int eventStartDate,
+            int eventEndDate)?
         individualAttendanceMark,
     TResult Function(int entryTime, int exitTime, int status, String tenantId,
             String registarId, String projectId)?
@@ -402,8 +500,18 @@ class _$AttendanceIndividualLogSearchEvent
     required TResult orElse(),
   }) {
     if (individualAttendanceLogSearch != null) {
-      return individualAttendanceLogSearch(registerId, tenantId, entryTime,
-          exitTime, currentDate, projectId, attendeeId, offset, limit);
+      return individualAttendanceLogSearch(
+          registerId,
+          tenantId,
+          entryTime,
+          exitTime,
+          currentDate,
+          projectId,
+          attendeeId,
+          offset,
+          limit,
+          eventStartDate,
+          eventEndDate);
     }
     return orElse();
   }
@@ -464,7 +572,9 @@ abstract class AttendanceIndividualLogSearchEvent
       required final String projectId,
       required final List<String> attendeeId,
       required final int offset,
-      required final int limit}) = _$AttendanceIndividualLogSearchEvent;
+      required final int limit,
+      required final int eventStartDate,
+      required final int eventEndDate}) = _$AttendanceIndividualLogSearchEvent;
 
   String get registerId;
   String get tenantId;
@@ -475,6 +585,8 @@ abstract class AttendanceIndividualLogSearchEvent
   List<String> get attendeeId;
   int get offset;
   int get limit;
+  int get eventStartDate;
+  int get eventEndDate;
   @JsonKey(ignore: true)
   _$$AttendanceIndividualLogSearchEventCopyWith<
           _$AttendanceIndividualLogSearchEvent>
@@ -493,7 +605,9 @@ abstract class _$$AttendanceMarkEventCopyWith<$Res> {
       dynamic status,
       String individualId,
       String registarId,
-      int id});
+      int id,
+      int eventStartDate,
+      int eventEndDate});
 }
 
 /// @nodoc
@@ -513,6 +627,8 @@ class __$$AttendanceMarkEventCopyWithImpl<$Res>
     Object? individualId = null,
     Object? registarId = null,
     Object? id = null,
+    Object? eventStartDate = null,
+    Object? eventEndDate = null,
   }) {
     return _then(_$AttendanceMarkEvent(
       entryTime: null == entryTime
@@ -536,6 +652,14 @@ class __$$AttendanceMarkEventCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
+      eventStartDate: null == eventStartDate
+          ? _value.eventStartDate
+          : eventStartDate // ignore: cast_nullable_to_non_nullable
+              as int,
+      eventEndDate: null == eventEndDate
+          ? _value.eventEndDate
+          : eventEndDate // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -549,7 +673,9 @@ class _$AttendanceMarkEvent implements AttendanceMarkEvent {
       this.status = -1,
       required this.individualId,
       required this.registarId,
-      required this.id});
+      required this.id,
+      required this.eventStartDate,
+      required this.eventEndDate});
 
   @override
   @JsonKey()
@@ -566,10 +692,14 @@ class _$AttendanceMarkEvent implements AttendanceMarkEvent {
   final String registarId;
   @override
   final int id;
+  @override
+  final int eventStartDate;
+  @override
+  final int eventEndDate;
 
   @override
   String toString() {
-    return 'AttendanceIndividualEvent.individualAttendanceMark(entryTime: $entryTime, exitTime: $exitTime, status: $status, individualId: $individualId, registarId: $registarId, id: $id)';
+    return 'AttendanceIndividualEvent.individualAttendanceMark(entryTime: $entryTime, exitTime: $exitTime, status: $status, individualId: $individualId, registarId: $registarId, id: $id, eventStartDate: $eventStartDate, eventEndDate: $eventEndDate)';
   }
 
   @override
@@ -586,7 +716,11 @@ class _$AttendanceMarkEvent implements AttendanceMarkEvent {
                 other.individualId == individualId) &&
             (identical(other.registarId, registarId) ||
                 other.registarId == registarId) &&
-            (identical(other.id, id) || other.id == id));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.eventStartDate, eventStartDate) ||
+                other.eventStartDate == eventStartDate) &&
+            (identical(other.eventEndDate, eventEndDate) ||
+                other.eventEndDate == eventEndDate));
   }
 
   @override
@@ -597,7 +731,9 @@ class _$AttendanceMarkEvent implements AttendanceMarkEvent {
       const DeepCollectionEquality().hash(status),
       individualId,
       registarId,
-      id);
+      id,
+      eventStartDate,
+      eventEndDate);
 
   @JsonKey(ignore: true)
   @override
@@ -618,10 +754,19 @@ class _$AttendanceMarkEvent implements AttendanceMarkEvent {
             String projectId,
             List<String> attendeeId,
             int offset,
-            int limit)
+            int limit,
+            int eventStartDate,
+            int eventEndDate)
         individualAttendanceLogSearch,
-    required TResult Function(int entryTime, int exitTime, dynamic status,
-            String individualId, String registarId, int id)
+    required TResult Function(
+            int entryTime,
+            int exitTime,
+            dynamic status,
+            String individualId,
+            String registarId,
+            int id,
+            int eventStartDate,
+            int eventEndDate)
         individualAttendanceMark,
     required TResult Function(int entryTime, int exitTime, int status,
             String tenantId, String registarId, String projectId)
@@ -631,8 +776,8 @@ class _$AttendanceMarkEvent implements AttendanceMarkEvent {
         searchAttendees,
     required TResult Function() dispose,
   }) {
-    return individualAttendanceMark(
-        entryTime, exitTime, status, individualId, registarId, id);
+    return individualAttendanceMark(entryTime, exitTime, status, individualId,
+        registarId, id, eventStartDate, eventEndDate);
   }
 
   @override
@@ -647,10 +792,19 @@ class _$AttendanceMarkEvent implements AttendanceMarkEvent {
             String projectId,
             List<String> attendeeId,
             int offset,
-            int limit)?
+            int limit,
+            int eventStartDate,
+            int eventEndDate)?
         individualAttendanceLogSearch,
-    TResult? Function(int entryTime, int exitTime, dynamic status,
-            String individualId, String registarId, int id)?
+    TResult? Function(
+            int entryTime,
+            int exitTime,
+            dynamic status,
+            String individualId,
+            String registarId,
+            int id,
+            int eventStartDate,
+            int eventEndDate)?
         individualAttendanceMark,
     TResult? Function(int entryTime, int exitTime, int status, String tenantId,
             String registarId, String projectId)?
@@ -660,8 +814,8 @@ class _$AttendanceMarkEvent implements AttendanceMarkEvent {
         searchAttendees,
     TResult? Function()? dispose,
   }) {
-    return individualAttendanceMark?.call(
-        entryTime, exitTime, status, individualId, registarId, id);
+    return individualAttendanceMark?.call(entryTime, exitTime, status,
+        individualId, registarId, id, eventStartDate, eventEndDate);
   }
 
   @override
@@ -676,10 +830,19 @@ class _$AttendanceMarkEvent implements AttendanceMarkEvent {
             String projectId,
             List<String> attendeeId,
             int offset,
-            int limit)?
+            int limit,
+            int eventStartDate,
+            int eventEndDate)?
         individualAttendanceLogSearch,
-    TResult Function(int entryTime, int exitTime, dynamic status,
-            String individualId, String registarId, int id)?
+    TResult Function(
+            int entryTime,
+            int exitTime,
+            dynamic status,
+            String individualId,
+            String registarId,
+            int id,
+            int eventStartDate,
+            int eventEndDate)?
         individualAttendanceMark,
     TResult Function(int entryTime, int exitTime, int status, String tenantId,
             String registarId, String projectId)?
@@ -691,8 +854,8 @@ class _$AttendanceMarkEvent implements AttendanceMarkEvent {
     required TResult orElse(),
   }) {
     if (individualAttendanceMark != null) {
-      return individualAttendanceMark(
-          entryTime, exitTime, status, individualId, registarId, id);
+      return individualAttendanceMark(entryTime, exitTime, status, individualId,
+          registarId, id, eventStartDate, eventEndDate);
     }
     return orElse();
   }
@@ -749,7 +912,9 @@ abstract class AttendanceMarkEvent implements AttendanceIndividualEvent {
       final dynamic status,
       required final String individualId,
       required final String registarId,
-      required final int id}) = _$AttendanceMarkEvent;
+      required final int id,
+      required final int eventStartDate,
+      required final int eventEndDate}) = _$AttendanceMarkEvent;
 
   int get entryTime;
   int get exitTime;
@@ -757,6 +922,8 @@ abstract class AttendanceMarkEvent implements AttendanceIndividualEvent {
   String get individualId;
   String get registarId;
   int get id;
+  int get eventStartDate;
+  int get eventEndDate;
   @JsonKey(ignore: true)
   _$$AttendanceMarkEventCopyWith<_$AttendanceMarkEvent> get copyWith =>
       throw _privateConstructorUsedError;
@@ -895,10 +1062,19 @@ class _$UploadAttendanceEvent implements UploadAttendanceEvent {
             String projectId,
             List<String> attendeeId,
             int offset,
-            int limit)
+            int limit,
+            int eventStartDate,
+            int eventEndDate)
         individualAttendanceLogSearch,
-    required TResult Function(int entryTime, int exitTime, dynamic status,
-            String individualId, String registarId, int id)
+    required TResult Function(
+            int entryTime,
+            int exitTime,
+            dynamic status,
+            String individualId,
+            String registarId,
+            int id,
+            int eventStartDate,
+            int eventEndDate)
         individualAttendanceMark,
     required TResult Function(int entryTime, int exitTime, int status,
             String tenantId, String registarId, String projectId)
@@ -924,10 +1100,19 @@ class _$UploadAttendanceEvent implements UploadAttendanceEvent {
             String projectId,
             List<String> attendeeId,
             int offset,
-            int limit)?
+            int limit,
+            int eventStartDate,
+            int eventEndDate)?
         individualAttendanceLogSearch,
-    TResult? Function(int entryTime, int exitTime, dynamic status,
-            String individualId, String registarId, int id)?
+    TResult? Function(
+            int entryTime,
+            int exitTime,
+            dynamic status,
+            String individualId,
+            String registarId,
+            int id,
+            int eventStartDate,
+            int eventEndDate)?
         individualAttendanceMark,
     TResult? Function(int entryTime, int exitTime, int status, String tenantId,
             String registarId, String projectId)?
@@ -953,10 +1138,19 @@ class _$UploadAttendanceEvent implements UploadAttendanceEvent {
             String projectId,
             List<String> attendeeId,
             int offset,
-            int limit)?
+            int limit,
+            int eventStartDate,
+            int eventEndDate)?
         individualAttendanceLogSearch,
-    TResult Function(int entryTime, int exitTime, dynamic status,
-            String individualId, String registarId, int id)?
+    TResult Function(
+            int entryTime,
+            int exitTime,
+            dynamic status,
+            String individualId,
+            String registarId,
+            int id,
+            int eventStartDate,
+            int eventEndDate)?
         individualAttendanceMark,
     TResult Function(int entryTime, int exitTime, int status, String tenantId,
             String registarId, String projectId)?
@@ -1172,10 +1366,19 @@ class _$SearchAttendeesEvent implements SearchAttendeesEvent {
             String projectId,
             List<String> attendeeId,
             int offset,
-            int limit)
+            int limit,
+            int eventStartDate,
+            int eventEndDate)
         individualAttendanceLogSearch,
-    required TResult Function(int entryTime, int exitTime, dynamic status,
-            String individualId, String registarId, int id)
+    required TResult Function(
+            int entryTime,
+            int exitTime,
+            dynamic status,
+            String individualId,
+            String registarId,
+            int id,
+            int eventStartDate,
+            int eventEndDate)
         individualAttendanceMark,
     required TResult Function(int entryTime, int exitTime, int status,
             String tenantId, String registarId, String projectId)
@@ -1201,10 +1404,19 @@ class _$SearchAttendeesEvent implements SearchAttendeesEvent {
             String projectId,
             List<String> attendeeId,
             int offset,
-            int limit)?
+            int limit,
+            int eventStartDate,
+            int eventEndDate)?
         individualAttendanceLogSearch,
-    TResult? Function(int entryTime, int exitTime, dynamic status,
-            String individualId, String registarId, int id)?
+    TResult? Function(
+            int entryTime,
+            int exitTime,
+            dynamic status,
+            String individualId,
+            String registarId,
+            int id,
+            int eventStartDate,
+            int eventEndDate)?
         individualAttendanceMark,
     TResult? Function(int entryTime, int exitTime, int status, String tenantId,
             String registarId, String projectId)?
@@ -1230,10 +1442,19 @@ class _$SearchAttendeesEvent implements SearchAttendeesEvent {
             String projectId,
             List<String> attendeeId,
             int offset,
-            int limit)?
+            int limit,
+            int eventStartDate,
+            int eventEndDate)?
         individualAttendanceLogSearch,
-    TResult Function(int entryTime, int exitTime, dynamic status,
-            String individualId, String registarId, int id)?
+    TResult Function(
+            int entryTime,
+            int exitTime,
+            dynamic status,
+            String individualId,
+            String registarId,
+            int id,
+            int eventStartDate,
+            int eventEndDate)?
         individualAttendanceMark,
     TResult Function(int entryTime, int exitTime, int status, String tenantId,
             String registarId, String projectId)?
@@ -1368,10 +1589,19 @@ class _$DisposeAttendanceIndividualEvent
             String projectId,
             List<String> attendeeId,
             int offset,
-            int limit)
+            int limit,
+            int eventStartDate,
+            int eventEndDate)
         individualAttendanceLogSearch,
-    required TResult Function(int entryTime, int exitTime, dynamic status,
-            String individualId, String registarId, int id)
+    required TResult Function(
+            int entryTime,
+            int exitTime,
+            dynamic status,
+            String individualId,
+            String registarId,
+            int id,
+            int eventStartDate,
+            int eventEndDate)
         individualAttendanceMark,
     required TResult Function(int entryTime, int exitTime, int status,
             String tenantId, String registarId, String projectId)
@@ -1396,10 +1626,19 @@ class _$DisposeAttendanceIndividualEvent
             String projectId,
             List<String> attendeeId,
             int offset,
-            int limit)?
+            int limit,
+            int eventStartDate,
+            int eventEndDate)?
         individualAttendanceLogSearch,
-    TResult? Function(int entryTime, int exitTime, dynamic status,
-            String individualId, String registarId, int id)?
+    TResult? Function(
+            int entryTime,
+            int exitTime,
+            dynamic status,
+            String individualId,
+            String registarId,
+            int id,
+            int eventStartDate,
+            int eventEndDate)?
         individualAttendanceMark,
     TResult? Function(int entryTime, int exitTime, int status, String tenantId,
             String registarId, String projectId)?
@@ -1424,10 +1663,19 @@ class _$DisposeAttendanceIndividualEvent
             String projectId,
             List<String> attendeeId,
             int offset,
-            int limit)?
+            int limit,
+            int eventStartDate,
+            int eventEndDate)?
         individualAttendanceLogSearch,
-    TResult Function(int entryTime, int exitTime, dynamic status,
-            String individualId, String registarId, int id)?
+    TResult Function(
+            int entryTime,
+            int exitTime,
+            dynamic status,
+            String individualId,
+            String registarId,
+            int id,
+            int eventStartDate,
+            int eventEndDate)?
         individualAttendanceMark,
     TResult Function(int entryTime, int exitTime, int status, String tenantId,
             String registarId, String projectId)?
