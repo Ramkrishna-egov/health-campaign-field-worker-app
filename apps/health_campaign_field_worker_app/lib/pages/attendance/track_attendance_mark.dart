@@ -502,24 +502,22 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
         widget: CircularButton(
           icon: Icons.circle_rounded,
           size: 15,
-          viewOnly: false,
+          viewOnly: (widget.dateTime.day == DateTime.now().day) ? false : true,
           color: const Color.fromRGBO(0, 100, 0, 1),
           index: double.parse(tableDataModel.status.toString()) ?? -1,
           isNotGreyed: false,
-          onTap: (widget.dateTime.day == DateTime.now().day)
-              ? () {
-                  context.read<AttendanceIndividualBloc>().add(
-                        AttendanceMarkEvent(
-                          individualId: tableDataModel.individualId!,
-                          registarId: tableDataModel!.registerId!,
-                          status: tableDataModel.individualId,
-                          id: tableDataModel.id!,
-                          eventStartDate: tableDataModel.eventStartDate,
-                          eventEndDate: tableDataModel.eventEndDate,
-                        ),
-                      );
-                }
-              : null,
+          onTap: () {
+            context.read<AttendanceIndividualBloc>().add(
+                  AttendanceMarkEvent(
+                    individualId: tableDataModel.individualId!,
+                    registarId: tableDataModel!.registerId!,
+                    status: tableDataModel.individualId,
+                    id: tableDataModel.id!,
+                    eventStartDate: tableDataModel.eventStartDate,
+                    eventEndDate: tableDataModel.eventEndDate,
+                  ),
+                );
+          },
         ),
       ),
     ]);
