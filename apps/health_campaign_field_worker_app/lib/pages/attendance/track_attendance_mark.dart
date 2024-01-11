@@ -217,23 +217,31 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                           footer: SizedBox(
                             height: 50,
                             child: DigitElevatedButton(
-                              onPressed: () {
-                                FocusManager.instance.primaryFocus?.unfocus();
-                                if (currentOffset == 0) {
-                                  markConfirmationDialog(
-                                    context.read<MarkAttendanceBloc>(),
-                                    localizations,
-                                  );
-                                } else {
-                                  showWarningDialog(
-                                    context,
-                                    localizations,
-                                  );
-                                }
-                              },
+                              onPressed: (widget.dateTime.day ==
+                                      DateTime.now().day)
+                                  ? () {
+                                      FocusManager.instance.primaryFocus
+                                          ?.unfocus();
+                                      if (currentOffset == 0) {
+                                        markConfirmationDialog(
+                                          context.read<MarkAttendanceBloc>(),
+                                          localizations,
+                                        );
+                                      } else {
+                                        showWarningDialog(
+                                          context,
+                                          localizations,
+                                        );
+                                      }
+                                    }
+                                  : () {
+                                      context.router.pop();
+                                    },
                               child: Text(
                                 localizations.translate(
-                                  i18.attendance.markAttendance,
+                                  (widget.dateTime.day == DateTime.now().day)
+                                      ? i18.attendance.markAttendance
+                                      : i18.attendance.closeButton,
                                 ),
                               ),
                             ),
@@ -498,18 +506,20 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
           color: const Color.fromRGBO(0, 100, 0, 1),
           index: double.parse(tableDataModel.status.toString()) ?? -1,
           isNotGreyed: false,
-          onTap: () {
-            context.read<AttendanceIndividualBloc>().add(
-                  AttendanceMarkEvent(
-                    individualId: tableDataModel.individualId!,
-                    registarId: tableDataModel!.registerId!,
-                    status: tableDataModel.individualId,
-                    id: tableDataModel.id!,
-                    eventStartDate: tableDataModel.eventStartDate,
-                    eventEndDate: tableDataModel.eventEndDate,
-                  ),
-                );
-          },
+          onTap: (widget.dateTime.day == DateTime.now().day)
+              ? () {
+                  context.read<AttendanceIndividualBloc>().add(
+                        AttendanceMarkEvent(
+                          individualId: tableDataModel.individualId!,
+                          registarId: tableDataModel!.registerId!,
+                          status: tableDataModel.individualId,
+                          id: tableDataModel.id!,
+                          eventStartDate: tableDataModel.eventStartDate,
+                          eventEndDate: tableDataModel.eventEndDate,
+                        ),
+                      );
+                }
+              : null,
         ),
       ),
     ]);
