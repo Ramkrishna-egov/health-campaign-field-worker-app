@@ -178,8 +178,10 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                     context,
                     localizations,
                     false,
-                    eventEnd: widget.eventEndTime,
-                    eventStart: widget.eventStartTime,
+                    map: {
+                      "eventEnd": widget.eventEndTime,
+                      "eventStart": widget.eventStartTime,
+                    },
                   );
                 },
               );
@@ -379,10 +381,9 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
 
   Future<dynamic> showErrorDialog(
     BuildContext context,
-    dynamic k,
+    AppLocalizations k,
     bool retry, {
-    required DateTime eventStart,
-    required DateTime eventEnd,
+    required Map<String, DateTime> map,
   }) {
     return showDialog(
       barrierDismissible: false,
@@ -433,10 +434,10 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                                       projectId: context.projectId,
                                       registerId: widget.registerId,
                                       tenantId: widget.tenantId,
-                                      eventStartDate:
-                                          eventStart.millisecondsSinceEpoch,
-                                      eventEndDate:
-                                          eventEnd.millisecondsSinceEpoch,
+                                      eventStartDate: map["eventStart"]!
+                                          .millisecondsSinceEpoch,
+                                      eventEndDate: map["eventEnd"]!
+                                          .millisecondsSinceEpoch,
                                     ),
                                   );
                             }

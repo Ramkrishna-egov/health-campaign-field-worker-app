@@ -58,10 +58,15 @@ class _TrackAttendanceInboxPageState extends State<TrackAttendanceInboxPage> {
                   attendanceRegistersModel!.attendanceRegister!,
                 );
 
-                attendanceRegisters
-                    .sort((a, b) => b.auditDetails!.lastModifiedTime!.compareTo(
-                          a.auditDetails!.lastModifiedTime!.toInt(),
-                        ));
+                attendanceRegisters.sort(
+                  (a, b) => DateTime.parse(DateFormat('yyyy-MM-dd').format(
+                    DateTime.fromMillisecondsSinceEpoch(a.startDate!),
+                  )).compareTo(
+                    DateTime.parse(DateFormat('yyyy-MM-dd').format(
+                      DateTime.fromMillisecondsSinceEpoch(b.startDate!),
+                    )),
+                  ),
+                );
 
                 projectList = attendanceRegisters!
                     .map((e) => {
@@ -69,7 +74,7 @@ class _TrackAttendanceInboxPageState extends State<TrackAttendanceInboxPage> {
                           "Description": (e.additionalDetails != null)
                               ? e.additionalDetails!.description ?? ""
                               : "",
-                          "Event Location": context.boundary.name,
+                          "Event Boundary": context.boundary.name,
                           "Total Attendees": e.attendanceAttendees != null
                               ? e.attendanceAttendees
                                   ?.where((att) =>
