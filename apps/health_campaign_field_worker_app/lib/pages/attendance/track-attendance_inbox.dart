@@ -72,32 +72,44 @@ class _TrackAttendanceInboxPageState extends State<TrackAttendanceInboxPage> {
 
                   projectList = attendanceRegisters
                       .map((e) => {
-                            "Event Type": e.serviceCode,
-                            "Description": (e.additionalDetails != null)
-                                ? e.additionalDetails!.description ?? ""
-                                : "",
-                            "Event Boundary": context.boundary.name,
-                            "Total Attendees": e.attendanceAttendees != null
-                                ? e.attendanceAttendees
-                                    ?.where((att) =>
-                                        att.denrollmentDate == null ||
-                                        !(att.denrollmentDate! <=
-                                            DateTime.now()
-                                                .millisecondsSinceEpoch))
-                                    .toList()
-                                    .length
-                                : 0,
-                            "Start Date": DateFormat('dd/MM/yyyy').format(
+                            localizations.translate(i18.attendance.eventType):
+                                e.serviceCode,
+                            localizations
+                                    .translate(i18.attendance.eventDescription):
+                                (e.additionalDetails != null)
+                                    ? e.additionalDetails!.description ?? ""
+                                    : "",
+                            localizations
+                                    .translate(i18.attendance.eventBoundary):
+                                context.boundary.name,
+                            localizations.translate(
+                                    i18.attendance.eventTotalAttendees):
+                                e.attendanceAttendees != null
+                                    ? e.attendanceAttendees
+                                        ?.where((att) =>
+                                            att.denrollmentDate == null ||
+                                            !(att.denrollmentDate! <=
+                                                DateTime.now()
+                                                    .millisecondsSinceEpoch))
+                                        .toList()
+                                        .length
+                                    : 0,
+                            localizations
+                                    .translate(i18.attendance.eventStartDate):
+                                DateFormat('dd/MM/yyyy').format(
                               DateTime.fromMillisecondsSinceEpoch(
                                 e.startDate!,
                               ),
                             ),
-                            "End date": DateFormat('dd/MM/yyyy').format(
+                            localizations
+                                    .translate(i18.attendance.eventEndDate):
+                                DateFormat('dd/MM/yyyy').format(
                               DateTime.fromMillisecondsSinceEpoch(
                                 e.endDate!,
                               ),
                             ),
-                            "Event status": e.status,
+                            localizations.translate(i18.attendance.eventStatus):
+                                e.status,
                           })
                       .toList();
                 }
