@@ -57,47 +57,50 @@ class _TrackAttendanceInboxPageState extends State<TrackAttendanceInboxPage> {
                 attendanceRegisters = List<AttendanceMarkRegisterModel>.from(
                   attendanceRegistersModel!.attendanceRegister!,
                 );
+                if (attendanceRegisters.isEmpty) {
+                  projectList = [];
+                } else {
+                  attendanceRegisters.sort(
+                    (a, b) => DateTime.parse(DateFormat('yyyy-MM-dd').format(
+                      DateTime.fromMillisecondsSinceEpoch(a.startDate!),
+                    )).compareTo(
+                      DateTime.parse(DateFormat('yyyy-MM-dd').format(
+                        DateTime.fromMillisecondsSinceEpoch(b.startDate!),
+                      )),
+                    ),
+                  );
 
-                attendanceRegisters.sort(
-                  (a, b) => DateTime.parse(DateFormat('yyyy-MM-dd').format(
-                    DateTime.fromMillisecondsSinceEpoch(a.startDate!),
-                  )).compareTo(
-                    DateTime.parse(DateFormat('yyyy-MM-dd').format(
-                      DateTime.fromMillisecondsSinceEpoch(b.startDate!),
-                    )),
-                  ),
-                );
-
-                projectList = attendanceRegisters!
-                    .map((e) => {
-                          "Event Type": e.serviceCode,
-                          "Description": (e.additionalDetails != null)
-                              ? e.additionalDetails!.description ?? ""
-                              : "",
-                          "Event Boundary": context.boundary.name,
-                          "Total Attendees": e.attendanceAttendees != null
-                              ? e.attendanceAttendees
-                                  ?.where((att) =>
-                                      att.denrollmentDate == null ||
-                                      !(att.denrollmentDate! <=
-                                          DateTime.now()
-                                              .millisecondsSinceEpoch))
-                                  .toList()
-                                  .length
-                              : 0,
-                          "Start Date": DateFormat('dd/MM/yyyy').format(
-                            DateTime.fromMillisecondsSinceEpoch(
-                              e.startDate!,
+                  projectList = attendanceRegisters
+                      .map((e) => {
+                            "Event Type": e.serviceCode,
+                            "Description": (e.additionalDetails != null)
+                                ? e.additionalDetails!.description ?? ""
+                                : "",
+                            "Event Boundary": context.boundary.name,
+                            "Total Attendees": e.attendanceAttendees != null
+                                ? e.attendanceAttendees
+                                    ?.where((att) =>
+                                        att.denrollmentDate == null ||
+                                        !(att.denrollmentDate! <=
+                                            DateTime.now()
+                                                .millisecondsSinceEpoch))
+                                    .toList()
+                                    .length
+                                : 0,
+                            "Start Date": DateFormat('dd/MM/yyyy').format(
+                              DateTime.fromMillisecondsSinceEpoch(
+                                e.startDate!,
+                              ),
                             ),
-                          ),
-                          "End date": DateFormat('dd/MM/yyyy').format(
-                            DateTime.fromMillisecondsSinceEpoch(
-                              e.endDate!,
+                            "End date": DateFormat('dd/MM/yyyy').format(
+                              DateTime.fromMillisecondsSinceEpoch(
+                                e.endDate!,
+                              ),
                             ),
-                          ),
-                          "Event status": e.status,
-                        })
-                    .toList();
+                            "Event status": e.status,
+                          })
+                      .toList();
+                }
               },
               error: (String? error) => Container(),
               orElse: () => Container(),
@@ -114,22 +117,26 @@ class _TrackAttendanceInboxPageState extends State<TrackAttendanceInboxPage> {
                 loaded: (AttendanceMarkRegisterModelResponse? attendanceModel) {
                   var list = <Widget>[];
 
-                  for (int i = 0; i < projectList.length; i++) {
-                    list.add(RegistarCard(
-                      data: projectList[i] as Map<String, dynamic>,
-                      regisId: attendanceRegisters![i].id!,
-                      tenatId: attendanceRegisters![i].tenantId!,
-                      show: true,
-                      attendee:
-                          attendanceRegisters![i].attendanceAttendees ?? [],
-                      startdate: DateTime.fromMillisecondsSinceEpoch(
-                        attendanceRegisters[i].startDate!,
-                      ),
-                      endDate: DateTime.fromMillisecondsSinceEpoch(
-                        attendanceRegisters[i].endDate!,
-                      ),
-                      localizations: localizations,
-                    ));
+                  if (projectList.isEmpty) {
+                    list = [];
+                  } else {
+                    for (int i = 0; i < projectList.length; i++) {
+                      list.add(RegistarCard(
+                        data: projectList[i] as Map<String, dynamic>,
+                        regisId: attendanceRegisters![i].id!,
+                        tenatId: attendanceRegisters![i].tenantId!,
+                        show: true,
+                        attendee:
+                            attendanceRegisters![i].attendanceAttendees ?? [],
+                        startdate: DateTime.fromMillisecondsSinceEpoch(
+                          attendanceRegisters[i].startDate!,
+                        ),
+                        endDate: DateTime.fromMillisecondsSinceEpoch(
+                          attendanceRegisters[i].endDate!,
+                        ),
+                        localizations: localizations,
+                      ));
+                    }
                   }
 
                   return Column(
@@ -146,6 +153,17 @@ class _TrackAttendanceInboxPageState extends State<TrackAttendanceInboxPage> {
                           textAlign: TextAlign.left,
                         ),
                       ),
+                      projectList.isEmpty
+                          ? const Center(
+                              child: Card(
+                                child: SizedBox(
+                                  height: 60,
+                                  width: 200,
+                                  child: Center(child: Text("No Data Found")),
+                                ),
+                              ),
+                            )
+                          : const SizedBox.shrink(),
                       ...list,
                       const SizedBox(
                         height: 16.0,
