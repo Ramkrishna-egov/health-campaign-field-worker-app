@@ -561,9 +561,22 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                       k.translate(
                         i18.attendance.checkAttendanceMark,
                       ),
-                      //"Please Make sure that all attendees are marked attendance",
                       style: DigitTheme
                           .instance.mobileTheme.textTheme.headlineMedium,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 8.0,
+                      bottom: 8.0,
+                    ),
+                    child: Text(
+                      k.translate(
+                        i18.attendance.attendanceWarningBody,
+                      ),
+                      style:
+                          DigitTheme.instance.mobileTheme.textTheme.bodyMedium,
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -601,14 +614,14 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
         return Dialog(
           child: Card(
             child: SizedBox(
-              height: 250,
+              height: 220,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(
-                      top: 4.0,
+                      top: 10.0,
                       bottom: 8.0,
                     ),
                     child: Text(
@@ -620,14 +633,14 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
-                      top: 4.0,
+                      top: 8.0,
                       bottom: 4.0,
                     ),
                     child: Text(
                       k.translate(i18.attendance.confirmationDesc),
                       // "The Attendance details for the Session have been pre-populated.Please confirm before submitting.",
                       style:
-                          DigitTheme.instance.mobileTheme.textTheme.bodyMedium,
+                          DigitTheme.instance.mobileTheme.textTheme.bodyMedium!,
                       textAlign: TextAlign.left,
                     ),
                   ),

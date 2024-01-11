@@ -1309,5 +1309,7 @@ class Attendance {
   String get eventEndDate => "ATTENDANCE_EVENT_END_DATE";
   String get eventStatus => "ATTENDANCE_EVENT_STATUS";
 
+  String get attendanceWarningBody => "ATTENDANCE_WARNING_BODY";
+
   // String get manageStockLabel => 'HOME_MANAGE_STOCK_LABEL';
 }

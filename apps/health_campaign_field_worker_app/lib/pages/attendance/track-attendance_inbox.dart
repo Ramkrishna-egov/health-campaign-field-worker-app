@@ -26,6 +26,7 @@ class TrackAttendanceInboxPage extends LocalizedStatefulWidget {
 class _TrackAttendanceInboxPageState extends State<TrackAttendanceInboxPage> {
   List<Map<dynamic, dynamic>> projectList = [];
   List<AttendanceMarkRegisterModel> attendanceRegisters = [];
+  bool empty = false;
 
   @override
   void initState() {
@@ -37,6 +38,13 @@ class _TrackAttendanceInboxPageState extends State<TrackAttendanceInboxPage> {
           ),
         );
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    projectList.clear();
+    attendanceRegisters.clear();
+    super.dispose();
   }
 
   @override
@@ -59,7 +67,9 @@ class _TrackAttendanceInboxPageState extends State<TrackAttendanceInboxPage> {
                 );
                 if (attendanceRegisters.isEmpty) {
                   projectList = [];
+                  empty = true;
                 } else {
+                  empty = false;
                   attendanceRegisters.sort(
                     (a, b) => DateTime.parse(DateFormat('yyyy-MM-dd').format(
                       DateTime.fromMillisecondsSinceEpoch(a.startDate!),
@@ -83,17 +93,17 @@ class _TrackAttendanceInboxPageState extends State<TrackAttendanceInboxPage> {
                                     .translate(i18.attendance.eventBoundary):
                                 context.boundary.name,
                             localizations.translate(
-                                    i18.attendance.eventTotalAttendees):
-                                e.attendanceAttendees != null
-                                    ? e.attendanceAttendees
-                                        ?.where((att) =>
-                                            att.denrollmentDate == null ||
-                                            !(att.denrollmentDate! <=
-                                                DateTime.now()
-                                                    .millisecondsSinceEpoch))
-                                        .toList()
-                                        .length
-                                    : 0,
+                              i18.attendance.eventTotalAttendees,
+                            ): e.attendanceAttendees != null
+                                ? e.attendanceAttendees
+                                    ?.where((att) =>
+                                        att.denrollmentDate == null ||
+                                        !(att.denrollmentDate! <=
+                                            DateTime.now()
+                                                .millisecondsSinceEpoch))
+                                    .toList()
+                                    .length
+                                : 0,
                             localizations
                                     .translate(i18.attendance.eventStartDate):
                                 DateFormat('dd/MM/yyyy').format(
@@ -131,6 +141,7 @@ class _TrackAttendanceInboxPageState extends State<TrackAttendanceInboxPage> {
 
                   if (projectList.isEmpty) {
                     list = [];
+                    empty = true;
                   } else {
                     for (int i = 0; i < projectList.length; i++) {
                       list.add(RegistarCard(
@@ -149,6 +160,8 @@ class _TrackAttendanceInboxPageState extends State<TrackAttendanceInboxPage> {
                         localizations: localizations,
                       ));
                     }
+
+                    empty = false;
                   }
 
                   return Column(
@@ -165,7 +178,7 @@ class _TrackAttendanceInboxPageState extends State<TrackAttendanceInboxPage> {
                           textAlign: TextAlign.left,
                         ),
                       ),
-                      projectList.isEmpty
+                      empty
                           ? const Center(
                               child: Card(
                                 child: SizedBox(
