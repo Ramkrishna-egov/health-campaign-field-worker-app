@@ -155,8 +155,9 @@ class AttendanceIndividualBloc
         List<AttendeeCollectionModel> searchList = [];
         int counter = 0;
         value.attendanceCollectionModel;
-        AbsentAttendee s = await attendanceRegisterRepository
-            .updateAttendeeInLocalDB(id: event.id);
+        await attendanceRegisterRepository.updateAttendeeInLocalDB(
+          id: event.id,
+        );
         List<AttendeeCollectionModel> updatedList =
             value.attendanceCollectionModel!.map((e) {
           if (e.status == -1) {
