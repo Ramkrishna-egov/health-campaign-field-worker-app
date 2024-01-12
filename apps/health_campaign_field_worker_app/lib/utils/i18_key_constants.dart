@@ -1311,5 +1311,10 @@ class Attendance {
 
   String get attendanceWarningBody => "ATTENDANCE_WARNING_BODY";
 
+  String get eventExceedDateSelection =>
+      "ATTENDANCE_EVENT_EXCEED_DATE_SELECTION";
+
+  String get viewAttendanceButton => "ATTENDANCE_VIEW_BUTTON";
+
   // String get manageStockLabel => 'HOME_MANAGE_STOCK_LABEL';
 }

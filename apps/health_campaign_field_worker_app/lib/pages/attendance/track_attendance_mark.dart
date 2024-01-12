@@ -215,33 +215,40 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
 
                         return ScrollableContent(
                           footer: SizedBox(
-                            height: 50,
-                            child: DigitElevatedButton(
-                              onPressed: (widget.dateTime.day ==
-                                      DateTime.now().day)
-                                  ? () {
-                                      FocusManager.instance.primaryFocus
-                                          ?.unfocus();
-                                      if (currentOffset == 0) {
-                                        markConfirmationDialog(
-                                          context.read<MarkAttendanceBloc>(),
-                                          localizations,
-                                        );
-                                      } else {
-                                        showWarningDialog(
-                                          context,
-                                          localizations,
-                                        );
+                            height: 85,
+                            child: DigitCard(
+                              margin: const EdgeInsets.only(
+                                left: 0,
+                                right: 0,
+                                top: 10,
+                              ),
+                              child: DigitElevatedButton(
+                                onPressed: (widget.dateTime.day ==
+                                        DateTime.now().day)
+                                    ? () {
+                                        FocusManager.instance.primaryFocus
+                                            ?.unfocus();
+                                        if (currentOffset == 0) {
+                                          markConfirmationDialog(
+                                            context.read<MarkAttendanceBloc>(),
+                                            localizations,
+                                          );
+                                        } else {
+                                          showWarningDialog(
+                                            context,
+                                            localizations,
+                                          );
+                                        }
                                       }
-                                    }
-                                  : () {
-                                      context.router.pop();
-                                    },
-                              child: Text(
-                                localizations.translate(
-                                  (widget.dateTime.day == DateTime.now().day)
-                                      ? i18.attendance.markAttendance
-                                      : i18.attendance.closeButton,
+                                    : () {
+                                        context.router.pop();
+                                      },
+                                child: Text(
+                                  localizations.translate(
+                                    (widget.dateTime.day == DateTime.now().day)
+                                        ? i18.attendance.markAttendance
+                                        : i18.attendance.closeButton,
+                                  ),
                                 ),
                               ),
                             ),
@@ -319,9 +326,10 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                         return Center(
                           child: Card(
                             child: SizedBox(
-                              height: 120,
-                              width: 200,
+                              height: 240,
+                              width: MediaQuery.of(context).size.width * 0.8,
                               child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Icon(
                                     Icons.error_outline_outlined,
@@ -329,11 +337,17 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                                     color:
                                         DigitTheme.instance.colorScheme.error,
                                   ),
-                                  Text(
-                                    "${localizations.translate(i18.attendance.somethingWentWrong)}!!!",
-                                    style: DigitTheme.instance.mobileTheme
-                                        .textTheme.headlineMedium,
-                                    textAlign: TextAlign.center,
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                      top: 16.0,
+                                      bottom: 8.0,
+                                    ),
+                                    child: Text(
+                                      "${localizations.translate(i18.attendance.somethingWentWrong)}!!!",
+                                      style: DigitTheme.instance.mobileTheme
+                                          .textTheme.headlineMedium,
+                                      textAlign: TextAlign.center,
+                                    ),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
