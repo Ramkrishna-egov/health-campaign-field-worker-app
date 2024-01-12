@@ -235,6 +235,8 @@ class RegistarCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DateTime s = DateTime.now();
+
     return DigitCard(
       child: Column(
         children: [
@@ -243,8 +245,16 @@ class RegistarCard extends StatelessWidget {
           ),
           show
               ? DigitElevatedButton(
-                  child: Text(localizations
-                      .translate(i18.attendance.markAttendanceLabel)),
+                  child: Text(
+                    localizations.translate(
+                      ((s.isAfter(startdate) ||
+                                  s.isAtSameMomentAs(startdate)) &&
+                              (s.isBefore(endDate) ||
+                                  s.isAtSameMomentAs(endDate)))
+                          ? i18.attendance.markAttendanceLabel
+                          : i18.attendance.viewAttendanceButton,
+                    ),
+                  ),
                   onPressed: () {
                     context.router.push(AttendanceDateSessionSelectionRoute(
                       //id: registarId

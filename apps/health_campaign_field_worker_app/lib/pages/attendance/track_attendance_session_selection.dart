@@ -1,5 +1,6 @@
 import 'package:digit_components/digit_components.dart';
 import 'package:digit_components/widgets/atoms/digit_radio_button_list.dart';
+import 'package:digit_components/widgets/atoms/digit_toaster.dart';
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import '../../utils/i18_key_constants.dart' as i18;
@@ -56,6 +57,7 @@ class _AttendanceDateSessionSelectionPageState
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
+    final theme = Theme.of(context);
 
     return Scaffold(
       body: ReactiveFormBuilder(
@@ -67,47 +69,68 @@ class _AttendanceDateSessionSelectionPageState
             header: const BackNavigationHelpHeaderWidget(
               showHelp: false,
             ),
-            footer: DigitElevatedButton(
-              child: Text(
-                localizations.translate(i18.attendance.viewAttendance),
+            footer: SizedBox(
+              height: 85,
+              child: DigitCard(
+                margin: const EdgeInsets.only(left: 0, right: 0, top: 10),
+                child: DigitElevatedButton(
+                  child: Text(
+                    localizations.translate(i18.attendance.viewAttendance),
+                  ),
+                  onPressed: () {
+                    if (form.control(_sessionRadio).value == null) {
+                      form.control(_sessionRadio).setErrors({'': true});
+                    }
+                    form.markAllAsTouched();
+                    DateTime s = form.control(_dateOfSession).value;
+                    if (!form.valid) {
+                      return;
+                    } else {
+                      if (!((s.isAfter(widget.eventStart) ||
+                              s.isAtSameMomentAs(widget.eventStart)) &&
+                          (s.isBefore(widget.eventEnd) ||
+                              s.isAtSameMomentAs(widget.eventEnd)))) {
+                        DigitToast.show(
+                          context,
+                          options: DigitToastOptions(
+                            localizations.translate(
+                              i18.attendance.eventExceedDateSelection,
+                            ),
+                            true,
+                            theme,
+                          ),
+                        );
+                      } else {
+                        final entryTime =
+                            AttendanceDateTimeManagement.getMillisecondEpoch(
+                          s,
+                          form.control(_sessionRadio).value.key.toString(),
+                          "entryTime",
+                        );
+
+                        final exitTime =
+                            AttendanceDateTimeManagement.getMillisecondEpoch(
+                          s,
+                          form.control(_sessionRadio).value.key.toString(),
+                          "exitType",
+                        );
+
+                        context.router.push(MarkAttendanceRoute(
+                          attendeeIds:
+                              widget.attendanceMarkIndividualModelAttendee,
+                          registerId: widget.id,
+                          tenantId: widget.tenantId,
+                          dateTime: s,
+                          entryTime: entryTime,
+                          exitTime: exitTime,
+                          eventEndTime: widget.eventEnd,
+                          eventStartTime: widget.eventStart,
+                        ));
+                      }
+                    }
+                  },
+                ),
               ),
-              onPressed: () {
-                if (form.control(_sessionRadio).value == null) {
-                  form.control(_sessionRadio).setErrors({'': true});
-                }
-                form.markAllAsTouched();
-
-                if (!form.valid) {
-                  return;
-                } else {
-                  DateTime s = form.control(_dateOfSession).value;
-
-                  final entryTime =
-                      AttendanceDateTimeManagement.getMillisecondEpoch(
-                    s,
-                    form.control(_sessionRadio).value.key.toString(),
-                    "entryTime",
-                  );
-
-                  final exitTime =
-                      AttendanceDateTimeManagement.getMillisecondEpoch(
-                    s,
-                    form.control(_sessionRadio).value.key.toString(),
-                    "exitType",
-                  );
-
-                  context.router.push(MarkAttendanceRoute(
-                    attendeeIds: widget.attendanceMarkIndividualModelAttendee,
-                    registerId: widget.id,
-                    tenantId: widget.tenantId,
-                    dateTime: s,
-                    entryTime: entryTime,
-                    exitTime: exitTime,
-                    eventEndTime: widget.eventEnd,
-                    eventStartTime: widget.eventStart,
-                  ));
-                }
-              },
             ),
             children: [
               DigitCard(
