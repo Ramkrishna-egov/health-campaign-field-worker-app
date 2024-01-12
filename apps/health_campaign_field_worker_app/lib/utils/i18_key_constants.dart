@@ -114,8 +114,6 @@ class Common {
 
   String get coreCommonDownloadFailed => 'CORE_COMMON_DOWNLOAD_FAILED';
 
-  String get noMatchFound => 'CORE_COMMON_NO_MATCH_FOUND';
-
   String get scanBales => 'CORE_COMMON_SCAN_BALES';
 }
 
@@ -1300,6 +1298,18 @@ class Attendance {
   String get pleaseTryAgain => "PLEASE_TRY_AGAIN";
 
   String get retry => "CORE_COMMON_NULL";
+
+  String get eventType => "ATTENDANCE_EVENT_TYPE";
+
+  String get eventDescription => "ATTENDANCE_EVENT_DESCRIPTION";
+
+  String get eventBoundary => "ATTENDANCE_EVENT_BOUNDARY";
+  String get eventTotalAttendees => "ATTENDANCE_EVENT_TOTAL_ATTENDEES";
+  String get eventStartDate => "ATTENDANCE_EVENT_START_DATE";
+  String get eventEndDate => "ATTENDANCE_EVENT_END_DATE";
+  String get eventStatus => "ATTENDANCE_EVENT_STATUS";
+
+  String get attendanceWarningBody => "ATTENDANCE_WARNING_BODY";
 
   // String get manageStockLabel => 'HOME_MANAGE_STOCK_LABEL';
 }

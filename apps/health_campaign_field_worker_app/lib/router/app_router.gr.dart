@@ -624,6 +624,8 @@ class _$AppRouter extends RootStackRouter {
           attendeeIds: args.attendeeIds,
           registerId: args.registerId,
           tenantId: args.tenantId,
+          eventStartTime: args.eventStartTime,
+          eventEndTime: args.eventEndTime,
           key: args.key,
           appLocalizations: args.appLocalizations,
         ),
@@ -2954,6 +2956,8 @@ class MarkAttendanceRoute extends PageRouteInfo<MarkAttendanceRouteArgs> {
     required List<String> attendeeIds,
     required String registerId,
     required String tenantId,
+    required DateTime eventStartTime,
+    required DateTime eventEndTime,
     Key? key,
     AppLocalizations? appLocalizations,
   }) : super(
@@ -2966,6 +2970,8 @@ class MarkAttendanceRoute extends PageRouteInfo<MarkAttendanceRouteArgs> {
             attendeeIds: attendeeIds,
             registerId: registerId,
             tenantId: tenantId,
+            eventStartTime: eventStartTime,
+            eventEndTime: eventEndTime,
             key: key,
             appLocalizations: appLocalizations,
           ),
@@ -2982,6 +2988,8 @@ class MarkAttendanceRouteArgs {
     required this.attendeeIds,
     required this.registerId,
     required this.tenantId,
+    required this.eventStartTime,
+    required this.eventEndTime,
     this.key,
     this.appLocalizations,
   });
@@ -2998,13 +3006,17 @@ class MarkAttendanceRouteArgs {
 
   final String tenantId;
 
+  final DateTime eventStartTime;
+
+  final DateTime eventEndTime;
+
   final Key? key;
 
   final AppLocalizations? appLocalizations;
 
   @override
   String toString() {
-    return 'MarkAttendanceRouteArgs{exitTime: $exitTime, entryTime: $entryTime, dateTime: $dateTime, attendeeIds: $attendeeIds, registerId: $registerId, tenantId: $tenantId, key: $key, appLocalizations: $appLocalizations}';
+    return 'MarkAttendanceRouteArgs{exitTime: $exitTime, entryTime: $entryTime, dateTime: $dateTime, attendeeIds: $attendeeIds, registerId: $registerId, tenantId: $tenantId, eventStartTime: $eventStartTime, eventEndTime: $eventEndTime, key: $key, appLocalizations: $appLocalizations}';
   }
 }
 

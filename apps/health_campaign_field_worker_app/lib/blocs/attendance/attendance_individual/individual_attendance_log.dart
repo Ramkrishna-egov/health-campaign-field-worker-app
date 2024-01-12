@@ -49,64 +49,68 @@ class AttendanceIndividualBloc
         registarId: event.registerId,
       );
       if (filterData.isEmpty) {
-        AttendanceMarkIndividualModel a =
-            await attendanceRegisterRepository.fetchAttendees(
-          attendeeids: event.attendeeId,
-          limit: 1000,
-          offset: 0,
-          tenantId: event.tenantId,
-        );
-
-        List<AbsentAttendee> wq = a.attendanceRegister!.map(
-          (e) {
-            final absentAttendee = AbsentAttendee()
-              ..name = e.name!.givenName ?? ""
-              ..entryTime = event.entryTime
-              ..exitTime = event.exitTime
-              ..eventStartDate = event.currentDate
-              ..eventEndDate = event.currentDate
-              ..individualId = e.id!
-              ..projectId = event.projectId
-              ..status = -1
-              ..currentDate = 12334567
-              ..registerId = event.registerId
-              ..tenantId = event.tenantId
-              ..userName = e.userDetails!.username ?? "";
-
-            return absentAttendee;
-          },
-        ).toList();
-
-        await attendanceRegisterRepository.storeAbsentAttendee(wq);
-
-        List<AttendeeCollectionModel> emitData = wq.map((e) {
-          AttendeeCollectionModel s = AttendeeCollectionModel(
-            entryTime: e.entryTime,
-            name: e.name,
-            individualId: e.individualId,
-            exitTime: e.exitTime,
-            eventStartDate: e.eventStartDate,
-            eventEndDate: e.eventEndDate,
-            status: e.status,
-            id: e.id,
-            registerId: event.registerId,
-            userName: e.userName,
+        if (event.attendeeId.isEmpty) {
+          throw "Atleast one attedndee should be there";
+        } else {
+          AttendanceMarkIndividualModel a =
+              await attendanceRegisterRepository.fetchAttendees(
+            attendeeids: event.attendeeId,
+            limit: 1000,
+            offset: 0,
+            tenantId: event.tenantId,
           );
 
-          return s;
-        }).toList();
-        emitData.sort((a, b) => a.name!.compareTo(b.name!));
-        await Future.delayed(const Duration(milliseconds: 800));
-        emit(
-          _AttendanceRowModelLoaded(
-            attendanceCollectionModel: emitData,
-            attendanceSearchModelList: [],
-            countData: emitData.length,
-            limitData: event.limit,
-            offsetData: event.offset,
-            currentOffset: emitData.length,
-          ),
-        );
+          List<AbsentAttendee> wq = a.attendanceRegister!.map(
+            (e) {
+              final absentAttendee = AbsentAttendee()
+                ..name = e.name!.givenName ?? ""
+                ..entryTime = event.entryTime
+                ..exitTime = event.exitTime
+                ..eventStartDate = event.eventStartDate
+                ..eventEndDate = event.eventEndDate
+                ..individualId = e.id!
+                ..projectId = event.projectId
+                ..status = -1
+                ..currentDate = event.currentDate
+                ..registerId = event.registerId
+                ..tenantId = event.tenantId
+                ..userName = e.userDetails!.username ?? "";
+
+              return absentAttendee;
+            },
+          ).toList();
+
+          await attendanceRegisterRepository.storeAbsentAttendee(wq);
+
+          List<AttendeeCollectionModel> emitData = wq.map((e) {
+            AttendeeCollectionModel s = AttendeeCollectionModel(
+              entryTime: e.entryTime,
+              name: e.name,
+              individualId: e.individualId,
+              exitTime: e.exitTime,
+              eventStartDate: e.eventStartDate,
+              eventEndDate: e.eventEndDate,
+              status: e.status,
+              id: e.id,
+              registerId: event.registerId,
+              userName: e.userName,
+            );
+
+            return s;
+          }).toList();
+          emitData.sort((a, b) => a.name!.compareTo(b.name!));
+          await Future.delayed(const Duration(milliseconds: 800));
+          emit(
+            _AttendanceRowModelLoaded(
+              attendanceCollectionModel: emitData,
+              attendanceSearchModelList: [],
+              countData: emitData.length,
+              limitData: event.limit,
+              offsetData: event.offset,
+              currentOffset: emitData.length,
+            ),
+          );
+        }
       } else {
         int counter = 0;
         List<AttendeeCollectionModel> emitData = filterData.map((e) {
@@ -142,7 +146,9 @@ class AttendanceIndividualBloc
         );
       }
     } catch (ex) {
-      emit(const AttendanceIndividualState.error("Something went wrong!!!"));
+      String? error = ex as String;
+
+      emit(AttendanceIndividualState.error(error));
     }
   }
 
@@ -155,8 +161,9 @@ class AttendanceIndividualBloc
         List<AttendeeCollectionModel> searchList = [];
         int counter = 0;
         value.attendanceCollectionModel;
-        AbsentAttendee s = await attendanceRegisterRepository
-            .updateAttendeeInLocalDB(id: event.id);
+        await attendanceRegisterRepository.updateAttendeeInLocalDB(
+          id: event.id,
+        );
         List<AttendeeCollectionModel> updatedList =
             value.attendanceCollectionModel!.map((e) {
           if (e.status == -1) {
@@ -339,6 +346,8 @@ class AttendanceIndividualEvent with _$AttendanceIndividualEvent {
     required List<String> attendeeId,
     required int offset,
     required int limit,
+    required int eventStartDate,
+    required int eventEndDate,
   }) = AttendanceIndividualLogSearchEvent;
   const factory AttendanceIndividualEvent.individualAttendanceMark({
     @Default(0) int entryTime,
@@ -347,6 +356,8 @@ class AttendanceIndividualEvent with _$AttendanceIndividualEvent {
     required String individualId,
     required String registarId,
     required int id,
+    required int eventStartDate,
+    required int eventEndDate,
   }) = AttendanceMarkEvent;
 
   const factory AttendanceIndividualEvent.uploadAttendance({

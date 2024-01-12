@@ -24,6 +24,8 @@ class MarkAttendancePage extends LocalizedStatefulWidget {
   final DateTime dateTime;
   final int entryTime;
   final int exitTime;
+  final DateTime eventStartTime;
+  final DateTime eventEndTime;
   const MarkAttendancePage({
     required this.exitTime,
     required this.entryTime,
@@ -31,6 +33,8 @@ class MarkAttendancePage extends LocalizedStatefulWidget {
     required this.attendeeIds,
     required this.registerId,
     required this.tenantId,
+    required this.eventStartTime,
+    required this.eventEndTime,
     super.key,
     super.appLocalizations,
   });
@@ -59,6 +63,8 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
             projectId: context.projectId,
             registerId: widget.registerId,
             tenantId: widget.tenantId,
+            eventEndDate: widget.eventEndTime.millisecondsSinceEpoch,
+            eventStartDate: widget.eventStartTime.millisecondsSinceEpoch,
           ),
         );
 
@@ -168,7 +174,15 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                   ).popUntil(
                     (route) => route is! PopupRoute,
                   );
-                  showErrorDialog(context, localizations, false);
+                  showErrorDialog(
+                    context,
+                    localizations,
+                    false,
+                    map: {
+                      "eventEnd": widget.eventEndTime,
+                      "eventStart": widget.eventStartTime,
+                    },
+                  );
                 },
               );
             },
@@ -316,7 +330,7 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                                         DigitTheme.instance.colorScheme.error,
                                   ),
                                   Text(
-                                    "${i18.attendance.somethingWentWrong}!!!",
+                                    "${localizations.translate(i18.attendance.somethingWentWrong)}!!!",
                                     style: DigitTheme.instance.mobileTheme
                                         .textTheme.headlineMedium,
                                     textAlign: TextAlign.center,
@@ -327,26 +341,45 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                                       width: 80,
                                       height: 40,
                                       child: DigitElevatedButton(
-                                        child: Text(i18.attendance.retry),
-                                        onPressed: () {
-                                          context
-                                              .read<AttendanceIndividualBloc>()
-                                              .add(
-                                                AttendanceIndividualLogSearchEvent(
-                                                  attendeeId:
-                                                      widget.attendeeIds,
-                                                  limit: 10,
-                                                  offset: 0,
-                                                  currentDate: widget.dateTime
-                                                      .millisecondsSinceEpoch,
-                                                  entryTime: widget.entryTime,
-                                                  exitTime: widget.exitTime,
-                                                  projectId: context.projectId,
-                                                  registerId: widget.registerId,
-                                                  tenantId: widget.tenantId,
-                                                ),
-                                              );
-                                        },
+                                        onPressed: widget.attendeeIds.isNotEmpty
+                                            ? () {
+                                                context
+                                                    .read<
+                                                        AttendanceIndividualBloc>()
+                                                    .add(
+                                                      AttendanceIndividualLogSearchEvent(
+                                                        attendeeId:
+                                                            widget.attendeeIds,
+                                                        limit: 10,
+                                                        offset: 0,
+                                                        currentDate: widget
+                                                            .dateTime
+                                                            .millisecondsSinceEpoch,
+                                                        entryTime:
+                                                            widget.entryTime,
+                                                        exitTime:
+                                                            widget.exitTime,
+                                                        projectId:
+                                                            context.projectId,
+                                                        registerId:
+                                                            widget.registerId,
+                                                        tenantId:
+                                                            widget.tenantId,
+                                                        eventEndDate: widget
+                                                            .eventEndTime
+                                                            .millisecondsSinceEpoch,
+                                                        eventStartDate: widget
+                                                            .eventStartTime
+                                                            .millisecondsSinceEpoch,
+                                                      ),
+                                                    );
+                                              }
+                                            : () {
+                                                Navigator.of(context).pop();
+                                              },
+                                        child: Text(localizations.translate(
+                                          i18.attendance.closeButton,
+                                        )),
                                       ),
                                     ),
                                   ),
@@ -367,7 +400,12 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
     );
   }
 
-  Future<dynamic> showErrorDialog(BuildContext context, dynamic k, bool retry) {
+  Future<dynamic> showErrorDialog(
+    BuildContext context,
+    AppLocalizations k,
+    bool retry, {
+    required Map<String, DateTime> map,
+  }) {
     return showDialog(
       barrierDismissible: false,
       context: context,
@@ -392,7 +430,7 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                       bottom: 8.0,
                     ),
                     child: Text(
-                      "${i18.attendance.somethingWentWrong} \n ${i18.attendance.pleaseTryAgain}!!",
+                      "${k.translate(i18.attendance.somethingWentWrong)} \n ${k.translate(i18.attendance.pleaseTryAgain)}!!",
                       style: DigitTheme
                           .instance.mobileTheme.textTheme.headlineMedium,
                       textAlign: TextAlign.center,
@@ -417,6 +455,10 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                                       projectId: context.projectId,
                                       registerId: widget.registerId,
                                       tenantId: widget.tenantId,
+                                      eventStartDate: map["eventStart"]!
+                                          .millisecondsSinceEpoch,
+                                      eventEndDate: map["eventEnd"]!
+                                          .millisecondsSinceEpoch,
                                     ),
                                   );
                             }
@@ -460,22 +502,22 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
         widget: CircularButton(
           icon: Icons.circle_rounded,
           size: 15,
-          viewOnly: false,
+          viewOnly: (widget.dateTime.day == DateTime.now().day) ? false : true,
           color: const Color.fromRGBO(0, 100, 0, 1),
           index: double.parse(tableDataModel.status.toString()) ?? -1,
           isNotGreyed: false,
-          onTap: (widget.dateTime.day == DateTime.now().day)
-              ? () {
-                  context.read<AttendanceIndividualBloc>().add(
-                        AttendanceMarkEvent(
-                          individualId: tableDataModel.individualId!,
-                          registarId: tableDataModel!.registerId!,
-                          status: tableDataModel.individualId,
-                          id: tableDataModel.id!,
-                        ),
-                      );
-                }
-              : null,
+          onTap: () {
+            context.read<AttendanceIndividualBloc>().add(
+                  AttendanceMarkEvent(
+                    individualId: tableDataModel.individualId!,
+                    registarId: tableDataModel!.registerId!,
+                    status: tableDataModel.individualId,
+                    id: tableDataModel.id!,
+                    eventStartDate: tableDataModel.eventStartDate,
+                    eventEndDate: tableDataModel.eventEndDate,
+                  ),
+                );
+          },
         ),
       ),
     ]);
@@ -527,9 +569,22 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                       k.translate(
                         i18.attendance.checkAttendanceMark,
                       ),
-                      //"Please Make sure that all attendees are marked attendance",
                       style: DigitTheme
                           .instance.mobileTheme.textTheme.headlineMedium,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 8.0,
+                      bottom: 8.0,
+                    ),
+                    child: Text(
+                      k.translate(
+                        i18.attendance.attendanceWarningBody,
+                      ),
+                      style:
+                          DigitTheme.instance.mobileTheme.textTheme.bodyMedium,
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -567,14 +622,14 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
         return Dialog(
           child: Card(
             child: SizedBox(
-              height: 250,
+              height: 220,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(
-                      top: 4.0,
+                      top: 10.0,
                       bottom: 8.0,
                     ),
                     child: Text(
@@ -586,14 +641,14 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
-                      top: 4.0,
+                      top: 8.0,
                       bottom: 4.0,
                     ),
                     child: Text(
                       k.translate(i18.attendance.confirmationDesc),
                       // "The Attendance details for the Session have been pre-populated.Please confirm before submitting.",
                       style:
-                          DigitTheme.instance.mobileTheme.textTheme.bodyMedium,
+                          DigitTheme.instance.mobileTheme.textTheme.bodyMedium!,
                       textAlign: TextAlign.left,
                     ),
                   ),

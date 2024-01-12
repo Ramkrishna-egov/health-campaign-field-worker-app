@@ -142,22 +142,21 @@ class AttendanceRegisterRepository {
     return attendeeList;
   }
 
-  Future<AbsentAttendee> updateAttendeeInLocalDB({
+  Future<void> updateAttendeeInLocalDB({
     required int id,
   }) async {
     try {
-      AbsentAttendee? data = await isar.absentAttendees.get(id);
-
-      data!.status = data!.status == -1
-          ? 1
-          : data!.status == 1
-              ? 0
-              : 1;
       await isar.writeTxn(() async {
+        AbsentAttendee? data = await isar.absentAttendees.get(id);
+
+        data!.status = data!.status == -1
+            ? 1
+            : data!.status == 1
+                ? 0
+                : 1;
+
         await isar.absentAttendees.put(data);
       });
-
-      return data;
     } catch (ex) {
       rethrow;
     }
