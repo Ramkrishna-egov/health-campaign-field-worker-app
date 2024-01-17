@@ -156,11 +156,8 @@ class _BoundarySelectionPageState
                                         // Call the resetChildDropdowns function when a parent dropdown is selected
                                         resetChildDropdowns(label, state);
                                       },
-                                      isRequired: true,
-                                      validationMessage:
-                                          localizations.translate(
-                                        i18.common.corecommonRequired,
-                                      ),
+                                    
+                                    
                                       emptyText: localizations
                                           .translate(i18.common.noMatchFound),
                                     ),
@@ -471,8 +468,9 @@ class _BoundarySelectionPageState
                                                   isClicked
                                               ? null
                                               : () async {
-                                                  if (!form.valid ||
-                                                      validateAllBoundarySelection()) {
+                                                  if (!form.valid
+                                                      
+                                                      ) {
                                                     clickedStatus.value = false;
                                                     await DigitToast.show(
                                                       context,

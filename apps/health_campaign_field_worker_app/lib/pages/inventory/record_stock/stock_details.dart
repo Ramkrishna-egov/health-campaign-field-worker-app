@@ -459,7 +459,12 @@ class _StockDetailsPageState extends LocalizedState<StockDetailsPage> {
                                 ),
                                 menuItems: reasons ?? [],
                                 formControlName: _transactionReasonKey,
-                                valueMapper: (value) => value.name.titleCase,
+                                valueMapper: (value) {
+
+                                  return localizations.translate(
+                                        value.name,);
+                                
+                                },
                                 isRequired: true,
                               ),
                             BlocBuilder<FacilityBloc, FacilityState>(
