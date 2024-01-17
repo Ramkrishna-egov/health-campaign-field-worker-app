@@ -460,17 +460,10 @@ class _StockDetailsPageState extends LocalizedState<StockDetailsPage> {
                                 menuItems: reasons ?? [],
                                 formControlName: _transactionReasonKey,
                                 valueMapper: (value) {
-                                  if (value.name.titleCase ==
-                                      "Lost In Storage") {
-                                    return localizations.translate(
-                                        i18.stockDetails.lostInStorage,);
-                                  } else if (value.name.titleCase ==
-                                      "Lost In Transit") {
-                                    return localizations.translate(
-                                        i18.stockDetails.lostInTransit,);
-                                  } else {
-                                    return value.name.titleCase;
-                                  }
+
+                                  return localizations.translate(
+                                        value.name,);
+                                
                                 },
                                 isRequired: true,
                               ),
