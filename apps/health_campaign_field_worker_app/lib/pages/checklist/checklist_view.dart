@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:collection/collection.dart';
 import 'package:digit_components/digit_components.dart';
 import 'package:digit_components/utils/date_utils.dart';
 import 'package:flutter/material.dart';
@@ -335,26 +336,27 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
                                                       .checklist.notSelectedKey,
                                           rowVersion: 1,
                                           tenantId: attribute?[i].tenantId,
-                                          additionalDetails:
-                                              ((attribute?[i].values?.length ==
-                                                              2 ||
-                                                          attribute?[i]
-                                                                  .values
-                                                                  ?.length ==
-                                                              3) &&
-                                                      controller[i].text ==
-                                                          attribute?[i]
-                                                              .values?[1]
-                                                              .trim())
-                                                  ? additionalController[i]
-                                                          .text
-                                                          .toString()
-                                                          .isEmpty
-                                                      ? null
-                                                      : additionalController[i]
-                                                          .text
-                                                          .toString()
-                                                  : null,
+                                          additionalDetails: (attribute?[i]
+                                                          .values
+                                                          ?.firstWhereOrNull(
+                                                            (element) =>
+                                                                element ==
+                                                                "YES",
+                                                          ) !=
+                                                      null &&
+                                                  controller[i].text ==
+                                                      attribute?[i]
+                                                          .values?[1]
+                                                          .trim())
+                                              ? additionalController[i]
+                                                      .text
+                                                      .toString()
+                                                      .isEmpty
+                                                  ? null
+                                                  : additionalController[i]
+                                                      .text
+                                                      .toString()
+                                              : null,
                                         ));
                                       }
 
@@ -493,7 +495,6 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
                           final childIndex =
                               initialAttributes?.indexOf(matchingChildItem);
                           if (childIndex != null) {
-                            controller[childIndex].clear();
                             visibleChecklistIndexes
                                 .removeWhere((v) => v == childIndex);
                           }
@@ -506,17 +507,6 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
                             text: value!,
                           ),
                         ).value;
-                        if (excludedIndexes.isNotEmpty) {
-                          for (int i = 0; i < excludedIndexes.length; i++) {
-                            // Clear excluded child controllers
-                            controller[excludedIndexes[i]].value =
-                                TextEditingController.fromValue(
-                              const TextEditingValue(
-                                text: '',
-                              ),
-                            ).value;
-                          }
-                        }
 
                         // Remove corresponding controllers based on the removed attributes
                       });
@@ -536,7 +526,11 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
               ),
               BlocBuilder<ServiceBloc, ServiceState>(
                 builder: (context, state) {
-                  return (controller[index].text == item.values?[1].trim())
+                  return (item.values?.firstWhereOrNull(
+                                (element) => element == "YES",
+                              ) !=
+                              null &&
+                          controller[index].text == item.values?[1].trim())
                       ? Padding(
                           padding: const EdgeInsets.only(
                             left: 4.0,
@@ -610,7 +604,9 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
         ],
         validator: (value) {
           if (((value == null || value == '') && item.required == true)) {
-            return localizations.translate("${item.code}_REQUIRED");
+            return localizations.translate(
+              i18.common.corecommonRequired,
+            );
           }
           if (item.regex != null) {
             return (RegExp(item.regex!).hasMatch(value!))
