@@ -798,6 +798,10 @@ class StockDetails {
   String get returnedSpaqDetails => 'RETURNED_SPAQ_DETAILS';
   String get damagedSpaqDetails => 'DAMAGED_SPAQ_DETAILS';
   String get quantityDamagedCountLabel => 'STOCK_DAMAGED_QUANTITY_LABEL';
+
+
+  String get lostInStorage=>"LOST_IN_STORAGE";
+   String get lostInTransit=>"LOST_IN_TRANSIT";
 }
 
 class StockReconciliationDetails {
