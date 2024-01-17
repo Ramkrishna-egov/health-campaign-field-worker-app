@@ -466,7 +466,7 @@ class _IndividualDetailsPageState
                                   ),
                                   IconButton(
                                     color: theme.colorScheme.secondary,
-                                    icon: const Icon(Icons.edit),
+                                    icon: const Icon(Icons.qr_code),
                                     onPressed: () {
                                       context.read<ScannerBloc>().add(
                                             const ScannerEvent.handleScanner(
