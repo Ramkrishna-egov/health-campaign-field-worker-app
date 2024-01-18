@@ -2,15 +2,16 @@ import 'package:digit_components/digit_components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+
 import '../../blocs/attendance/attendance_register.dart';
 import '../../blocs/localization/app_localization.dart';
 import '../../models/attendance/attendance_mark_model/register_model.dart';
 import '../../router/app_router.dart';
 import '../../utils/environment_config.dart';
+import '../../utils/i18_key_constants.dart' as i18;
 import '../../utils/utils.dart';
 import '../../widgets/header/back_navigation_help_header.dart';
 import '../../widgets/localized.dart';
-import '../../utils/i18_key_constants.dart' as i18;
 
 class TrackAttendanceInboxPage extends LocalizedStatefulWidget {
   const TrackAttendanceInboxPage({
@@ -52,6 +53,7 @@ class _TrackAttendanceInboxPageState extends State<TrackAttendanceInboxPage> {
     final localizations = AppLocalizations.of(context);
 
     return Scaffold(
+      
       body: SingleChildScrollView(
         child: BlocListener<AttendanceProjectsSearchBloc,
             AttendanceProjectsSearchState>(
@@ -193,12 +195,7 @@ class _TrackAttendanceInboxPageState extends State<TrackAttendanceInboxPage> {
                       const SizedBox(
                         height: 16.0,
                       ),
-                      const Align(
-                        alignment: Alignment.bottomCenter,
-                        child: PoweredByDigit(
-                          version: '1.2.0',
-                        ),
-                      ),
+                     
                     ],
                   );
                 },
