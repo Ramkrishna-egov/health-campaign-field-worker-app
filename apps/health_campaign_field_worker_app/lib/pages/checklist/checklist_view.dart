@@ -270,7 +270,7 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
                                                   return localizations
                                                       .translate(
                                                     i18.common
-                                                        .coreCommonReasonRequired,
+                                                        .coreCommonOthersRequired,
                                                   );
                                                 }
 
@@ -339,10 +339,10 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
 
                               for (int i = 0; i < controller.length; i++) {
                                 if (itemsAttributes?[i].required == true &&
+                                    visibleChecklistIndexes
+                                        .any((e) => e == i) &&
                                     ((itemsAttributes?[i].dataType ==
                                                 'SingleValueList' &&
-                                            visibleChecklistIndexes
-                                                .any((e) => e == i) &&
                                             (controller[i].text == '')) ||
                                         (itemsAttributes?[i].dataType !=
                                                 'SingleValueList' &&
@@ -402,18 +402,31 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
                                                       .checklist.notSelectedKey,
                                           rowVersion: 1,
                                           tenantId: attribute?[i].tenantId,
-                                          additionalDetails: (attribute?[i]
-                                                          .values
-                                                          ?.firstWhereOrNull(
-                                                            (element) =>
-                                                                element ==
-                                                                "YES",
-                                                          ) !=
-                                                      null &&
-                                                  controller[i].text ==
-                                                      attribute?[i]
-                                                          .values?[1]
-                                                          .trim())
+                                          additionalDetails: ((attribute?[i]
+                                                              .values
+                                                              ?.firstWhereOrNull(
+                                                                (element) =>
+                                                                    element ==
+                                                                    "YES",
+                                                              ) !=
+                                                          null &&
+                                                      controller[i].text ==
+                                                          attribute?[i]
+                                                              .values?[1]
+                                                              .trim()) ||
+                                                  (attribute?[i]
+                                                              .values
+                                                              ?.firstWhereOrNull(
+                                                                (element) =>
+                                                                    element
+                                                                        .toUpperCase() ==
+                                                                    "OTHERS",
+                                                              ) !=
+                                                          null &&
+                                                      controller[i]
+                                                          .text
+                                                          .toUpperCase()
+                                                          .contains("OTHERS")))
                                               ? additionalController[i]
                                                       .text
                                                       .toString()
@@ -792,7 +805,7 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
                         validator: (value1) {
                           if (value1 == null || value1 == '') {
                             return localizations.translate(
-                              i18.common.coreCommonReasonRequired,
+                              i18.common.coreCommonOthersRequired,
                             );
                           }
 
