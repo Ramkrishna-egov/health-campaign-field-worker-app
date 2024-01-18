@@ -237,7 +237,7 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
 
                                 if (scannerState.qrcodes.isNotEmpty) {
                                   bloc.add(SearchHouseholdsEvent.searchByTag(
-                                    tag: scannerState.qrcodes.first,
+                                    tag: scannerState.qrcodes.last,
                                     projectId: context.projectId,
                                   ));
                                 }
@@ -436,6 +436,7 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
                         onPressed: () async {
                           submitButton = true;
                           final bloc = context.read<ScannerBloc>();
+                          codes.clear();
                           codes.add(_resourceController.value.text);
                           bloc.add(
                             ScannerEvent.handleScanner(
@@ -455,7 +456,7 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
                               bloc.add(SearchHouseholdsEvent.searchByTag(
                                 tag: manualcode
                                     ? _resourceController.value.text
-                                    : scannerState.qrcodes.first,
+                                    : scannerState.qrcodes.last,
                                 projectId: context.projectId,
                               ));
                             }
