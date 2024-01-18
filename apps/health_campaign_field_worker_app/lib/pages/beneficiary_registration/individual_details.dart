@@ -479,7 +479,7 @@ class _IndividualDetailsPageState
                                       child: Text(
                                         overflow: TextOverflow.ellipsis,
                                         localizations
-                                            .translate(state.qrcodes.first),
+                                            .translate(state.qrcodes.last),
                                       ),
                                     ),
                                     IconButton(
