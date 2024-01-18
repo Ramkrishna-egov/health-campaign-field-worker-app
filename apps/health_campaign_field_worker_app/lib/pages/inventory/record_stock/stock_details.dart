@@ -460,10 +460,9 @@ class _StockDetailsPageState extends LocalizedState<StockDetailsPage> {
                                 menuItems: reasons ?? [],
                                 formControlName: _transactionReasonKey,
                                 valueMapper: (value) {
-
                                   return localizations.translate(
-                                        value.name,);
-                                
+                                    value.name,
+                                  );
                                 },
                                 isRequired: true,
                               ),
@@ -620,24 +619,26 @@ class _StockDetailsPageState extends LocalizedState<StockDetailsPage> {
                                     ),
                               },
                             ),
-                            DigitOutlineIconButton(
-                              buttonStyle: OutlinedButton.styleFrom(
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.zero,
-                                ),
-                              ),
-                              onPressed: () {
-                                context.router.push(QRScannerRoute(
-                                  quantity: 5,
-                                  isGS1code: true,
-                                  sinlgleValue: false,
-                                ));
-                              },
-                              icon: Icons.qr_code,
-                              label: localizations.translate(
-                                i18.common.scanBales,
-                              ),
-                            ),
+                            // Commenting this because we need this functionality for other APK
+
+                            // DigitOutlineIconButton(
+                            //   buttonStyle: OutlinedButton.styleFrom(
+                            //     shape: const RoundedRectangleBorder(
+                            //       borderRadius: BorderRadius.zero,
+                            //     ),
+                            //   ),
+                            //   onPressed: () {
+                            //     context.router.push(QRScannerRoute(
+                            //       quantity: 5,
+                            //       isGS1code: true,
+                            //       sinlgleValue: false,
+                            //     ));
+                            //   },
+                            //   icon: Icons.qr_code,
+                            //   label: localizations.translate(
+                            //     i18.common.scanBales,
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),
