@@ -224,16 +224,82 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
                                                     ele =
                                                         "${controller[index].text}.$e";
                                                   }
-                                                  controller[index].value =
-                                                      TextEditingController
-                                                          .fromValue(
-                                                    TextEditingValue(
-                                                      text: ele,
-                                                    ),
-                                                  ).value;
+                                                  setState(() {
+                                                    controller[index].value =
+                                                        TextEditingController
+                                                            .fromValue(
+                                                      TextEditingValue(
+                                                        text: ele,
+                                                      ),
+                                                    ).value;
+                                                  });
                                                 },
                                               ))
                                           .toList(),
+                                    );
+                                  },
+                                ),
+                                BlocBuilder<ServiceBloc, ServiceState>(
+                                  builder: (context, state) {
+                                    return (e.values?.firstWhereOrNull(
+                                                  (element) =>
+                                                      element.toUpperCase() ==
+                                                      "OTHERS",
+                                                ) !=
+                                                null &&
+                                            controller[index]
+                                                .text
+                                                .toUpperCase()
+                                                .contains("OTHERS"))
+                                        ? Padding(
+                                            padding: const EdgeInsets.only(
+                                              left: 4.0,
+                                              right: 4.0,
+                                              bottom: 16,
+                                            ),
+                                            child: DigitTextField(
+                                              maxLength: 1000,
+                                              controller:
+                                                  additionalController[index],
+                                              label: '${localizations.translate(
+                                                '${selectedServiceDefinition?.code}.${e.code}.ADDITIONAL_FIELD',
+                                              )}*',
+                                              validator: (value1) {
+                                                if (value1 == null ||
+                                                    value1 == '') {
+                                                  return localizations
+                                                      .translate(
+                                                    i18.common
+                                                        .coreCommonReasonRequired,
+                                                  );
+                                                }
+
+                                                return null;
+                                              },
+                                            ),
+                                          )
+                                        : const SizedBox();
+                                  },
+                                ),
+                                BlocBuilder<ServiceBloc, ServiceState>(
+                                  builder: (context, state) {
+                                    final hasError = (e.required == true &&
+                                        controller[index].text.isEmpty &&
+                                        submitTriggered);
+
+                                    return Offstage(
+                                      offstage: !hasError,
+                                      child: Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          localizations.translate(
+                                            i18.common.corecommonRequired,
+                                          ),
+                                          style: TextStyle(
+                                            color: theme.colorScheme.error,
+                                          ),
+                                        ),
+                                      ),
                                     );
                                   },
                                 ),
@@ -690,15 +756,72 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
                             } else {
                               ele = "${controller[index].text}.$e";
                             }
-                            controller[index].value =
-                                TextEditingController.fromValue(
-                              TextEditingValue(
-                                text: ele,
-                              ),
-                            ).value;
+                            setState(() {
+                              controller[index].value =
+                                  TextEditingController.fromValue(
+                                TextEditingValue(
+                                  text: ele,
+                                ),
+                              ).value;
+                            });
                           },
                         ))
                     .toList(),
+              );
+            },
+          ),
+          BlocBuilder<ServiceBloc, ServiceState>(
+            builder: (context, state) {
+              return (item.values?.firstWhereOrNull(
+                            (element) => element.toUpperCase() == "OTHERS",
+                          ) !=
+                          null &&
+                      controller[index].text.toUpperCase().contains("OTHERS"))
+                  ? Padding(
+                      padding: const EdgeInsets.only(
+                        left: 4.0,
+                        right: 4.0,
+                        bottom: 16,
+                      ),
+                      child: DigitTextField(
+                        maxLength: 1000,
+                        controller: additionalController[index],
+                        label: '${localizations.translate(
+                          '${selectedServiceDefinition?.code}.${item.code}.ADDITIONAL_FIELD',
+                        )}*',
+                        validator: (value1) {
+                          if (value1 == null || value1 == '') {
+                            return localizations.translate(
+                              i18.common.coreCommonReasonRequired,
+                            );
+                          }
+
+                          return null;
+                        },
+                      ),
+                    )
+                  : const SizedBox();
+            },
+          ),
+          BlocBuilder<ServiceBloc, ServiceState>(
+            builder: (context, state) {
+              final hasError = (item.required == true &&
+                  controller[index].text.isEmpty &&
+                  submitTriggered);
+
+              return Offstage(
+                offstage: !hasError,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    localizations.translate(
+                      i18.common.corecommonRequired,
+                    ),
+                    style: TextStyle(
+                      color: theme.colorScheme.error,
+                    ),
+                  ),
+                ),
               );
             },
           ),
