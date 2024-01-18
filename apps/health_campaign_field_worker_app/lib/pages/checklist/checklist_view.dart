@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:collection/collection.dart';
 import 'package:digit_components/digit_components.dart';
 import 'package:digit_components/utils/date_utils.dart';
 import 'package:flutter/material.dart';
@@ -223,16 +224,82 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
                                                     ele =
                                                         "${controller[index].text}.$e";
                                                   }
-                                                  controller[index].value =
-                                                      TextEditingController
-                                                          .fromValue(
-                                                    TextEditingValue(
-                                                      text: ele,
-                                                    ),
-                                                  ).value;
+                                                  setState(() {
+                                                    controller[index].value =
+                                                        TextEditingController
+                                                            .fromValue(
+                                                      TextEditingValue(
+                                                        text: ele,
+                                                      ),
+                                                    ).value;
+                                                  });
                                                 },
                                               ))
                                           .toList(),
+                                    );
+                                  },
+                                ),
+                                BlocBuilder<ServiceBloc, ServiceState>(
+                                  builder: (context, state) {
+                                    return (e.values?.firstWhereOrNull(
+                                                  (element) =>
+                                                      element.toUpperCase() ==
+                                                      "OTHERS",
+                                                ) !=
+                                                null &&
+                                            controller[index]
+                                                .text
+                                                .toUpperCase()
+                                                .contains("OTHERS"))
+                                        ? Padding(
+                                            padding: const EdgeInsets.only(
+                                              left: 4.0,
+                                              right: 4.0,
+                                              bottom: 16,
+                                            ),
+                                            child: DigitTextField(
+                                              maxLength: 1000,
+                                              controller:
+                                                  additionalController[index],
+                                              label: '${localizations.translate(
+                                                '${selectedServiceDefinition?.code}.${e.code}.ADDITIONAL_FIELD',
+                                              )}*',
+                                              validator: (value1) {
+                                                if (value1 == null ||
+                                                    value1 == '') {
+                                                  return localizations
+                                                      .translate(
+                                                    i18.common
+                                                        .coreCommonOthersRequired,
+                                                  );
+                                                }
+
+                                                return null;
+                                              },
+                                            ),
+                                          )
+                                        : const SizedBox();
+                                  },
+                                ),
+                                BlocBuilder<ServiceBloc, ServiceState>(
+                                  builder: (context, state) {
+                                    final hasError = (e.required == true &&
+                                        controller[index].text.isEmpty &&
+                                        submitTriggered);
+
+                                    return Offstage(
+                                      offstage: !hasError,
+                                      child: Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          localizations.translate(
+                                            i18.common.corecommonRequired,
+                                          ),
+                                          style: TextStyle(
+                                            color: theme.colorScheme.error,
+                                          ),
+                                        ),
+                                      ),
                                     );
                                   },
                                 ),
@@ -272,10 +339,10 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
 
                               for (int i = 0; i < controller.length; i++) {
                                 if (itemsAttributes?[i].required == true &&
+                                    visibleChecklistIndexes
+                                        .any((e) => e == i) &&
                                     ((itemsAttributes?[i].dataType ==
                                                 'SingleValueList' &&
-                                            visibleChecklistIndexes
-                                                .any((e) => e == i) &&
                                             (controller[i].text == '')) ||
                                         (itemsAttributes?[i].dataType !=
                                                 'SingleValueList' &&
@@ -335,26 +402,40 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
                                                       .checklist.notSelectedKey,
                                           rowVersion: 1,
                                           tenantId: attribute?[i].tenantId,
-                                          additionalDetails:
-                                              ((attribute?[i].values?.length ==
-                                                              2 ||
-                                                          attribute?[i]
-                                                                  .values
-                                                                  ?.length ==
-                                                              3) &&
+                                          additionalDetails: ((attribute?[i]
+                                                              .values
+                                                              ?.firstWhereOrNull(
+                                                                (element) =>
+                                                                    element ==
+                                                                    "YES",
+                                                              ) !=
+                                                          null &&
                                                       controller[i].text ==
                                                           attribute?[i]
                                                               .values?[1]
-                                                              .trim())
-                                                  ? additionalController[i]
+                                                              .trim()) ||
+                                                  (attribute?[i]
+                                                              .values
+                                                              ?.firstWhereOrNull(
+                                                                (element) =>
+                                                                    element
+                                                                        .toUpperCase() ==
+                                                                    "OTHERS",
+                                                              ) !=
+                                                          null &&
+                                                      controller[i]
                                                           .text
-                                                          .toString()
-                                                          .isEmpty
-                                                      ? null
-                                                      : additionalController[i]
-                                                          .text
-                                                          .toString()
-                                                  : null,
+                                                          .toUpperCase()
+                                                          .contains("OTHERS")))
+                                              ? additionalController[i]
+                                                      .text
+                                                      .toString()
+                                                      .isEmpty
+                                                  ? null
+                                                  : additionalController[i]
+                                                      .text
+                                                      .toString()
+                                              : null,
                                         ));
                                       }
 
@@ -493,7 +574,6 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
                           final childIndex =
                               initialAttributes?.indexOf(matchingChildItem);
                           if (childIndex != null) {
-                            controller[childIndex].clear();
                             visibleChecklistIndexes
                                 .removeWhere((v) => v == childIndex);
                           }
@@ -506,17 +586,6 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
                             text: value!,
                           ),
                         ).value;
-                        if (excludedIndexes.isNotEmpty) {
-                          for (int i = 0; i < excludedIndexes.length; i++) {
-                            // Clear excluded child controllers
-                            controller[excludedIndexes[i]].value =
-                                TextEditingController.fromValue(
-                              const TextEditingValue(
-                                text: '',
-                              ),
-                            ).value;
-                          }
-                        }
 
                         // Remove corresponding controllers based on the removed attributes
                       });
@@ -536,7 +605,11 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
               ),
               BlocBuilder<ServiceBloc, ServiceState>(
                 builder: (context, state) {
-                  return (controller[index].text == item.values?[1].trim())
+                  return (item.values?.firstWhereOrNull(
+                                (element) => element == "YES",
+                              ) !=
+                              null &&
+                          controller[index].text == item.values?[1].trim())
                       ? Padding(
                           padding: const EdgeInsets.only(
                             left: 4.0,
@@ -610,7 +683,9 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
         ],
         validator: (value) {
           if (((value == null || value == '') && item.required == true)) {
-            return localizations.translate("${item.code}_REQUIRED");
+            return localizations.translate(
+              i18.common.corecommonRequired,
+            );
           }
           if (item.regex != null) {
             return (RegExp(item.regex!).hasMatch(value!))
@@ -694,15 +769,72 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
                             } else {
                               ele = "${controller[index].text}.$e";
                             }
-                            controller[index].value =
-                                TextEditingController.fromValue(
-                              TextEditingValue(
-                                text: ele,
-                              ),
-                            ).value;
+                            setState(() {
+                              controller[index].value =
+                                  TextEditingController.fromValue(
+                                TextEditingValue(
+                                  text: ele,
+                                ),
+                              ).value;
+                            });
                           },
                         ))
                     .toList(),
+              );
+            },
+          ),
+          BlocBuilder<ServiceBloc, ServiceState>(
+            builder: (context, state) {
+              return (item.values?.firstWhereOrNull(
+                            (element) => element.toUpperCase() == "OTHERS",
+                          ) !=
+                          null &&
+                      controller[index].text.toUpperCase().contains("OTHERS"))
+                  ? Padding(
+                      padding: const EdgeInsets.only(
+                        left: 4.0,
+                        right: 4.0,
+                        bottom: 16,
+                      ),
+                      child: DigitTextField(
+                        maxLength: 1000,
+                        controller: additionalController[index],
+                        label: '${localizations.translate(
+                          '${selectedServiceDefinition?.code}.${item.code}.ADDITIONAL_FIELD',
+                        )}*',
+                        validator: (value1) {
+                          if (value1 == null || value1 == '') {
+                            return localizations.translate(
+                              i18.common.coreCommonOthersRequired,
+                            );
+                          }
+
+                          return null;
+                        },
+                      ),
+                    )
+                  : const SizedBox();
+            },
+          ),
+          BlocBuilder<ServiceBloc, ServiceState>(
+            builder: (context, state) {
+              final hasError = (item.required == true &&
+                  controller[index].text.isEmpty &&
+                  submitTriggered);
+
+              return Offstage(
+                offstage: !hasError,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    localizations.translate(
+                      i18.common.corecommonRequired,
+                    ),
+                    style: TextStyle(
+                      color: theme.colorScheme.error,
+                    ),
+                  ),
+                ),
               );
             },
           ),
