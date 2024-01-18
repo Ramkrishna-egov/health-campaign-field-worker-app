@@ -357,6 +357,7 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
                                                   color: Colors.red,
                                                 ),
                                                 onPressed: () {
+                                               
                                                   final bloc = context
                                                       .read<ScannerBloc>();
                                                   if (widget.isGS1code) {
@@ -412,9 +413,16 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
                     child: ScrollableContent(
                       header: GestureDetector(
                         onTap: () {
-                          setState(() {
-                            manualcode = false;
-                          });
+                          context.router.pop();
+                                                context.router.push(QRScannerRoute(
+                                          quantity: 1,
+                                          isGS1code: false,
+                                          sinlgleValue: true,
+                                          isEditEnabled: true,
+                                        ));
+                          // setState(() {
+                          //   manualcode = false;
+                          // });
                         },
                         child: const Align(
                           alignment: Alignment.topRight,
@@ -562,7 +570,7 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
           }
         } else {
           if (bloc.state.qrcodes.contains(barcodes.first.displayValue)) {
-            
+
              // TODO: temporarily commented
             // Future.delayed(const Duration(seconds: 10));
             // await handleError(
