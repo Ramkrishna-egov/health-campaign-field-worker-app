@@ -341,12 +341,7 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
                                 if (itemsAttributes?[i].required == true &&
                                     visibleChecklistIndexes
                                         .any((e) => e == i) &&
-                                    ((itemsAttributes?[i].dataType ==
-                                                'SingleValueList' &&
-                                            (controller[i].text == '')) ||
-                                        (itemsAttributes?[i].dataType !=
-                                                'SingleValueList' &&
-                                            (controller[i].text == '')))) {
+                                    controller[i].text == '') {
                                   return;
                                 }
                               }
