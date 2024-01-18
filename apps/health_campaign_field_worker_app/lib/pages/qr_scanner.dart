@@ -195,6 +195,8 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
 
                           child: TextButton(
                             onPressed: () {
+                              context.read<ScannerBloc>().add(
+                                  const ScannerEvent.handleScanner([], [],),);
                               setState(() {
                                 manualcode = true;
                               });
@@ -540,14 +542,13 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
             final parser = GS1BarcodeParser.defaultParser();
             final parsedResult =
                 parser.parse(barcodes.first.displayValue.toString());
-            final alreadyScanned = bloc.state.barcodes.any((element) =>
-                element.elements.entries.last.value.data ==
-                parsedResult.elements.entries.last.value.data);
-            if (alreadyScanned) {
-              await handleError(
-                i18.deliverIntervention.resourceAlreadyScanned,
-              );
-            } else if (widget.quantity > result.length) {
+
+                // TODO: temporarily commented
+            // final alreadyScanned = bloc.state.barcodes.any((element) =>
+            //     element.elements.entries.last.value.data ==
+            //     parsedResult.elements.entries.last.value.data);
+
+            if (widget.quantity > result.length) {
               await storeValue(parsedResult);
             } else {
               await handleError(
@@ -561,11 +562,13 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
           }
         } else {
           if (bloc.state.qrcodes.contains(barcodes.first.displayValue)) {
-            Future.delayed(const Duration(seconds: 10));
-            await handleError(
-              i18.deliverIntervention.resourceAlreadyScanned,
-            );
-            Future.delayed(const Duration(seconds: 3));
+            
+             // TODO: temporarily commented
+            // Future.delayed(const Duration(seconds: 10));
+            // await handleError(
+            //   i18.deliverIntervention.sameQrcodeScanned,
+            // );
+            // Future.delayed(const Duration(seconds: 3));
 
             return;
           } else {
