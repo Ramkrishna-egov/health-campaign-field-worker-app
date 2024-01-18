@@ -156,8 +156,11 @@ class _BoundarySelectionPageState
                                         // Call the resetChildDropdowns function when a parent dropdown is selected
                                         resetChildDropdowns(label, state);
                                       },
-                                    
-                                    
+                                      isRequired: isDistributor || labelIndex==0 ?true:false,
+                                      validationMessage:isDistributor || labelIndex==0 ?
+                                          localizations.translate(
+                                        i18.common.corecommonRequired,
+                                      ):null,
                                       emptyText: localizations
                                           .translate(i18.common.noMatchFound),
                                     ),
@@ -468,9 +471,8 @@ class _BoundarySelectionPageState
                                                   isClicked
                                               ? null
                                               : () async {
-                                                  if (!form.valid
-                                                      
-                                                      ) {
+                                                  if (!form.valid ||
+                                                      validateAllBoundarySelection(isDistributor)) {
                                                     clickedStatus.value = false;
                                                     await DigitToast.show(
                                                       context,
@@ -582,8 +584,12 @@ class _BoundarySelectionPageState
     return fb.group(formControls);
   }
 
-  bool validateAllBoundarySelection() {
-    // Iterate through the map entries
+  bool validateAllBoundarySelection(bool isDistributor) {
+
+
+if (isDistributor) {
+  
+   // Iterate through the map entries
     for (final entry in formControls.entries) {
       // Access the form control
       final formControl = entry.value;
@@ -598,5 +604,9 @@ class _BoundarySelectionPageState
 
     // Return false if none of the form controls have a null value
     return false;
+} else {
+  return false;
+}
+   
   }
 }

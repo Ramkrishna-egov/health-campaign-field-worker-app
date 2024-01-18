@@ -27,7 +27,7 @@ class ScannerBloc extends Bloc<ScannerEvent, ScannerState> {
     try {
       if (event.qrcode.isNotEmpty) {
         final projectBeneficiary = await projectBeneficiaryRepository
-            .search(ProjectBeneficiarySearchModel(tag: event.qrcode.first));
+            .search(ProjectBeneficiarySearchModel(tag: event.qrcode.last));
 
         if (projectBeneficiary.isEmpty) {
           emit(state.copyWith(duplicate: false));

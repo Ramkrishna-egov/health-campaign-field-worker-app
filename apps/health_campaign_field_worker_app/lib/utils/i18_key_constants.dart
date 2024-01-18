@@ -643,6 +643,8 @@ class DeliverIntervention {
 
   String get resourceAlreadyScanned => 'RESOURCE_ALREADY_SCANNED';
 
+  String get sameQrcodeScanned => "SAME_QRCODE_SCANNED";
+
   String get scannerLabel => 'SCANNER_LABEL';
 
   String get noOfResourceScanned => 'NO_OF_RESOURCE_SCANNED';

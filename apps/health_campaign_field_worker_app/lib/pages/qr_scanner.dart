@@ -195,6 +195,8 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
 
                           child: TextButton(
                             onPressed: () {
+                              context.read<ScannerBloc>().add(
+                                  const ScannerEvent.handleScanner([], [],),);
                               setState(() {
                                 manualcode = true;
                               });
@@ -235,7 +237,7 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
 
                                 if (scannerState.qrcodes.isNotEmpty) {
                                   bloc.add(SearchHouseholdsEvent.searchByTag(
-                                    tag: scannerState.qrcodes.first,
+                                    tag: scannerState.qrcodes.last,
                                     projectId: context.projectId,
                                   ));
                                 }
@@ -355,6 +357,7 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
                                                   color: Colors.red,
                                                 ),
                                                 onPressed: () {
+                                               
                                                   final bloc = context
                                                       .read<ScannerBloc>();
                                                   if (widget.isGS1code) {
@@ -410,9 +413,16 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
                     child: ScrollableContent(
                       header: GestureDetector(
                         onTap: () {
-                          setState(() {
-                            manualcode = false;
-                          });
+                          context.router.pop();
+                                                context.router.push(QRScannerRoute(
+                                          quantity: 1,
+                                          isGS1code: false,
+                                          sinlgleValue: true,
+                                          isEditEnabled: true,
+                                        ));
+                          // setState(() {
+                          //   manualcode = false;
+                          // });
                         },
                         child: const Align(
                           alignment: Alignment.topRight,
@@ -426,6 +436,7 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
                         onPressed: () async {
                           submitButton = true;
                           final bloc = context.read<ScannerBloc>();
+                          codes.clear();
                           codes.add(_resourceController.value.text);
                           bloc.add(
                             ScannerEvent.handleScanner(
@@ -445,7 +456,7 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
                               bloc.add(SearchHouseholdsEvent.searchByTag(
                                 tag: manualcode
                                     ? _resourceController.value.text
-                                    : scannerState.qrcodes.first,
+                                    : scannerState.qrcodes.last,
                                 projectId: context.projectId,
                               ));
                             }
@@ -540,14 +551,13 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
             final parser = GS1BarcodeParser.defaultParser();
             final parsedResult =
                 parser.parse(barcodes.first.displayValue.toString());
-            final alreadyScanned = bloc.state.barcodes.any((element) =>
-                element.elements.entries.last.value.data ==
-                parsedResult.elements.entries.last.value.data);
-            if (alreadyScanned) {
-              await handleError(
-                i18.deliverIntervention.resourceAlreadyScanned,
-              );
-            } else if (widget.quantity > result.length) {
+
+                // TODO: temporarily commented
+            // final alreadyScanned = bloc.state.barcodes.any((element) =>
+            //     element.elements.entries.last.value.data ==
+            //     parsedResult.elements.entries.last.value.data);
+
+            if (widget.quantity > result.length) {
               await storeValue(parsedResult);
             } else {
               await handleError(
@@ -561,11 +571,13 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
           }
         } else {
           if (bloc.state.qrcodes.contains(barcodes.first.displayValue)) {
-            Future.delayed(const Duration(seconds: 10));
-            await handleError(
-              i18.deliverIntervention.resourceAlreadyScanned,
-            );
-            Future.delayed(const Duration(seconds: 3));
+
+             // TODO: temporarily commented
+            // Future.delayed(const Duration(seconds: 10));
+            // await handleError(
+            //   i18.deliverIntervention.sameQrcodeScanned,
+            // );
+            // Future.delayed(const Duration(seconds: 3));
 
             return;
           } else {
