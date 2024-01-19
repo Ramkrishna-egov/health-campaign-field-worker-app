@@ -600,11 +600,18 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
               ),
               BlocBuilder<ServiceBloc, ServiceState>(
                 builder: (context, state) {
-                  return (item.values?.firstWhereOrNull(
-                                (element) => element == "YES",
-                              ) !=
-                              null &&
-                          controller[index].text == item.values?[1].trim())
+                  return ((item.values?.firstWhereOrNull(
+                                    (element) => element == "YES",
+                                  ) !=
+                                  null &&
+                              controller[index].text ==
+                                  item.values?[1].trim()) ||
+                          (item.values?.firstWhereOrNull(
+                                    (element) =>
+                                        element.toUpperCase() == "OTHERS",
+                                  ) !=
+                                  null &&
+                              controller[index].text.toUpperCase() == "OTHERS"))
                       ? Padding(
                           padding: const EdgeInsets.only(
                             left: 4.0,
