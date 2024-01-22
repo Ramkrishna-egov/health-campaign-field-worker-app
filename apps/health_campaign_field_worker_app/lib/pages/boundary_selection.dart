@@ -69,7 +69,7 @@ class _BoundarySelectionPageState
           (role) =>
               role.code == RolesType.distributor.toValue() ||
               role.code == RolesType.registrar.toValue()||
-              role.code == RolesType.superUser.toValue() ||
+              role.code == RolesType.supervisor.toValue() ||
               role.code == RolesType.nationalSupervisor.toValue() ,
         )
         .toList()
