@@ -64,13 +64,22 @@ class _BoundarySelectionPageState
 
   @override
   Widget build(BuildContext context) {
+    bool mandateAllBoundarySelection = context.loggedInUserRoles
+        .where(
+          (role) =>
+              role.code == RolesType.distributor.toValue() ||
+              role.code == RolesType.registrar.toValue() ||
+              role.code == RolesType.supervisor.toValue() ||
+              role.code == RolesType.nationalSupervisor.toValue(),
+        )
+        .toList()
+        .isNotEmpty;
+
     bool isDistributor = context.loggedInUserRoles
         .where(
           (role) =>
               role.code == RolesType.distributor.toValue() ||
-              role.code == RolesType.registrar.toValue()||
-              role.code == RolesType.supervisor.toValue() ||
-              role.code == RolesType.nationalSupervisor.toValue() ,
+              role.code == RolesType.registrar.toValue(),
         )
         .toList()
         .isNotEmpty;
@@ -158,11 +167,17 @@ class _BoundarySelectionPageState
                                         // Call the resetChildDropdowns function when a parent dropdown is selected
                                         resetChildDropdowns(label, state);
                                       },
-                                      isRequired: isDistributor || labelIndex==0 ?true:false,
-                                      validationMessage:isDistributor || labelIndex==0 ?
-                                          localizations.translate(
-                                        i18.common.corecommonRequired,
-                                      ):null,
+                                      isRequired: mandateAllBoundarySelection ||
+                                              labelIndex == 0
+                                          ? true
+                                          : false,
+                                      validationMessage:
+                                          mandateAllBoundarySelection ||
+                                                  labelIndex == 0
+                                              ? localizations.translate(
+                                                  i18.common.corecommonRequired,
+                                                )
+                                              : null,
                                       emptyText: localizations
                                           .translate(i18.common.noMatchFound),
                                     ),
@@ -474,7 +489,9 @@ class _BoundarySelectionPageState
                                               ? null
                                               : () async {
                                                   if (!form.valid ||
-                                                      validateAllBoundarySelection(isDistributor)) {
+                                                      validateAllBoundarySelection(
+                                                        mandateAllBoundarySelection,
+                                                      )) {
                                                     clickedStatus.value = false;
                                                     await DigitToast.show(
                                                       context,
@@ -586,29 +603,26 @@ class _BoundarySelectionPageState
     return fb.group(formControls);
   }
 
-  bool validateAllBoundarySelection(bool isDistributor) {
+  bool validateAllBoundarySelection(bool mandateAllBoundarySelection) {
+    if (mandateAllBoundarySelection) {
+      // Iterate through the map entries
+      for (final entry in formControls.entries) {
+        // Access the form control
+        final formControl = entry.value;
 
+        // Check if the form control value is null
+        if (formControl.value == null) {
+          formControl.setErrors({'': true});
+          // Return true if any form control has a null value
 
-if (isDistributor) {
-  
-   // Iterate through the map entries
-    for (final entry in formControls.entries) {
-      // Access the form control
-      final formControl = entry.value;
-
-      // Check if the form control value is null
-      if (formControl.value == null) {
-        formControl.setErrors({'': true});
-        // Return true if any form control has a null value
-        return true;
+          return true;
+        }
       }
-    }
 
-    // Return false if none of the form controls have a null value
-    return false;
-} else {
-  return false;
-}
-   
+      // Return false if none of the form controls have a null value
+      return false;
+    } else {
+      return false;
+    }
   }
 }
