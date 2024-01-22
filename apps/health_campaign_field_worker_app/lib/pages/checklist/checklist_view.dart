@@ -37,6 +37,9 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
   bool isControllersInitialized = false;
   List<int> visibleChecklistIndexes = [];
   GlobalKey<FormState> checklistFormKey = GlobalKey<FormState>();
+  String othersText = "OTHERS";
+  String yesText = "YES";
+  String multiSelectionSeparator = "^";
 
   @override
   void initState() {
@@ -198,10 +201,14 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
                                     return Column(
                                       children: e.values!
                                           .map((e) => DigitCheckboxTile(
-                                                label: e,
+                                                label: localizations.translate(
+                                                  'CORE_COMMON_$e',
+                                                ),
                                                 value: controller[index]
                                                     .text
-                                                    .split('.')
+                                                    .split(
+                                                      multiSelectionSeparator,
+                                                    )
                                                     .contains(e),
                                                 onChanged: (value) {
                                                   context
@@ -216,13 +223,17 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
                                                   final String ele;
                                                   var val = controller[index]
                                                       .text
-                                                      .split('.');
+                                                      .split(
+                                                        multiSelectionSeparator,
+                                                      );
                                                   if (val.contains(e)) {
                                                     val.remove(e);
-                                                    ele = val.join(".");
+                                                    ele = val.join(
+                                                      multiSelectionSeparator,
+                                                    );
                                                   } else {
                                                     ele =
-                                                        "${controller[index].text}.$e";
+                                                        "${controller[index].text}$multiSelectionSeparator$e";
                                                   }
                                                   setState(() {
                                                     controller[index].value =
@@ -243,14 +254,20 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
                                   builder: (context, state) {
                                     return (e.values?.firstWhereOrNull(
                                                   (element) =>
-                                                      element.toUpperCase() ==
-                                                      "OTHERS",
+                                                      localizations
+                                                          .translate(
+                                                            'CORE_COMMON_$element',
+                                                          )
+                                                          .toUpperCase() ==
+                                                      othersText,
                                                 ) !=
                                                 null &&
-                                            controller[index]
-                                                .text
+                                            localizations
+                                                .translate(
+                                                  'CORE_COMMON_${controller[index].text}',
+                                                )
                                                 .toUpperCase()
-                                                .contains("OTHERS"))
+                                                .contains(othersText))
                                         ? Padding(
                                             padding: const EdgeInsets.only(
                                               left: 4.0,
@@ -377,24 +394,36 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
                                           dataType: attribute?[i].dataType,
                                           clientReferenceId: IdGen.i.identifier,
                                           referenceId: referenceId,
-                                          value: attribute?[i].dataType !=
-                                                  'SingleValueList'
+                                          value: attribute?[i].dataType ==
+                                                  'MultiValueList'
                                               ? controller[i]
                                                       .text
                                                       .toString()
-                                                      .trim()
                                                       .isNotEmpty
                                                   ? controller[i]
                                                       .text
                                                       .toString()
+                                                      .substring(1)
                                                   : null
-                                              : visibleChecklistIndexes
-                                                      .contains(i)
+                                              : attribute?[i].dataType !=
+                                                      'SingleValueList'
                                                   ? controller[i]
-                                                      .text
-                                                      .toString()
-                                                  : i18
-                                                      .checklist.notSelectedKey,
+                                                          .text
+                                                          .toString()
+                                                          .trim()
+                                                          .isNotEmpty
+                                                      ? controller[i]
+                                                          .text
+                                                          .toString()
+                                                      : i18.checklist
+                                                          .notSelectedKey
+                                                  : visibleChecklistIndexes
+                                                          .contains(i)
+                                                      ? controller[i]
+                                                          .text
+                                                          .toString()
+                                                      : i18.checklist
+                                                          .notSelectedKey,
                                           rowVersion: 1,
                                           tenantId: attribute?[i].tenantId,
                                           additionalDetails: ((attribute?[i]
@@ -402,7 +431,7 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
                                                               ?.firstWhereOrNull(
                                                                 (element) =>
                                                                     element ==
-                                                                    "YES",
+                                                                    yesText,
                                                               ) !=
                                                           null &&
                                                       controller[i].text ==
@@ -413,15 +442,29 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
                                                               .values
                                                               ?.firstWhereOrNull(
                                                                 (element) =>
-                                                                    element
+                                                                    localizations
+                                                                        .translate(
+                                                                          'CORE_COMMON_$element',
+                                                                        )
                                                                         .toUpperCase() ==
-                                                                    "OTHERS",
+                                                                    othersText,
                                                               ) !=
                                                           null &&
                                                       controller[i]
-                                                          .text
-                                                          .toUpperCase()
-                                                          .contains("OTHERS")))
+                                                              .text
+                                                              .split(
+                                                                multiSelectionSeparator,
+                                                              )
+                                                              .firstWhereOrNull(
+                                                                (element) =>
+                                                                    localizations
+                                                                        .translate(
+                                                                          'CORE_COMMON_$element',
+                                                                        )
+                                                                        .toUpperCase() ==
+                                                                    othersText,
+                                                              ) !=
+                                                          null))
                                               ? additionalController[i]
                                                       .text
                                                       .toString()
@@ -601,17 +644,25 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
               BlocBuilder<ServiceBloc, ServiceState>(
                 builder: (context, state) {
                   return ((item.values?.firstWhereOrNull(
-                                    (element) => element == "YES",
+                                    (element) => element == yesText,
                                   ) !=
                                   null &&
                               controller[index].text ==
                                   item.values?[1].trim()) ||
                           (item.values?.firstWhereOrNull(
                                     (element) =>
-                                        element.toUpperCase() == "OTHERS",
+                                        localizations
+                                            .translate('CORE_COMMON_$element')
+                                            .toUpperCase() ==
+                                        othersText,
                                   ) !=
                                   null &&
-                              controller[index].text.toUpperCase() == "OTHERS"))
+                              localizations
+                                      .translate(
+                                        'CORE_COMMON_${controller[index].text}',
+                                      )
+                                      .toUpperCase() ==
+                                  othersText))
                       ? Padding(
                           padding: const EdgeInsets.only(
                             left: 4.0,
@@ -754,8 +805,11 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
               return Column(
                 children: item.values!
                     .map((e) => DigitCheckboxTile(
-                          label: e,
-                          value: controller[index].text.split('.').contains(e),
+                          label: localizations.translate('CORE_COMMON_$e'),
+                          value: controller[index]
+                              .text
+                              .split(multiSelectionSeparator)
+                              .contains(e),
                           onChanged: (value) {
                             context.read<ServiceBloc>().add(
                                   ServiceChecklistEvent(
@@ -764,12 +818,15 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
                                   ),
                                 );
                             final String ele;
-                            var val = controller[index].text.split('.');
+                            var val = controller[index]
+                                .text
+                                .split(multiSelectionSeparator);
                             if (val.contains(e)) {
                               val.remove(e);
-                              ele = val.join(".");
+                              ele = val.join(multiSelectionSeparator);
                             } else {
-                              ele = "${controller[index].text}.$e";
+                              ele =
+                                  "${controller[index].text}$multiSelectionSeparator$e";
                             }
                             setState(() {
                               controller[index].value =
@@ -788,10 +845,24 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
           BlocBuilder<ServiceBloc, ServiceState>(
             builder: (context, state) {
               return (item.values?.firstWhereOrNull(
-                            (element) => element.toUpperCase() == "OTHERS",
+                            (element) =>
+                                localizations
+                                    .translate('CORE_COMMON_$element')
+                                    .toUpperCase() ==
+                                othersText,
                           ) !=
                           null &&
-                      controller[index].text.toUpperCase().contains("OTHERS"))
+                      controller[index]
+                              .text
+                              .split(multiSelectionSeparator)
+                              .firstWhereOrNull(
+                                (element) =>
+                                    localizations
+                                        .translate('CORE_COMMON_$element')
+                                        .toUpperCase() ==
+                                    othersText,
+                              ) !=
+                          null)
                   ? Padding(
                       padding: const EdgeInsets.only(
                         left: 4.0,
