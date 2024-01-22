@@ -68,7 +68,9 @@ class _BoundarySelectionPageState
         .where(
           (role) =>
               role.code == RolesType.distributor.toValue() ||
-              role.code == RolesType.registrar.toValue(),
+              role.code == RolesType.registrar.toValue()||
+              role.code == RolesType.supervisor.toValue() ||
+              role.code == RolesType.nationalSupervisor.toValue() ,
         )
         .toList()
         .isNotEmpty;

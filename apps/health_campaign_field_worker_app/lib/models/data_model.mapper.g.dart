@@ -5234,6 +5234,8 @@ class RolesTypeMapper extends EnumMapper<RolesType> {
       case "WAREHOUSE_MANAGER": return RolesType.warehouseManager;
       case "DISTRIBUTOR": return RolesType.distributor;
       case "REGISTRAR": return RolesType.registrar;
+      case "SUPERVISOR": return RolesType.supervisor;
+      case "NATIONAL_SUPERVISOR": return RolesType.nationalSupervisor;
       default: throw MapperException.unknownEnumValue(value);
     }
   }
@@ -5243,6 +5245,8 @@ class RolesTypeMapper extends EnumMapper<RolesType> {
       case RolesType.warehouseManager: return "WAREHOUSE_MANAGER";
       case RolesType.distributor: return "DISTRIBUTOR";
       case RolesType.registrar: return "REGISTRAR";
+      case RolesType.supervisor: return "SUPERVISOR";
+      case RolesType.nationalSupervisor: return "NATIONAL_SUPERVISOR";
     }
   }
 }
