@@ -6,5 +6,7 @@ enum RolesType {
   @MappableValue("WAREHOUSE_MANAGER") warehouseManager,
   @MappableValue("DISTRIBUTOR") distributor,
   @MappableValue("REGISTRAR") registrar,
+  @MappableValue("SUPERUSER") superUser,
+  @MappableValue("NATIONAL_SUPERVISOR") nationalSupervisor,
   ;
 }

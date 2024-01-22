@@ -240,7 +240,12 @@ class SearchHouseholdsBloc
     SearchHouseholdsEmitter emit,
   ) async {
     // Perform a series of asynchronous data retrieval operations based on the search criteria.
+ emit(state.copyWith(
+     
+      loading: true,
+    ));
 
+   
     // Fetch household results based on proximity and other criteria.
     final List<HouseholdModel> proximityBasedResults =
         await addressRepository.searchHouseHoldbyAddress(AddressSearchModel(
@@ -391,6 +396,8 @@ class SearchHouseholdsBloc
       );
     }
 
+
+ await Future.delayed(const Duration(milliseconds: 1000));
     // Update the state with the results and mark the search as completed.
     emit(state.copyWith(
       householdMembers: containers,

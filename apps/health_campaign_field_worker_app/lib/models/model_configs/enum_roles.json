@@ -13,6 +13,16 @@
       "name": "Registrar",
       "value": "REGISTRAR"
       
+    },
+    {
+      "name": "Super User",
+      "value": "SUPERUSER"
+      
+    },
+    {
+      "name": "National Supervisor",
+      "value": "NATIONAL_SUPERVISOR"
+      
     }
   ],
   "isEnum": true
