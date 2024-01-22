@@ -36,6 +36,12 @@ class MarkAttendanceBloc
     );
 
     try {
+
+      if (filterData.first.uploadToServer==true) {
+         throw " You can not edit the attendee once attendancelog is submitted";
+      } else {
+        
+      
       for (var element in filterData) {
         if (element.status == 1) {
           final entry = {
@@ -69,11 +75,14 @@ class MarkAttendanceBloc
         registartId: event.registarId,
       );
 
+   await attendanceRegisterRepository.updateAttendeeSubmitStatus(listData: filterData);
+
       if (check) {
         emit(const MarkAttendanceState.loaded(
           flagStatus: true,
           responseMsg: "Data Inserted Successfully",
         ));
+      }
       }
     } catch (e) {
       // emit(value.copyWith(

@@ -74,7 +74,9 @@ class AttendanceIndividualBloc
                 ..currentDate = event.currentDate
                 ..registerId = event.registerId
                 ..tenantId = event.tenantId
-                ..userName = e.userDetails!.username ?? "";
+                ..userName = e.userDetails!.username ?? ""
+                ..uploadToServer=false
+                ;
 
               return absentAttendee;
             },

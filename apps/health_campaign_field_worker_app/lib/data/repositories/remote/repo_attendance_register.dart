@@ -161,4 +161,26 @@ class AttendanceRegisterRepository {
       rethrow;
     }
   }
+
+   Future<void> updateAttendeeSubmitStatus({
+    required List<AbsentAttendee> listData,
+  }) async {
+    try {
+      await isar.writeTxn(() async {
+
+        for (var element in listData) {
+          
+        
+        AbsentAttendee? data = await isar.absentAttendees.get(element.id);
+          
+              data!.uploadToServer=true;
+      
+
+        await isar.absentAttendees.put(data!);
+        }
+      });
+    } catch (ex) {
+      rethrow;
+    }
+  }
 }
