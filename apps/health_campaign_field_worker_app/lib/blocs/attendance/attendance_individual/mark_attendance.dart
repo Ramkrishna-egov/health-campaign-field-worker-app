@@ -36,53 +36,51 @@ class MarkAttendanceBloc
     );
 
     try {
-
-      if (filterData.first.uploadToServer==true) {
-         throw " You can not edit the attendee once attendancelog is submitted";
+      if (filterData.first.uploadToServer) {
+        throw " You can not edit the attendee once attendancelog is submitted";
       } else {
-        
-      
-      for (var element in filterData) {
-        if (element.status == 1) {
-          final entry = {
-            "registerId": element.registerId,
-            "individualId": element.individualId,
-            "tenantId": element.tenantId,
-            "time": element.entryTime,
-            "type": "ENTRY",
-            "status": "ACTIVE",
-            "documentIds": [],
-            "additionalDetails": {},
-          };
+        for (var element in filterData) {
+          if (element.status == 1) {
+            final entry = {
+              "registerId": element.registerId,
+              "individualId": element.individualId,
+              "tenantId": element.tenantId,
+              "time": element.entryTime,
+              "type": "ENTRY",
+              "status": "ACTIVE",
+              "documentIds": [],
+              "additionalDetails": {},
+            };
 
-          final exit = {
-            "registerId": element.registerId,
-            "individualId": element.individualId,
-            "tenantId": element.tenantId,
-            "time": element.exitTime,
-            "type": "EXIT",
-            "status": "ACTIVE",
-            "documentIds": [],
-            "additionalDetails": {},
-          };
-          m.add(entry);
-          m.add(exit);
+            final exit = {
+              "registerId": element.registerId,
+              "individualId": element.individualId,
+              "tenantId": element.tenantId,
+              "time": element.exitTime,
+              "type": "EXIT",
+              "status": "ACTIVE",
+              "documentIds": [],
+              "additionalDetails": {},
+            };
+            m.add(entry);
+            m.add(exit);
+          }
         }
-      }
 
-      final check = await attendanceRegisterRepository.createAttendanceLog(
-        attedeesList: m,
-        registartId: event.registarId,
-      );
+        final check = await attendanceRegisterRepository.createAttendanceLog(
+          attedeesList: m,
+          registartId: event.registarId,
+        );
 
-   await attendanceRegisterRepository.updateAttendeeSubmitStatus(listData: filterData);
+        await attendanceRegisterRepository.updateAttendeeSubmitStatus(
+            listData: filterData,);
 
-      if (check) {
-        emit(const MarkAttendanceState.loaded(
-          flagStatus: true,
-          responseMsg: "Data Inserted Successfully",
-        ));
-      }
+        if (check) {
+          emit(const MarkAttendanceState.loaded(
+            flagStatus: true,
+            responseMsg: "Data Inserted Successfully",
+          ));
+        }
       }
     } catch (e) {
       // emit(value.copyWith(

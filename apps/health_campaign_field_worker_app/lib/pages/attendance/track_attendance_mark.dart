@@ -228,6 +228,13 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                                     ? () {
                                         FocusManager.instance.primaryFocus
                                             ?.unfocus();
+                                            if (attendanceCollectionModel!.first.uploadToServer) {
+
+                                              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("aleardy submitted")));
+                                              
+                                              return ;
+                                              
+                                            }
                                         if (currentOffset == 0) {
                                           markConfirmationDialog(
                                             context.read<MarkAttendanceBloc>(),
@@ -516,7 +523,7 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
         widget: CircularButton(
           icon: Icons.circle_rounded,
           size: 15,
-          viewOnly: (widget.dateTime.day == DateTime.now().day) ? false : true,
+          viewOnly: (widget.dateTime.day == DateTime.now().day && !tableDataModel.uploadToServer) ? false : true,
           color: const Color.fromRGBO(0, 100, 0, 1),
           index: double.parse(tableDataModel.status.toString()) ?? -1,
           isNotGreyed: false,

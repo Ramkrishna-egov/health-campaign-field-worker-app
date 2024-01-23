@@ -96,6 +96,7 @@ class AttendanceIndividualBloc
               id: e.id,
               registerId: event.registerId,
               userName: e.userName,
+              uploadToServer: e.uploadToServer,
             );
 
             return s;
@@ -130,6 +131,7 @@ class AttendanceIndividualBloc
             status: e.status,
             registerId: event.registerId,
             userName: e.userName,
+             uploadToServer: e.uploadToServer,
           );
 
           return s;
@@ -177,6 +179,7 @@ class AttendanceIndividualBloc
               counter = counter - 1;
             }
             AttendeeCollectionModel s = AttendeeCollectionModel(
+               uploadToServer: e.uploadToServer,
               userName: e.userName,
               registerId: e.registerId,
               id: e.id,
@@ -210,6 +213,7 @@ class AttendanceIndividualBloc
                 counter = counter - 1;
               }
               AttendeeCollectionModel s = AttendeeCollectionModel(
+                 uploadToServer: e.uploadToServer,
                 userName: e.userName,
                 registerId: e.registerId,
                 id: e.id,
