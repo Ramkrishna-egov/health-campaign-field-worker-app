@@ -72,8 +72,13 @@ const AbsentAttendeeSchema = CollectionSchema(
       name: r'tenantId',
       type: IsarType.string,
     ),
-    r'userName': PropertySchema(
+    r'uploadToServer': PropertySchema(
       id: 11,
+      name: r'uploadToServer',
+      type: IsarType.bool,
+    ),
+    r'userName': PropertySchema(
+      id: 12,
       name: r'userName',
       type: IsarType.string,
     )
@@ -124,7 +129,8 @@ void _absentAttendeeSerialize(
   writer.writeString(offsets[8], object.registerId);
   writer.writeLong(offsets[9], object.status);
   writer.writeString(offsets[10], object.tenantId);
-  writer.writeString(offsets[11], object.userName);
+  writer.writeBool(offsets[11], object.uploadToServer);
+  writer.writeString(offsets[12], object.userName);
 }
 
 AbsentAttendee _absentAttendeeDeserialize(
@@ -146,7 +152,8 @@ AbsentAttendee _absentAttendeeDeserialize(
   object.registerId = reader.readString(offsets[8]);
   object.status = reader.readLong(offsets[9]);
   object.tenantId = reader.readString(offsets[10]);
-  object.userName = reader.readString(offsets[11]);
+  object.uploadToServer = reader.readBool(offsets[11]);
+  object.userName = reader.readString(offsets[12]);
   return object;
 }
 
@@ -180,6 +187,8 @@ P _absentAttendeeDeserializeProp<P>(
     case 10:
       return (reader.readString(offset)) as P;
     case 11:
+      return (reader.readBool(offset)) as P;
+    case 12:
       return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -1354,6 +1363,16 @@ extension AbsentAttendeeQueryFilter
   }
 
   QueryBuilder<AbsentAttendee, AbsentAttendee, QAfterFilterCondition>
+      uploadToServerEqualTo(bool value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'uploadToServer',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<AbsentAttendee, AbsentAttendee, QAfterFilterCondition>
       userNameEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -1645,6 +1664,20 @@ extension AbsentAttendeeQuerySortBy
     });
   }
 
+  QueryBuilder<AbsentAttendee, AbsentAttendee, QAfterSortBy>
+      sortByUploadToServer() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'uploadToServer', Sort.asc);
+    });
+  }
+
+  QueryBuilder<AbsentAttendee, AbsentAttendee, QAfterSortBy>
+      sortByUploadToServerDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'uploadToServer', Sort.desc);
+    });
+  }
+
   QueryBuilder<AbsentAttendee, AbsentAttendee, QAfterSortBy> sortByUserName() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'userName', Sort.asc);
@@ -1820,6 +1853,20 @@ extension AbsentAttendeeQuerySortThenBy
     });
   }
 
+  QueryBuilder<AbsentAttendee, AbsentAttendee, QAfterSortBy>
+      thenByUploadToServer() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'uploadToServer', Sort.asc);
+    });
+  }
+
+  QueryBuilder<AbsentAttendee, AbsentAttendee, QAfterSortBy>
+      thenByUploadToServerDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'uploadToServer', Sort.desc);
+    });
+  }
+
   QueryBuilder<AbsentAttendee, AbsentAttendee, QAfterSortBy> thenByUserName() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'userName', Sort.asc);
@@ -1911,6 +1958,13 @@ extension AbsentAttendeeQueryWhereDistinct
     });
   }
 
+  QueryBuilder<AbsentAttendee, AbsentAttendee, QDistinct>
+      distinctByUploadToServer() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'uploadToServer');
+    });
+  }
+
   QueryBuilder<AbsentAttendee, AbsentAttendee, QDistinct> distinctByUserName(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -1991,6 +2045,13 @@ extension AbsentAttendeeQueryProperty
   QueryBuilder<AbsentAttendee, String, QQueryOperations> tenantIdProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'tenantId');
+    });
+  }
+
+  QueryBuilder<AbsentAttendee, bool, QQueryOperations>
+      uploadToServerProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'uploadToServer');
     });
   }
 

@@ -1322,5 +1322,7 @@ class Attendance {
 
   String get viewAttendanceButton => "ATTENDANCE_VIEW_BUTTON";
 
+  String get atleastOneAttendeePresent => "ATTENDANCE_ONE_ATTENDEE_PRESENT";
+
   // String get manageStockLabel => 'HOME_MANAGE_STOCK_LABEL';
 }

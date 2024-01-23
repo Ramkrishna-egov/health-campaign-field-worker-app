@@ -5,6 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../data/local_store/no_sql/schema/absent_attendee.dart';
 import '../../../data/repositories/remote/repo_attendance_register.dart';
+import '../../../utils/i18_key_constants.dart' as i18;
 
 part 'mark_attendance.freezed.dart';
 
@@ -36,49 +37,57 @@ class MarkAttendanceBloc
     );
 
     try {
-      for (var element in filterData) {
-        if (element.status == 1) {
-          final entry = {
-            "registerId": element.registerId,
-            "individualId": element.individualId,
-            "tenantId": element.tenantId,
-            "time": element.entryTime,
-            "type": "ENTRY",
-            "status": "ACTIVE",
-            "documentIds": [],
-            "additionalDetails": {},
-          };
+      if (filterData.first.uploadToServer) {
+        throw " You can not edit the attendee once attendancelog is submitted";
+      } else {
+        for (var element in filterData) {
+          if (element.status == 1) {
+            final entry = {
+              "registerId": element.registerId,
+              "individualId": element.individualId,
+              "tenantId": element.tenantId,
+              "time": element.entryTime,
+              "type": "ENTRY",
+              "status": "ACTIVE",
+              "documentIds": [],
+              "additionalDetails": {},
+            };
 
-          final exit = {
-            "registerId": element.registerId,
-            "individualId": element.individualId,
-            "tenantId": element.tenantId,
-            "time": element.exitTime,
-            "type": "EXIT",
-            "status": "ACTIVE",
-            "documentIds": [],
-            "additionalDetails": {},
-          };
-          m.add(entry);
-          m.add(exit);
+            final exit = {
+              "registerId": element.registerId,
+              "individualId": element.individualId,
+              "tenantId": element.tenantId,
+              "time": element.exitTime,
+              "type": "EXIT",
+              "status": "ACTIVE",
+              "documentIds": [],
+              "additionalDetails": {},
+            };
+            m.add(entry);
+            m.add(exit);
+          }
+        }
+        if (m.isNotEmpty) {
+          final check = await attendanceRegisterRepository.createAttendanceLog(
+            attedeesList: m,
+            registartId: event.registarId,
+          );
+
+          await attendanceRegisterRepository.updateAttendeeSubmitStatus(
+            listData: filterData,
+          );
+
+          if (check) {
+            emit(const MarkAttendanceState.loaded(
+              flagStatus: true,
+              responseMsg: "Data Inserted Successfully",
+            ));
+          }
+        } else {
+          throw i18.attendance.atleastOneAttendeePresent;
         }
       }
-
-      final check = await attendanceRegisterRepository.createAttendanceLog(
-        attedeesList: m,
-        registartId: event.registarId,
-      );
-
-      if (check) {
-        emit(const MarkAttendanceState.loaded(
-          flagStatus: true,
-          responseMsg: "Data Inserted Successfully",
-        ));
-      }
     } catch (e) {
-      // emit(value.copyWith(
-      //   flag: false,
-      // ));
       emit(MarkAttendanceState.error(e.toString()));
     }
   }

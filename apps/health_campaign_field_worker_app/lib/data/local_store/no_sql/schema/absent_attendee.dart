@@ -17,4 +17,5 @@ class AbsentAttendee {
   late String name;
   late int currentDate;
   late String userName;
+  late bool uploadToServer;
 }

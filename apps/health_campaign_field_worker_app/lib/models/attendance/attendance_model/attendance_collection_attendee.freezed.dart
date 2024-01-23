@@ -33,6 +33,7 @@ mixin _$AttendeeCollectionModel {
   int get eventEndDate => throw _privateConstructorUsedError;
   String? get type => throw _privateConstructorUsedError;
   int get status => throw _privateConstructorUsedError;
+  bool get uploadToServer => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -58,7 +59,8 @@ abstract class $AttendeeCollectionModelCopyWith<$Res> {
       int eventStartDate,
       int eventEndDate,
       String? type,
-      int status});
+      int status,
+      bool uploadToServer});
 }
 
 /// @nodoc
@@ -87,6 +89,7 @@ class _$AttendeeCollectionModelCopyWithImpl<$Res,
     Object? eventEndDate = null,
     Object? type = freezed,
     Object? status = null,
+    Object? uploadToServer = null,
   }) {
     return _then(_value.copyWith(
       userName: freezed == userName
@@ -137,6 +140,10 @@ class _$AttendeeCollectionModelCopyWithImpl<$Res,
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as int,
+      uploadToServer: null == uploadToServer
+          ? _value.uploadToServer
+          : uploadToServer // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -161,7 +168,8 @@ abstract class _$$_AttendeeCollectionModelCopyWith<$Res>
       int eventStartDate,
       int eventEndDate,
       String? type,
-      int status});
+      int status,
+      bool uploadToServer});
 }
 
 /// @nodoc
@@ -188,6 +196,7 @@ class __$$_AttendeeCollectionModelCopyWithImpl<$Res>
     Object? eventEndDate = null,
     Object? type = freezed,
     Object? status = null,
+    Object? uploadToServer = null,
   }) {
     return _then(_$_AttendeeCollectionModel(
       userName: freezed == userName
@@ -238,6 +247,10 @@ class __$$_AttendeeCollectionModelCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as int,
+      uploadToServer: null == uploadToServer
+          ? _value.uploadToServer
+          : uploadToServer // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -257,7 +270,8 @@ class _$_AttendeeCollectionModel implements _AttendeeCollectionModel {
       this.eventStartDate = 0,
       this.eventEndDate = 0,
       this.type,
-      this.status = -1});
+      this.status = -1,
+      required this.uploadToServer});
 
   factory _$_AttendeeCollectionModel.fromJson(Map<String, dynamic> json) =>
       _$$_AttendeeCollectionModelFromJson(json);
@@ -291,10 +305,12 @@ class _$_AttendeeCollectionModel implements _AttendeeCollectionModel {
   @override
   @JsonKey()
   final int status;
+  @override
+  final bool uploadToServer;
 
   @override
   String toString() {
-    return 'AttendeeCollectionModel(userName: $userName, name: $name, id: $id, registerId: $registerId, individualId: $individualId, tenantId: $tenantId, entryTime: $entryTime, exitTime: $exitTime, eventStartDate: $eventStartDate, eventEndDate: $eventEndDate, type: $type, status: $status)';
+    return 'AttendeeCollectionModel(userName: $userName, name: $name, id: $id, registerId: $registerId, individualId: $individualId, tenantId: $tenantId, entryTime: $entryTime, exitTime: $exitTime, eventStartDate: $eventStartDate, eventEndDate: $eventEndDate, type: $type, status: $status, uploadToServer: $uploadToServer)';
   }
 
   @override
@@ -321,7 +337,9 @@ class _$_AttendeeCollectionModel implements _AttendeeCollectionModel {
             (identical(other.eventEndDate, eventEndDate) ||
                 other.eventEndDate == eventEndDate) &&
             (identical(other.type, type) || other.type == type) &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.uploadToServer, uploadToServer) ||
+                other.uploadToServer == uploadToServer));
   }
 
   @JsonKey(ignore: true)
@@ -339,7 +357,8 @@ class _$_AttendeeCollectionModel implements _AttendeeCollectionModel {
       eventStartDate,
       eventEndDate,
       type,
-      status);
+      status,
+      uploadToServer);
 
   @JsonKey(ignore: true)
   @override
@@ -370,7 +389,8 @@ abstract class _AttendeeCollectionModel implements AttendeeCollectionModel {
       final int eventStartDate,
       final int eventEndDate,
       final String? type,
-      final int status}) = _$_AttendeeCollectionModel;
+      final int status,
+      required final bool uploadToServer}) = _$_AttendeeCollectionModel;
 
   factory _AttendeeCollectionModel.fromJson(Map<String, dynamic> json) =
       _$_AttendeeCollectionModel.fromJson;
@@ -399,6 +419,8 @@ abstract class _AttendeeCollectionModel implements AttendeeCollectionModel {
   String? get type;
   @override
   int get status;
+  @override
+  bool get uploadToServer;
   @override
   @JsonKey(ignore: true)
   _$$_AttendeeCollectionModelCopyWith<_$_AttendeeCollectionModel>

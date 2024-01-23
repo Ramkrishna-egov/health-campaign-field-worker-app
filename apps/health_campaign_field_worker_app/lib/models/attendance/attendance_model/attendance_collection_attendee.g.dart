@@ -21,6 +21,7 @@ _$_AttendeeCollectionModel _$$_AttendeeCollectionModelFromJson(
       eventEndDate: json['eventEndDate'] as int? ?? 0,
       type: json['type'] as String?,
       status: json['status'] as int? ?? -1,
+      uploadToServer: json['uploadToServer'] as bool,
     );
 
 Map<String, dynamic> _$$_AttendeeCollectionModelToJson(
@@ -38,4 +39,5 @@ Map<String, dynamic> _$$_AttendeeCollectionModelToJson(
       'eventEndDate': instance.eventEndDate,
       'type': instance.type,
       'status': instance.status,
+      'uploadToServer': instance.uploadToServer,
     };

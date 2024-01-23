@@ -18,6 +18,7 @@ class AttendeeCollectionModel with _$AttendeeCollectionModel {
     @Default(0) int eventEndDate,
     String? type,
     @Default(-1) int status,
+    required bool uploadToServer,
   }) = _AttendeeCollectionModel;
 
   factory AttendeeCollectionModel.fromJson(
