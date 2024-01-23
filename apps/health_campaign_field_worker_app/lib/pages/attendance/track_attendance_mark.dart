@@ -224,17 +224,11 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                               ),
                               child: DigitElevatedButton(
                                 onPressed: (widget.dateTime.day ==
-                                        DateTime.now().day)
+                                        DateTime.now().day && !(attendanceCollectionModel!.first.uploadToServer))
                                     ? () {
                                         FocusManager.instance.primaryFocus
                                             ?.unfocus();
-                                            if (attendanceCollectionModel!.first.uploadToServer) {
-
-                                              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("aleardy submitted")));
-                                              
-                                              return ;
-                                              
-                                            }
+                                           
                                         if (currentOffset == 0) {
                                           markConfirmationDialog(
                                             context.read<MarkAttendanceBloc>(),
@@ -252,7 +246,7 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                                       },
                                 child: Text(
                                   localizations.translate(
-                                    (widget.dateTime.day == DateTime.now().day)
+                                    (widget.dateTime.day == DateTime.now().day && !(attendanceCollectionModel!.first.uploadToServer))
                                         ? i18.attendance.markAttendance
                                         : i18.attendance.closeButton,
                                   ),
