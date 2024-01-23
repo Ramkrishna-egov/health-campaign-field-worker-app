@@ -181,6 +181,7 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                     map: {
                       "eventEnd": widget.eventEndTime,
                       "eventStart": widget.eventStartTime,
+                      "msg": value.error.toString()??"",
                     },
                   );
                 },
@@ -419,7 +420,7 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
     BuildContext context,
     AppLocalizations k,
     bool retry, {
-    required Map<String, DateTime> map,
+    required Map<String, dynamic> map,
   }) {
     return showDialog(
       barrierDismissible: false,
@@ -445,6 +446,7 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                       bottom: 8.0,
                     ),
                     child: Text(
+                      map['msg']==i18.attendance.atleastOneAttendeePresent?k.translate(i18.attendance.atleastOneAttendeePresent) :
                       "${k.translate(i18.attendance.somethingWentWrong)} \n ${k.translate(i18.attendance.pleaseTryAgain)}!!",
                       style: DigitTheme
                           .instance.mobileTheme.textTheme.headlineMedium,
@@ -677,7 +679,7 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                       // "Note: You can not edit attendance details for the past days",
                       style:
                           DigitTheme.instance.mobileTheme.textTheme.bodyMedium,
-                      textAlign: TextAlign.left,
+                      textAlign: TextAlign.center,
                     ),
                   ),
                   SizedBox(

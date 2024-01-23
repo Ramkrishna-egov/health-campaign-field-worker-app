@@ -5,6 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../data/local_store/no_sql/schema/absent_attendee.dart';
 import '../../../data/repositories/remote/repo_attendance_register.dart';
+import '../../../utils/i18_key_constants.dart' as i18;
 
 part 'mark_attendance.freezed.dart';
 
@@ -66,26 +67,27 @@ class MarkAttendanceBloc
             m.add(exit);
           }
         }
+        if (m.isNotEmpty) {
+          final check = await attendanceRegisterRepository.createAttendanceLog(
+            attedeesList: m,
+            registartId: event.registarId,
+          );
 
-        final check = await attendanceRegisterRepository.createAttendanceLog(
-          attedeesList: m,
-          registartId: event.registarId,
-        );
+          await attendanceRegisterRepository.updateAttendeeSubmitStatus(
+            listData: filterData,
+          );
 
-        await attendanceRegisterRepository.updateAttendeeSubmitStatus(
-            listData: filterData,);
-
-        if (check) {
-          emit(const MarkAttendanceState.loaded(
-            flagStatus: true,
-            responseMsg: "Data Inserted Successfully",
-          ));
+          if (check) {
+            emit(const MarkAttendanceState.loaded(
+              flagStatus: true,
+              responseMsg: "Data Inserted Successfully",
+            ));
+          }
+        } else {
+          throw i18.attendance.atleastOneAttendeePresent;
         }
       }
     } catch (e) {
-      // emit(value.copyWith(
-      //   flag: false,
-      // ));
       emit(MarkAttendanceState.error(e.toString()));
     }
   }
