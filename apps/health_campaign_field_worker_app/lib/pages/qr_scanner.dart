@@ -66,112 +66,100 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return WillPopScope(
-      onWillPop: () {
-        if (!submitButton) {
-          context
-              .read<ScannerBloc>()
-              .add(const ScannerEvent.handleScanner([], []));
-
-          return Future.value(true);
-        } else {
-          return Future.value(true);
-        }
-      },
-      child: Scaffold(
-        body: BlocBuilder<ScannerBloc, ScannerState>(
-          builder: (context, state) {
-            return !manualcode
-                ? Stack(
-                    children: <Widget>[
-                      GestureDetector(
-                        onTap: () {
-                          controller?.pauseCamera();
-                          controller?.resumeCamera();
-                        },
-                        child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height,
-                          color: Colors.green[300],
-                          child: DetectorView(
-                            title: 'Barcode Scanner',
-                            customPaint: _customPaint,
-                            text: _text,
-                            onImage: _processImage,
-                            initialCameraLensDirection: _cameraLensDirection,
-                            onCameraLensDirectionChanged: (value) =>
-                                _cameraLensDirection = value,
-                          ),
+    return Scaffold(
+      body: BlocBuilder<ScannerBloc, ScannerState>(
+        builder: (context, state) {
+          return !manualcode
+              ? Stack(
+                  children: <Widget>[
+                    GestureDetector(
+                      onTap: () {
+                        controller?.pauseCamera();
+                        controller?.resumeCamera();
+                      },
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height,
+                        color: Colors.green[300],
+                        child: DetectorView(
+                          title: 'Barcode Scanner',
+                          customPaint: _customPaint,
+                          text: _text,
+                          onImage: _processImage,
+                          initialCameraLensDirection: _cameraLensDirection,
+                          onCameraLensDirectionChanged: (value) =>
+                              _cameraLensDirection = value,
                         ),
                       ),
-                      Positioned(
-                        top: kPadding * 2,
-                        left: kPadding,
-                        child: SizedBox(
-                          // [TODO: Localization need to be added]
-                          child: GestureDetector(
-                            onTap: () async {
-                              controller?.toggleFlash();
-                              var status = await controller?.getFlashStatus();
-                              if (status != null) {
-                                setState(() {
-                                  flashstatus = status;
-                                });
-                              }
-                            },
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Icon(
-                                  Icons.flashlight_on,
+                    ),
+                    Positioned(
+                      top: kPadding * 2,
+                      left: kPadding,
+                      child: SizedBox(
+                        // [TODO: Localization need to be added]
+                        child: InkWell(
+                          onTap: () async {
+                            var status = await controller?.getFlashStatus();
+                            if (status != null) {
+                              setState(() {
+                                flashstatus = status;
+                              });
+                            }
+                          },
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Icon(
+                                Icons.flashlight_on,
+                                color: theme.colorScheme.secondary,
+                              ),
+                              Text(
+                                localizations.translate(
+                                  flashstatus
+                                      ? i18.deliverIntervention.flashOff
+                                      : i18.deliverIntervention.flashOn,
+                                ),
+                                style: TextStyle(
                                   color: theme.colorScheme.secondary,
                                 ),
-                                Text(
-                                  localizations.translate(
-                                    flashstatus
-                                        ? i18.deliverIntervention.flashOff
-                                        : i18.deliverIntervention.flashOn,
-                                  ),
-                                  style: TextStyle(
-                                    color: theme.colorScheme.secondary,
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
-                      // [TODO : Need move to constants]
-                      Positioned(
-                        top: kPadding * 8,
-                        left: MediaQuery.of(context).size.width / 3,
-                        width: 250,
-                        height: 250,
-                        child: SizedBox(
-                          width: 150,
-                          height: 150,
-                          // [TODO: Localization need to be added]
-                          child: Text(
-                            localizations.translate(
-                              i18.deliverIntervention.scannerLabel,
-                            ),
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                            ),
+                    ),
+                    // [TODO : Need move to constants]
+                    Positioned(
+                      top: MediaQuery.of(context).size.width / 5,
+                      left: MediaQuery.of(context).size.width / 2.6,
+                      width: 250,
+                      height: 250,
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width / 3,
+                        height: MediaQuery.of(context).size.height / 3,
+                        // [TODO: Localization need to be added]
+                        child: Text(
+                          localizations.translate(
+                            i18.deliverIntervention.scannerLabel,
+                          ),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
                           ),
                         ),
                       ),
-                      Positioned(
-                        top: MediaQuery.of(context).size.height / 2.4,
-                        left: MediaQuery.of(context).size.width / 4.5,
-                        width: 250,
-                        height: 250,
-                        child: SizedBox(
-                          width: 150,
-                          height: 150,
-                          // [TODO: Localization need to be added]
+                    ),
+                    Positioned(
+                      top: MediaQuery.of(context).size.height / 2.4,
+                      left: MediaQuery.of(context).size.width / 4,
+                      width: 250,
+                      height: 250,
+                      child: SizedBox(
+                        width: 150,
+                        height: 50,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: kPadding),
                           child: Text(
                             localizations.translate(
                               i18.deliverIntervention.manualScan,
@@ -574,20 +562,15 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
           }
         } else {
           if (bloc.state.qrcodes.contains(barcodes.first.displayValue)) {
-            // TODO: temporarily commented
-            // Future.delayed(const Duration(seconds: 10));
-            // await handleError(
-            //   i18.deliverIntervention.sameQrcodeScanned,
-            // );
-            // Future.delayed(const Duration(seconds: 3));
-
+            await handleError(
+              i18.deliverIntervention.resourceAlreadyScanned,
+            );
             return;
           } else {
             RegExp pattern = RegExp(r'^\d{4}-\d{2}-\d{2}-\d{1}-\d{3}$');
 
             if (pattern.hasMatch(barcodes.first.displayValue ?? "")) {
               await storeCode(barcodes.first.displayValue.toString());
-              Future.delayed(const Duration(seconds: 3));
             } else {
               await handleError(
                 i18.deliverIntervention.scanValidResource,
@@ -634,9 +617,6 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
         ),
       );
     }
-    Future.delayed(
-      const Duration(seconds: 1),
-    );
   }
 
   Future storeCode(
@@ -659,6 +639,9 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
       bloc.state.barcodes,
       codes,
     ));
+    await Future.delayed(
+      const Duration(seconds: 5),
+    );
 
     return;
   }
@@ -670,7 +653,7 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
     final bloc = context.read<ScannerBloc>();
 
     player.play(AssetSource("audio/add.wav"));
-    Future.delayed(const Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 3));
 
     result = List.from(bloc.state.barcodes);
     result.removeDuplicates(
@@ -682,7 +665,7 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
     setState(() {
       result = result;
     });
-    Future.delayed(
+    await Future.delayed(
       const Duration(seconds: 5),
     );
 
