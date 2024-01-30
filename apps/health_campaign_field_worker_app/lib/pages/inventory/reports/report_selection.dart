@@ -124,6 +124,22 @@ class _InventoryReportSelectionPageState
                 ),
                 DigitListView(
                   title: localizations.translate(
+                    i18.inventoryReportSelection.inventoryReportGainedLabel,
+                  ),
+                  description: localizations.translate(
+                    i18.inventoryReportSelection
+                        .inventoryReportGainedDescription,
+                  ),
+                  prefixIcon: Icons.store,
+                  sufixIcon: Icons.arrow_circle_right,
+                  onPressed: () => context.router.push(
+                    InventoryReportDetailsRoute(
+                      reportType: InventoryReportType.gained,
+                    ),
+                  ),
+                ),
+                DigitListView(
+                  title: localizations.translate(
                     i18.inventoryReportSelection
                         .inventoryReportReconciliationLabel,
                   ),

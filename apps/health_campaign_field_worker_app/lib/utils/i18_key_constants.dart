@@ -725,6 +725,8 @@ class WarehouseDetails {
 
   String get dateOfLoss => "WAREHOUSE_DETAILS_DATE_OF_LOSS";
 
+  String get dateOfGain => "WAREHOUSE_DETAILS_DATE_OF_GAIN";
+
   String get dateOfDamage => "WAREHOUSE_DETAILS_DATE_OF_DAMAGE";
   String get dateOfIssue => "WAREHOUSE_DETAILS_DATE_OF_ISSUE";
   String get dateOfReturn => "WAREHOUSE_DETAILS_DATE_OF_RETURN";
@@ -741,6 +743,8 @@ class StockDetails {
   String get returnedPageTitle => 'RETURNED_STOCK_DETAILS';
 
   String get lostPageTitle => 'LOST_STOCK_DETAILS';
+
+  String get gainedPageTitle => 'GAINED_STOCK_DETAILS';
 
   String get damagedPageTitle => 'DAMAGED_STOCK_DETAILS';
 
@@ -762,6 +766,10 @@ class StockDetails {
     return 'STOCK_DETAILS_RECEIVED_FROM_LOST';
   }
 
+  String get selectTransactingPartyReceivedFromGained {
+    return 'STOCK_DETAILS_RECEIVED_FROM_GAINED';
+  }
+
   /// Quantity sent/received/lost/damaged label
   String get quantityReceivedLabel => 'STOCK_DETAILS_QUANTITY_RECEIVED';
 
@@ -770,6 +778,8 @@ class StockDetails {
   String get quantityReturnedLabel => 'STOCK_DETAILS_QUANTITY_RETURNED';
 
   String get quantityLostLabel => 'STOCK_DETAILS_QUANTITY_LOST';
+
+  String get quantityGainedLabel => 'STOCK_DETAILS_QUANTITY_GAINED';
 
   String get quantityDamagedLabel => 'STOCK_DETAILS_QUANTITY_DAMAGED';
 
@@ -783,6 +793,8 @@ class StockDetails {
 
   /// Lost/Damaged during label
   String get transactionReasonLost => 'STOCK_DETAILS_LOST_DURING';
+
+  String get transactionReasonGained => 'STOCK_DETAILS_GAINED_DURING';
 
   String get transactionReasonDamaged => 'STOCK_DETAILS_DAMAGED_DURING';
 
@@ -802,8 +814,6 @@ class StockDetails {
   String get returnedSpaqDetails => 'RETURNED_SPAQ_DETAILS';
   String get damagedSpaqDetails => 'DAMAGED_SPAQ_DETAILS';
   String get quantityDamagedCountLabel => 'STOCK_DAMAGED_QUANTITY_LABEL';
-  
-
 }
 
 class StockReconciliationDetails {
@@ -827,6 +837,8 @@ class StockReconciliationDetails {
   String get stockReturned => 'STOCK_RECONCILIATION_STOCK_RETURNED';
 
   String get stockLost => 'STOCK_RECONCILIATION_STOCK_LOST';
+
+  String get stockGained => 'STOCK_RECONCILIATION_STOCK_GAINED';
 
   String get stockDamaged => 'STOCK_RECONCILIATION_STOCK_DAMAGED';
 
@@ -910,6 +922,11 @@ class ManageStock {
 
   String get recordStockLossDescription =>
       'MANAGE_STOCK_RECORDSTOCK_LOSS_DESCRIPTION';
+
+  String get recordStockGainLabel => 'MANAGE_STOCK_RECORDSTOCK_GAIN_LABEL';
+
+  String get recordStockGainDescription =>
+      'MANAGE_STOCK_RECORDSTOCK_GAINED_DESCRIPTION';
 
   String get recordSpaqReceipt => 'RECORD_SPAQ_RECEIPT';
   String get recordSpaqReceivedAtFacility => 'RECORD_SPAQ_RECEIVED_AT_FACILITY';
@@ -1079,6 +1096,14 @@ class InventoryReportSelection {
     return 'INVENTORY_REPORT_SELECTION_LOSS_DESCRIPTION';
   }
 
+  String get inventoryReportGainedLabel {
+    return 'INVENTORY_REPORT_SELECTION_GAINED_LABEL';
+  }
+
+  String get inventoryReportGainedDescription {
+    return 'INVENTORY_REPORT_SELECTION_GAINED_DESCRIPTION';
+  }
+
   String get inventoryReportReconciliationLabel {
     return 'INVENTORY_REPORT_SELECTION_RECONCILIATION_LABEL';
   }
@@ -1115,6 +1140,10 @@ class InventoryReportDetails {
     return 'INVENTORY_REPORT_DETAILS_LOSS_REPORT_TITLE';
   }
 
+  String get gainReportTitle {
+    return 'INVENTORY_REPORT_DETAILS_GAINED_REPORT_TITLE';
+  }
+
   String get reconciliationReportTitle {
     return 'INVENTORY_REPORT_DETAILS_RECONCILIATION_REPORT_TITLE';
   }
@@ -1147,6 +1176,10 @@ class InventoryReportDetails {
     return 'INVENTORY_REPORT_DETAILS_LOSS_QUANTITY_LABEL';
   }
 
+  String get gainQuantityLabel {
+    return 'INVENTORY_REPORT_DETAILS_GAINED_QUANTITY_LABEL';
+  }
+
   String get receiptTransactingPartyLabel {
     return 'INVENTORY_REPORT_DETAILS_RECEIPT_TRANSACTING_PARTY_LABEL';
   }
@@ -1165,6 +1198,10 @@ class InventoryReportDetails {
 
   String get lossTransactingPartyLabel {
     return 'INVENTORY_REPORT_DETAILS_LOSS_TRANSACTING_PARTY_LABEL';
+  }
+
+  String get gainTransactingPartyLabel {
+    return 'INVENTORY_REPORT_DETAILS_GAINED_TRANSACTING_PARTY_LABEL';
   }
 
   String get stockInHandLabel {
@@ -1193,6 +1230,10 @@ class InventoryReportDetails {
 
   String get lostCountLabel {
     return 'INVENTORY_REPORT_DETAILS_LOST_COUNT_LABEL';
+  }
+
+  String get gainedCountLabel {
+    return 'INVENTORY_REPORT_DETAILS_GAINED_COUNT_LABEL';
   }
 
   String get noRecordsMessage {
@@ -1272,6 +1313,8 @@ class Attendance {
   String get markAttendance => 'BUTTON_MARK_ATTENDANCE';
 
   String get tableHeaderName => 'TABLE_HEADER_NAME';
+
+  String get tableHeaderId => 'TABLE_HEADER_ID';
 
   String get tableHeaderAttendance => 'TABLE_HEADER_ATTENDANCE';
 

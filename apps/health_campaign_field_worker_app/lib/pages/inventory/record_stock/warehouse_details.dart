@@ -225,6 +225,8 @@ class _WarehouseDetailsPageState extends LocalizedState<WarehouseDetailsPage> {
         return i18.warehouseDetails.dateOfReturn;
       case StockRecordEntryType.loss:
         return i18.warehouseDetails.dateOfLoss;
+      case StockRecordEntryType.gained:
+        return i18.warehouseDetails.dateOfGain;
       default:
         return i18.warehouseDetails.dateOfReceipt;
     }

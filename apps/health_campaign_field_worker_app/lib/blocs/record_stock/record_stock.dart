@@ -155,10 +155,4 @@ class InvalidRecordStockStateException implements Exception {
   const InvalidRecordStockStateException([this.message]);
 }
 
-enum StockRecordEntryType {
-  receipt,
-  dispatch,
-  returned,
-  loss,
-  damaged,
-}
+enum StockRecordEntryType { receipt, dispatch, returned, loss, damaged, gained }

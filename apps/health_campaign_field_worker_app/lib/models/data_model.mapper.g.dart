@@ -5082,6 +5082,8 @@ class TransactionReasonMapper extends EnumMapper<TransactionReason> {
       case "RETURNED": return TransactionReason.returned;
       case "LOST_IN_STORAGE": return TransactionReason.lostInStorage;
       case "LOST_IN_TRANSIT": return TransactionReason.lostInTransit;
+      case "GAINED_IN_STORAGE": return TransactionReason.gainedInStorage;
+      case "GAINED_IN_TRANSIT": return TransactionReason.gainedInTransit;
       case "DAMAGED_IN_STORAGE": return TransactionReason.damagedInStorage;
       case "DAMAGED_IN_TRANSIT": return TransactionReason.damagedInTransit;
       default: throw MapperException.unknownEnumValue(value);
@@ -5094,6 +5096,8 @@ class TransactionReasonMapper extends EnumMapper<TransactionReason> {
       case TransactionReason.returned: return "RETURNED";
       case TransactionReason.lostInStorage: return "LOST_IN_STORAGE";
       case TransactionReason.lostInTransit: return "LOST_IN_TRANSIT";
+      case TransactionReason.gainedInStorage: return "GAINED_IN_STORAGE";
+      case TransactionReason.gainedInTransit: return "GAINED_IN_TRANSIT";
       case TransactionReason.damagedInStorage: return "DAMAGED_IN_STORAGE";
       case TransactionReason.damagedInTransit: return "DAMAGED_IN_TRANSIT";
     }

@@ -11,6 +11,7 @@ _$_AttendeeCollectionModel _$$_AttendeeCollectionModelFromJson(
     _$_AttendeeCollectionModel(
       userName: json['userName'] as String?,
       name: json['name'] as String?,
+      lastName: json['lastName'] as String?,
       id: json['id'] as int?,
       registerId: json['registerId'] as String?,
       individualId: json['individualId'] as String?,
@@ -29,6 +30,7 @@ Map<String, dynamic> _$$_AttendeeCollectionModelToJson(
     <String, dynamic>{
       'userName': instance.userName,
       'name': instance.name,
+      'lastName': instance.lastName,
       'id': instance.id,
       'registerId': instance.registerId,
       'individualId': instance.individualId,

@@ -18,6 +18,14 @@
       "value": "LOST_IN_TRANSIT"
     },
     {
+      "name": "gainedInStorage",
+      "value": "GAINED_IN_STORAGE"
+    },
+    {
+      "name": "gainedInTransit",
+      "value": "GAINED_IN_TRANSIT"
+    },
+    {
       "name": "damagedInStorage",
       "value": "DAMAGED_IN_STORAGE"
     },

@@ -8,6 +8,7 @@ class AttendeeCollectionModel with _$AttendeeCollectionModel {
   factory AttendeeCollectionModel({
     String? userName,
     String? name,
+    String? lastName,
     int? id,
     String? registerId,
     String? individualId,

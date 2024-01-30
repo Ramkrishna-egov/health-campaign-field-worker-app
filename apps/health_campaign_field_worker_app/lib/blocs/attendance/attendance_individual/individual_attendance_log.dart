@@ -64,6 +64,7 @@ class AttendanceIndividualBloc
             (e) {
               final absentAttendee = AbsentAttendee()
                 ..name = e.name!.givenName ?? ""
+                ..lastName = e.name!.familyName ?? ""
                 ..entryTime = event.entryTime
                 ..exitTime = event.exitTime
                 ..eventStartDate = event.eventStartDate
@@ -75,8 +76,7 @@ class AttendanceIndividualBloc
                 ..registerId = event.registerId
                 ..tenantId = event.tenantId
                 ..userName = e.userDetails!.username ?? ""
-                ..uploadToServer=false
-                ;
+                ..uploadToServer = false;
 
               return absentAttendee;
             },
@@ -88,6 +88,7 @@ class AttendanceIndividualBloc
             AttendeeCollectionModel s = AttendeeCollectionModel(
               entryTime: e.entryTime,
               name: e.name,
+              lastName: e.lastName,
               individualId: e.individualId,
               exitTime: e.exitTime,
               eventStartDate: e.eventStartDate,
@@ -124,6 +125,7 @@ class AttendanceIndividualBloc
             id: e.id,
             entryTime: e.entryTime,
             name: e.name,
+            lastName: e.lastName,
             individualId: e.individualId,
             exitTime: e.exitTime,
             eventStartDate: e.eventStartDate,
@@ -131,7 +133,7 @@ class AttendanceIndividualBloc
             status: e.status,
             registerId: event.registerId,
             userName: e.userName,
-             uploadToServer: e.uploadToServer,
+            uploadToServer: e.uploadToServer,
           );
 
           return s;
@@ -179,12 +181,13 @@ class AttendanceIndividualBloc
               counter = counter - 1;
             }
             AttendeeCollectionModel s = AttendeeCollectionModel(
-               uploadToServer: e.uploadToServer,
+              uploadToServer: e.uploadToServer,
               userName: e.userName,
               registerId: e.registerId,
               id: e.id,
               entryTime: e.entryTime,
               name: e.name,
+              lastName: e.lastName,
               individualId: e.individualId,
               exitTime: e.exitTime,
               eventStartDate: e.eventStartDate,
@@ -213,12 +216,13 @@ class AttendanceIndividualBloc
                 counter = counter - 1;
               }
               AttendeeCollectionModel s = AttendeeCollectionModel(
-                 uploadToServer: e.uploadToServer,
+                uploadToServer: e.uploadToServer,
                 userName: e.userName,
                 registerId: e.registerId,
                 id: e.id,
                 entryTime: e.entryTime,
                 name: e.name,
+                lastName: e.lastName,
                 individualId: e.individualId,
                 exitTime: e.exitTime,
                 eventStartDate: e.eventStartDate,
@@ -328,7 +332,11 @@ class AttendanceIndividualBloc
           final List<AttendeeCollectionModel> result = value
               .attendanceCollectionModel!
               .where((item) =>
-                  item.name!.toLowerCase().contains(event.name.toLowerCase()))
+                  item.name!.toLowerCase().contains(event.name.toLowerCase()) ||
+                  (item.lastName != null &&
+                      item.lastName!
+                          .toLowerCase()
+                          .contains(event.name.toLowerCase())))
               .toList();
 
           emit(value.copyWith(attendanceSearchModelList: result));

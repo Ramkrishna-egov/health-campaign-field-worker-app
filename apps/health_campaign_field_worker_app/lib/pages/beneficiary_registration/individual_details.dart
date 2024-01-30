@@ -70,13 +70,6 @@ class _IndividualDetailsPageState
                     (router.parent() as StackRouter).pop();
                   } else {
                     (router.parent() as StackRouter).pop();
-                    context.read<SearchHouseholdsBloc>().add(
-                          SearchHouseholdsByHouseholdsEvent(
-                            householdModel: value.householdModel,
-                            projectId: context.projectId,
-                            isProximityEnabled: false,
-                          ),
-                        );
                     router.push(AcknowledgementRoute());
                   }
                 },
