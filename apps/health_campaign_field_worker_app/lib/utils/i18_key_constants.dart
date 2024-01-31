@@ -721,6 +721,9 @@ class WarehouseDetails {
 
   String get warehouseNameId => 'WAREHOSUE_DETAILS_WAREHOUSE_NAME_ID';
 
+  String get warehouseNameOrSupervisorNameId =>
+      'WAREHOSUE_DETAILS_WAREHOUSE_NAME_OR_SUPERVISOR_ID';
+
   String get usNameCommunitySupervisor => 'US_NAME_COMMUNITY_SUPERVISOR';
 
   String get dateOfLoss => "WAREHOUSE_DETAILS_DATE_OF_LOSS";
@@ -875,6 +878,9 @@ class StockReconciliationDetails {
 
   String get facilityNameCommunitySupervisor =>
       'FACILITY_NAME_COMMUNITY_SUPERVISOR';
+
+  String get facilityNameCommunitySupervisorName =>
+      'FACILITY_NAME_COMMUNITY_SUPERVISOR_NAME';
 
   String get spaqReconciliation => 'SPAQ_RECONCILIATION';
   String get spaqReceived => 'SPAQ_RECEIVED';
