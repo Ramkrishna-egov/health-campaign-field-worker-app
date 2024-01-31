@@ -489,7 +489,7 @@ class _IndividualDetailsPageState
                                         // context.read<ScannerBloc>().add(ScannerScanEvent())
                                         context.router.push(QRScannerRoute(
                                           quantity: 1,
-                                          isGS1code: false,
+                                          isGS1code: true,
                                           sinlgleValue: true,
                                           isEditEnabled: true,
                                         ));
@@ -509,7 +509,7 @@ class _IndividualDetailsPageState
                                         );
                                     context.router.push(QRScannerRoute(
                                       quantity: 1,
-                                      isGS1code: false,
+                                      isGS1code: true,
                                       sinlgleValue: true,
                                     ));
                                   },

@@ -196,7 +196,11 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
                           child: TextButton(
                             onPressed: () {
                               context.read<ScannerBloc>().add(
-                                  const ScannerEvent.handleScanner([], [],),);
+                                    const ScannerEvent.handleScanner(
+                                      [],
+                                      [],
+                                    ),
+                                  );
                               setState(() {
                                 manualcode = true;
                               });
@@ -357,7 +361,6 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
                                                   color: Colors.red,
                                                 ),
                                                 onPressed: () {
-                                               
                                                   final bloc = context
                                                       .read<ScannerBloc>();
                                                   if (widget.isGS1code) {
@@ -414,12 +417,12 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
                       header: GestureDetector(
                         onTap: () {
                           context.router.pop();
-                                                context.router.push(QRScannerRoute(
-                                          quantity: 1,
-                                          isGS1code: false,
-                                          sinlgleValue: true,
-                                          isEditEnabled: true,
-                                        ));
+                          context.router.push(QRScannerRoute(
+                            quantity: 1,
+                            isGS1code: false,
+                            sinlgleValue: true,
+                            isEditEnabled: true,
+                          ));
                           // setState(() {
                           //   manualcode = false;
                           // });
@@ -552,12 +555,12 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
             final parsedResult =
                 parser.parse(barcodes.first.displayValue.toString());
 
-                // TODO: temporarily commented
+            // TODO: temporarily commented
             // final alreadyScanned = bloc.state.barcodes.any((element) =>
             //     element.elements.entries.last.value.data ==
             //     parsedResult.elements.entries.last.value.data);
 
-            if (widget.quantity > result.length) {
+            if (widget.quantity >= result.length) {
               await storeValue(parsedResult);
             } else {
               await handleError(
@@ -571,8 +574,7 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
           }
         } else {
           if (bloc.state.qrcodes.contains(barcodes.first.displayValue)) {
-
-             // TODO: temporarily commented
+            // TODO: temporarily commented
             // Future.delayed(const Duration(seconds: 10));
             // await handleError(
             //   i18.deliverIntervention.sameQrcodeScanned,
