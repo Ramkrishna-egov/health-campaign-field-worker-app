@@ -569,7 +569,7 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
             }
           } catch (e) {
             await handleError(
-              i18.deliverIntervention.scannedResourceCountMisMatch,
+              i18.deliverIntervention.scanValidResource,
             );
           }
         } else {
