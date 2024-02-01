@@ -415,6 +415,11 @@ class _IndividualDetailsPageState
                                       i18.individualDetails.lastNameLengthError,
                                     ),
                               },
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(RegExp(
+                                  "[a-zA-Z ]",
+                                )),
+                              ],
                             ),
                             Offstage(
                               offstage: !widget.isHeadOfHousehold,
