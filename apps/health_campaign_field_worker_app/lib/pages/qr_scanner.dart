@@ -583,8 +583,17 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
 
             return;
           } else {
-            await storeCode(barcodes.first.displayValue.toString());
-            Future.delayed(const Duration(seconds: 3));
+            try {
+              final parser = GS1BarcodeParser.defaultParser();
+              final parsedResult =
+                  parser.parse(barcodes.first.displayValue.toString());
+              await storeCode(barcodes.first.displayValue.toString());
+              Future.delayed(const Duration(seconds: 3));
+            } catch (e) {
+              await handleError(
+                i18.deliverIntervention.scanValidResource,
+              );
+            }
           }
         }
       }
