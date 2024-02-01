@@ -1,5 +1,6 @@
 import 'package:digit_components/digit_components.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import '../widgets/beneficiary/distribution_center_card.dart';
@@ -91,6 +92,13 @@ class _SearchBeneficiaryPageState
                                       children: [
                                         DigitSearchBar(
                                           controller: searchController,
+                                          inputFormatters: [
+                                            FilteringTextInputFormatter.allow(
+                                              RegExp(
+                                                "[a-zA-Z ]",
+                                              ),
+                                            ),
+                                          ],
                                           hintText: localizations.translate(
                                             i18.searchBeneficiary
                                                 .beneficiarySearchHintText,
@@ -168,19 +176,20 @@ class _SearchBeneficiaryPageState
                                                         final bloc = context.read<
                                                             SearchHouseholdsBloc>();
                                                         bloc.add(
-                                                            SearchHouseholdsEvent
-                                                                .searchByProximity(
-                                                          latitude:
-                                                              locationState
-                                                                  .latitude!,
-                                                          longititude:
-                                                              locationState
-                                                                  .longitude!,
-                                                          projectId:
-                                                              context.projectId,
-                                                          maxRadius: appConfig
-                                                              .maxRadius!,
-                                                        ));
+                                                          SearchHouseholdsEvent
+                                                              .searchByProximity(
+                                                            latitude:
+                                                                locationState
+                                                                    .latitude!,
+                                                            longititude:
+                                                                locationState
+                                                                    .longitude!,
+                                                            projectId: context
+                                                                .projectId,
+                                                            maxRadius: appConfig
+                                                                .maxRadius!,
+                                                          ),
+                                                        );
                                                       } else {
                                                         final bloc = context.read<
                                                             SearchHouseholdsBloc>();
