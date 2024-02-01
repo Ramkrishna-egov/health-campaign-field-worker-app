@@ -560,7 +560,7 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
             //     element.elements.entries.last.value.data ==
             //     parsedResult.elements.entries.last.value.data);
 
-            if (widget.quantity >= result.length) {
+            if (widget.quantity > result.length) {
               await storeValue(parsedResult);
             } else {
               await handleError(
