@@ -157,7 +157,10 @@ class _AttendanceDateSessionSelectionPageState
                     ),
                     DigitDateFormPicker(
                       start: widget.eventStart,
-                      end: widget.eventEnd,
+                      end: (DateTime.now().millisecondsSinceEpoch <
+                              widget.eventEnd.millisecondsSinceEpoch)
+                          ? DateTime.now()
+                          : widget.eventEnd,
                       label:
                           localizations.translate(i18.attendance.dateOfSession),
                       formControlName: _dateOfSession,

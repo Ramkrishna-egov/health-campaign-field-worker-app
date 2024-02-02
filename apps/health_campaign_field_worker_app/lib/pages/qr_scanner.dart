@@ -583,13 +583,13 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
 
             return;
           } else {
-            try {
-              final parser = GS1BarcodeParser.defaultParser();
-              final parsedResult =
-                  parser.parse(barcodes.first.displayValue.toString());
+            RegExp pattern =
+                RegExp(r'^\d{4}-\d{2}-\d{2}-\d{1}-\d{3}-[a-zA-Z0-9]{5}$');
+
+            if (pattern.hasMatch(barcodes.first.displayValue ?? "")) {
               await storeCode(barcodes.first.displayValue.toString());
               Future.delayed(const Duration(seconds: 3));
-            } catch (e) {
+            } else {
               await handleError(
                 i18.deliverIntervention.scanValidResource,
               );
