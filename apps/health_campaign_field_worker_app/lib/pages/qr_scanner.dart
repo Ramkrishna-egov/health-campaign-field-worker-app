@@ -583,8 +583,7 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
 
             return;
           } else {
-            RegExp pattern =
-                RegExp(r'^\d{4}-\d{2}-\d{2}-\d{1}-\d{3}-[a-zA-Z0-9]{5}$');
+            RegExp pattern = RegExp(r'^\d{4}-\d{2}-\d{2}-\d{1}-\d{3}$');
 
             if (pattern.hasMatch(barcodes.first.displayValue ?? "")) {
               await storeCode(barcodes.first.displayValue.toString());
