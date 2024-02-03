@@ -56,6 +56,7 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   final _resourceController = TextEditingController();
   bool submitButton = false;
+  RegExp pattern = RegExp(r'^\d{4}-\d{2}-\d{2}-\d{1}-\d{3}$');
 
   @override
   void initState() {
@@ -423,6 +424,15 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
                             i18.common.coreCommonSubmit,
                           )),
                           onPressed: () async {
+                            if (!pattern.hasMatch(
+                              _resourceController.value.text,
+                            )) {
+                              await handleError(
+                                i18.deliverIntervention.scanValidResource,
+                              );
+
+                              return;
+                            }
                             final bloc = context.read<ScannerBloc>();
                             codes.add(_resourceController.value.text);
                             bloc.add(
@@ -569,8 +579,6 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
             );
             return;
           } else {
-            RegExp pattern = RegExp(r'^\d{4}-\d{2}-\d{2}-\d{1}-\d{3}$');
-
             if (pattern.hasMatch(barcodes.first.displayValue ?? "")) {
               await storeCode(barcodes.first.displayValue.toString());
             } else {
