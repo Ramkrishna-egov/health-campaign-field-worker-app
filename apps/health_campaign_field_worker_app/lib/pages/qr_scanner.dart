@@ -4,7 +4,6 @@ import 'package:digit_components/digit_components.dart';
 import 'package:digit_components/widgets/atoms/digit_toaster.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:google_mlkit_barcode_scanning/google_mlkit_barcode_scanning.dart';
 import 'package:gs1_barcode_parser/gs1_barcode_parser.dart';
 import 'dart:io';
@@ -187,7 +186,8 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
                             child: TextButton(
                               onPressed: () {
                                 context.read<ScannerBloc>().add(
-                                    const ScannerEvent.handleScanner([], []));
+                                      const ScannerEvent.handleScanner([], []),
+                                    );
                                 setState(() {
                                   manualcode = true;
                                 });
@@ -226,27 +226,17 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
                                 } else {
                                   final bloc =
                                       context.read<SearchHouseholdsBloc>();
-                                  final hfBloc =
-                                      context.read<SearchReferralsBloc>();
 
                                   final scannerState =
                                       context.read<ScannerBloc>().state;
 
                                   if (scannerState.qrcodes.isNotEmpty) {
-                                    if (isHealthFacilityWorker) {
-                                      hfBloc
-                                          .add(SearchReferralsEvent.searchByTag(
+                                    bloc.add(
+                                      SearchHouseholdsEvent.searchByTag(
                                         tag: scannerState.qrcodes.first,
                                         projectId: context.projectId,
-                                      ));
-                                    } else {
-                                      bloc.add(
-                                        SearchHouseholdsEvent.searchByTag(
-                                          tag: scannerState.qrcodes.first,
-                                          projectId: context.projectId,
-                                        ),
-                                      );
-                                    }
+                                      ),
+                                    );
                                   }
                                   context.router.pop();
                                 }
@@ -380,8 +370,6 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
                                                           .handleScanner(
                                                         result,
                                                         state.qrcodes,
-                                                        isReferral:
-                                                            isHealthFacilityWorker,
                                                       ),
                                                     );
                                                   } else {
@@ -398,8 +386,6 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
                                                           .handleScanner(
                                                         state.barcodes,
                                                         codes,
-                                                        isReferral:
-                                                            isHealthFacilityWorker,
                                                       ),
                                                     );
                                                   }
@@ -420,7 +406,6 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
                     )
                   : DigitCard(
                       child: ScrollableContent(
-                        backgroundColor: Colors.white,
                         header: GestureDetector(
                           onTap: () {
                             setState(() {
@@ -444,7 +429,6 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
                               ScannerEvent.handleScanner(
                                 state.barcodes,
                                 codes,
-                                isReferral: isHealthFacilityWorker,
                               ),
                             );
                             if (widget.isGS1code &&
@@ -454,26 +438,15 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
                               final bloc = context.read<SearchHouseholdsBloc>();
                               final scannerState =
                                   context.read<ScannerBloc>().state;
-                              final hfBloc =
-                                  context.read<SearchReferralsBloc>();
 
                               if (scannerState.qrcodes.isNotEmpty ||
                                   manualcode) {
-                                if (isHealthFacilityWorker) {
-                                  hfBloc.add(SearchReferralsEvent.searchByTag(
-                                    tag: manualcode
-                                        ? _resourceController.value.text
-                                        : scannerState.qrcodes.first,
-                                    projectId: context.projectId,
-                                  ));
-                                } else {
-                                  bloc.add(SearchHouseholdsEvent.searchByTag(
-                                    tag: manualcode
-                                        ? _resourceController.value.text
-                                        : scannerState.qrcodes.first,
-                                    projectId: context.projectId,
-                                  ));
-                                }
+                                bloc.add(SearchHouseholdsEvent.searchByTag(
+                                  tag: manualcode
+                                      ? _resourceController.value.text
+                                      : scannerState.qrcodes.first,
+                                  projectId: context.projectId,
+                                ));
                               }
                               context.router.pop();
                             }
