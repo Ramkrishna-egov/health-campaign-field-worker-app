@@ -22,7 +22,7 @@
   </queries>
   <!--#enddocregion android-queries-->
    <application
-        android:label="Liberia HCM"
+        android:label="HCM-Liberia"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
