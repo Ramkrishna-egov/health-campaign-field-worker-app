@@ -432,6 +432,17 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
                               );
 
                               return;
+                            } else {
+                              bool isLimiteExceeded = await isLimitExceeded(
+                                _resourceController.value.text,
+                              );
+                              if (isLimiteExceeded) {
+                                await handleError(
+                                  i18.deliverIntervention.scanValidResource,
+                                );
+
+                                return;
+                              }
                             }
                             final bloc = context.read<ScannerBloc>();
                             codes.add(_resourceController.value.text);
@@ -577,10 +588,20 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
             await handleError(
               i18.deliverIntervention.resourceAlreadyScanned,
             );
+
             return;
           } else {
             if (pattern.hasMatch(barcodes.first.displayValue ?? "")) {
-              await storeCode(barcodes.first.displayValue.toString());
+              bool isLimiteExceeded = await isLimitExceeded(
+                barcodes.first.displayValue.toString(),
+              );
+              if (isLimiteExceeded) {
+                await handleError(
+                  i18.deliverIntervention.scanValidResource,
+                );
+              } else {
+                await storeCode(barcodes.first.displayValue.toString());
+              }
             } else {
               await handleError(
                 i18.deliverIntervention.scanValidResource,
@@ -698,6 +719,20 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
 
   String trimString(String input) {
     return input.length > 20 ? '${input.substring(0, 20)}...' : input;
+  }
+
+  Future<bool> isLimitExceeded(String value) async {
+    try {
+      String lastValue = value.split("-").last;
+
+      if (int.parse(lastValue) > 100) {
+        return true;
+      }
+    } catch (e) {
+      return true;
+    }
+
+    return false;
   }
 
   void initializeCameras() async {
