@@ -64,14 +64,23 @@ class DigitIntegerFormPicker extends StatelessWidget {
                   keyboardType: TextInputType.number,
                 ),
               ),
-              _buildButton(context,
-                  border: Border(
-                    right: _borderSide,
-                    bottom: _borderSide,
-                    top: _borderSide,
-                  ),
-                  icon: Icons.add,
-                  onPressed: () => form.control(formControlName).value += 1),
+              _buildButton(
+                context,
+                border: Border(
+                  right: _borderSide,
+                  bottom: _borderSide,
+                  top: _borderSide,
+                ),
+                icon: Icons.add,
+                onPressed: () {
+                  maximum != null
+                      ? form.control(formControlName).value < maximum ||
+                              form.control(formControlName).value == null
+                          ? form.control(formControlName).value += 1
+                          : maximum
+                      : form.control(formControlName).value += 1;
+                },
+              ),
             ],
           ),
         ));
