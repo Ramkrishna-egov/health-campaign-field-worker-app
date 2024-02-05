@@ -166,7 +166,6 @@ class _StockDetailsPageState extends LocalizedState<StockDetailsPage> {
               }
 
               transactionReasonLabel ??= '';
-              debugPrint(transactionPartyLabel);
 
               return ReactiveFormBuilder(
                 form: _form,
@@ -723,7 +722,8 @@ class _StockDetailsPageState extends LocalizedState<StockDetailsPage> {
                                             valueMapper: (e) =>
                                                 localizations.translate(e),
                                             onChanged: (value) {
-                                              if (value == 'IN_HAND') {
+                                              if (value == 'IN_HAND' ||
+                                                  value == 'BY_CANOE') {
                                                 setState(() {
                                                   form
                                                       .control(
