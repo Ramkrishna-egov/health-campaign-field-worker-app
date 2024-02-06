@@ -106,10 +106,12 @@ Map<String, dynamic> _$$_AuditDetailsToJson(_$_AuditDetails instance) =>
 _$_AdditionalDetails _$$_AdditionalDetailsFromJson(Map<String, dynamic> json) =>
     _$_AdditionalDetails(
       description: json['description'] as String?,
+      boundary: json['boundary'] as String?,
     );
 
 Map<String, dynamic> _$$_AdditionalDetailsToJson(
         _$_AdditionalDetails instance) =>
     <String, dynamic>{
       'description': instance.description,
+      'boundary': instance.boundary,
     };
