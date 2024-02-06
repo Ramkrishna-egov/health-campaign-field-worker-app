@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class DigitSearchBar extends StatelessWidget {
   final TextEditingController? controller;
@@ -9,6 +10,7 @@ class DigitSearchBar extends StatelessWidget {
   final double? borderRadius;
   final ValueChanged<String>? onChanged;
   final TextCapitalization textCapitalization;
+  final List<TextInputFormatter>? inputFormatters;
 
   const DigitSearchBar({
     super.key,
@@ -20,6 +22,7 @@ class DigitSearchBar extends StatelessWidget {
     this.borderRadius,
     this.onChanged,
     this.textCapitalization = TextCapitalization.none,
+    this.inputFormatters,
   });
 
   @override
@@ -38,6 +41,7 @@ class DigitSearchBar extends StatelessWidget {
           controller: controller,
           onChanged: onChanged,
           textCapitalization: textCapitalization,
+          inputFormatters: inputFormatters,
           decoration: InputDecoration(
             border: InputBorder.none,
             hintText: hintText ?? 'Enter the field details',

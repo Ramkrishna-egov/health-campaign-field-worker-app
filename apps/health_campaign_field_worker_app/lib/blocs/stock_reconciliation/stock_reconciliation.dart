@@ -104,6 +104,7 @@ class StockReconciliationBloc
             AdditionalField('issued', state.stockIssued),
             AdditionalField('returned', state.stockReturned),
             AdditionalField('lost', state.stockLost),
+            AdditionalField('gained', state.stockGained),
             AdditionalField('damaged', state.stockDamaged),
             AdditionalField('inHand', state.stockInHand),
           ],
@@ -182,6 +183,13 @@ class StockReconciliationState with _$StockReconciliationState {
                 e.transactionReason == TransactionReason.lostInStorage)),
       );
 
+  num get stockGained => _getQuantityCount(
+        stockModels.where((e) =>
+            e.transactionType == TransactionType.received &&
+            (e.transactionReason == TransactionReason.gainedInStorage ||
+                e.transactionReason == TransactionReason.gainedInTransit)),
+      );
+
   num get stockDamaged => _getQuantityCount(
         stockModels.where((e) =>
             e.transactionType == TransactionType.dispatched &&
@@ -190,7 +198,7 @@ class StockReconciliationState with _$StockReconciliationState {
       );
 
   num get stockInHand =>
-      (stockReceived + stockReturned) -
+      (stockReceived + stockReturned + stockGained) -
       (stockIssued + stockDamaged + stockLost);
 
   num _getQuantityCount(Iterable<StockModel> stocks) {

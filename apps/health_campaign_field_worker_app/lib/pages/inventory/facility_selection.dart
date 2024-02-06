@@ -6,6 +6,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 import '../../blocs/localization/app_localization.dart';
 import '../../models/entities/facility.dart';
 import '../../router/app_router.dart';
+import '../../utils/extensions/extensions.dart';
 import '../../widgets/header/back_navigation_help_header.dart';
 import '../../utils/i18_key_constants.dart' as i18;
 
@@ -23,6 +24,8 @@ class FacilitySelectionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
+    final isDistrictLevelProject =
+        context.selectedProject.address?.boundaryType == 'District';
 
     return ReactiveFormBuilder(
       form: _form,
@@ -49,8 +52,11 @@ class FacilitySelectionPage extends StatelessWidget {
                       padding: const EdgeInsets.all(16),
                       child: DigitTextFormField(
                         label: localizations.translate(
-                          i18.stockReconciliationDetails
-                              .facilityNameCommunitySupervisor,
+                          isDistrictLevelProject
+                              ? i18.stockReconciliationDetails
+                                  .facilityNameCommunitySupervisor
+                              : i18.stockReconciliationDetails
+                                  .facilityNameCommunitySupervisorName,
                         ),
                         formControlName: _facilityName,
                       ),

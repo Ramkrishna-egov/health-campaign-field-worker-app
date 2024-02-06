@@ -102,13 +102,27 @@ class _ManageStocksPageState extends LocalizedState<ManageStocksPage> {
                   title: localizations
                       .translate(i18.manageStock.recordStockLossLabel),
                   description: localizations.translate(
-                    i18.manageStock.recordStockDamagedDescription,
+                    i18.manageStock.recordStockLossDescription,
                   ),
                   prefixIcon: Icons.store,
                   sufixIcon: Icons.arrow_circle_right,
                   onPressed: () => context.router.push(
                     RecordStockWrapperRoute(
                       type: StockRecordEntryType.loss,
+                    ),
+                  ),
+                ),
+                DigitListView(
+                  title: localizations
+                      .translate(i18.manageStock.recordStockGainLabel),
+                  description: localizations.translate(
+                    i18.manageStock.recordStockGainDescription,
+                  ),
+                  prefixIcon: Icons.store,
+                  sufixIcon: Icons.arrow_circle_right,
+                  onPressed: () => context.router.push(
+                    RecordStockWrapperRoute(
+                      type: StockRecordEntryType.gained,
                     ),
                   ),
                 ),

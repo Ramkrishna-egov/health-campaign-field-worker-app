@@ -181,7 +181,7 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                     map: {
                       "eventEnd": widget.eventEndTime,
                       "eventStart": widget.eventStartTime,
-                      "msg": value.error.toString()??"",
+                      "msg": value.error.toString() ?? "",
                     },
                   );
                 },
@@ -225,11 +225,13 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                               ),
                               child: DigitElevatedButton(
                                 onPressed: (widget.dateTime.day ==
-                                        DateTime.now().day && !(attendanceCollectionModel!.first.uploadToServer))
+                                            DateTime.now().day &&
+                                        !(attendanceCollectionModel!
+                                            .first.uploadToServer))
                                     ? () {
                                         FocusManager.instance.primaryFocus
                                             ?.unfocus();
-                                           
+
                                         if (currentOffset == 0) {
                                           markConfirmationDialog(
                                             context.read<MarkAttendanceBloc>(),
@@ -247,7 +249,10 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                                       },
                                 child: Text(
                                   localizations.translate(
-                                    (widget.dateTime.day == DateTime.now().day && !(attendanceCollectionModel!.first.uploadToServer))
+                                    (widget.dateTime.day ==
+                                                DateTime.now().day &&
+                                            !(attendanceCollectionModel!
+                                                .first.uploadToServer))
                                         ? i18.attendance.markAttendance
                                         : i18.attendance.closeButton,
                                   ),
@@ -446,8 +451,10 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
                       bottom: 8.0,
                     ),
                     child: Text(
-                      map['msg']==i18.attendance.atleastOneAttendeePresent?k.translate(i18.attendance.atleastOneAttendeePresent) :
-                      "${k.translate(i18.attendance.somethingWentWrong)} \n ${k.translate(i18.attendance.pleaseTryAgain)}!!",
+                      map['msg'] == i18.attendance.atleastOneAttendeePresent
+                          ? k.translate(
+                              i18.attendance.atleastOneAttendeePresent)
+                          : "${k.translate(i18.attendance.somethingWentWrong)} \n ${k.translate(i18.attendance.pleaseTryAgain)}!!",
                       style: DigitTheme
                           .instance.mobileTheme.textTheme.headlineMedium,
                       textAlign: TextAlign.center,
@@ -511,15 +518,18 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
         apiKey: tableDataModel.name,
       ),
       TableData(
-        label: tableDataModel.userName,
-        apiKey: tableDataModel.userName,
+        label: tableDataModel.lastName,
+        apiKey: tableDataModel.lastName,
       ),
       TableData(
         apiKey: tableDataModel.status.toString(),
         widget: CircularButton(
           icon: Icons.circle_rounded,
           size: 15,
-          viewOnly: (widget.dateTime.day == DateTime.now().day && !tableDataModel.uploadToServer) ? false : true,
+          viewOnly: (widget.dateTime.day == DateTime.now().day &&
+                  !tableDataModel.uploadToServer)
+              ? false
+              : true,
           color: const Color.fromRGBO(0, 100, 0, 1),
           index: double.parse(tableDataModel.status.toString()) ?? -1,
           isNotGreyed: false,
@@ -547,8 +557,8 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
         cellKey: 'name',
       ),
       TableHeader(
-        localizations.translate(i18.attendance.tableHeaderUserId),
-        cellKey: "userId",
+        localizations.translate(i18.attendance.tableHeaderId),
+        cellKey: "lastName",
       ),
       TableHeader(
         //DateFormat("dd MMMM yyyy").format(s).toString(),

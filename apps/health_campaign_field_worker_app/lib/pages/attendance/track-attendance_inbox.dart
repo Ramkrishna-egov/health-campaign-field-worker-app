@@ -53,7 +53,6 @@ class _TrackAttendanceInboxPageState extends State<TrackAttendanceInboxPage> {
     final localizations = AppLocalizations.of(context);
 
     return Scaffold(
-      
       body: SingleChildScrollView(
         child: BlocListener<AttendanceProjectsSearchBloc,
             AttendanceProjectsSearchState>(
@@ -93,7 +92,10 @@ class _TrackAttendanceInboxPageState extends State<TrackAttendanceInboxPage> {
                                     : "",
                             localizations
                                     .translate(i18.attendance.eventBoundary):
-                                context.boundary.name,
+                                (e.additionalDetails != null)
+                                    ? e.additionalDetails!.boundary ??
+                                        context.boundary.name
+                                    : context.boundary.name,
                             localizations.translate(
                               i18.attendance.eventTotalAttendees,
                             ): e.attendanceAttendees != null
@@ -195,7 +197,6 @@ class _TrackAttendanceInboxPageState extends State<TrackAttendanceInboxPage> {
                       const SizedBox(
                         height: 16.0,
                       ),
-                     
                     ],
                   );
                 },

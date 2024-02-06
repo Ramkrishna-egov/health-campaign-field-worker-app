@@ -47,6 +47,8 @@ class _WarehouseDetailsPageState extends LocalizedState<WarehouseDetailsPage> {
   Widget build(BuildContext context) {
     //final isWarehouseManager = context.isWarehouseManager;
     final stockState = context.read<RecordStockBloc>().state;
+    final isDistrictLevelProject =
+        context.selectedProject.address?.boundaryType == 'District';
 
     return BlocBuilder<ProjectBloc, ProjectState>(
       builder: (ctx, projectState) {
@@ -176,7 +178,10 @@ class _WarehouseDetailsPageState extends LocalizedState<WarehouseDetailsPage> {
                                 ),
                                 isRequired: true,
                                 label: localizations.translate(
-                                  i18.warehouseDetails.warehouseNameId,
+                                  isDistrictLevelProject
+                                      ? i18.warehouseDetails.warehouseNameId
+                                      : i18.warehouseDetails
+                                          .warehouseNameOrSupervisorNameId,
                                 ),
                                 suffix: const Padding(
                                   padding: EdgeInsets.all(8.0),
@@ -225,6 +230,8 @@ class _WarehouseDetailsPageState extends LocalizedState<WarehouseDetailsPage> {
         return i18.warehouseDetails.dateOfReturn;
       case StockRecordEntryType.loss:
         return i18.warehouseDetails.dateOfLoss;
+      case StockRecordEntryType.gained:
+        return i18.warehouseDetails.dateOfGain;
       default:
         return i18.warehouseDetails.dateOfReceipt;
     }

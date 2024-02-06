@@ -1116,6 +1116,7 @@ AdditionalDetails _$AdditionalDetailsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$AdditionalDetails {
   String? get description => throw _privateConstructorUsedError;
+  String? get boundary => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1129,7 +1130,7 @@ abstract class $AdditionalDetailsCopyWith<$Res> {
           AdditionalDetails value, $Res Function(AdditionalDetails) then) =
       _$AdditionalDetailsCopyWithImpl<$Res, AdditionalDetails>;
   @useResult
-  $Res call({String? description});
+  $Res call({String? description, String? boundary});
 }
 
 /// @nodoc
@@ -1146,11 +1147,16 @@ class _$AdditionalDetailsCopyWithImpl<$Res, $Val extends AdditionalDetails>
   @override
   $Res call({
     Object? description = freezed,
+    Object? boundary = freezed,
   }) {
     return _then(_value.copyWith(
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      boundary: freezed == boundary
+          ? _value.boundary
+          : boundary // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -1164,7 +1170,7 @@ abstract class _$$_AdditionalDetailsCopyWith<$Res>
       __$$_AdditionalDetailsCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? description});
+  $Res call({String? description, String? boundary});
 }
 
 /// @nodoc
@@ -1179,11 +1185,16 @@ class __$$_AdditionalDetailsCopyWithImpl<$Res>
   @override
   $Res call({
     Object? description = freezed,
+    Object? boundary = freezed,
   }) {
     return _then(_$_AdditionalDetails(
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      boundary: freezed == boundary
+          ? _value.boundary
+          : boundary // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -1192,17 +1203,19 @@ class __$$_AdditionalDetailsCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_AdditionalDetails implements _AdditionalDetails {
-  const _$_AdditionalDetails({this.description});
+  const _$_AdditionalDetails({this.description, this.boundary});
 
   factory _$_AdditionalDetails.fromJson(Map<String, dynamic> json) =>
       _$$_AdditionalDetailsFromJson(json);
 
   @override
   final String? description;
+  @override
+  final String? boundary;
 
   @override
   String toString() {
-    return 'AdditionalDetails(description: $description)';
+    return 'AdditionalDetails(description: $description, boundary: $boundary)';
   }
 
   @override
@@ -1211,12 +1224,14 @@ class _$_AdditionalDetails implements _AdditionalDetails {
         (other.runtimeType == runtimeType &&
             other is _$_AdditionalDetails &&
             (identical(other.description, description) ||
-                other.description == description));
+                other.description == description) &&
+            (identical(other.boundary, boundary) ||
+                other.boundary == boundary));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, description);
+  int get hashCode => Object.hash(runtimeType, description, boundary);
 
   @JsonKey(ignore: true)
   @override
@@ -1234,14 +1249,17 @@ class _$_AdditionalDetails implements _AdditionalDetails {
 }
 
 abstract class _AdditionalDetails implements AdditionalDetails {
-  const factory _AdditionalDetails({final String? description}) =
-      _$_AdditionalDetails;
+  const factory _AdditionalDetails(
+      {final String? description,
+      final String? boundary}) = _$_AdditionalDetails;
 
   factory _AdditionalDetails.fromJson(Map<String, dynamic> json) =
       _$_AdditionalDetails.fromJson;
 
   @override
   String? get description;
+  @override
+  String? get boundary;
   @override
   @JsonKey(ignore: true)
   _$$_AdditionalDetailsCopyWith<_$_AdditionalDetails> get copyWith =>

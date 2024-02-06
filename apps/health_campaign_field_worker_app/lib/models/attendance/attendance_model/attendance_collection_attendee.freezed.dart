@@ -23,6 +23,7 @@ AttendeeCollectionModel _$AttendeeCollectionModelFromJson(
 mixin _$AttendeeCollectionModel {
   String? get userName => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
+  String? get lastName => throw _privateConstructorUsedError;
   int? get id => throw _privateConstructorUsedError;
   String? get registerId => throw _privateConstructorUsedError;
   String? get individualId => throw _privateConstructorUsedError;
@@ -50,6 +51,7 @@ abstract class $AttendeeCollectionModelCopyWith<$Res> {
   $Res call(
       {String? userName,
       String? name,
+      String? lastName,
       int? id,
       String? registerId,
       String? individualId,
@@ -79,6 +81,7 @@ class _$AttendeeCollectionModelCopyWithImpl<$Res,
   $Res call({
     Object? userName = freezed,
     Object? name = freezed,
+    Object? lastName = freezed,
     Object? id = freezed,
     Object? registerId = freezed,
     Object? individualId = freezed,
@@ -99,6 +102,10 @@ class _$AttendeeCollectionModelCopyWithImpl<$Res,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastName: freezed == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
               as String?,
       id: freezed == id
           ? _value.id
@@ -159,6 +166,7 @@ abstract class _$$_AttendeeCollectionModelCopyWith<$Res>
   $Res call(
       {String? userName,
       String? name,
+      String? lastName,
       int? id,
       String? registerId,
       String? individualId,
@@ -186,6 +194,7 @@ class __$$_AttendeeCollectionModelCopyWithImpl<$Res>
   $Res call({
     Object? userName = freezed,
     Object? name = freezed,
+    Object? lastName = freezed,
     Object? id = freezed,
     Object? registerId = freezed,
     Object? individualId = freezed,
@@ -206,6 +215,10 @@ class __$$_AttendeeCollectionModelCopyWithImpl<$Res>
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastName: freezed == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
               as String?,
       id: freezed == id
           ? _value.id
@@ -261,6 +274,7 @@ class _$_AttendeeCollectionModel implements _AttendeeCollectionModel {
   _$_AttendeeCollectionModel(
       {this.userName,
       this.name,
+      this.lastName,
       this.id,
       this.registerId,
       this.individualId,
@@ -280,6 +294,8 @@ class _$_AttendeeCollectionModel implements _AttendeeCollectionModel {
   final String? userName;
   @override
   final String? name;
+  @override
+  final String? lastName;
   @override
   final int? id;
   @override
@@ -310,7 +326,7 @@ class _$_AttendeeCollectionModel implements _AttendeeCollectionModel {
 
   @override
   String toString() {
-    return 'AttendeeCollectionModel(userName: $userName, name: $name, id: $id, registerId: $registerId, individualId: $individualId, tenantId: $tenantId, entryTime: $entryTime, exitTime: $exitTime, eventStartDate: $eventStartDate, eventEndDate: $eventEndDate, type: $type, status: $status, uploadToServer: $uploadToServer)';
+    return 'AttendeeCollectionModel(userName: $userName, name: $name, lastName: $lastName, id: $id, registerId: $registerId, individualId: $individualId, tenantId: $tenantId, entryTime: $entryTime, exitTime: $exitTime, eventStartDate: $eventStartDate, eventEndDate: $eventEndDate, type: $type, status: $status, uploadToServer: $uploadToServer)';
   }
 
   @override
@@ -321,6 +337,8 @@ class _$_AttendeeCollectionModel implements _AttendeeCollectionModel {
             (identical(other.userName, userName) ||
                 other.userName == userName) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.lastName, lastName) ||
+                other.lastName == lastName) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.registerId, registerId) ||
                 other.registerId == registerId) &&
@@ -348,6 +366,7 @@ class _$_AttendeeCollectionModel implements _AttendeeCollectionModel {
       runtimeType,
       userName,
       name,
+      lastName,
       id,
       registerId,
       individualId,
@@ -380,6 +399,7 @@ abstract class _AttendeeCollectionModel implements AttendeeCollectionModel {
   factory _AttendeeCollectionModel(
       {final String? userName,
       final String? name,
+      final String? lastName,
       final int? id,
       final String? registerId,
       final String? individualId,
@@ -399,6 +419,8 @@ abstract class _AttendeeCollectionModel implements AttendeeCollectionModel {
   String? get userName;
   @override
   String? get name;
+  @override
+  String? get lastName;
   @override
   int? get id;
   @override

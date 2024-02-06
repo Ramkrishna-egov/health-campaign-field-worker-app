@@ -80,6 +80,7 @@ class AuditDetails with _$AuditDetails {
 class AdditionalDetails with _$AdditionalDetails {
   const factory AdditionalDetails({
     String? description,
+    String? boundary,
   }) = _AdditionalDetails;
 
   factory AdditionalDetails.fromJson(

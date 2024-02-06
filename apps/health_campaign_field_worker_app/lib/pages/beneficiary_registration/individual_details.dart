@@ -70,13 +70,6 @@ class _IndividualDetailsPageState
                     (router.parent() as StackRouter).pop();
                   } else {
                     (router.parent() as StackRouter).pop();
-                    context.read<SearchHouseholdsBloc>().add(
-                          SearchHouseholdsByHouseholdsEvent(
-                            householdModel: value.householdModel,
-                            projectId: context.projectId,
-                            isProximityEnabled: false,
-                          ),
-                        );
                     router.push(AcknowledgementRoute());
                   }
                 },
@@ -118,6 +111,30 @@ class _IndividualDetailsPageState
                               form: form,
                               oldIndividual: null,
                             );
+
+                            final locationBloc = context.read<LocationBloc>();
+                            final locationInitialState = locationBloc.state;
+                            final initialLat = locationInitialState.latitude;
+                            final initialLng = locationInitialState.longitude;
+                            final initialAccuracy =
+                                locationInitialState.accuracy;
+                            if (addressModel != null &&
+                                (addressModel.latitude == null ||
+                                    addressModel.longitude == null ||
+                                    addressModel.locationAccuracy == null)) {
+                              bloc.add(
+                                BeneficiaryRegistrationSaveAddressEvent(
+                                  addressModel.copyWith(
+                                    latitude: initialLat ??
+                                        addressModel.locationAccuracy,
+                                    longitude: initialLng ??
+                                        addressModel.locationAccuracy,
+                                    locationAccuracy: initialAccuracy ??
+                                        addressModel.locationAccuracy,
+                                  ),
+                                ),
+                              );
+                            }
 
                             final boundary = context.boundary;
 
@@ -353,6 +370,11 @@ class _IndividualDetailsPageState
                               label: localizations.translate(
                                 i18.individualDetails.firstNameLabelText,
                               ),
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(RegExp(
+                                  "[a-zA-Z ]",
+                                )),
+                              ],
                               maxLength: 200,
                               isRequired: true,
                               validationMessages: {
@@ -393,6 +415,11 @@ class _IndividualDetailsPageState
                                       i18.individualDetails.lastNameLengthError,
                                     ),
                               },
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(RegExp(
+                                  "[a-zA-Z ]",
+                                )),
+                              ],
                             ),
                             Offstage(
                               offstage: !widget.isHeadOfHousehold,

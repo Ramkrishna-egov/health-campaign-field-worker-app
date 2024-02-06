@@ -67,6 +67,12 @@ class InventoryReportBloc
         TransactionReason.lostInStorage,
         TransactionReason.lostInTransit,
       ];
+    } else if (reportType == InventoryReportType.gained) {
+      transactionType = [TransactionType.received];
+      transactionReason = [
+        TransactionReason.gainedInStorage,
+        TransactionReason.gainedInTransit,
+      ];
     }
 
     final data = (await stockRepository.search(
@@ -159,5 +165,6 @@ enum InventoryReportType {
   returned,
   damage,
   loss,
+  gained,
   reconciliation,
 }
