@@ -141,7 +141,6 @@ extension ContextUtilityExtensions on BuildContext {
     for (final role in loggedInUser.roles) {
       switch (role.code) {
         case "REGISTRAR":
-        case "DISTRIBUTOR":
         case "COMMUNITY_DISTRIBUTOR":
           return true;
         default:
