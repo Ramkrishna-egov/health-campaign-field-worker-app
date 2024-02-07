@@ -1,19 +1,15 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:digit_components/digit_components.dart';
-import 'package:digit_components/models/digit_row_card/digit_row_card_model.dart';
 import 'package:digit_components/widgets/atoms/digit_toaster.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../blocs/localization/app_localization.dart';
-import '../../blocs/app_initialization/app_initialization.dart';
 import '../../blocs/auth/auth.dart';
 import '../../blocs/boundary/boundary.dart';
-import '../../blocs/localization/localization.dart';
-import '../../blocs/user/user.dart';
 import '../../router/app_router.dart';
 import '../../utils/background_service.dart';
 import '../../utils/constants.dart';
+import '../../utils/extensions/extensions.dart';
 import '../../utils/i18_key_constants.dart' as i18;
 
 class SideBar extends StatelessWidget {
@@ -62,16 +58,18 @@ class SideBar extends StatelessWidget {
               context.router.replace(HomeRoute());
             },
           ),
-          DigitIconTile(
-            title: AppLocalizations.of(context).translate(
-              i18.common.coreCommonViewDownloadedData,
-            ),
-            icon: Icons.download,
-            onPressed: () {
-              Navigator.of(context, rootNavigator: true).pop();
-              context.router.push(const BeneficiariesReportRoute());
-            },
-          ),
+          context.isDownSyncEnabled
+              ? DigitIconTile(
+                  title: AppLocalizations.of(context).translate(
+                    i18.common.coreCommonViewDownloadedData,
+                  ),
+                  icon: Icons.download,
+                  onPressed: () {
+                    Navigator.of(context, rootNavigator: true).pop();
+                    context.router.push(const BeneficiariesReportRoute());
+                  },
+                )
+              : const Offstage(),
           DigitIconTile(
             title: AppLocalizations.of(context)
                 .translate(i18.common.coreCommonLogout),

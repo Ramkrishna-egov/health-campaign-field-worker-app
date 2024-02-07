@@ -64,26 +64,6 @@ class _BoundarySelectionPageState
 
   @override
   Widget build(BuildContext context) {
-    bool mandateAllBoundarySelection = context.loggedInUserRoles
-        .where(
-          (role) =>
-              role.code == RolesType.distributor.toValue() ||
-              role.code == RolesType.registrar.toValue() ||
-              role.code == RolesType.supervisor.toValue() ||
-              role.code == RolesType.nationalSupervisor.toValue(),
-        )
-        .toList()
-        .isNotEmpty;
-
-    bool isDistributor = context.loggedInUserRoles
-        .where(
-          (role) =>
-              role.code == RolesType.distributor.toValue() ||
-              role.code == RolesType.registrar.toValue(),
-        )
-        .toList()
-        .isNotEmpty;
-
     return WillPopScope(
       onWillPop: () async => shouldPop,
       child: BlocBuilder<BoundaryBloc, BoundaryState>(
@@ -167,12 +147,13 @@ class _BoundarySelectionPageState
                                         // Call the resetChildDropdowns function when a parent dropdown is selected
                                         resetChildDropdowns(label, state);
                                       },
-                                      isRequired: mandateAllBoundarySelection ||
-                                              labelIndex == 0
-                                          ? true
-                                          : false,
+                                      isRequired:
+                                          context.isAllBoundaryMandatory ||
+                                                  labelIndex == 0
+                                              ? true
+                                              : false,
                                       validationMessage:
-                                          mandateAllBoundarySelection ||
+                                          context.isAllBoundaryMandatory ||
                                                   labelIndex == 0
                                               ? localizations.translate(
                                                   i18.common.corecommonRequired,
@@ -490,7 +471,8 @@ class _BoundarySelectionPageState
                                               : () async {
                                                   if (!form.valid ||
                                                       validateAllBoundarySelection(
-                                                        mandateAllBoundarySelection,
+                                                        context
+                                                            .isAllBoundaryMandatory,
                                                       )) {
                                                     clickedStatus.value = false;
                                                     await DigitToast.show(
@@ -519,7 +501,8 @@ class _BoundarySelectionPageState
 
                                                     if (context.mounted) {
                                                       if (isOnline &&
-                                                          isDistributor) {
+                                                          context
+                                                              .isDownSyncEnabled) {
                                                         context
                                                             .read<
                                                                 BeneficiaryDownSyncBloc>()
