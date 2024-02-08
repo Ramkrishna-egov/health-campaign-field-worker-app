@@ -3,7 +3,6 @@ import 'package:digit_components/digit_components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:recase/recase.dart';
 
 import '../../../blocs/app_initialization/app_initialization.dart';
 import '../../../blocs/facility/facility.dart';
@@ -803,24 +802,24 @@ class _StockDetailsPageState extends LocalizedState<StockDetailsPage> {
                                     ),
                                     // Commenting this because we need this functionality for other APK
 
-                                    // DigitOutlineIconButton(
-                                    //   buttonStyle: OutlinedButton.styleFrom(
-                                    //     shape: const RoundedRectangleBorder(
-                                    //       borderRadius: BorderRadius.zero,
-                                    //     ),
-                                    //   ),
-                                    //   onPressed: () {
-                                    //     context.router.push(QRScannerRoute(
-                                    //       quantity: 5,
-                                    //       isGS1code: true,
-                                    //       sinlgleValue: false,
-                                    //     ));
-                                    //   },
-                                    //   icon: Icons.qr_code,
-                                    //   label: localizations.translate(
-                                    //     i18.common.scanBales,
-                                    //   ),
-                                    // ),
+                                    DigitOutlineIconButton(
+                                      buttonStyle: OutlinedButton.styleFrom(
+                                        shape: const RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.zero,
+                                        ),
+                                      ),
+                                      onPressed: () {
+                                        context.router.push(QRScannerRoute(
+                                          quantity: 1,
+                                          isGS1code: true,
+                                          sinlgleValue: false,
+                                        ));
+                                      },
+                                      icon: Icons.qr_code,
+                                      label: localizations.translate(
+                                        i18.common.scanBales,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
