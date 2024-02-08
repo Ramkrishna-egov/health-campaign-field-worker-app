@@ -154,61 +154,71 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
                             ),
                           ),
                         ),
-                        Positioned(
-                          top: MediaQuery.of(context).size.height / 2.4,
-                          left: MediaQuery.of(context).size.width / 4,
-                          width: 250,
-                          height: 250,
-                          child: SizedBox(
-                            width: 150,
-                            height: 50,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: kPadding),
-                              child: Text(
-                                localizations.translate(
-                                  i18.deliverIntervention.manualScan,
-                                ),
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: MediaQuery.of(context).size.height / 2.0,
-                          left: MediaQuery.of(context).size.width / 6,
-                          width: 250,
-                          height: 50,
-                          child: SizedBox(
-                            width: 150,
-                            height: 50,
-                            child: TextButton(
-                              onPressed: () {
-                                context.read<ScannerBloc>().add(
-                                      const ScannerEvent.handleScanner([], []),
-                                    );
-                                setState(() {
-                                  manualcode = true;
-                                });
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: kPadding),
-                                child: Text(
-                                  localizations.translate(
-                                    i18.deliverIntervention.manualEnterCode,
-                                  ),
-                                  style: TextStyle(
-                                    color: theme.colorScheme.secondary,
-                                    fontSize: 20,
-                                    decoration: TextDecoration.underline,
+                        !widget.isGS1code
+                            ? Positioned(
+                                top: MediaQuery.of(context).size.height / 2.4,
+                                left: MediaQuery.of(context).size.width / 4,
+                                width: 250,
+                                height: 250,
+                                child: SizedBox(
+                                  width: 150,
+                                  height: 50,
+                                  child: Padding(
+                                    padding:
+                                        const EdgeInsets.only(top: kPadding),
+                                    child: Text(
+                                      localizations.translate(
+                                        i18.deliverIntervention.manualScan,
+                                      ),
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ),
-                          ),
-                        ),
+                              )
+                            : const Offstage(),
+                        !widget.isGS1code
+                            ? Positioned(
+                                top: MediaQuery.of(context).size.height / 2.0,
+                                left: MediaQuery.of(context).size.width / 6,
+                                width: 250,
+                                height: 50,
+                                child: SizedBox(
+                                  width: 150,
+                                  height: 50,
+                                  child: TextButton(
+                                    onPressed: () {
+                                      context.read<ScannerBloc>().add(
+                                            const ScannerEvent.handleScanner(
+                                              [],
+                                              [],
+                                            ),
+                                          );
+                                      setState(() {
+                                        manualcode = true;
+                                      });
+                                    },
+                                    child: Padding(
+                                      padding:
+                                          const EdgeInsets.only(top: kPadding),
+                                      child: Text(
+                                        localizations.translate(
+                                          i18.deliverIntervention
+                                              .manualEnterCode,
+                                        ),
+                                        style: TextStyle(
+                                          color: theme.colorScheme.secondary,
+                                          fontSize: 20,
+                                          decoration: TextDecoration.underline,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : const Offstage(),
 
                         Positioned(
                           bottom: 0,
@@ -216,7 +226,11 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
                           child: DigitCard(
                             margin: const EdgeInsets.only(top: kPadding),
                             padding: const EdgeInsets.fromLTRB(
-                                kPadding, 0, kPadding, 0),
+                              kPadding,
+                              0,
+                              kPadding,
+                              0,
+                            ),
                             child: DigitElevatedButton(
                               child: Text(localizations
                                   .translate(i18.common.coreCommonSubmit)),
@@ -424,24 +438,26 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
                             i18.common.coreCommonSubmit,
                           )),
                           onPressed: () async {
-                            if (!pattern.hasMatch(
-                              _resourceController.value.text,
-                            )) {
-                              await handleError(
-                                i18.deliverIntervention.scanValidResource,
-                              );
-
-                              return;
-                            } else {
-                              bool isLimiteExceeded = await isLimitExceeded(
+                            if (!widget.isGS1code) {
+                              if (!pattern.hasMatch(
                                 _resourceController.value.text,
-                              );
-                              if (isLimiteExceeded) {
+                              )) {
                                 await handleError(
                                   i18.deliverIntervention.scanValidResource,
                                 );
 
                                 return;
+                              } else {
+                                bool isLimiteExceeded = await isLimitExceeded(
+                                  _resourceController.value.text,
+                                );
+                                if (isLimiteExceeded) {
+                                  await handleError(
+                                    i18.deliverIntervention.scanValidResource,
+                                  );
+
+                                  return;
+                                }
                               }
                             }
                             final bloc = context.read<ScannerBloc>();
@@ -452,9 +468,8 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
                                 codes,
                               ),
                             );
-                            if (widget.isGS1code &&
-                                result.length < widget.quantity) {
-                              buildDialog();
+                            if (widget.isGS1code) {
+                              // buildDialog();
                             } else {
                               final bloc = context.read<SearchHouseholdsBloc>();
                               final scannerState =
@@ -571,13 +586,7 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
             //     element.elements.entries.last.value.data ==
             //     parsedResult.elements.entries.last.value.data);
 
-            if (widget.quantity > result.length) {
-              await storeValue(parsedResult);
-            } else {
-              await handleError(
-                i18.deliverIntervention.scannedResourceCountMisMatch,
-              );
-            }
+            await storeValue(parsedResult);
           } catch (e) {
             await handleError(
               i18.deliverIntervention.scanValidResource,
