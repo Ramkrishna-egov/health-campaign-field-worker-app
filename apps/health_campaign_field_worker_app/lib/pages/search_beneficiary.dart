@@ -129,7 +129,7 @@ class _SearchBeneficiaryPageState
                                           final bloc = context
                                               .read<SearchHouseholdsBloc>();
 
-                                          if (value.trim().length < 2 &&
+                                          if (value.trim().length < 3 &&
                                               !isProximityEnabled) {
                                             bloc.add(
                                               const SearchHouseholdsClearEvent(),
@@ -138,7 +138,7 @@ class _SearchBeneficiaryPageState
                                             return;
                                           } else {
                                             if (isProximityEnabled &&
-                                                value.trim().length < 2) {
+                                                value.trim().length < 3) {
                                               bloc.add(SearchHouseholdsEvent
                                                   .searchByProximity(
                                                 latitude:
@@ -278,7 +278,8 @@ class _SearchBeneficiaryPageState
                                 );
 
                                 return ViewBeneficiaryCard(
-                                  distance: distance,
+                                  distance:
+                                      isProximityEnabled ? distance : null,
                                   householdMember: i,
                                   onOpenPressed: () async {
                                     final bloc =

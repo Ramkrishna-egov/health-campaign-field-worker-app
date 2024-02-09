@@ -123,23 +123,23 @@ class _ViewBeneficiaryCardState extends LocalizedState<ViewBeneficiaryCard> {
                     taskdata.last.clientReferenceId)
                 .toList()
             : null;
-  
-    final ageInYears = DigitDateUtils.calculateAge(
-      householdMember.headOfHousehold.dateOfBirth != null
-          ? DigitDateUtils.getFormattedDateToDateTime(
-                householdMember.headOfHousehold.dateOfBirth!,
-              ) ??
-              DateTime.now()
-          : DateTime.now(),
-    ).years;
-    final ageInMonths = DigitDateUtils.calculateAge(
-      householdMember.headOfHousehold.dateOfBirth != null
-          ? DigitDateUtils.getFormattedDateToDateTime(
-                householdMember.headOfHousehold.dateOfBirth!,
-              ) ??
-              DateTime.now()
-          : DateTime.now(),
-    ).months;
+
+        final ageInYears = DigitDateUtils.calculateAge(
+          e.dateOfBirth != null
+              ? DigitDateUtils.getFormattedDateToDateTime(
+                    e.dateOfBirth!,
+                  ) ??
+                  DateTime.now()
+              : DateTime.now(),
+        ).years;
+        final ageInMonths = DigitDateUtils.calculateAge(
+          e.dateOfBirth != null
+              ? DigitDateUtils.getFormattedDateToDateTime(
+                    e.dateOfBirth!,
+                  ) ??
+                  DateTime.now()
+              : DateTime.now(),
+        ).months;
 
         final isNotEligible = !checkEligibilityForAgeAndSideEffect(
           DigitDOBAge(
@@ -238,7 +238,6 @@ class _ViewBeneficiaryCardState extends LocalizedState<ViewBeneficiaryCard> {
         // rowTableData
       },
     ).toList();
-
 
     final ageInYears = DigitDateUtils.calculateAge(
       householdMember.headOfHousehold.dateOfBirth != null
