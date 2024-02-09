@@ -81,6 +81,23 @@ extension ContextUtilityExtensions on BuildContext {
     }
   }
 
+  bool get isDownSyncEnabled {
+    try {
+      bool isDownSyncEnabled = loggedInUserRoles
+          .where(
+            (role) =>
+                role.code == RolesType.communityDistributor.toValue() ||
+                role.code == RolesType.healthFacilitySupervisor.toValue(),
+          )
+          .toList()
+          .isNotEmpty;
+
+      return isDownSyncEnabled;
+    } catch (_) {
+      return false;
+    }
+  }
+
   List<UserRoleModel> get loggedInUserRoles {
     final authBloc = _get<AuthBloc>();
     final userRequestObject = authBloc.state.whenOrNull(

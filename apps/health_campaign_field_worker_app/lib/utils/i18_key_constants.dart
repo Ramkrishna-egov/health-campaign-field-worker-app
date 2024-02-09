@@ -108,6 +108,8 @@ class Common {
   String get coreQuantityWasted => 'CORE_QUANTITY_WASTED';
   String get coreCommonDownload => 'CORE_COMMON_DOWNLOAD';
   String get coreCommonDownloadFailed => 'CORE_COMMON_DOWNLOAD_FAILED';
+  String get noMatchFound => 'CORE_COMMON_NO_MATCH_FOUND';
+  String get loading => 'CORE_COMMON_LOADING';
 }
 
 class AdverseEvents {
