@@ -4,10 +4,9 @@ import 'package:drift/drift.dart';
 
 import '../../../models/data_model.dart';
 import '../../../utils/utils.dart';
-import '../../data_repository.dart';
+import 'base/downsync_base.dart';
 
-class DownsyncLocalRepository
-    extends LocalRepository<DownsyncModel, DownsyncSearchModel> {
+class DownsyncLocalRepository extends DownsyncLocalBaseRepository {
   DownsyncLocalRepository(super.sql, super.opLogManager);
 
   @override
@@ -48,9 +47,6 @@ class DownsyncLocalRepository
   }
 
   @override
-  DataModelType get type => DataModelType.project;
-
-  @override
   FutureOr<List<DownsyncModel>> search(
     DownsyncSearchModel query,
   ) async {
@@ -80,8 +76,4 @@ class DownsyncLocalRepository
       );
     }).toList();
   }
-
-  @override
-  // TODO: implement table
-  TableInfo<Table, dynamic> get table => throw UnimplementedError();
 }

@@ -60,7 +60,7 @@ class _SearchBeneficiaryPageState
             body: NotificationListener<ScrollNotification>(
               onNotification: (scrollNotification) {
                 if (scrollNotification is ScrollUpdateNotification) {
-                  final metrics = scrollNotification.metrics;              
+                  final metrics = scrollNotification.metrics;
                   if (metrics.atEdge &&
                       isProximityEnabled &&
                       searchController.text == '') {
@@ -277,40 +277,27 @@ class _SearchBeneficiaryPageState
                                   ),
                                 );
 
-                                return Container(
-                                  margin:
-                                      const EdgeInsets.only(bottom: kPadding),
-                                  child: ViewBeneficiaryCard(
-                                    distance:
-                                        isProximityEnabled ? distance : null,
-                                    householdMember: i,
-                                    onOpenPressed: () async {
-                                      final scannerbloc =
-                                          context.read<ScannerBloc>();
+                                return ViewBeneficiaryCard(
+                                  distance: distance,
+                                  householdMember: i,
+                                  onOpenPressed: () async {
+                                    final bloc =
+                                        context.read<SearchHouseholdsBloc>();
 
-                                      scannerbloc.add(
-                                        const ScannerEvent.handleScanner(
-                                            [], [],),
-                                      );
+                                    await context.router.push(
+                                      BeneficiaryWrapperRoute(
+                                        wrapper: i,
+                                      ),
+                                    );
+                                    setState(() {
+                                      isProximityEnabled = false;
+                                    });
+                                    searchController.clear();
 
-                                      final bloc =
-                                          context.read<SearchHouseholdsBloc>();
-
-                                      await context.router.push(
-                                        BeneficiaryWrapperRoute(
-                                          wrapper: i,
-                                        ),
-                                      );
-                                      setState(() {
-                                        isProximityEnabled = false;
-                                      });
-                                      searchController.clear();
-
-                                      bloc.add(
-                                        const SearchHouseholdsClearEvent(),
-                                      );
-                                    },
-                                  ),
+                                    bloc.add(
+                                      const SearchHouseholdsClearEvent(),
+                                    );
+                                  },
                                 );
                               },
                               childCount: searchState.householdMembers.length,
@@ -324,16 +311,12 @@ class _SearchBeneficiaryPageState
               ),
             ),
             bottomNavigationBar: SizedBox(
-              height: 150,
-              child: Card(
-                margin: const EdgeInsets.all(0),
-                child: Container(
-                  padding: const EdgeInsets.fromLTRB(kPadding, 0, kPadding, 0),
-                  child: Column(
-                    children: [
-                      BlocBuilder<SearchHouseholdsBloc, SearchHouseholdsState>(
-                        builder: (context, state) {
-                          final router = context.router;
+              height: 85,
+              child: DigitCard(
+                margin: const EdgeInsets.only(left: 0, right: 0, top: 10),
+                child: BlocBuilder<SearchHouseholdsBloc, SearchHouseholdsState>(
+                  builder: (context, state) {
+                    final router = context.router;
 
                     final searchQuery = state.searchQuery;
                     VoidCallback? onPressed;
