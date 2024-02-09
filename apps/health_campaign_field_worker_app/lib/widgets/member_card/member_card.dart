@@ -560,20 +560,38 @@ class MemberCard extends StatelessWidget {
                                               50,
                                             ),
                                           ),
-                                          onPressed: () async {
-                                            Navigator.of(
-                                              context,
-                                              rootNavigator: true,
-                                            ).pop();
-                                            await context.router.push(
-                                              ReferBeneficiaryRoute(
-                                                projectBeneficiaryClientRefId:
-                                                    projectBeneficiaryClientReferenceId ??
-                                                        '',
-                                                individual: individual,
-                                              ),
-                                            );
-                                          },
+                                          onPressed: tasks != null &&
+                                                  (tasks ?? [])
+                                                      .where((element) =>
+                                                          element.status !=
+                                                              Status
+                                                                  .beneficiaryRefused
+                                                                  .toValue() &&
+                                                          element.status !=
+                                                              Status
+                                                                  .beneficiaryReferred
+                                                                  .toValue())
+                                                      .toList()
+                                                      .isNotEmpty &&
+                                                  !checkStatus(
+                                                    tasks,
+                                                    context.selectedCycle,
+                                                  )
+                                              ? null
+                                              : () async {
+                                                  Navigator.of(
+                                                    context,
+                                                    rootNavigator: true,
+                                                  ).pop();
+                                                  await context.router.push(
+                                                    ReferBeneficiaryRoute(
+                                                      projectBeneficiaryClientRefId:
+                                                          projectBeneficiaryClientReferenceId ??
+                                                              '',
+                                                      individual: individual,
+                                                    ),
+                                                  );
+                                                },
                                         ),
                                         const SizedBox(
                                           height: 10,

@@ -128,6 +128,10 @@ class AdverseEvents {
   String get didYouReAdministerLabel => 'DID_YOU_RE_ADMINISTER';
 
   String get noOfTimesReAdministered => 'NO_OF_TIMES_RE_ADMINISTERED';
+
+  String get sideEffectsAlertTitle => 'SIDE_EFFECTS_ALERT_TITLE';
+
+  String get sideEffectsAlertContent => 'SIDE_EFFECTS_ALERT_CONTENT';
 }
 
 class Login {
@@ -602,6 +606,12 @@ class DeliverIntervention {
   String get dialogTitle => 'DELIVER_INTERVENTION_DIALOG_TITLE';
 
   String get dialogContent => 'DELIVER_INTERVENTION_DIALOG_CONTENT';
+
+  String get referDialogTitle => 'DELIVER_INTERVENTION_REFER_DIALOG_TITLE';
+
+  String get referDialogContent => 'DELIVER_INTERVENTION_REFER_DIALOG_CONTENT';
+
+  String get referDialogSubmit => 'DELIVER_INTERVENTION_REFER_DIALOG_SUBMIT';
 
   String get didYouObserveAdvEventsTitle =>
       'DID_YOU_OBSERVE_ADVERSE_EVENTS_TITLE';
@@ -1199,6 +1209,8 @@ class ReferBeneficiary {
   String get referredDialogTitle => 'REFERRAL_CONFIRMATION_DIALOG_BOX_TITLE';
   String get referredDialogContent =>
       'REFERRAL_CONFIRMATION_DIALOG_BOX_CONTENT';
+  String get referAlertDialogTitle => 'REFERRAL_ALERT_DIALOG_TITLE';
+  String get referAlertDialogContent => 'REFERRAL_ALERT_DIALOG_CONTENT';
 }
 
 class IneligibilityReasons {

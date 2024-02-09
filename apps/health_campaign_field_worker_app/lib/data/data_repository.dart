@@ -77,8 +77,11 @@ abstract class RemoteRepository<D extends EntityModel,
           return await dio.post(
             searchPath,
             queryParameters: {
-              'offset': offSet ?? 0,
-              'limit': limit ?? 100,
+              'offset': 0,
+              'limit':
+                  entityName == 'Facility' || entityName == 'ProjectFacility'
+                      ? 2000
+                      : 1000,
               'tenantId': envConfig.variables.tenantId,
               if (query.isDeleted ?? false) 'includeDeleted': query.isDeleted,
             },

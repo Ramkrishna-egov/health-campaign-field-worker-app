@@ -504,7 +504,9 @@ class _BoundarySelectionPageState
                                                 }
                                               }
                                             },
-                                      child: const Text('Submit'),
+                                      child: const Text(AppLocalizations.of(
+                                        context,
+                                      ).translate(i18.common.coreCommonSubmit)),
                                     ),
                                   ),
                                 ),
