@@ -56,7 +56,7 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   final _resourceController = TextEditingController();
   bool submitButton = false;
-  RegExp pattern = RegExp(r'^\d{4}-\d{2}-\d{2}-\d{1}-\d{3}$');
+  RegExp pattern = RegExp(r'^\d{4}-\d{2}-\d{2}-\d{1}-\d{3}-[A-Za-z]{2}$');
 
   @override
   void initState() {
@@ -732,7 +732,8 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
 
   Future<bool> isLimitExceeded(String value) async {
     try {
-      String lastValue = value.split("-").last;
+      List<String> values = value.split("-");
+      String lastValue = values[values.length - 2];
 
       if (int.parse(lastValue) > 100) {
         return true;
