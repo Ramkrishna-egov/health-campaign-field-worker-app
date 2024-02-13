@@ -709,6 +709,16 @@ class StockDetails {
   String get returnedSpaqDetails => 'RETURNED_SPAQ_DETAILS';
   String get damagedSpaqDetails => 'DAMAGED_SPAQ_DETAILS';
   String get quantityDamagedCountLabel => 'STOCK_DAMAGED_QUANTITY_LABEL';
+
+  String get countDialogTitle => 'STOCK_DETAILS_COUNT_DIALOG_TITLE';
+
+  String get countContent => 'STOCK_DETAILS_COUNT_DIALOG_CONTENT';
+
+  String get countDialogSuccess =>
+      'STOCK_DETAILS_COUNT_DIALOG_SUCCESS_ACTION_LABEL';
+
+  String get countDialogCancel =>
+      'STOCK_DETAILS_COUNT_DIALOG_CANCEL_ACTION_LABEL';
 }
 
 class StockReconciliationDetails {

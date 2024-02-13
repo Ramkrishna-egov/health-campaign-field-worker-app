@@ -568,6 +568,8 @@ class _DeliverInterventionPageState
                                                         i18.deliverIntervention
                                                             .deliveryCommentLabel,
                                                       ),
+                                                      readOnly:
+                                                          !doseAdministered,
                                                       valueMapper: (value) =>
                                                           localizations
                                                               .translate(value),
