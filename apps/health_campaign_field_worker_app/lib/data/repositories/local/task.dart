@@ -341,13 +341,11 @@ class TaskLocalRepository extends TaskLocalBaseRepository {
         mode: InsertMode.insertOrReplace,
       );
 
-      for (AddressCompanion addressCompanion in addressCompanions) {
-        batch.update(
+      if (addressCompanions.isNotEmpty) {
+        batch.insertAll(
           sql.address,
-          addressCompanion,
-          where: (table) => table.relatedClientReferenceId.equals(
-            addressCompanion.relatedClientReferenceId.value,
-          ),
+          addressCompanions.whereNotNull().toList(),
+          mode: InsertMode.insertOrReplace,
         );
       }
 
