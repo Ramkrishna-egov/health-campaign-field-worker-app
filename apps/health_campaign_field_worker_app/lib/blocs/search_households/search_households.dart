@@ -182,6 +182,9 @@ class SearchHouseholdsBloc
           householdMembers: [],
         ));
       } else {
+        individuals.sort((a, b) => (a.clientAuditDetails?.createdTime ?? 0)
+            .compareTo(b.clientAuditDetails?.createdTime ?? 0));
+
         final householdMemberWrapper = HouseholdMemberWrapper(
           household: event.householdModel,
           headOfHousehold: headOfHousehold,
@@ -311,6 +314,8 @@ class SearchHouseholdsBloc
 
       if (head == null) continue;
       // Create a container for household members and associated data.
+      individualMemebrs.sort((a, b) => (a.clientAuditDetails?.createdTime ?? 0)
+          .compareTo(b.clientAuditDetails?.createdTime ?? 0));
       containers.add(
         HouseholdMemberWrapper(
           household: householdresult,
@@ -504,6 +509,8 @@ class SearchHouseholdsBloc
       // Search for project beneficiaries based on client reference ID and project.
 
       // Create a container for household members and associated data.
+      individualMemebrs.sort((a, b) => (a.clientAuditDetails?.createdTime ?? 0)
+          .compareTo(b.clientAuditDetails?.createdTime ?? 0));
       containers.add(
         HouseholdMemberWrapper(
           household: householdresult,
