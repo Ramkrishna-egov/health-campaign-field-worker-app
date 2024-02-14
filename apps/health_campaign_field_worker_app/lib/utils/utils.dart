@@ -597,9 +597,12 @@ void showDownloadDialog(
           secondaryAction: model.secondaryButtonLabel != null
               ? DigitDialogActions(
                   label: model.secondaryButtonLabel ?? '',
-                  action: (ctx) {
-                    Navigator.of(context, rootNavigator: true).pop();
-                    context.router.pop();
+                  action: (ctx) async {
+                    await LocalSecureStore.instance.setManualSyncTrigger(false);
+                    if (context.mounted) {
+                      Navigator.of(context, rootNavigator: true).pop();
+                      context.router.pop();
+                    }
                   },
                 )
               : null,

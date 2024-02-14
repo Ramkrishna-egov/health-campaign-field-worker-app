@@ -47,6 +47,8 @@ class NetworkManager {
     bool isSyncCompleted = false;
     SyncError? syncError;
 
+    await LocalSecureStore.instance.setSyncRunning(true);
+
 // Perform the sync Down Operation
 
     try {
@@ -72,7 +74,10 @@ class NetworkManager {
       syncError ??= SyncUpError(e);
     }
 
-    if (syncError != null) throw syncError;
+    if (syncError != null) {
+      await LocalSecureStore.instance.setSyncRunning(false);
+      throw syncError;
+    }
 
     final futuresSyncDown = await Future.wait(
       localRepositories
@@ -97,6 +102,7 @@ class NetworkManager {
       );
     } else if (pendingSyncUpEntries.isEmpty && pendingSyncDownEntries.isEmpty) {
       await LocalSecureStore.instance.setManualSyncTrigger(false);
+      await LocalSecureStore.instance.setSyncRunning(false);
       isSyncCompleted = true;
     }
 
