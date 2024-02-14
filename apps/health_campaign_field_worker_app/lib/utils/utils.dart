@@ -599,8 +599,10 @@ void showDownloadDialog(
                   label: model.secondaryButtonLabel ?? '',
                   action: (ctx) async {
                     await LocalSecureStore.instance.setManualSyncTrigger(false);
-                    Navigator.of(context, rootNavigator: true).pop();
-                    context.router.pop();
+                    if (context.mounted) {
+                      Navigator.of(context, rootNavigator: true).pop();
+                      context.router.pop();
+                    }
                   },
                 )
               : null,
