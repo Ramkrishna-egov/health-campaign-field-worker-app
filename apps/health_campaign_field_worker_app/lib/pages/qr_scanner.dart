@@ -704,11 +704,11 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
     await Future.delayed(const Duration(seconds: 3));
 
     result = List.from(bloc.state.barcodes);
+    result.add(parsedresult);
     result.removeDuplicates(
       (element) => element.elements.entries.last.value.data,
     );
 
-    result.add(parsedresult);
     bloc.add(ScannerEvent.handleScanner(result, bloc.state.qrcodes));
     setState(() {
       result = result;
