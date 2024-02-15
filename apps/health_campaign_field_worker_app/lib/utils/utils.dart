@@ -601,7 +601,7 @@ void showDownloadDialog(
                     await LocalSecureStore.instance.setManualSyncTrigger(false);
                     if (context.mounted) {
                       Navigator.of(context, rootNavigator: true).pop();
-                      context.router.pop();
+                      context.router.popUntilRouteWithName(HomeRoute.name);
                     }
                   },
                 )
