@@ -32886,11 +32886,11 @@ class HFReferralData extends DataClass implements Insertable<HFReferralData> {
   final String? symptom;
   final String? auditCreatedBy;
   final bool? nonRecoverableError;
-  final int? auditCreatedTime;
   final int? clientCreatedTime;
   final String? clientModifiedBy;
   final String? clientCreatedBy;
   final int? clientModifiedTime;
+  final int? auditCreatedTime;
   final String? auditModifiedBy;
   final int? auditModifiedTime;
   final String clientReferenceId;
@@ -32910,11 +32910,11 @@ class HFReferralData extends DataClass implements Insertable<HFReferralData> {
       this.symptom,
       this.auditCreatedBy,
       this.nonRecoverableError,
-      this.auditCreatedTime,
       this.clientCreatedTime,
       this.clientModifiedBy,
       this.clientCreatedBy,
       this.clientModifiedTime,
+      this.auditCreatedTime,
       this.auditModifiedBy,
       this.auditModifiedTime,
       required this.clientReferenceId,
@@ -32948,8 +32948,6 @@ class HFReferralData extends DataClass implements Insertable<HFReferralData> {
           .mapFromDatabaseResponse(data['${effectivePrefix}audit_created_by']),
       nonRecoverableError: const BoolType().mapFromDatabaseResponse(
           data['${effectivePrefix}non_recoverable_error']),
-      auditCreatedTime: const IntType().mapFromDatabaseResponse(
-          data['${effectivePrefix}audit_created_time']),
       clientCreatedTime: const IntType().mapFromDatabaseResponse(
           data['${effectivePrefix}client_created_time']),
       clientModifiedBy: const StringType().mapFromDatabaseResponse(
@@ -32958,6 +32956,8 @@ class HFReferralData extends DataClass implements Insertable<HFReferralData> {
           .mapFromDatabaseResponse(data['${effectivePrefix}client_created_by']),
       clientModifiedTime: const IntType().mapFromDatabaseResponse(
           data['${effectivePrefix}client_modified_time']),
+      auditCreatedTime: const IntType().mapFromDatabaseResponse(
+          data['${effectivePrefix}audit_created_time']),
       auditModifiedBy: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}audit_modified_by']),
       auditModifiedTime: const IntType().mapFromDatabaseResponse(
@@ -33011,9 +33011,6 @@ class HFReferralData extends DataClass implements Insertable<HFReferralData> {
     if (!nullToAbsent || nonRecoverableError != null) {
       map['non_recoverable_error'] = Variable<bool?>(nonRecoverableError);
     }
-    if (!nullToAbsent || auditCreatedTime != null) {
-      map['audit_created_time'] = Variable<int?>(auditCreatedTime);
-    }
     if (!nullToAbsent || clientCreatedTime != null) {
       map['client_created_time'] = Variable<int?>(clientCreatedTime);
     }
@@ -33025,6 +33022,9 @@ class HFReferralData extends DataClass implements Insertable<HFReferralData> {
     }
     if (!nullToAbsent || clientModifiedTime != null) {
       map['client_modified_time'] = Variable<int?>(clientModifiedTime);
+    }
+    if (!nullToAbsent || auditCreatedTime != null) {
+      map['audit_created_time'] = Variable<int?>(auditCreatedTime);
     }
     if (!nullToAbsent || auditModifiedBy != null) {
       map['audit_modified_by'] = Variable<String?>(auditModifiedBy);
@@ -33079,9 +33079,6 @@ class HFReferralData extends DataClass implements Insertable<HFReferralData> {
       nonRecoverableError: nonRecoverableError == null && nullToAbsent
           ? const Value.absent()
           : Value(nonRecoverableError),
-      auditCreatedTime: auditCreatedTime == null && nullToAbsent
-          ? const Value.absent()
-          : Value(auditCreatedTime),
       clientCreatedTime: clientCreatedTime == null && nullToAbsent
           ? const Value.absent()
           : Value(clientCreatedTime),
@@ -33094,6 +33091,9 @@ class HFReferralData extends DataClass implements Insertable<HFReferralData> {
       clientModifiedTime: clientModifiedTime == null && nullToAbsent
           ? const Value.absent()
           : Value(clientModifiedTime),
+      auditCreatedTime: auditCreatedTime == null && nullToAbsent
+          ? const Value.absent()
+          : Value(auditCreatedTime),
       auditModifiedBy: auditModifiedBy == null && nullToAbsent
           ? const Value.absent()
           : Value(auditModifiedBy),
@@ -33131,11 +33131,11 @@ class HFReferralData extends DataClass implements Insertable<HFReferralData> {
       auditCreatedBy: serializer.fromJson<String?>(json['auditCreatedBy']),
       nonRecoverableError:
           serializer.fromJson<bool?>(json['nonRecoverableError']),
-      auditCreatedTime: serializer.fromJson<int?>(json['auditCreatedTime']),
       clientCreatedTime: serializer.fromJson<int?>(json['clientCreatedTime']),
       clientModifiedBy: serializer.fromJson<String?>(json['clientModifiedBy']),
       clientCreatedBy: serializer.fromJson<String?>(json['clientCreatedBy']),
       clientModifiedTime: serializer.fromJson<int?>(json['clientModifiedTime']),
+      auditCreatedTime: serializer.fromJson<int?>(json['auditCreatedTime']),
       auditModifiedBy: serializer.fromJson<String?>(json['auditModifiedBy']),
       auditModifiedTime: serializer.fromJson<int?>(json['auditModifiedTime']),
       clientReferenceId: serializer.fromJson<String>(json['clientReferenceId']),
@@ -33160,11 +33160,11 @@ class HFReferralData extends DataClass implements Insertable<HFReferralData> {
       'symptom': serializer.toJson<String?>(symptom),
       'auditCreatedBy': serializer.toJson<String?>(auditCreatedBy),
       'nonRecoverableError': serializer.toJson<bool?>(nonRecoverableError),
-      'auditCreatedTime': serializer.toJson<int?>(auditCreatedTime),
       'clientCreatedTime': serializer.toJson<int?>(clientCreatedTime),
       'clientModifiedBy': serializer.toJson<String?>(clientModifiedBy),
       'clientCreatedBy': serializer.toJson<String?>(clientCreatedBy),
       'clientModifiedTime': serializer.toJson<int?>(clientModifiedTime),
+      'auditCreatedTime': serializer.toJson<int?>(auditCreatedTime),
       'auditModifiedBy': serializer.toJson<String?>(auditModifiedBy),
       'auditModifiedTime': serializer.toJson<int?>(auditModifiedTime),
       'clientReferenceId': serializer.toJson<String>(clientReferenceId),
@@ -33187,11 +33187,11 @@ class HFReferralData extends DataClass implements Insertable<HFReferralData> {
           String? symptom,
           String? auditCreatedBy,
           bool? nonRecoverableError,
-          int? auditCreatedTime,
           int? clientCreatedTime,
           String? clientModifiedBy,
           String? clientCreatedBy,
           int? clientModifiedTime,
+          int? auditCreatedTime,
           String? auditModifiedBy,
           int? auditModifiedTime,
           String? clientReferenceId,
@@ -33211,11 +33211,11 @@ class HFReferralData extends DataClass implements Insertable<HFReferralData> {
         symptom: symptom ?? this.symptom,
         auditCreatedBy: auditCreatedBy ?? this.auditCreatedBy,
         nonRecoverableError: nonRecoverableError ?? this.nonRecoverableError,
-        auditCreatedTime: auditCreatedTime ?? this.auditCreatedTime,
         clientCreatedTime: clientCreatedTime ?? this.clientCreatedTime,
         clientModifiedBy: clientModifiedBy ?? this.clientModifiedBy,
         clientCreatedBy: clientCreatedBy ?? this.clientCreatedBy,
         clientModifiedTime: clientModifiedTime ?? this.clientModifiedTime,
+        auditCreatedTime: auditCreatedTime ?? this.auditCreatedTime,
         auditModifiedBy: auditModifiedBy ?? this.auditModifiedBy,
         auditModifiedTime: auditModifiedTime ?? this.auditModifiedTime,
         clientReferenceId: clientReferenceId ?? this.clientReferenceId,
@@ -33238,11 +33238,11 @@ class HFReferralData extends DataClass implements Insertable<HFReferralData> {
           ..write('symptom: $symptom, ')
           ..write('auditCreatedBy: $auditCreatedBy, ')
           ..write('nonRecoverableError: $nonRecoverableError, ')
-          ..write('auditCreatedTime: $auditCreatedTime, ')
           ..write('clientCreatedTime: $clientCreatedTime, ')
           ..write('clientModifiedBy: $clientModifiedBy, ')
           ..write('clientCreatedBy: $clientCreatedBy, ')
           ..write('clientModifiedTime: $clientModifiedTime, ')
+          ..write('auditCreatedTime: $auditCreatedTime, ')
           ..write('auditModifiedBy: $auditModifiedBy, ')
           ..write('auditModifiedTime: $auditModifiedTime, ')
           ..write('clientReferenceId: $clientReferenceId, ')
@@ -33267,11 +33267,11 @@ class HFReferralData extends DataClass implements Insertable<HFReferralData> {
         symptom,
         auditCreatedBy,
         nonRecoverableError,
-        auditCreatedTime,
         clientCreatedTime,
         clientModifiedBy,
         clientCreatedBy,
         clientModifiedTime,
+        auditCreatedTime,
         auditModifiedBy,
         auditModifiedTime,
         clientReferenceId,
@@ -33295,11 +33295,11 @@ class HFReferralData extends DataClass implements Insertable<HFReferralData> {
           other.symptom == this.symptom &&
           other.auditCreatedBy == this.auditCreatedBy &&
           other.nonRecoverableError == this.nonRecoverableError &&
-          other.auditCreatedTime == this.auditCreatedTime &&
           other.clientCreatedTime == this.clientCreatedTime &&
           other.clientModifiedBy == this.clientModifiedBy &&
           other.clientCreatedBy == this.clientCreatedBy &&
           other.clientModifiedTime == this.clientModifiedTime &&
+          other.auditCreatedTime == this.auditCreatedTime &&
           other.auditModifiedBy == this.auditModifiedBy &&
           other.auditModifiedTime == this.auditModifiedTime &&
           other.clientReferenceId == this.clientReferenceId &&
@@ -33321,11 +33321,11 @@ class HFReferralCompanion extends UpdateCompanion<HFReferralData> {
   final Value<String?> symptom;
   final Value<String?> auditCreatedBy;
   final Value<bool?> nonRecoverableError;
-  final Value<int?> auditCreatedTime;
   final Value<int?> clientCreatedTime;
   final Value<String?> clientModifiedBy;
   final Value<String?> clientCreatedBy;
   final Value<int?> clientModifiedTime;
+  final Value<int?> auditCreatedTime;
   final Value<String?> auditModifiedBy;
   final Value<int?> auditModifiedTime;
   final Value<String> clientReferenceId;
@@ -33345,11 +33345,11 @@ class HFReferralCompanion extends UpdateCompanion<HFReferralData> {
     this.symptom = const Value.absent(),
     this.auditCreatedBy = const Value.absent(),
     this.nonRecoverableError = const Value.absent(),
-    this.auditCreatedTime = const Value.absent(),
     this.clientCreatedTime = const Value.absent(),
     this.clientModifiedBy = const Value.absent(),
     this.clientCreatedBy = const Value.absent(),
     this.clientModifiedTime = const Value.absent(),
+    this.auditCreatedTime = const Value.absent(),
     this.auditModifiedBy = const Value.absent(),
     this.auditModifiedTime = const Value.absent(),
     this.clientReferenceId = const Value.absent(),
@@ -33370,11 +33370,11 @@ class HFReferralCompanion extends UpdateCompanion<HFReferralData> {
     this.symptom = const Value.absent(),
     this.auditCreatedBy = const Value.absent(),
     this.nonRecoverableError = const Value.absent(),
-    this.auditCreatedTime = const Value.absent(),
     this.clientCreatedTime = const Value.absent(),
     this.clientModifiedBy = const Value.absent(),
     this.clientCreatedBy = const Value.absent(),
     this.clientModifiedTime = const Value.absent(),
+    this.auditCreatedTime = const Value.absent(),
     this.auditModifiedBy = const Value.absent(),
     this.auditModifiedTime = const Value.absent(),
     required String clientReferenceId,
@@ -33395,11 +33395,11 @@ class HFReferralCompanion extends UpdateCompanion<HFReferralData> {
     Expression<String?>? symptom,
     Expression<String?>? auditCreatedBy,
     Expression<bool?>? nonRecoverableError,
-    Expression<int?>? auditCreatedTime,
     Expression<int?>? clientCreatedTime,
     Expression<String?>? clientModifiedBy,
     Expression<String?>? clientCreatedBy,
     Expression<int?>? clientModifiedTime,
+    Expression<int?>? auditCreatedTime,
     Expression<String?>? auditModifiedBy,
     Expression<int?>? auditModifiedTime,
     Expression<String>? clientReferenceId,
@@ -33421,12 +33421,12 @@ class HFReferralCompanion extends UpdateCompanion<HFReferralData> {
       if (auditCreatedBy != null) 'audit_created_by': auditCreatedBy,
       if (nonRecoverableError != null)
         'non_recoverable_error': nonRecoverableError,
-      if (auditCreatedTime != null) 'audit_created_time': auditCreatedTime,
       if (clientCreatedTime != null) 'client_created_time': clientCreatedTime,
       if (clientModifiedBy != null) 'client_modified_by': clientModifiedBy,
       if (clientCreatedBy != null) 'client_created_by': clientCreatedBy,
       if (clientModifiedTime != null)
         'client_modified_time': clientModifiedTime,
+      if (auditCreatedTime != null) 'audit_created_time': auditCreatedTime,
       if (auditModifiedBy != null) 'audit_modified_by': auditModifiedBy,
       if (auditModifiedTime != null) 'audit_modified_time': auditModifiedTime,
       if (clientReferenceId != null) 'client_reference_id': clientReferenceId,
@@ -33449,11 +33449,11 @@ class HFReferralCompanion extends UpdateCompanion<HFReferralData> {
       Value<String?>? symptom,
       Value<String?>? auditCreatedBy,
       Value<bool?>? nonRecoverableError,
-      Value<int?>? auditCreatedTime,
       Value<int?>? clientCreatedTime,
       Value<String?>? clientModifiedBy,
       Value<String?>? clientCreatedBy,
       Value<int?>? clientModifiedTime,
+      Value<int?>? auditCreatedTime,
       Value<String?>? auditModifiedBy,
       Value<int?>? auditModifiedTime,
       Value<String>? clientReferenceId,
@@ -33473,11 +33473,11 @@ class HFReferralCompanion extends UpdateCompanion<HFReferralData> {
       symptom: symptom ?? this.symptom,
       auditCreatedBy: auditCreatedBy ?? this.auditCreatedBy,
       nonRecoverableError: nonRecoverableError ?? this.nonRecoverableError,
-      auditCreatedTime: auditCreatedTime ?? this.auditCreatedTime,
       clientCreatedTime: clientCreatedTime ?? this.clientCreatedTime,
       clientModifiedBy: clientModifiedBy ?? this.clientModifiedBy,
       clientCreatedBy: clientCreatedBy ?? this.clientCreatedBy,
       clientModifiedTime: clientModifiedTime ?? this.clientModifiedTime,
+      auditCreatedTime: auditCreatedTime ?? this.auditCreatedTime,
       auditModifiedBy: auditModifiedBy ?? this.auditModifiedBy,
       auditModifiedTime: auditModifiedTime ?? this.auditModifiedTime,
       clientReferenceId: clientReferenceId ?? this.clientReferenceId,
@@ -33526,9 +33526,6 @@ class HFReferralCompanion extends UpdateCompanion<HFReferralData> {
     if (nonRecoverableError.present) {
       map['non_recoverable_error'] = Variable<bool?>(nonRecoverableError.value);
     }
-    if (auditCreatedTime.present) {
-      map['audit_created_time'] = Variable<int?>(auditCreatedTime.value);
-    }
     if (clientCreatedTime.present) {
       map['client_created_time'] = Variable<int?>(clientCreatedTime.value);
     }
@@ -33540,6 +33537,9 @@ class HFReferralCompanion extends UpdateCompanion<HFReferralData> {
     }
     if (clientModifiedTime.present) {
       map['client_modified_time'] = Variable<int?>(clientModifiedTime.value);
+    }
+    if (auditCreatedTime.present) {
+      map['audit_created_time'] = Variable<int?>(auditCreatedTime.value);
     }
     if (auditModifiedBy.present) {
       map['audit_modified_by'] = Variable<String?>(auditModifiedBy.value);
@@ -33577,11 +33577,11 @@ class HFReferralCompanion extends UpdateCompanion<HFReferralData> {
           ..write('symptom: $symptom, ')
           ..write('auditCreatedBy: $auditCreatedBy, ')
           ..write('nonRecoverableError: $nonRecoverableError, ')
-          ..write('auditCreatedTime: $auditCreatedTime, ')
           ..write('clientCreatedTime: $clientCreatedTime, ')
           ..write('clientModifiedBy: $clientModifiedBy, ')
           ..write('clientCreatedBy: $clientCreatedBy, ')
           ..write('clientModifiedTime: $clientModifiedTime, ')
+          ..write('auditCreatedTime: $auditCreatedTime, ')
           ..write('auditModifiedBy: $auditModifiedBy, ')
           ..write('auditModifiedTime: $auditModifiedTime, ')
           ..write('clientReferenceId: $clientReferenceId, ')
@@ -33669,12 +33669,6 @@ class $HFReferralTable extends HFReferral
           requiredDuringInsert: false,
           defaultConstraints: 'CHECK (non_recoverable_error IN (0, 1))',
           defaultValue: const Constant(false));
-  final VerificationMeta _auditCreatedTimeMeta =
-      const VerificationMeta('auditCreatedTime');
-  @override
-  late final GeneratedColumn<int?> auditCreatedTime = GeneratedColumn<int?>(
-      'audit_created_time', aliasedName, true,
-      type: const IntType(), requiredDuringInsert: false);
   final VerificationMeta _clientCreatedTimeMeta =
       const VerificationMeta('clientCreatedTime');
   @override
@@ -33698,6 +33692,12 @@ class $HFReferralTable extends HFReferral
   @override
   late final GeneratedColumn<int?> clientModifiedTime = GeneratedColumn<int?>(
       'client_modified_time', aliasedName, true,
+      type: const IntType(), requiredDuringInsert: false);
+  final VerificationMeta _auditCreatedTimeMeta =
+      const VerificationMeta('auditCreatedTime');
+  @override
+  late final GeneratedColumn<int?> auditCreatedTime = GeneratedColumn<int?>(
+      'audit_created_time', aliasedName, true,
       type: const IntType(), requiredDuringInsert: false);
   final VerificationMeta _auditModifiedByMeta =
       const VerificationMeta('auditModifiedBy');
@@ -33750,11 +33750,11 @@ class $HFReferralTable extends HFReferral
         symptom,
         auditCreatedBy,
         nonRecoverableError,
-        auditCreatedTime,
         clientCreatedTime,
         clientModifiedBy,
         clientCreatedBy,
         clientModifiedTime,
+        auditCreatedTime,
         auditModifiedBy,
         auditModifiedTime,
         clientReferenceId,
@@ -33832,12 +33832,6 @@ class $HFReferralTable extends HFReferral
           nonRecoverableError.isAcceptableOrUnknown(
               data['non_recoverable_error']!, _nonRecoverableErrorMeta));
     }
-    if (data.containsKey('audit_created_time')) {
-      context.handle(
-          _auditCreatedTimeMeta,
-          auditCreatedTime.isAcceptableOrUnknown(
-              data['audit_created_time']!, _auditCreatedTimeMeta));
-    }
     if (data.containsKey('client_created_time')) {
       context.handle(
           _clientCreatedTimeMeta,
@@ -33861,6 +33855,12 @@ class $HFReferralTable extends HFReferral
           _clientModifiedTimeMeta,
           clientModifiedTime.isAcceptableOrUnknown(
               data['client_modified_time']!, _clientModifiedTimeMeta));
+    }
+    if (data.containsKey('audit_created_time')) {
+      context.handle(
+          _auditCreatedTimeMeta,
+          auditCreatedTime.isAcceptableOrUnknown(
+              data['audit_created_time']!, _auditCreatedTimeMeta));
     }
     if (data.containsKey('audit_modified_by')) {
       context.handle(

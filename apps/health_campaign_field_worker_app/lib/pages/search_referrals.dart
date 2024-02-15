@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
 import '../blocs/app_initialization/app_initialization.dart';
-import '../blocs/scanner/scanner.dart';
 import '../blocs/search_referrals/search_referrals.dart';
 import '../blocs/service/service.dart';
 import '../models/data_model.dart';
@@ -196,30 +195,6 @@ class _SearchReferralsPageState extends LocalizedState<SearchReferralsPage> {
                             ),
                           );
                         },
-                      ),
-                      DigitOutlineIconButton(
-                        buttonStyle: OutlinedButton.styleFrom(
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.zero,
-                          ),
-                        ),
-                        onPressed: () {
-                          context.read<ScannerBloc>().add(
-                                const ScannerEvent.handleScanner(
-                                  [],
-                                  [],
-                                ),
-                              );
-                          context.router.push(QRScannerRoute(
-                            quantity: 1,
-                            isGS1code: false,
-                            sinlgleValue: true,
-                          ));
-                        },
-                        icon: Icons.qr_code,
-                        label: localizations.translate(
-                          i18.deliverIntervention.scannerLabel,
-                        ),
                       ),
                     ],
                   ),

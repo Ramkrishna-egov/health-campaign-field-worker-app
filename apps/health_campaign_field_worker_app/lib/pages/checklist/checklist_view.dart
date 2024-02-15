@@ -54,13 +54,9 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    bool isHealthFacilityWorker = context.loggedInUserRoles
-        .where((role) => role.code == RolesType.healthFacilityWorker.toValue())
-        .toList()
-        .isNotEmpty;
-
     return WillPopScope(
-      onWillPop: isHealthFacilityWorker && widget.referralClientRefId != null
+      onWillPop: context.isHealthFacilitySupervisor &&
+              widget.referralClientRefId != null
           ? () async => false
           : () async => _onBackPressed(context),
       child: Scaffold(
@@ -73,7 +69,7 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
                 if (!isControllersInitialized) {
                   initialAttributes?.forEach((e) {
                     controller.add(TextEditingController());
-                    if (!(isHealthFacilityWorker &&
+                    if (!(context.isHealthFacilitySupervisor &&
                         widget.referralClientRefId != null)) {
                       additionalController.add(TextEditingController());
                     }
@@ -90,7 +86,7 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
               serviceDefinitionFetch: (value) {
                 return ScrollableContent(
                   header: Column(children: [
-                    if (!(isHealthFacilityWorker &&
+                    if (!(context.isHealthFacilitySupervisor &&
                         widget.referralClientRefId != null))
                       const BackNavigationHelpHeaderWidget(),
                   ]),
@@ -127,7 +123,8 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
                                   (itemsAttributes?[i].dataType !=
                                           'SingleValueList' &&
                                       (controller[i].text == '' &&
-                                          !(isHealthFacilityWorker &&
+                                          !(context
+                                                  .isHealthFacilitySupervisor &&
                                               widget.referralClientRefId !=
                                                   null))))) {
                             return;
@@ -161,7 +158,8 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
                                     attributeCode: '${attribute?[i].code}',
                                     dataType: attribute?[i].dataType,
                                     clientReferenceId: IdGen.i.identifier,
-                                    referenceId: isHealthFacilityWorker &&
+                                    referenceId: context
+                                                .isHealthFacilitySupervisor &&
                                             widget.referralClientRefId != null
                                         ? widget.referralClientRefId
                                         : referenceId,
@@ -179,7 +177,8 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
                                             : i18.checklist.notSelectedKey,
                                     rowVersion: 1,
                                     tenantId: attribute?[i].tenantId,
-                                    additionalDetails: isHealthFacilityWorker &&
+                                    additionalDetails: context
+                                                .isHealthFacilitySupervisor &&
                                             widget.referralClientRefId != null
                                         ? null
                                         : ((attribute?[i].values?.length == 2 ||
@@ -187,10 +186,10 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
                                                             .values
                                                             ?.length ==
                                                         3 ||
-                                        attribute?[i]
-                                            .values
-                                            ?.length ==
-                                            4) &&
+                                                    attribute?[i]
+                                                            .values
+                                                            ?.length ==
+                                                        4) &&
                                                 controller[i].text ==
                                                     attribute?[i]
                                                         .values?[1]
@@ -220,7 +219,8 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
                                           tenantId: value
                                               .selectedServiceDefinition!
                                               .tenantId,
-                                          clientId: isHealthFacilityWorker &&
+                                          clientId: context
+                                                      .isHealthFacilitySupervisor &&
                                                   widget.referralClientRefId !=
                                                       null
                                               ? widget.referralClientRefId
@@ -272,7 +272,8 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
                           ),
                         );
                         if (shouldSubmit ?? false) {
-                          if (isHealthFacilityWorker &&
+                          if (context.mounted &&
+                              context.isHealthFacilitySupervisor &&
                               widget.referralClientRefId != null) {
                             router.navigate(SearchReferralsRoute());
                           } else {
@@ -470,10 +471,6 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
     ServiceDefinitionModel? selectedServiceDefinition,
     BuildContext context,
   ) {
-    bool isHealthFacilityWorker = context.loggedInUserRoles
-        .where((role) => role.code == RolesType.healthFacilityWorker.toValue())
-        .toList()
-        .isNotEmpty;
     final theme = Theme.of(context);
     /* Check the data type of the attribute*/
     if (item.dataType == 'SingleValueList') {
@@ -561,7 +558,7 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
               BlocBuilder<ServiceBloc, ServiceState>(
                 builder: (context, state) {
                   return (controller[index].text == item.values?[1].trim() &&
-                          !(isHealthFacilityWorker &&
+                          !(context.isHealthFacilitySupervisor &&
                               widget.referralClientRefId != null))
                       ? Padding(
                           padding: const EdgeInsets.only(

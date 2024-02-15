@@ -1,5 +1,6 @@
 import 'package:digit_components/digit_components.dart';
 import 'package:digit_components/widgets/atoms/digit_radio_button_list.dart';
+import 'package:digit_components/widgets/atoms/digit_reactive_search_dropdown.dart';
 import 'package:digit_components/widgets/atoms/digit_toaster.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -824,7 +825,7 @@ class _RecordReferralDetailsPageState
                                       DigitTextFormField(
                                         formControlName: _ageKey,
                                         label: localizations.translate(
-                                          i18.common.ageInMonths,
+                                          i18.individualDetails.monthsHintText,
                                         ),
                                         readOnly: viewOnly,
                                         keyboardType: TextInputType.number,

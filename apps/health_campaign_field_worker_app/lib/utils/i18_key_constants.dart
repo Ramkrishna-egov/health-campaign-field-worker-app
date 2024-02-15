@@ -106,7 +106,6 @@ class Common {
 
   String get noResultsFound => 'NO_RESULTS_FOUND';
 
-  String get coreCommonSyncInProgress => 'CORE_COMMON_SYNC_IN_PROGRESS';
   String get min3CharsRequired => 'MIN_REQUIRED_3';
 
   String get facilitySearchHeaderLabel => 'FACILITY_SEARCH_HEADER_LABEL';

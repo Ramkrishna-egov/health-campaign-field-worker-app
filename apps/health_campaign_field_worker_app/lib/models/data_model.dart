@@ -32,7 +32,6 @@ export 'entities/project_resource.dart';
 export 'entities/project_staff.dart';
 export 'entities/project_type.dart';
 export 'entities/referral.dart';
-export 'entities/roles.dart';
 export 'entities/roles_type.dart';
 export 'entities/service.dart';
 export 'entities/service_attributes.dart';

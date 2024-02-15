@@ -6,10 +6,9 @@ import 'package:drift/drift.dart';
 
 import '../../../models/data_model.dart';
 import '../../../utils/utils.dart';
-import '../../data_repository.dart';
+import 'base/h_f_referral_base.dart';
 
-class HFReferralLocalRepository
-    extends LocalRepository<HFReferralModel, HFReferralSearchModel> {
+class HFReferralLocalRepository extends HFReferralLocalBaseRepository {
   HFReferralLocalRepository(super.sql, super.opLogManager);
 
   @override
