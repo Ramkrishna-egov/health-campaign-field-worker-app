@@ -722,7 +722,11 @@ class _StockDetailsPageState extends LocalizedState<StockDetailsPage> {
                                                 localizations.translate(e),
                                             onChanged: (value) {
                                               if (value == 'IN_HAND' ||
-                                                  value == 'BY_CANOE') {
+                                                  value == 'BY_CANOE' ||
+                                                  value == 'MOTOR_BIKE' ||
+                                                  value == 'KEH_KEH' ||
+                                                  value == 'PUSH_PUSH' ||
+                                                  value == 'WHEELBARROW') {
                                                 setState(() {
                                                   form
                                                       .control(
