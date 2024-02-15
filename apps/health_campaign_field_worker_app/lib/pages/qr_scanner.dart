@@ -225,11 +225,8 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
                           width: MediaQuery.of(context).size.width,
                           child: DigitCard(
                             margin: const EdgeInsets.only(top: kPadding),
-                            padding: const EdgeInsets.fromLTRB(
+                            padding: const EdgeInsets.all(
                               kPadding,
-                              0,
-                              kPadding,
-                              0,
                             ),
                             child: DigitElevatedButton(
                               child: Text(localizations
@@ -263,12 +260,12 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
                         Positioned(
                           bottom: (kPadding * 7.5),
                           height: widget.isGS1code
-                              ? state.barcodes.length < 10
+                              ? state.barcodes.length < 3
                                   ? (state.barcodes.length * 60) + 80
-                                  : MediaQuery.of(context).size.height / 2.2
-                              : state.qrcodes.length < 10
+                                  : MediaQuery.of(context).size.height / 3.8
+                              : state.qrcodes.length < 3
                                   ? (state.qrcodes.length * 60) + 80
-                                  : MediaQuery.of(context).size.height / 2,
+                                  : MediaQuery.of(context).size.height / 3.8,
                           width: MediaQuery.of(context).size.width,
                           child: Container(
                             width: 100,
@@ -309,108 +306,112 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
                                         ),
                                 ),
                                 Expanded(
-                                  child: ListView.builder(
-                                    itemCount: widget.isGS1code
-                                        ? state.barcodes.length
-                                        : state.qrcodes.length,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return ListTile(
-                                        shape: const Border(),
-                                        title: Container(
-                                          margin: const EdgeInsets.only(
-                                            left: kPadding,
-                                            right: kPadding,
-                                          ),
-                                          height: kPadding * 6,
-                                          decoration: BoxDecoration(
-                                            color: DigitTheme.instance
-                                                .colorScheme.background,
-                                            border: Border.all(
-                                              color: DigitTheme
-                                                  .instance.colorScheme.outline,
-                                              width: 1,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(bottom: 8.0),
+                                    child: ListView.builder(
+                                      itemCount: widget.isGS1code
+                                          ? state.barcodes.length
+                                          : state.qrcodes.length,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        return ListTile(
+                                          shape: const Border(),
+                                          title: Container(
+                                            margin: const EdgeInsets.only(
+                                              left: kPadding,
+                                              right: kPadding,
                                             ),
-                                            borderRadius:
-                                                const BorderRadius.all(
-                                              Radius.circular(4.0),
-                                            ),
-                                          ),
-                                          padding:
-                                              const EdgeInsets.all(kPadding),
-                                          child: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.end,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Flexible(
-                                                child: Text(
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  widget.isGS1code
-                                                      ? state
-                                                          .barcodes[index]
-                                                          .elements
-                                                          .entries
-                                                          .last
-                                                          .value
-                                                          .data
-                                                          .toString()
-                                                      : trimString(state
-                                                          .qrcodes[index]
-                                                          .toString()),
-                                                ),
+                                            height: kPadding * 6,
+                                            decoration: BoxDecoration(
+                                              color: DigitTheme.instance
+                                                  .colorScheme.background,
+                                              border: Border.all(
+                                                color: DigitTheme.instance
+                                                    .colorScheme.outline,
+                                                width: 1,
                                               ),
-                                              IconButton(
-                                                icon: const Icon(
-                                                  Icons.delete,
-                                                  color: Colors.red,
-                                                  size: 24,
+                                              borderRadius:
+                                                  const BorderRadius.all(
+                                                Radius.circular(4.0),
+                                              ),
+                                            ),
+                                            padding:
+                                                const EdgeInsets.all(kPadding),
+                                            child: Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.end,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Flexible(
+                                                  child: Text(
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    widget.isGS1code
+                                                        ? state
+                                                            .barcodes[index]
+                                                            .elements
+                                                            .entries
+                                                            .last
+                                                            .value
+                                                            .data
+                                                            .toString()
+                                                        : trimString(state
+                                                            .qrcodes[index]
+                                                            .toString()),
+                                                  ),
                                                 ),
-                                                onPressed: () {
-                                                  final bloc = context
-                                                      .read<ScannerBloc>();
-                                                  if (widget.isGS1code) {
-                                                    result = List.from(
-                                                      state.barcodes,
-                                                    );
-                                                    result.removeAt(index);
-                                                    setState(() {
-                                                      result = result;
-                                                    });
-
-                                                    bloc.add(
-                                                      ScannerEvent
-                                                          .handleScanner(
-                                                        result,
-                                                        state.qrcodes,
-                                                      ),
-                                                    );
-                                                  } else {
-                                                    codes = List.from(
-                                                      state.qrcodes,
-                                                    );
-                                                    codes.removeAt(index);
-                                                    setState(() {
-                                                      codes = codes;
-                                                    });
-
-                                                    bloc.add(
-                                                      ScannerEvent
-                                                          .handleScanner(
+                                                IconButton(
+                                                  icon: const Icon(
+                                                    Icons.delete,
+                                                    color: Colors.red,
+                                                    size: 24,
+                                                  ),
+                                                  onPressed: () {
+                                                    final bloc = context
+                                                        .read<ScannerBloc>();
+                                                    if (widget.isGS1code) {
+                                                      result = List.from(
                                                         state.barcodes,
-                                                        codes,
-                                                      ),
-                                                    );
-                                                  }
-                                                },
-                                              ),
-                                            ],
+                                                      );
+                                                      result.removeAt(index);
+                                                      setState(() {
+                                                        result = result;
+                                                      });
+
+                                                      bloc.add(
+                                                        ScannerEvent
+                                                            .handleScanner(
+                                                          result,
+                                                          state.qrcodes,
+                                                        ),
+                                                      );
+                                                    } else {
+                                                      codes = List.from(
+                                                        state.qrcodes,
+                                                      );
+                                                      codes.removeAt(index);
+                                                      setState(() {
+                                                        codes = codes;
+                                                      });
+
+                                                      bloc.add(
+                                                        ScannerEvent
+                                                            .handleScanner(
+                                                          state.barcodes,
+                                                          codes,
+                                                        ),
+                                                      );
+                                                    }
+                                                  },
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                      );
-                                    },
+                                        );
+                                      },
+                                    ),
                                   ),
                                 ),
                               ],
@@ -703,11 +704,11 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
     await Future.delayed(const Duration(seconds: 3));
 
     result = List.from(bloc.state.barcodes);
+    result.add(parsedresult);
     result.removeDuplicates(
       (element) => element.elements.entries.last.value.data,
     );
 
-    result.add(parsedresult);
     bloc.add(ScannerEvent.handleScanner(result, bloc.state.qrcodes));
     setState(() {
       result = result;
