@@ -609,6 +609,11 @@ class DeliverIntervention {
 
   String get dialogContent => 'DELIVER_INTERVENTION_DIALOG_CONTENT';
 
+  String get wastedDialogTitle => 'DELIVER_INTERVENTION_WASTED_DIALOG_TITLE';
+
+  String get wastedDialogContent =>
+      'DELIVER_INTERVENTION_WASTED_DIALOG_CONTENT';
+
   String get referDialogTitle => 'DELIVER_INTERVENTION_REFER_DIALOG_TITLE';
 
   String get referDialogContent => 'DELIVER_INTERVENTION_REFER_DIALOG_CONTENT';

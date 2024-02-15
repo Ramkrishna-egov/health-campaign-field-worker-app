@@ -339,7 +339,8 @@ class _StockDetailsPageState extends LocalizedState<StockDetailsPage> {
                                                     'damaged_quantity',
                                                     damagedQuantity,
                                                   ),
-                                                if (comments != null)
+                                                if (comments != null &&
+                                                    comments.isNotEmpty)
                                                   AdditionalField(
                                                     'comments',
                                                     comments,

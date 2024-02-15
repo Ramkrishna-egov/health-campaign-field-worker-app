@@ -50,7 +50,7 @@ class SideBar extends StatelessWidget {
                     if (value.userModel.permanentCity != null)
                       Text(
                         value.userModel.permanentCity.toString(),
-                        style: theme.textTheme.labelSmall,
+                        style: theme.textTheme.displayMedium,
                       ),
                   ],
                 ),
