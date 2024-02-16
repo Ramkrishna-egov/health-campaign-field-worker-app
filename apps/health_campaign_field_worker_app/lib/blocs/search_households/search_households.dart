@@ -165,19 +165,19 @@ class SearchHouseholdsBloc
     // Initialize a list to store household member wrappers.
     final containers = <HouseholdMemberWrapper>[];
     if (individuals.isNotEmpty || households.isNotEmpty) {
-     final hhMembers = beneficiaryType == BeneficiaryType.individual
-    ? await householdMember.search(
-        HouseholdMemberSearchModel(
-          individualClientReferenceIds:
-              individuals.map((e) => e.clientReferenceId).toList(),
-        ),
-      )
-    : await householdMember.search(
-        HouseholdMemberSearchModel(
-          householdClientReferenceIds:
-              households.map((e) => e.clientReferenceId).toList(),
-        ),
-      );
+      final hhMembers = beneficiaryType == BeneficiaryType.individual
+          ? await householdMember.search(
+              HouseholdMemberSearchModel(
+                individualClientReferenceIds:
+                    individuals.map((e) => e.clientReferenceId).toList(),
+              ),
+            )
+          : await householdMember.search(
+              HouseholdMemberSearchModel(
+                householdClientReferenceIds:
+                    households.map((e) => e.clientReferenceId).toList(),
+              ),
+            );
       final head = hhMembers.firstWhere((element) => element.isHeadOfHousehold);
 
       final members = await householdMember.search(
@@ -240,12 +240,10 @@ class SearchHouseholdsBloc
     SearchHouseholdsEmitter emit,
   ) async {
     // Perform a series of asynchronous data retrieval operations based on the search criteria.
- emit(state.copyWith(
-     
+    emit(state.copyWith(
       loading: true,
     ));
 
-   
     // Fetch household results based on proximity and other criteria.
     final List<HouseholdModel> proximityBasedResults =
         await addressRepository.searchHouseHoldbyAddress(AddressSearchModel(
@@ -396,8 +394,7 @@ class SearchHouseholdsBloc
       );
     }
 
-
- await Future.delayed(const Duration(milliseconds: 1000));
+    await Future.delayed(const Duration(milliseconds: 1000));
     // Update the state with the results and mark the search as completed.
     emit(state.copyWith(
       householdMembers: containers,
@@ -671,6 +668,7 @@ class SearchHouseholdsBloc
     SearchHouseholdsEmitter emit,
   ) async {
     emit(state.copyWith(
+      tag: null,
       searchQuery: null,
       householdMembers: [],
     ));
