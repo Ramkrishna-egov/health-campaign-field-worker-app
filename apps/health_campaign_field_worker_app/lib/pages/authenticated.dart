@@ -20,6 +20,7 @@ import '../data/remote_client.dart';
 import '../data/repositories/local/address.dart';
 import '../data/repositories/oplog/oplog.dart';
 import '../data/repositories/remote/bandwidth_check.dart';
+
 import '../models/data_model.dart';
 import '../router/app_router.dart';
 import '../router/authenticated_route_observer.dart';
@@ -43,48 +44,51 @@ class AuthenticatedPageWrapper extends StatelessWidget {
         return Portal(
           child: Scaffold(
             appBar: AppBar(
-              actions: [
-                BlocBuilder<BoundaryBloc, BoundaryState>(
-                  builder: (ctx, state) {
-                    final selectedBoundary = ctx.boundaryOrNull;
+              actions: showDrawer
+                  ? [
+                      BlocBuilder<BoundaryBloc, BoundaryState>(
+                        builder: (ctx, state) {
+                          final selectedBoundary = ctx.boundaryOrNull;
 
-                    if (selectedBoundary == null) {
-                      return const SizedBox.shrink();
-                    }
+                          if (selectedBoundary == null) {
+                            return const SizedBox.shrink();
+                          } else {
+                            final boundaryName = selectedBoundary.name ??
+                                selectedBoundary.code ??
+                                AppLocalizations.of(context).translate(
+                                  i18.projectSelection.onProjectMapped,
+                                );
 
-                    final boundaryName = selectedBoundary.name ??
-                        selectedBoundary.code ??
-                        AppLocalizations.of(context).translate(
-                          i18.projectSelection.onProjectMapped,
-                        );
+                            final theme = Theme.of(context);
 
-                    final theme = Theme.of(context);
-
-                    return GestureDetector(
-                      onTap: () {
-                        ctx.router.navigate(BoundarySelectionRoute());
-                      },
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          TextButton(
-                            style: TextButton.styleFrom(
-                              foregroundColor: theme.colorScheme.surface,
-                              padding: EdgeInsets.zero,
-                            ),
-                            onPressed: () {
-                              ctx.router.navigate(BoundarySelectionRoute());
-                            },
-                            child: Text(boundaryName),
-                            // child: Text(boundaryName),
-                          ),
-                          const Icon(Icons.arrow_drop_down_outlined),
-                        ],
+                            return GestureDetector(
+                              onTap: () {
+                                ctx.router.replaceAll([
+                                  HomeRoute(),
+                                  BoundarySelectionRoute(),
+                                ]);
+                              },
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    boundaryName,
+                                    style: TextStyle(
+                                      color: theme.colorScheme.surface,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  const Icon(
+                                    Icons.arrow_drop_down_outlined,
+                                  ),
+                                ],
+                              ),
+                            );
+                          }
+                        },
                       ),
-                    );
-                  },
-                ),
-              ],
+                    ]
+                  : null,
             ),
             drawer: showDrawer ? const Drawer(child: SideBar()) : null,
             body: MultiBlocProvider(
@@ -219,8 +223,9 @@ class AuthenticatedPageWrapper extends StatelessWidget {
                   create: (ctx) => BeneficiaryDownSyncBloc(
                     //{TODO: Need to get the bandwidth path from config
                     bandwidthCheckRepository: BandwidthCheckRepository(
-                        DioClient().dio,
-                        bandwidthPath: '/project/check/bandwidth'),
+                      DioClient().dio,
+                      bandwidthPath: '/project/check/bandwidth',
+                    ),
                     householdLocalRepository: ctx.read<
                         LocalRepository<HouseholdModel,
                             HouseholdSearchModel>>(),

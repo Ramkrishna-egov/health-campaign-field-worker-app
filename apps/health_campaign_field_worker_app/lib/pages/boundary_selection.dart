@@ -538,7 +538,9 @@ class _BoundarySelectionPageState
                                                     }
                                                   }
                                                 },
-                                          child: const Text('Submit'),
+                                          child: Text(localizations.translate(
+                                            i18.common.coreCommonSubmit,
+                                          )),
                                         );
                                       },
                                     ),
