@@ -234,7 +234,8 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
                               onPressed: () async {
                                 if (widget.isGS1code &&
                                     result.length < widget.quantity) {
-                                  buildDialog();
+                                  // buildDialog();
+                                  context.router.pop();
                                 } else {
                                   final bloc =
                                       context.read<SearchHouseholdsBloc>();
