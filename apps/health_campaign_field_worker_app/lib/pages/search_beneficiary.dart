@@ -176,6 +176,12 @@ class _SearchBeneficiaryPageState
                                                   value: isProximityEnabled,
                                                   onChanged: (value) {
                                                     searchController.clear();
+                                                    final bloc = context.read<
+                                                        SearchHouseholdsBloc>();
+                                                    bloc.add(
+                                                      const SearchHouseholdsClearEvent(),
+                                                    );
+
                                                     setState(() {
                                                       isProximityEnabled =
                                                           value;
