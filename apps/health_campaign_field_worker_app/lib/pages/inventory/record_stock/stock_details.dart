@@ -331,63 +331,46 @@ class _StockDetailsPageState extends LocalizedState<StockDetailsPage> {
                                               if ([
                                                 StockRecordEntryType.receipt,
                                               ].contains(entryType)) {
-                                                if (barcodes.isNotEmpty) {
-                                                  if (balesQuantity != null &&
-                                                      barcodes.length !=
-                                                          int.parse(balesQuantity
-                                                              .toString()) &&
-                                                      (comments == null ||
-                                                          comments.isEmpty)) {
-                                                    await DigitToast.show(
-                                                      context,
-                                                      options:
-                                                          DigitToastOptions(
-                                                        localizations.translate(i18
-                                                            .stockDetails
-                                                            .baleMismatchCommentRequired),
-                                                        true,
-                                                        theme,
-                                                      ),
-                                                    );
-
-                                                    return;
-                                                  }
-
-                                                  for (var element
-                                                      in barcodes) {
-                                                    List<String> keys = [];
-                                                    List<String> values = [];
-                                                    for (var e in element
-                                                        .elements.entries) {
-                                                      e.value.rawData;
-                                                      keys.add(
-                                                        e.key.toString(),
-                                                      );
-                                                      values.add(
-                                                        e.value.data.toString(),
-                                                      );
-                                                    }
-
-                                                    additionalFields.add(
-                                                      AdditionalField(
-                                                        keys.join('|'),
-                                                        values.join('|'),
-                                                      ),
-                                                    );
-                                                  }
-                                                } else {
+                                                if (balesQuantity != null &&
+                                                    barcodes.length !=
+                                                        int.parse(balesQuantity
+                                                            .toString()) &&
+                                                    (comments == null ||
+                                                        comments.isEmpty)) {
                                                   await DigitToast.show(
                                                     context,
                                                     options: DigitToastOptions(
                                                       localizations.translate(i18
                                                           .stockDetails
-                                                          .noBalesScannedError),
+                                                          .baleMismatchCommentRequired),
                                                       true,
                                                       theme,
                                                     ),
                                                   );
 
                                                   return;
+                                                }
+
+                                                for (var element in barcodes) {
+                                                  List<String> keys = [];
+                                                  List<String> values = [];
+                                                  for (var e in element
+                                                      .elements.entries) {
+                                                    e.value.rawData;
+                                                    keys.add(
+                                                      e.key.toString(),
+                                                    );
+                                                    values.add(
+                                                      e.value.data.toString(),
+                                                    );
+                                                  }
+
+                                                  additionalFields.add(
+                                                    AdditionalField(
+                                                      keys.join('|'),
+                                                      values.join('|'),
+                                                    ),
+                                                  );
                                                 }
                                               }
 
