@@ -246,7 +246,8 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
                                   if (scannerState.qrcodes.isNotEmpty) {
                                     bloc.add(
                                       SearchHouseholdsEvent.searchByTag(
-                                        tag: scannerState.qrcodes.first,
+                                        tag: scannerState.qrcodes.first
+                                            .replaceAll(' ', ''),
                                         projectId: context.projectId,
                                       ),
                                     );
@@ -440,9 +441,11 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
                             i18.common.coreCommonSubmit,
                           )),
                           onPressed: () async {
+                            String code = _resourceController.value.text
+                                .replaceAll(' ', '');
                             if (!widget.isGS1code) {
                               if (!pattern.hasMatch(
-                                _resourceController.value.text,
+                                code,
                               )) {
                                 await handleError(
                                   i18.deliverIntervention.scanValidResource,
@@ -451,7 +454,7 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
                                 return;
                               } else {
                                 bool isLimiteExceeded = await isLimitExceeded(
-                                  _resourceController.value.text,
+                                  code,
                                 );
                                 if (isLimiteExceeded) {
                                   await handleError(
@@ -463,7 +466,7 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
                               }
                             }
                             final bloc = context.read<ScannerBloc>();
-                            codes.add(_resourceController.value.text);
+                            codes.add(code);
                             bloc.add(
                               ScannerEvent.handleScanner(
                                 state.barcodes,
@@ -481,8 +484,9 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
                                   manualcode) {
                                 bloc.add(SearchHouseholdsEvent.searchByTag(
                                   tag: manualcode
-                                      ? _resourceController.value.text
-                                      : scannerState.qrcodes.first,
+                                      ? code
+                                      : scannerState.qrcodes.first
+                                          .replaceAll(' ', ''),
                                   projectId: context.projectId,
                                 ));
                               }
@@ -595,23 +599,26 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
             );
           }
         } else {
-          if (bloc.state.qrcodes.contains(barcodes.first.displayValue)) {
+          String code = (barcodes.first.displayValue ?? "").replaceAll(' ', '');
+          if (bloc.state.qrcodes.contains(code)) {
             await handleError(
               i18.deliverIntervention.resourceAlreadyScanned,
             );
 
             return;
           } else {
-            if (pattern.hasMatch(barcodes.first.displayValue ?? "")) {
+            if (pattern.hasMatch(
+              code,
+            )) {
               bool isLimiteExceeded = await isLimitExceeded(
-                barcodes.first.displayValue.toString(),
+                code,
               );
               if (isLimiteExceeded) {
                 await handleError(
                   i18.deliverIntervention.scanValidResource,
                 );
               } else {
-                await storeCode(barcodes.first.displayValue.toString());
+                await storeCode(code);
               }
             } else {
               await handleError(
