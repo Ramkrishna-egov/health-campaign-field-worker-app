@@ -786,6 +786,18 @@ class StockDetails {
 
   String get quantityDamagedLabel => 'STOCK_DETAILS_QUANTITY_DAMAGED';
 
+  String get balesReceivedCountLabel => 'STOCK_DETAILS_BALES_RECEIVED';
+
+  String get balesSentCountLabel => 'STOCK_DETAILS_BALES_SENT';
+
+  String get balesReturnedCountLabel => 'STOCK_DETAILS_BALES_RETURNED';
+
+  String get balesLostCountLabel => 'STOCK_DETAILS_BALES_LOST';
+
+  String get balesGainedCountLabel => 'STOCK_DETAILS_BALES_GAINED';
+
+  String get balesDamagedCountLabel => 'STOCK_DETAILS_BALES_DAMAGED';
+
   /// Waybill number label
   String get waybillNumberLabel => 'STOCK_DETAILS_WAYBILL_NUMBER';
 
@@ -812,11 +824,24 @@ class StockDetails {
   String get transportTypeLabel => 'STOCK_DETAILS_TRANSPORT_TYPE';
 
   String get receivedSpaqDetails => 'RECEIVED_SPAQ_DETAILS';
+
   String get selectSpaqVariant => 'SELECT_SPAQ_VARIANT';
+
   String get issuedSpaqDetails => 'ISSUED_SPAQ_DETAILS';
+
   String get returnedSpaqDetails => 'RETURNED_SPAQ_DETAILS';
+
   String get damagedSpaqDetails => 'DAMAGED_SPAQ_DETAILS';
+
   String get quantityDamagedCountLabel => 'STOCK_DAMAGED_QUANTITY_LABEL';
+
+  String get noBalesScannedError => 'NO_BALES_SCANNED_ERROR';
+
+  String get baleMismatchCommentRequired => 'BALE_MISMATCH_COMMENT_REQUIRED';
+
+  String get balesScanned => 'BALES_SCANNED';
+
+  String get balesQuantityRequiredError => 'BALES_QUANTITY_REQUIRED_ERROR';
 }
 
 class StockReconciliationDetails {

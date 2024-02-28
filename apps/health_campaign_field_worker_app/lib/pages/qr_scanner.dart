@@ -234,8 +234,7 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
                               onPressed: () async {
                                 if (widget.isGS1code &&
                                     result.length < widget.quantity) {
-                                  // buildDialog();
-                                  context.router.pop();
+                                  buildDialog();
                                 } else {
                                   final bloc =
                                       context.read<SearchHouseholdsBloc>();
@@ -299,7 +298,7 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
                                   width: MediaQuery.of(context).size.width,
                                   child: widget.isGS1code
                                       ? Text(
-                                          '${state.barcodes.length.toString()} ${localizations.translate(i18.deliverIntervention.resourcesScanned)}',
+                                          '${state.barcodes.length.toString()} ${localizations.translate(i18.stockDetails.balesScanned)}',
                                           style: theme.textTheme.headlineMedium,
                                         )
                                       : Text(
@@ -474,7 +473,7 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
                               ),
                             );
                             if (widget.isGS1code) {
-                              // buildDialog();
+                              buildDialog();
                             } else {
                               final bloc = context.read<SearchHouseholdsBloc>();
                               final scannerState =
@@ -592,7 +591,13 @@ class _QRScannerPageState extends LocalizedState<QRScannerPage> {
             //     element.elements.entries.last.value.data ==
             //     parsedResult.elements.entries.last.value.data);
 
-            await storeValue(parsedResult);
+            if (widget.quantity > result.length) {
+              await storeValue(parsedResult);
+            } else {
+              await handleError(
+                i18.deliverIntervention.scannedResourceCountMisMatch,
+              );
+            }
           } catch (e) {
             await handleError(
               i18.deliverIntervention.scanValidResource,
