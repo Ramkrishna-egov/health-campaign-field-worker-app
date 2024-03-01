@@ -302,8 +302,20 @@ class SearchHouseholdsBloc
               ? membersIds.contains(element.beneficiaryClientReferenceId)
               : householdId == element.beneficiaryClientReferenceId)
           .toList();
+
+      final beneficiaryClientReferenceIds = projectBeneficiaries
+          .map((e) => e.beneficiaryClientReferenceId)
+          .toList();
+
+      final List<IndividualModel> beneficiaryIndividuals = individualMemebrs
+          .where((element) =>
+              beneficiaryClientReferenceIds.contains(element.clientReferenceId))
+          .toList();
       // Find the head of household from the individuals.
-      final head = individuals.firstWhereOrNull(
+      final head = (beneficiaryType == BeneficiaryType.individual
+              ? beneficiaryIndividuals
+              : individualMemebrs)
+          .firstWhereOrNull(
         (element) =>
             element.clientReferenceId ==
             entry.value
@@ -317,11 +329,16 @@ class SearchHouseholdsBloc
       // Create a container for household members and associated data.
       individualMemebrs.sort((a, b) => (a.clientAuditDetails?.createdTime ?? 0)
           .compareTo(b.clientAuditDetails?.createdTime ?? 0));
+      beneficiaryIndividuals.sort((a, b) =>
+          (a.clientAuditDetails?.createdTime ?? 0)
+              .compareTo(b.clientAuditDetails?.createdTime ?? 0));
       containers.add(
         HouseholdMemberWrapper(
           household: householdresult,
           headOfHousehold: head,
-          members: individualMemebrs,
+          members: beneficiaryType == BeneficiaryType.individual
+              ? beneficiaryIndividuals
+              : individualMemebrs,
           projectBeneficiaries: beneficiaries,
           tasks: tasks.isEmpty ? null : tasks,
           sideEffects: sideEffects.isEmpty ? null : sideEffects,
@@ -493,8 +510,21 @@ class SearchHouseholdsBloc
               ? membersIds.contains(element.beneficiaryClientReferenceId)
               : householdId == element.beneficiaryClientReferenceId)
           .toList();
+
+      final beneficiaryClientReferenceIds = projectBeneficiaries
+          .map((e) => e.beneficiaryClientReferenceId)
+          .toList();
+
+      final List<IndividualModel> beneficiaryIndividuals = individualMemebrs
+          .where((element) =>
+              beneficiaryClientReferenceIds.contains(element.clientReferenceId))
+          .toList();
+
       // Find the head of household from the individuals.
-      final head = allIndividuals.firstWhereOrNull(
+      final head = ((beneficiaryType == BeneficiaryType.individual
+              ? beneficiaryIndividuals
+              : individualMemebrs))
+          .firstWhereOrNull(
         (element) =>
             element.clientReferenceId ==
             entry.value
@@ -511,11 +541,16 @@ class SearchHouseholdsBloc
       // Create a container for household members and associated data.
       individualMemebrs.sort((a, b) => (a.clientAuditDetails?.createdTime ?? 0)
           .compareTo(b.clientAuditDetails?.createdTime ?? 0));
+      beneficiaryIndividuals.sort((a, b) =>
+          (a.clientAuditDetails?.createdTime ?? 0)
+              .compareTo(b.clientAuditDetails?.createdTime ?? 0));
       containers.add(
         HouseholdMemberWrapper(
           household: householdresult,
           headOfHousehold: head,
-          members: individualMemebrs,
+          members: beneficiaryType == BeneficiaryType.individual
+              ? beneficiaryIndividuals
+              : individualMemebrs,
           projectBeneficiaries: beneficiaries,
           tasks: tasks.isEmpty ? null : tasks,
           sideEffects: sideEffects.isEmpty ? null : sideEffects,
