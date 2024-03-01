@@ -42,6 +42,7 @@ class _StockDetailsPageState extends LocalizedState<StockDetailsPage> {
   static const _commentsKey = 'comments';
   late ProductVariantModel productVariantModel;
   bool transportbyHand = false;
+  bool enableBaleScanning = false;
   List<ValidatorFunction> balesQuantityValidator = [];
 
   FormGroup _form() {
@@ -122,11 +123,13 @@ class _StockDetailsPageState extends LocalizedState<StockDetailsPage> {
                   quantityCountLabel = module.quantityReceivedLabel;
                   balesCountLabel = module.balesReceivedCountLabel;
                   transactionType = TransactionType.received;
-                  balesQuantityValidator = [
-                    Validators.number,
-                    Validators.min(0),
-                    Validators.max(context.maximumQuantity),
-                  ];
+                  if (enableBaleScanning) {
+                    balesQuantityValidator = [
+                      Validators.number,
+                      Validators.min(0),
+                      Validators.max(context.maximumQuantity),
+                    ];
+                  }
                   break;
                 case StockRecordEntryType.dispatch:
                   pageTitle = module.issuedPageTitle;
@@ -329,8 +332,10 @@ class _StockDetailsPageState extends LocalizedState<StockDetailsPage> {
                                                   scannerState.barcodes;
 
                                               if ([
-                                                StockRecordEntryType.receipt,
-                                              ].contains(entryType)) {
+                                                    StockRecordEntryType
+                                                        .receipt,
+                                                  ].contains(entryType) &&
+                                                  enableBaleScanning) {
                                                 if (balesQuantity != null &&
                                                     barcodes.length !=
                                                         int.parse(balesQuantity
@@ -775,8 +780,9 @@ class _StockDetailsPageState extends LocalizedState<StockDetailsPage> {
                                       },
                                     ),
                                     if ([
-                                      StockRecordEntryType.receipt,
-                                    ].contains(entryType))
+                                          StockRecordEntryType.receipt,
+                                        ].contains(entryType) &&
+                                        enableBaleScanning)
                                       DigitTextFormField(
                                         keyboardType: TextInputType.number,
                                         label: localizations.translate(
@@ -905,8 +911,9 @@ class _StockDetailsPageState extends LocalizedState<StockDetailsPage> {
                                     ),
                                     // Commenting this because we need this functionality for other APK
                                     if ([
-                                      StockRecordEntryType.receipt,
-                                    ].contains(entryType))
+                                          StockRecordEntryType.receipt,
+                                        ].contains(entryType) &&
+                                        enableBaleScanning)
                                       DigitOutlineIconButton(
                                         buttonStyle: OutlinedButton.styleFrom(
                                           shape: const RoundedRectangleBorder(
