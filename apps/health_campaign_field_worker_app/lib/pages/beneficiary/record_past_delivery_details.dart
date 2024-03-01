@@ -9,6 +9,7 @@ import '../../../utils/i18_key_constants.dart' as i18;
 import '../../blocs/delivery_intervention/deliver_intervention.dart';
 import '../../blocs/household_overview/household_overview.dart';
 import '../../blocs/localization/app_localization.dart';
+import '../../models/data_model.dart';
 import '../../models/data_model.mapper.g.dart';
 import '../../models/entities/additional_fields_type.dart';
 import '../../models/entities/status.dart';
@@ -113,8 +114,21 @@ class _RecordPastDeliveryDetailsPageState
                                     : Status.administeredFailed.toValue();
 
                                 // Create a new task with the updated status
-                                final result =
+                                TaskModel result =
                                     futureTaskList![i].copyWith(status: status);
+
+                                if (result.auditDetails != null) {
+                                  result = result.copyWith(
+                                    auditDetails: AuditDetails(
+                                      createdBy: result.auditDetails!.createdBy,
+                                      createdTime:
+                                          result.auditDetails!.createdTime,
+                                      lastModifiedBy: context.loggedInUserUuid,
+                                      lastModifiedTime:
+                                          DateTime.now().millisecondsSinceEpoch,
+                                    ),
+                                  );
+                                }
 
                                 // Add the updated task to the event
                                 event.add(DeliverInterventionSubmitEvent(
