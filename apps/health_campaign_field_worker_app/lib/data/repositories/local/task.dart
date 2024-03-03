@@ -31,8 +31,9 @@ class TaskLocalRepository extends TaskLocalBaseRepository {
             ),
         ]),
       );
-         select
+              select
       .limit(query.limit ?? 50, offset: query.offset ?? 0);
+
     select.watch().listen((results) {
       final data = results
           .map((e) {
@@ -96,6 +97,9 @@ class TaskLocalRepository extends TaskLocalBaseRepository {
       ),
     ]);
 
+
+         selectQuery
+      .limit(query.limit ?? 50, offset: query.offset ?? 0);
     final results = await (selectQuery
           ..where(buildAnd([
             if (query.clientReferenceId != null)
