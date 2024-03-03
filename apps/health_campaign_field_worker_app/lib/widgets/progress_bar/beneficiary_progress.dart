@@ -41,6 +41,10 @@ class _BeneficiaryProgressBarState extends State<BeneficiaryProgressBar> {
     taskRepository.listenToChanges(
       query: TaskSearchModel(
         projectId: context.projectId,
+        createdBy: context.loggedInUserUuid,
+        limit: 100,
+        offset: 0,
+
       ),
       listener: (taskData) async {
         if (mounted) {
@@ -62,6 +66,8 @@ class _BeneficiaryProgressBarState extends State<BeneficiaryProgressBar> {
           ProjectBeneficiarySearchModel beneficiarySearchModel =
               ProjectBeneficiarySearchModel(
             projectId: context.projectId,
+            offset: 0,
+            limit: 100,
           );
           List<ProjectBeneficiaryModel> data =
               await repository.search(beneficiarySearchModel);
@@ -76,6 +82,10 @@ class _BeneficiaryProgressBarState extends State<BeneficiaryProgressBar> {
           TaskSearchModel taskSearchQuery = TaskSearchModel(
             projectBeneficiaryClientReferenceId: clientReferenceIdsList,
             status: Status.administeredSuccess.toValue(),
+         createdBy: context.loggedInUserUuid,
+        limit: 100,
+        offset: 0,
+
           );
           List<TaskModel> results =
               await taskRepository.search(taskSearchQuery);
