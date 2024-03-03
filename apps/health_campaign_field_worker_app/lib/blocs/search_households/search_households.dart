@@ -408,8 +408,8 @@ class SearchHouseholdsBloc
           : IndividualSearchModel(
               name: NameSearchModel(
                 givenName: event.searchText.trim(),
-               offset: event.offset,
-               limit: event.limit,
+                offset: event.offset,
+                limit: event.limit,
               ),
             ),
     );
@@ -426,9 +426,8 @@ class SearchHouseholdsBloc
           : IndividualSearchModel(
               name: NameSearchModel(
                 familyName: event.searchText.trim(),
-                        offset: event.offset,
-               limit: event.limit,
-               
+                offset: event.offset,
+                limit: event.limit,
               ),
             ),
     );
