@@ -29,6 +29,9 @@ class ProjectBeneficiaryLocalRepository
             ),
         ]),
       );
+      
+            select
+      .limit(query.limit ?? 50, offset: query.offset ?? 0);
 
     select.watch().listen((event) {
       final data = event.map((e) {

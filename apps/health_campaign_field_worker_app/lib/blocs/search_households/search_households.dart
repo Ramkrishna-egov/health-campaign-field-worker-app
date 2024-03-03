@@ -56,16 +56,6 @@ class SearchHouseholdsBloc
     on(_handleSearchByHousehold);
     on(_handleInitialize);
 
-    if (sideEffectDataRepository is SideEffectLocalRepository) {
-      (sideEffectDataRepository as SideEffectLocalRepository).listenToChanges(
-        query: SideEffectSearchModel(
-          projectId: projectId,
-        ),
-        listener: (data) {
-          add(const SearchHouseholdsInitializedEvent());
-        },
-      );
-    }
   }
 
   void _handleInitialize(

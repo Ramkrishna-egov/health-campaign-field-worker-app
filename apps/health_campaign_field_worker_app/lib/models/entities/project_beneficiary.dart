@@ -16,7 +16,9 @@ class ProjectBeneficiarySearchModel extends EntitySearchModel {
   final List<String>? clientReferenceId;
   final String? tenantId;
   final DateTime? dateOfRegistrationTime;
-  
+  final int? limit;
+  final int? offset;
+
   ProjectBeneficiarySearchModel({
     this.id,
     this.projectId,
@@ -26,13 +28,15 @@ class ProjectBeneficiarySearchModel extends EntitySearchModel {
     this.beneficiaryRegistrationDateGte,
     this.clientReferenceId,
     this.tenantId,
+    this.limit,
+    this.offset,
     int? dateOfRegistration,
     super.boundaryCode,
     super.isDeleted,
-  }): dateOfRegistrationTime = dateOfRegistration == null
-      ? null
-      : DateTime.fromMillisecondsSinceEpoch(dateOfRegistration),
-   super();
+  })  : dateOfRegistrationTime = dateOfRegistration == null
+            ? null
+            : DateTime.fromMillisecondsSinceEpoch(dateOfRegistration),
+        super();
 
   @MappableConstructor()
   ProjectBeneficiarySearchModel.ignoreDeleted({
@@ -44,20 +48,20 @@ class ProjectBeneficiarySearchModel extends EntitySearchModel {
     this.beneficiaryRegistrationDateGte,
     this.clientReferenceId,
     this.tenantId,
+    this.limit,
+    this.offset,
     int? dateOfRegistration,
     super.boundaryCode,
-  }): dateOfRegistrationTime = dateOfRegistration == null
-  ? null
-      : DateTime.fromMillisecondsSinceEpoch(dateOfRegistration),
-   super(isDeleted: false);
+  })  : dateOfRegistrationTime = dateOfRegistration == null
+            ? null
+            : DateTime.fromMillisecondsSinceEpoch(dateOfRegistration),
+        super(isDeleted: false);
 
   int? get dateOfRegistration => dateOfRegistrationTime?.millisecondsSinceEpoch;
-  
 }
 
 @MappableClass(ignoreNull: true)
 class ProjectBeneficiaryModel extends EntityModel {
-
   static const schemaName = 'ProjectBeneficiary';
 
   final String? id;
@@ -82,13 +86,14 @@ class ProjectBeneficiaryModel extends EntityModel {
     this.tenantId,
     this.rowVersion,
     required int dateOfRegistration,
-    super.auditDetails,super.clientAuditDetails,
+    super.auditDetails,
+    super.clientAuditDetails,
     super.isDeleted = false,
-  }): dateOfRegistrationTime = DateTime.fromMillisecondsSinceEpoch(dateOfRegistration),
-      super();
+  })  : dateOfRegistrationTime =
+            DateTime.fromMillisecondsSinceEpoch(dateOfRegistration),
+        super();
 
-  int  get dateOfRegistration => dateOfRegistrationTime.millisecondsSinceEpoch;
-  
+  int get dateOfRegistration => dateOfRegistrationTime.millisecondsSinceEpoch;
 
   ProjectBeneficiaryCompanion get companion {
     return ProjectBeneficiaryCompanion(
@@ -111,7 +116,7 @@ class ProjectBeneficiaryModel extends EntityModel {
       tenantId: Value(tenantId),
       rowVersion: Value(rowVersion),
       dateOfRegistration: Value(dateOfRegistration),
-      );
+    );
   }
 }
 

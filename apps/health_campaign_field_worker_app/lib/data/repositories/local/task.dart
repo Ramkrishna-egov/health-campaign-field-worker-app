@@ -31,7 +31,8 @@ class TaskLocalRepository extends TaskLocalBaseRepository {
             ),
         ]),
       );
-
+         select
+      .limit(query.limit ?? 50, offset: query.offset ?? 0);
     select.watch().listen((results) {
       final data = results
           .map((e) {
