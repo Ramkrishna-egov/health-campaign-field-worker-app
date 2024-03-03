@@ -378,7 +378,6 @@ class SearchHouseholdsBloc
 
     // Fetch household results based on proximity and other criteria.
 
-    List<IndividualModel> indResults = [];
     List<IndividualModel> proximityBasedIndividualResults = [];
 
     if (event.isProximityEnabled) {
@@ -388,6 +387,8 @@ class SearchHouseholdsBloc
         latitude: event.latitude,
         longitude: event.longitude,
         maxRadius: event.maxRadius,
+        offset: event.offset,
+        limit: event.limit,
       ));
     }
     // Extract individual IDs from proximity-based individual results.
@@ -407,6 +408,8 @@ class SearchHouseholdsBloc
           : IndividualSearchModel(
               name: NameSearchModel(
                 givenName: event.searchText.trim(),
+               offset: event.offset,
+               limit: event.limit,
               ),
             ),
     );
@@ -423,6 +426,9 @@ class SearchHouseholdsBloc
           : IndividualSearchModel(
               name: NameSearchModel(
                 familyName: event.searchText.trim(),
+                        offset: event.offset,
+               limit: event.limit,
+               
               ),
             ),
     );
@@ -634,6 +640,8 @@ class SearchHouseholdsEvent with _$SearchHouseholdsEvent {
     double? latitude,
     double? longitude,
     double? maxRadius,
+    required int offset,
+    required int limit,
   }) = SearchHouseholdsSearchByHouseholdHeadEvent;
 
   const factory SearchHouseholdsEvent.searchByProximity({

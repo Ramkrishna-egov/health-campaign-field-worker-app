@@ -12,6 +12,9 @@ class IndividualSearchModel extends EntitySearchModel {
   final List<String>? clientReferenceId;
   final String? tenantId;
   final NameSearchModel? name;
+    final int? limit;
+  final int? offset;
+  
   final Gender? gender;
   final List<IdentifierSearchModel>? identifiers;
   
@@ -22,6 +25,8 @@ class IndividualSearchModel extends EntitySearchModel {
     this.tenantId,
     this.name,
     this.gender,
+         this.limit,
+    this.offset,
     this.identifiers,
     super.boundaryCode,
     super.isDeleted,
@@ -35,6 +40,8 @@ class IndividualSearchModel extends EntitySearchModel {
     this.tenantId,
     this.name,
     this.gender,
+         this.limit,
+    this.offset,
     this.identifiers,
     super.boundaryCode,
   }):  super(isDeleted: false);

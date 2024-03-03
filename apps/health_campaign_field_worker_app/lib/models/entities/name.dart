@@ -12,6 +12,8 @@ class NameSearchModel extends EntitySearchModel {
   final String? familyName;
   final String? otherNames;
   final String? tenantId;
+  final int? limit;
+  final int? offset;
   
   NameSearchModel({
     this.id,
@@ -19,6 +21,8 @@ class NameSearchModel extends EntitySearchModel {
     this.familyName,
     this.otherNames,
     this.tenantId,
+     this.limit,
+    this.offset,
     super.boundaryCode,
     super.isDeleted,
   }):  super();
@@ -30,6 +34,8 @@ class NameSearchModel extends EntitySearchModel {
     this.familyName,
     this.otherNames,
     this.tenantId,
+    this.limit,
+    this.offset,
     super.boundaryCode,
   }):  super(isDeleted: false);
 }

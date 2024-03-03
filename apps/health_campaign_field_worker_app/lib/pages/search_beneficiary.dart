@@ -77,6 +77,17 @@ class _SearchBeneficiaryPageState
                     setState(() {
                       offset = (offset + limit);
                     });
+                  } else if (metrics.atEdge && searchController.text == '') {
+                    SearchHouseholdsEvent.searchByHouseholdHead(
+                      searchText: searchController.text,
+                      projectId: context.projectId,
+                      isProximityEnabled: isProximityEnabled,
+                      offset: offset,
+                      limit: limit,
+                    );
+                    setState(() {
+                      offset = (offset + limit);
+                    });
                   }
                 }
                 // Return true to allow the notification to continue to be dispatched to further ancestors.
@@ -163,6 +174,8 @@ class _SearchBeneficiaryPageState
                                                       isProximityEnabled,
                                                   maxRadius:
                                                       appConfig.maxRadius,
+                                                  limit: limit,
+                                                  offset: offset,
                                                 ),
                                               );
                                             }

@@ -37,6 +37,9 @@ class IndividualLocalRepository extends IndividualLocalBaseRepository {
         ),
       ],
     );
+    
+         selectQuery
+      .limit(query.limit ?? 50, offset: query.offset ?? 0);
     final r = await selectQuery.get();
     print(r.length);
 
