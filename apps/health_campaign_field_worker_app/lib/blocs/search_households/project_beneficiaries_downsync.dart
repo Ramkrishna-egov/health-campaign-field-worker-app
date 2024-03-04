@@ -85,7 +85,7 @@ class BeneficiaryDownSyncBloc
         event.appConfiguration,
       );
       emit(BeneficiaryDownSyncState.getBatchSize(
-        configuredBatchSize,
+        configuredBatchSize * 10,
         event.projectId,
         event.boundaryCode,
         event.pendingSyncCount,
