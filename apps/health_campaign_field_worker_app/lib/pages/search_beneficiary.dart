@@ -82,7 +82,7 @@ class _SearchBeneficiaryPageState
                       searchText: searchController.text,
                       projectId: context.projectId,
                       isProximityEnabled: isProximityEnabled,
-                      offset: offset,
+                      offset: offset + limit,
                       limit: limit,
                     );
                     setState(() {
