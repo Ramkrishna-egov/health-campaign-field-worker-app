@@ -31,8 +31,7 @@ class TaskLocalRepository extends TaskLocalBaseRepository {
             ),
         ]),
       );
-              select
-      .limit(query.limit ?? 50, offset: query.offset ?? 0);
+    select.limit(query.limit ?? 50, offset: query.offset ?? 0);
 
     select.watch().listen((results) {
       final data = results
@@ -97,9 +96,7 @@ class TaskLocalRepository extends TaskLocalBaseRepository {
       ),
     ]);
 
-
-         selectQuery
-      .limit(query.limit ?? 50, offset: query.offset ?? 0);
+    selectQuery.limit(query.limit ?? 50, offset: query.offset ?? 0);
     final results = await (selectQuery
           ..where(buildAnd([
             if (query.clientReferenceId != null)
@@ -117,6 +114,11 @@ class TaskLocalRepository extends TaskLocalBaseRepository {
             if (userId != null)
               sql.task.auditCreatedBy.equals(
                 userId,
+              ),
+            if (query.plannedEndDate != null)
+              sql.task.clientCreatedTime.isBetweenValues(
+                query.plannedStartDate,
+                query.plannedEndDate,
               ),
           ])))
         .get();

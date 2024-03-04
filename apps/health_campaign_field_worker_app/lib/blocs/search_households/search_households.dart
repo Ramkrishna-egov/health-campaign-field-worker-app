@@ -55,7 +55,6 @@ class SearchHouseholdsBloc
     on(_handleClear);
     on(_handleSearchByHousehold);
     on(_handleInitialize);
-
   }
 
   void _handleInitialize(
@@ -398,9 +397,9 @@ class SearchHouseholdsBloc
           : IndividualSearchModel(
               name: NameSearchModel(
                 givenName: event.searchText.trim(),
-                offset: event.offset,
-                limit: event.limit,
               ),
+              offset: event.offset,
+              limit: event.limit,
             ),
     );
 
@@ -416,9 +415,9 @@ class SearchHouseholdsBloc
           : IndividualSearchModel(
               name: NameSearchModel(
                 familyName: event.searchText.trim(),
-                offset: event.offset,
-                limit: event.limit,
               ),
+              offset: event.offset,
+              limit: event.limit,
             ),
     );
 
@@ -556,7 +555,7 @@ class SearchHouseholdsBloc
       // Update the state with the results and mark the search as completed.
     }
     emit(state.copyWith(
-      householdMembers: containers,
+      householdMembers: [...state.householdMembers, ...containers],
       loading: false,
     ));
   }
