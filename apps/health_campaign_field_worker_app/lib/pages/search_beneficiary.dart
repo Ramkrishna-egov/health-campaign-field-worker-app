@@ -77,7 +77,7 @@ class _SearchBeneficiaryPageState
                     setState(() {
                       offset = (offset + limit);
                     });
-                  } else if (metrics.atEdge && searchController.text == '') {
+                  } else if (metrics.atEdge && searchController.text != '') {
                     SearchHouseholdsEvent.searchByHouseholdHead(
                       searchText: searchController.text,
                       projectId: context.projectId,
