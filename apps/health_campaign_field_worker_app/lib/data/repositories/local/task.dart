@@ -31,7 +31,9 @@ class TaskLocalRepository extends TaskLocalBaseRepository {
             ),
         ]),
       );
-    select.limit(query.limit ?? 50, offset: query.offset ?? 0);
+    if (query.limit != null && query.offset != null) {
+      select.limit(query.limit!, offset: query.offset);
+    }
 
     select.watch().listen((results) {
       final data = results
@@ -97,7 +99,7 @@ class TaskLocalRepository extends TaskLocalBaseRepository {
     ]);
 
     if (query.limit != null && query.offset != null) {
-      selectQuery.limit(query.limit ?? 50, offset: query.offset ?? 0);
+      selectQuery.limit(query.limit!, offset: query.offset);
     }
     final results = await (selectQuery
           ..where(buildAnd([

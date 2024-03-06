@@ -37,9 +37,10 @@ class IndividualLocalRepository extends IndividualLocalBaseRepository {
         ),
       ],
     );
-    
-         selectQuery
-      .limit(query.limit ?? 50, offset: query.offset ?? 0);
+
+    if (query.limit != null && query.offset != null) {
+      selectQuery.limit(query.limit!, offset: query.offset);
+    }
 
     final results = await (selectQuery
           ..where(
