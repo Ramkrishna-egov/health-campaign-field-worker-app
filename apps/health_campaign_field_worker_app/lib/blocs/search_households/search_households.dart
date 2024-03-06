@@ -55,17 +55,6 @@ class SearchHouseholdsBloc
     on(_handleClear);
     on(_handleSearchByHousehold);
     on(_handleInitialize);
-
-    if (sideEffectDataRepository is SideEffectLocalRepository) {
-      (sideEffectDataRepository as SideEffectLocalRepository).listenToChanges(
-        query: SideEffectSearchModel(
-          projectId: projectId,
-        ),
-        listener: (data) {
-          add(const SearchHouseholdsInitializedEvent());
-        },
-      );
-    }
   }
 
   void _handleInitialize(
@@ -378,7 +367,6 @@ class SearchHouseholdsBloc
 
     // Fetch household results based on proximity and other criteria.
 
-    List<IndividualModel> indResults = [];
     List<IndividualModel> proximityBasedIndividualResults = [];
 
     if (event.isProximityEnabled) {
@@ -388,6 +376,8 @@ class SearchHouseholdsBloc
         latitude: event.latitude,
         longitude: event.longitude,
         maxRadius: event.maxRadius,
+        offset: event.offset,
+        limit: event.limit,
       ));
     }
     // Extract individual IDs from proximity-based individual results.
@@ -408,6 +398,8 @@ class SearchHouseholdsBloc
               name: NameSearchModel(
                 givenName: event.searchText.trim(),
               ),
+              offset: event.offset,
+              limit: event.limit,
             ),
     );
 
@@ -424,6 +416,8 @@ class SearchHouseholdsBloc
               name: NameSearchModel(
                 familyName: event.searchText.trim(),
               ),
+              offset: event.offset,
+              limit: event.limit,
             ),
     );
 
@@ -495,6 +489,9 @@ class SearchHouseholdsBloc
     for (final entry in groupedHouseholds.entries) {
       final householdId = entry.key;
 
+      final exisitingHousehold = state.householdMembers
+          .firstWhereOrNull((element) => element.household.id == householdId);
+      if (exisitingHousehold != null) continue;
       if (householdId == null) continue;
       // Retrieve the first household result.
       final householdresult =
@@ -561,7 +558,7 @@ class SearchHouseholdsBloc
       // Update the state with the results and mark the search as completed.
     }
     emit(state.copyWith(
-      householdMembers: containers,
+      householdMembers: [...state.householdMembers, ...containers],
       loading: false,
     ));
   }
@@ -634,6 +631,8 @@ class SearchHouseholdsEvent with _$SearchHouseholdsEvent {
     double? latitude,
     double? longitude,
     double? maxRadius,
+    required int offset,
+    required int limit,
   }) = SearchHouseholdsSearchByHouseholdHeadEvent;
 
   const factory SearchHouseholdsEvent.searchByProximity({
