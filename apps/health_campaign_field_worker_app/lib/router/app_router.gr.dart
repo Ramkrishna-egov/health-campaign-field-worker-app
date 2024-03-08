@@ -226,6 +226,7 @@ class _$AppRouter extends RootStackRouter {
         child: ProjectFacilitySelectionPage(
           key: args.key,
           projectFacilities: args.projectFacilities,
+          facilityMap: args.facilityMap,
         ),
       );
     },
@@ -1695,12 +1696,14 @@ class ProjectFacilitySelectionRoute
   ProjectFacilitySelectionRoute({
     Key? key,
     required List<ProjectFacilityModel> projectFacilities,
+    required Map<String, String> facilityMap,
   }) : super(
           ProjectFacilitySelectionRoute.name,
           path: 'select-project-facilities',
           args: ProjectFacilitySelectionRouteArgs(
             key: key,
             projectFacilities: projectFacilities,
+            facilityMap: facilityMap,
           ),
         );
 
@@ -1711,15 +1714,18 @@ class ProjectFacilitySelectionRouteArgs {
   const ProjectFacilitySelectionRouteArgs({
     this.key,
     required this.projectFacilities,
+    required this.facilityMap,
   });
 
   final Key? key;
 
   final List<ProjectFacilityModel> projectFacilities;
 
+  final Map<String, String> facilityMap;
+
   @override
   String toString() {
-    return 'ProjectFacilitySelectionRouteArgs{key: $key, projectFacilities: $projectFacilities}';
+    return 'ProjectFacilitySelectionRouteArgs{key: $key, projectFacilities: $projectFacilities, facilityMap: $facilityMap}';
   }
 }
 

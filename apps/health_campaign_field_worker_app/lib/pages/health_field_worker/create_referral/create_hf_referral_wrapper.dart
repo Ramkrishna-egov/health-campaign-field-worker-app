@@ -69,9 +69,10 @@ class HFCreateReferralWrapperPage extends StatelessWidget
                   const ServiceEmptyState(),
                   serviceDataRepository: service,
                 )..add(ServiceSearchEvent(
-                      serviceSearchModel: ServiceSearchModel(
-                    clientId: hfReferralModel?.clientReferenceId,
-                  ))),
+                    serviceSearchModel: ServiceSearchModel(
+                      clientId: hfReferralModel?.clientReferenceId,
+                    ),
+                  )),
                 child: BlocProvider(
                   create: (_) => RecordHFReferralBloc(
                     RecordHFReferralState.create(

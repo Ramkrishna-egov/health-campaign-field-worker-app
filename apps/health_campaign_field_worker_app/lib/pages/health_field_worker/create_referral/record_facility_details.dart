@@ -55,7 +55,7 @@ class _ReferralFacilityPageState extends LocalizedState<ReferralFacilityPage> {
       builder: (ctx, facilityState) {
         return facilityState.maybeWhen(
           orElse: () => const SizedBox.shrink(),
-          fetched: (facilities) {
+          fetched: (facilities, facilityMap) {
             final projectFacilities = facilities
                 .where((e) => e.id != 'N/A' && e.id != 'Delivery Team')
                 .toList();
@@ -202,6 +202,7 @@ class _ReferralFacilityPageState extends LocalizedState<ReferralFacilityPage> {
                                               ProjectFacilitySelectionRoute(
                                                 projectFacilities:
                                                     projectFacilities,
+                                                facilityMap: facilityMap,
                                               ),
                                             );
 
@@ -219,6 +220,7 @@ class _ReferralFacilityPageState extends LocalizedState<ReferralFacilityPage> {
                                         valueAccessor:
                                             ProjectFacilityValueAccessor(
                                           projectFacilities,
+                                          facilityMap,
                                         ),
                                         label: localizations.translate(
                                           i18.referBeneficiary
@@ -247,6 +249,7 @@ class _ReferralFacilityPageState extends LocalizedState<ReferralFacilityPage> {
                                                   ProjectFacilitySelectionRoute(
                                                     projectFacilities:
                                                         projectFacilities,
+                                                    facilityMap: facilityMap,
                                                   ),
                                                 );
 
