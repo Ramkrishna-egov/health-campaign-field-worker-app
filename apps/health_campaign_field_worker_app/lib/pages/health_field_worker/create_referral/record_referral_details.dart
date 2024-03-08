@@ -39,12 +39,9 @@ class _RecordReferralDetailsPageState
   static const _nameOfChildKey = 'nameOfChild';
   static const _evaluationFacilityKey = 'evaluationFacility';
   static const _referralReason = 'referralReason';
-  static const _referredByKey = 'referredBy';
-  static const _genderKey = 'gender';
   static const _cycleKey = 'cycle';
-  static const _beneficiaryIdKey = 'beneficiaryId';
+  static const _referredByKey = 'referredBy';
   static const _referralCodeKey = 'referralCode';
-  static const _ageKey = 'ageInMonths';
   final clickedStatus = ValueNotifier<bool>(false);
 
   @override
@@ -101,14 +98,6 @@ class _RecordReferralDetailsPageState
                                               clickedStatus.value = false;
                                               form
                                                   .control(_cycleKey)
-                                                  .setErrors({'': true});
-                                            } else if (form
-                                                    .control(_genderKey)
-                                                    .value ==
-                                                null) {
-                                              clickedStatus.value = false;
-                                              form
-                                                  .control(_genderKey)
                                                   .setErrors({'': true});
                                             } else if (form
                                                     .control(_referralReason)
@@ -183,15 +172,6 @@ class _RecordReferralDetailsPageState
                                               final nameOfChild = form
                                                   .control(_nameOfChildKey)
                                                   .value as String;
-                                              final age = form
-                                                  .control(_ageKey)
-                                                  .value as int;
-                                              final gender = form
-                                                  .control(_genderKey)
-                                                  .value as String;
-                                              final beneficiaryId = form
-                                                  .control(_beneficiaryIdKey)
-                                                  .value as String?;
                                               final referralCode = form
                                                   .control(_referralCodeKey)
                                                   .value as String?;
@@ -233,8 +213,6 @@ class _RecordReferralDetailsPageState
                                                     projectId:
                                                         context.projectId,
                                                     name: nameOfChild.trim(),
-                                                    beneficiaryId:
-                                                        beneficiaryId,
                                                     referralCode: referralCode,
                                                     symptom: symptom.key,
                                                     tenantId: envConfig
@@ -313,28 +291,6 @@ class _RecordReferralDetailsPageState
                                                                 .toValue(),
                                                             nameOfChild,
                                                           ),
-                                                        if (age != null &&
-                                                            age
-                                                                .toString()
-                                                                .trim()
-                                                                .isNotEmpty)
-                                                          AdditionalField(
-                                                            AdditionalFieldsType
-                                                                .age
-                                                                .toValue(),
-                                                            age,
-                                                          ),
-                                                        if (gender != null &&
-                                                            gender
-                                                                .toString()
-                                                                .trim()
-                                                                .isNotEmpty)
-                                                          AdditionalField(
-                                                            AdditionalFieldsType
-                                                                .gender
-                                                                .toValue(),
-                                                            gender,
-                                                          ),
                                                         if (cycle != null &&
                                                             cycle
                                                                 .toString()
@@ -409,14 +365,6 @@ class _RecordReferralDetailsPageState
                                                 clickedStatus.value = false;
                                                 form
                                                     .control(_cycleKey)
-                                                    .setErrors({'': true});
-                                              } else if (form
-                                                      .control(_genderKey)
-                                                      .value ==
-                                                  null) {
-                                                clickedStatus.value = false;
-                                                form
-                                                    .control(_genderKey)
                                                     .setErrors({'': true});
                                               } else if (form
                                                       .control(_referralReason)
@@ -529,15 +477,6 @@ class _RecordReferralDetailsPageState
                                                 final nameOfChild = form
                                                     .control(_nameOfChildKey)
                                                     .value as String;
-                                                final age = form
-                                                    .control(_ageKey)
-                                                    .value as int;
-                                                final gender = form
-                                                    .control(_genderKey)
-                                                    .value as String;
-                                                final beneficiaryId = form
-                                                    .control(_beneficiaryIdKey)
-                                                    .value as String?;
                                                 final referralCode = form
                                                     .control(_referralCodeKey)
                                                     .value as String?;
@@ -581,8 +520,6 @@ class _RecordReferralDetailsPageState
                                                       projectId:
                                                           context.projectId,
                                                       name: nameOfChild.trim(),
-                                                      beneficiaryId:
-                                                          beneficiaryId,
                                                       referralCode:
                                                           referralCode,
                                                       symptom: symptom.key,
@@ -662,28 +599,6 @@ class _RecordReferralDetailsPageState
                                                                   .nameOfReferral
                                                                   .toValue(),
                                                               nameOfChild,
-                                                            ),
-                                                          if (age != null &&
-                                                              age
-                                                                  .toString()
-                                                                  .trim()
-                                                                  .isNotEmpty)
-                                                            AdditionalField(
-                                                              AdditionalFieldsType
-                                                                  .age
-                                                                  .toValue(),
-                                                              age,
-                                                            ),
-                                                          if (gender != null &&
-                                                              gender
-                                                                  .toString()
-                                                                  .trim()
-                                                                  .isNotEmpty)
-                                                            AdditionalField(
-                                                              AdditionalFieldsType
-                                                                  .gender
-                                                                  .toValue(),
-                                                              gender,
                                                             ),
                                                           if (cycle != null &&
                                                               cycle
@@ -807,92 +722,12 @@ class _RecordReferralDetailsPageState
                                         },
                                       ),
                                       DigitTextFormField(
-                                        formControlName: _beneficiaryIdKey,
-                                        label: localizations.translate(
-                                          i18.referBeneficiary
-                                              .beneficiaryIdLabel,
-                                        ),
-                                        readOnly: viewOnly,
-                                      ),
-                                      DigitTextFormField(
                                         formControlName: _referralCodeKey,
                                         label: localizations.translate(
                                           i18.referBeneficiary
                                               .referralCodeLabel,
                                         ),
                                         readOnly: viewOnly,
-                                      ),
-                                      DigitTextFormField(
-                                        formControlName: _ageKey,
-                                        label: localizations.translate(
-                                          i18.individualDetails.monthsHintText,
-                                        ),
-                                        readOnly: viewOnly,
-                                        keyboardType: TextInputType.number,
-                                        inputFormatters: [
-                                          FilteringTextInputFormatter
-                                              .digitsOnly,
-                                        ],
-                                        isRequired: true,
-                                        validationMessages: {
-                                          'required': (_) =>
-                                              localizations.translate(
-                                                i18.common.corecommonRequired,
-                                              ),
-                                          'max': (_) => localizations
-                                              .translate(
-                                                i18.common.maxValue,
-                                              )
-                                              .replaceAll(
-                                                '{}',
-                                                (context.selectedProjectType
-                                                            ?.validMaxAge ??
-                                                        '')
-                                                    .toString(),
-                                              ),
-                                        },
-                                      ),
-                                      BlocBuilder<AppInitializationBloc,
-                                          AppInitializationState>(
-                                        builder: (context, state) =>
-                                            state.maybeWhen(
-                                          orElse: () => const Offstage(),
-                                          initialized: (appConfiguration, _) {
-                                            final genderOptions =
-                                                appConfiguration
-                                                        .genderOptions ??
-                                                    <GenderOptions>[];
-
-                                            return DigitReactiveSearchDropdown<
-                                                String>(
-                                              label: localizations.translate(
-                                                i18.individualDetails
-                                                    .genderLabelText,
-                                              ),
-                                              enabled: !viewOnly,
-                                              form: form,
-                                              isRequired: true,
-                                              menuItems: genderOptions
-                                                  .map(
-                                                    (e) => e.name,
-                                                  )
-                                                  .toList(),
-                                              validationMessage:
-                                                  localizations.translate(
-                                                i18.common.corecommonRequired,
-                                              ),
-                                              formControlName: _genderKey,
-                                              valueMapper: (value) {
-                                                return localizations
-                                                    .translate(value);
-                                              },
-                                              emptyText:
-                                                  localizations.translate(
-                                                i18.common.noMatchFound,
-                                              ),
-                                            );
-                                          },
-                                        ),
                                       ),
                                     ]),
                                   ],
@@ -1001,15 +836,6 @@ class _RecordReferralDetailsPageState
           Validators.required,
         ],
       ),
-      _beneficiaryIdKey: FormControl<String>(
-        value: referralState.mapOrNull(
-          create: (value) => value.hfReferralModel?.beneficiaryId,
-        ),
-        disabled: referralState.mapOrNull(
-              create: (value) => value.viewOnly,
-            ) ??
-            false,
-      ),
       _referralCodeKey: FormControl<String>(
         value: referralState.mapOrNull(
           create: (value) =>
@@ -1019,42 +845,6 @@ class _RecordReferralDetailsPageState
               create: (value) => value.viewOnly,
             ) ??
             false,
-      ),
-      _genderKey: FormControl<String>(
-        value: referralState.mapOrNull(
-          create: (value) => value.viewOnly
-              ? value.hfReferralModel?.additionalFields?.fields
-                  .where((e) => e.key == AdditionalFieldsType.gender.toValue())
-                  .first
-                  .value
-              : null,
-        ),
-        disabled: referralState.mapOrNull(
-              create: (value) => value.viewOnly,
-            ) ??
-            false,
-      ),
-      _ageKey: FormControl<int>(
-        value: referralState.mapOrNull(
-          create: (value) => value.viewOnly
-              ? value.hfReferralModel?.additionalFields?.fields
-                  .where((e) => e.key == AdditionalFieldsType.age.toValue())
-                  .first
-                  .value
-              : null,
-        ),
-        disabled: referralState.mapOrNull(
-              create: (value) => value.viewOnly,
-            ) ??
-            false,
-        validators: (context.selectedProjectType?.validMaxAge != null)
-            ? [
-                Validators.required,
-                Validators.max<int>(
-                  context.selectedProjectType?.validMaxAge ?? 60,
-                ),
-              ]
-            : [Validators.required],
       ),
       _referralReason: FormControl<KeyValue>(
         value: referralState.mapOrNull(
