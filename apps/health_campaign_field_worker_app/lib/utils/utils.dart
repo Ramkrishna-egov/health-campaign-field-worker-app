@@ -283,6 +283,11 @@ bool checkEligibilityForAgeAndSideEffect(
   List<SideEffectModel>? sideEffects,
 ) {
   int totalAgeMonths = age.years * 12 + age.months;
+  bool skipAge = [
+    Status.administeredFailed.toValue(),
+    Status.administeredSuccess.toValue(),
+    Status.delivered.toValue(),
+  ].contains(tasks?.status);
   final currentCycle = projectType?.cycles?.firstWhereOrNull(
     (e) =>
         (e.startDate!) < DateTime.now().millisecondsSinceEpoch &&
@@ -304,16 +309,18 @@ bool checkEligibilityForAgeAndSideEffect(
 
       return projectType?.validMinAge != null &&
               projectType?.validMaxAge != null
-          ? totalAgeMonths >= projectType!.validMinAge! &&
-                  totalAgeMonths <= projectType.validMaxAge!
+          ? skipAge ||
+                  (totalAgeMonths >= projectType!.validMinAge! &&
+                      totalAgeMonths <= projectType.validMaxAge!)
               ? recordedSideEffect && !checkStatus([tasks], currentCycle)
                   ? false
                   : true
               : false
           : false;
     } else {
-      return totalAgeMonths >= projectType!.validMinAge! &&
-              totalAgeMonths <= projectType.validMaxAge!
+      return skipAge ||
+              (totalAgeMonths >= projectType!.validMinAge! &&
+                  totalAgeMonths <= projectType.validMaxAge!)
           ? true
           : false;
     }
@@ -572,7 +579,7 @@ void showDownloadDialog(
             action: (ctx) {
               if (dialogType == DigitProgressDialogType.pendingSync) {
                 Navigator.of(context, rootNavigator: true).pop();
-                context.router.pop();
+                context.router.popUntilRouteWithName(HomeRoute.name);
               } else {
                 if ((model.totalCount ?? 0) > 0) {
                   context.read<BeneficiaryDownSyncBloc>().add(
@@ -601,7 +608,7 @@ void showDownloadDialog(
                     await LocalSecureStore.instance.setManualSyncTrigger(false);
                     if (context.mounted) {
                       Navigator.of(context, rootNavigator: true).pop();
-                      context.router.pop();
+                      context.router.popUntilRouteWithName(HomeRoute.name);
                     }
                   },
                 )

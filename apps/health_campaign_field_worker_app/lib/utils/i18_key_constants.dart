@@ -174,6 +174,9 @@ class Checklist {
 
   String get checklistlabel => 'CHECKLIST_LABEL';
 
+  String get communityDistributorChecklistlabel =>
+      'COMMUNITY_DISTRIBUTOR_CHECKLIST_LABEL';
+
   String get checklistCreateActionLabel => 'CHECKLIST_CREATE_ACTION_LABEL';
 
   String get checklistViewActionLabel => 'CHECKLIST_VIEW_ACTION_LABEL';
@@ -252,6 +255,9 @@ class Home {
 
   String get healthFacilitySupervisorCheckList =>
       'HF_SUPERVISOR_CHECK_LIST_LABEL';
+
+  String get communityDistributorChecklist =>
+      'COMMUNITY_DISTRIBUTOR_CHECK_LIST_LABEL';
   String get deleteAllLabel => 'HOME_DELETE_ALL_LABEL';
   String get db => 'HOME_DB_LABEL';
   String get beneficiaryReferralLabel => 'HOME_BENEFICIARY_REFERRAL_LABEL';
@@ -620,6 +626,11 @@ class DeliverIntervention {
   String get dialogTitle => 'DELIVER_INTERVENTION_DIALOG_TITLE';
 
   String get dialogContent => 'DELIVER_INTERVENTION_DIALOG_CONTENT';
+
+  String get wastedDialogTitle => 'DELIVER_INTERVENTION_WASTED_DIALOG_TITLE';
+
+  String get wastedDialogContent =>
+      'DELIVER_INTERVENTION_WASTED_DIALOG_CONTENT';
 
   String get referDialogTitle => 'DELIVER_INTERVENTION_REFER_DIALOG_TITLE';
 

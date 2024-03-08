@@ -37,8 +37,10 @@ class IndividualLocalRepository extends IndividualLocalBaseRepository {
         ),
       ],
     );
-    final r = await selectQuery.get();
-    print(r.length);
+
+    if (query.limit != null && query.offset != null) {
+      selectQuery.limit(query.limit!, offset: query.offset);
+    }
 
     final results = await (selectQuery
           ..where(
@@ -80,7 +82,13 @@ class IndividualLocalRepository extends IndividualLocalBaseRepository {
                   userId,
                 ),
             ]),
-          ))
+          )
+          ..orderBy([
+            OrderingTerm(
+              expression: sql.individual.clientCreatedTime,
+              mode: OrderingMode.asc,
+            ),
+          ]))
         .get();
 
     return results
