@@ -222,12 +222,12 @@ class HFReferralLocalRepository extends HFReferralLocalBaseRepository {
     bool createOpLog = true,
   }) async {
     final referralCompanion = entity.companion.copyWith(
-      name: entity.additionalFields?.fields
+      name: Value(entity.additionalFields?.fields
           .where(
             (h) => h.key == AdditionalFieldsType.nameOfReferral.toValue(),
           )
           .first
-          .value,
+          .value),
     );
 
     await sql.batch((batch) {
