@@ -5184,6 +5184,7 @@ class RolesTypeMapper extends EnumMapper<RolesType> {
     switch (value) {
       case "COMMUNITY_DISTRIBUTOR": return RolesType.communityDistributor;
       case "HEALTH_FACILITY_SUPERVISOR": return RolesType.healthFacilitySupervisor;
+      case "COMMUNITY_SUPERVISOR": return RolesType.communitySupervisor;
       default: throw MapperException.unknownEnumValue(value);
     }
   }
@@ -5192,6 +5193,7 @@ class RolesTypeMapper extends EnumMapper<RolesType> {
     switch (self) {
       case RolesType.communityDistributor: return "COMMUNITY_DISTRIBUTOR";
       case RolesType.healthFacilitySupervisor: return "HEALTH_FACILITY_SUPERVISOR";
+      case RolesType.communitySupervisor: return "COMMUNITY_SUPERVISOR";
     }
   }
 }
@@ -5391,31 +5393,6 @@ class PgrServiceApplicationStatusMapper extends EnumMapper<PgrServiceApplication
 }
 
 extension PgrServiceApplicationStatusMapperExtension on PgrServiceApplicationStatus {
-  dynamic toValue() => Mapper.toValue(this);
-}
-
-class RolesTypeMapper extends EnumMapper<RolesType> {
-  RolesTypeMapper._();
-
-  @override  RolesType decode(dynamic value) {
-    switch (value) {
-      case "COMMUNITY_DISTRIBUTOR": return RolesType.communityDistributor;
-      case "HEALTH_FACILITY_SUPERVISOR": return RolesType.healthFacilitySupervisor;
-      case "COMMUNITY_SUPERVISOR": return RolesType.communitySupervisor;
-      default: throw MapperException.unknownEnumValue(value);
-    }
-  }
-
-  @override  dynamic encode(RolesType self) {
-    switch (self) {
-      case RolesType.communityDistributor: return "COMMUNITY_DISTRIBUTOR";
-      case RolesType.healthFacilitySupervisor: return "HEALTH_FACILITY_SUPERVISOR";
-      case RolesType.communitySupervisor: return "COMMUNITY_SUPERVISOR";
-    }
-  }
-}
-
-extension RolesTypeMapperExtension on RolesType {
   dynamic toValue() => Mapper.toValue(this);
 }
 
