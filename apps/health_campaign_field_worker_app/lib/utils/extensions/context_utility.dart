@@ -39,6 +39,40 @@ extension ContextUtilityExtensions on BuildContext {
     return selectedCycle;
   }
 
+  ProjectType? get selectedProjectType {
+    final projectBloc = _get<ProjectBloc>();
+
+    final projectState = projectBloc.state;
+    final projectType = projectState.projectType;
+
+    if (selectedCycle == null) {
+      return null;
+    }
+
+    return projectType;
+  }
+
+  List<String> get cycles {
+    final projectBloc = _get<ProjectBloc>();
+
+    final projectState = projectBloc.state;
+
+    if (projectState.projectType?.cycles != null &&
+        (projectState.projectType?.cycles?.length ?? 0) > 0) {
+      List<String> resultList = [];
+
+      for (int i = 1;
+          i <= (projectState.projectType?.cycles?.length ?? 0);
+          i++) {
+        resultList.add('0${i.toString()}');
+      }
+
+      return resultList;
+    } else {
+      return [];
+    }
+  }
+
   BoundaryModel get boundary {
     final boundaryBloc = _get<BoundaryBloc>();
     final boundaryState = boundaryBloc.state;
@@ -88,6 +122,21 @@ extension ContextUtilityExtensions on BuildContext {
             (role) =>
                 role.code == RolesType.communityDistributor.toValue() ||
                 role.code == RolesType.healthFacilitySupervisor.toValue(),
+          )
+          .toList()
+          .isNotEmpty;
+
+      return isDownSyncEnabled;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  bool get isHealthFacilitySupervisor {
+    try {
+      bool isDownSyncEnabled = loggedInUserRoles
+          .where(
+            (role) => role.code == RolesType.healthFacilitySupervisor.toValue(),
           )
           .toList()
           .isNotEmpty;
