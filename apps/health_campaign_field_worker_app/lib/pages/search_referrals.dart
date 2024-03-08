@@ -148,7 +148,7 @@ class _SearchReferralsPageState extends LocalizedState<SearchReferralsPage> {
               },
             ),
             bottomNavigationBar: SizedBox(
-              height: 150,
+              height: 55,
               child: Card(
                 margin: const EdgeInsets.all(0),
                 // padding: const EdgeInsets.fromLTRB(kPadding, 0, kPadding, 0),
