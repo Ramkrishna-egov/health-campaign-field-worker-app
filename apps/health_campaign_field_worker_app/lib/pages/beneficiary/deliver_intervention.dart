@@ -233,6 +233,25 @@ class _DeliverInterventionPageState
                                                               .value)?[0])
                                                           .toString();
 
+                                                  if (wastedCount != 'null' &&
+                                                      wastedCount.isNotEmpty &&
+                                                      int.parse(wastedCount) >
+                                                          2) {
+                                                    await DigitToast.show(
+                                                      context,
+                                                      options:
+                                                          DigitToastOptions(
+                                                        localizations.translate(i18
+                                                            .deliverIntervention
+                                                            .wastedCountValidation),
+                                                        true,
+                                                        theme,
+                                                      ),
+                                                    );
+
+                                                    return;
+                                                  }
+
                                                   final shouldSubmit =
                                                       await DigitDialog.show<
                                                           bool>(

@@ -670,6 +670,8 @@ class DeliverIntervention {
 
   String get resourceDeliveredValidation => 'RESOURCE_DELIVERED_VALIDATION';
 
+  String get wastedCountValidation => 'WASTED_COUNT_VALIDATION';
+
   String get deliveryCommentRequired => 'DELIVERY_COMMENT_REQUIRED';
 
   // [new key added for record past delivery details]
