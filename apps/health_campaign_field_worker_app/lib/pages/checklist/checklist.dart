@@ -9,6 +9,7 @@ import '../../blocs/service/service.dart';
 import '../../blocs/service_definition/service_definition.dart';
 import '../../models/entities/service.dart';
 import '../../router/app_router.dart';
+import '../../utils/extensions/extensions.dart';
 import '../../utils/i18_key_constants.dart' as i18;
 import '../../widgets/action_card/action_card.dart';
 import '../../widgets/header/back_navigation_help_header.dart';
@@ -28,6 +29,9 @@ class _ChecklistPageState extends LocalizedState<ChecklistPage> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final label = context.isDistributor
+        ? i18.checklist.communityDistributorChecklistlabel
+        : i18.checklist.checklistlabel;
 
     return Scaffold(
       body: ScrollableContent(
@@ -53,7 +57,7 @@ class _ChecklistPageState extends LocalizedState<ChecklistPage> {
                         alignment: Alignment.centerLeft,
                         child: Text(
                           localizations.translate(
-                            i18.checklist.checklistlabel,
+                            label,
                           ),
                           style: theme.textTheme.displayMedium,
                         ),

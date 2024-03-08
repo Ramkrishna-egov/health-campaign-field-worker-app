@@ -165,6 +165,9 @@ class Checklist {
 
   String get checklistlabel => 'CHECKLIST_LABEL';
 
+  String get communityDistributorChecklistlabel =>
+      'COMMUNITY_DISTRIBUTOR_CHECKLIST_LABEL';
+
   String get checklistCreateActionLabel => 'CHECKLIST_CREATE_ACTION_LABEL';
 
   String get checklistViewActionLabel => 'CHECKLIST_VIEW_ACTION_LABEL';
@@ -243,6 +246,9 @@ class Home {
 
   String get healthFacilitySupervisorCheckList =>
       'HF_SUPERVISOR_CHECK_LIST_LABEL';
+
+  String get communityDistributorChecklist =>
+      'COMMUNITY_DISTRIBUTOR_CHECK_LIST_LABEL';
 }
 
 class SearchBeneficiary {

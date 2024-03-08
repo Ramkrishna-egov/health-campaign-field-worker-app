@@ -9,46 +9,46 @@ import '../../data/local_store/sql_store/sql_store.dart';
 class IndividualSearchModel extends EntitySearchModel {
   final String? id;
   final String? dateOfBirth;
+  final int? limit;
+  final int? offset;
   final List<String>? clientReferenceId;
   final String? tenantId;
   final NameSearchModel? name;
-  final int? limit;
-  final int? offset;
-
   final Gender? gender;
   final List<IdentifierSearchModel>? identifiers;
-
+  
   IndividualSearchModel({
     this.id,
     this.dateOfBirth,
+    this.limit,
+    this.offset,
     this.clientReferenceId,
     this.tenantId,
     this.name,
     this.gender,
-    this.limit,
-    this.offset,
     this.identifiers,
     super.boundaryCode,
     super.isDeleted,
-  }) : super();
+  }):  super();
 
   @MappableConstructor()
   IndividualSearchModel.ignoreDeleted({
     this.id,
     this.dateOfBirth,
+    this.limit,
+    this.offset,
     this.clientReferenceId,
     this.tenantId,
     this.name,
     this.gender,
-    this.limit,
-    this.offset,
     this.identifiers,
     super.boundaryCode,
-  }) : super(isDeleted: false);
+  }):  super(isDeleted: false);
 }
 
 @MappableClass(ignoreNull: true)
 class IndividualModel extends EntityModel {
+
   static const schemaName = 'Individual';
 
   final String? id;
@@ -91,10 +91,9 @@ class IndividualModel extends EntityModel {
     this.address,
     this.gender,
     this.identifiers,
-    super.auditDetails,
-    super.clientAuditDetails,
+    super.auditDetails,super.clientAuditDetails,
     super.isDeleted = false,
-  }) : super();
+  }): super();
 
   IndividualCompanion get companion {
     return IndividualCompanion(
@@ -123,7 +122,7 @@ class IndividualModel extends EntityModel {
       rowVersion: Value(rowVersion),
       bloodGroup: Value(bloodGroup),
       gender: Value(gender),
-    );
+      );
   }
 }
 
