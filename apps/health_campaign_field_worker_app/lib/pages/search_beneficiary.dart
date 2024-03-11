@@ -171,6 +171,9 @@ class _SearchBeneficiaryPageState
                                                 limit = limit;
                                               });
                                               bloc.add(
+                                                const SearchHouseholdsClearEvent(),
+                                              );
+                                              bloc.add(
                                                 SearchHouseholdsSearchByHouseholdHeadEvent(
                                                   searchText: value.trim(),
                                                   projectId: context.projectId,
