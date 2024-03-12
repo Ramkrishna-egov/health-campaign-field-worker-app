@@ -8,22 +8,13 @@ import 'lib/models.dart';
 void run(HookContext context) async {
   final variables = context.vars;
 
-  ConfigModel model = Mapper.fromMap<ConfigModel>(variables);
+  ConfigModel model = ConfigModelMapper.fromMap(variables);
   if (!model.createRepository) {
-    var path = p.join(
+    final path = p.join(
       'data',
       'repositories',
       'remote',
       '${model.name.snakeCase}.dart',
-    );
-    await _deleteFile(path);
-
-    path = p.join(
-      'data',
-      'repositories',
-      'local',
-      'base',
-      '${model.name.snakeCase}_base.dart',
     );
     await _deleteFile(path);
   }
