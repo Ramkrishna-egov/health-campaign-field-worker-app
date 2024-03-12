@@ -6,24 +6,24 @@ part of 'attendee_search_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AttendanceSearchIndividualModel _$$_AttendanceSearchIndividualModelFromJson(
-        Map<String, dynamic> json) =>
-    _$_AttendanceSearchIndividualModel(
-      attendeeIndividuals: (json['attendance'] as List<dynamic>?)
-          ?.map((e) =>
-              AttendeeIndividualModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
+_$AttendanceSearchIndividualModelImpl
+    _$$AttendanceSearchIndividualModelImplFromJson(Map<String, dynamic> json) =>
+        _$AttendanceSearchIndividualModelImpl(
+          attendeeIndividuals: (json['attendance'] as List<dynamic>?)
+              ?.map((e) =>
+                  AttendeeIndividualModel.fromJson(e as Map<String, dynamic>))
+              .toList(),
+        );
 
-Map<String, dynamic> _$$_AttendanceSearchIndividualModelToJson(
-        _$_AttendanceSearchIndividualModel instance) =>
+Map<String, dynamic> _$$AttendanceSearchIndividualModelImplToJson(
+        _$AttendanceSearchIndividualModelImpl instance) =>
     <String, dynamic>{
       'attendance': instance.attendeeIndividuals,
     };
 
-_$_AttendeeIndividualModel _$$_AttendeeIndividualModelFromJson(
+_$AttendeeIndividualModelImpl _$$AttendeeIndividualModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_AttendeeIndividualModel(
+    _$AttendeeIndividualModelImpl(
       id: json['id'] as String?,
       registerId: json['registerId'] as String?,
       individualId: json['individualId'] as String?,
@@ -33,8 +33,8 @@ _$_AttendeeIndividualModel _$$_AttendeeIndividualModelFromJson(
       status: json['status'] as String?,
     );
 
-Map<String, dynamic> _$$_AttendeeIndividualModelToJson(
-        _$_AttendeeIndividualModel instance) =>
+Map<String, dynamic> _$$AttendeeIndividualModelImplToJson(
+        _$AttendeeIndividualModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'registerId': instance.registerId,

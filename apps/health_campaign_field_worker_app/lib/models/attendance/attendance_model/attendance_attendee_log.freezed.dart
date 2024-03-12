@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'attendance_attendee_log.dart';
 
@@ -12,7 +12,7 @@ part of 'attendance_attendee_log.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 AttendeeAttendanceResponseLog _$AttendeeAttendanceResponseLogFromJson(
     Map<String, dynamic> json) {
@@ -109,12 +109,12 @@ class _$AttendeeAttendanceResponseLogCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_AttendeeAttendanceResponseLogCopyWith<$Res>
+abstract class _$$AttendeeAttendanceResponseLogImplCopyWith<$Res>
     implements $AttendeeAttendanceResponseLogCopyWith<$Res> {
-  factory _$$_AttendeeAttendanceResponseLogCopyWith(
-          _$_AttendeeAttendanceResponseLog value,
-          $Res Function(_$_AttendeeAttendanceResponseLog) then) =
-      __$$_AttendeeAttendanceResponseLogCopyWithImpl<$Res>;
+  factory _$$AttendeeAttendanceResponseLogImplCopyWith(
+          _$AttendeeAttendanceResponseLogImpl value,
+          $Res Function(_$AttendeeAttendanceResponseLogImpl) then) =
+      __$$AttendeeAttendanceResponseLogImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -128,13 +128,13 @@ abstract class _$$_AttendeeAttendanceResponseLogCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AttendeeAttendanceResponseLogCopyWithImpl<$Res>
+class __$$AttendeeAttendanceResponseLogImplCopyWithImpl<$Res>
     extends _$AttendeeAttendanceResponseLogCopyWithImpl<$Res,
-        _$_AttendeeAttendanceResponseLog>
-    implements _$$_AttendeeAttendanceResponseLogCopyWith<$Res> {
-  __$$_AttendeeAttendanceResponseLogCopyWithImpl(
-      _$_AttendeeAttendanceResponseLog _value,
-      $Res Function(_$_AttendeeAttendanceResponseLog) _then)
+        _$AttendeeAttendanceResponseLogImpl>
+    implements _$$AttendeeAttendanceResponseLogImplCopyWith<$Res> {
+  __$$AttendeeAttendanceResponseLogImplCopyWithImpl(
+      _$AttendeeAttendanceResponseLogImpl _value,
+      $Res Function(_$AttendeeAttendanceResponseLogImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -148,7 +148,7 @@ class __$$_AttendeeAttendanceResponseLogCopyWithImpl<$Res>
     Object? type = freezed,
     Object? status = null,
   }) {
-    return _then(_$_AttendeeAttendanceResponseLog(
+    return _then(_$AttendeeAttendanceResponseLogImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -183,9 +183,9 @@ class __$$_AttendeeAttendanceResponseLogCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AttendeeAttendanceResponseLog
+class _$AttendeeAttendanceResponseLogImpl
     implements _AttendeeAttendanceResponseLog {
-  const _$_AttendeeAttendanceResponseLog(
+  const _$AttendeeAttendanceResponseLogImpl(
       {this.id,
       this.registerId,
       this.individualId,
@@ -194,9 +194,9 @@ class _$_AttendeeAttendanceResponseLog
       this.type,
       this.status = "INACTIVE"});
 
-  factory _$_AttendeeAttendanceResponseLog.fromJson(
+  factory _$AttendeeAttendanceResponseLogImpl.fromJson(
           Map<String, dynamic> json) =>
-      _$$_AttendeeAttendanceResponseLogFromJson(json);
+      _$$AttendeeAttendanceResponseLogImplFromJson(json);
 
   @override
   final String? id;
@@ -221,10 +221,10 @@ class _$_AttendeeAttendanceResponseLog
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AttendeeAttendanceResponseLog &&
+            other is _$AttendeeAttendanceResponseLogImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.registerId, registerId) ||
                 other.registerId == registerId) &&
@@ -245,13 +245,14 @@ class _$_AttendeeAttendanceResponseLog
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AttendeeAttendanceResponseLogCopyWith<_$_AttendeeAttendanceResponseLog>
-      get copyWith => __$$_AttendeeAttendanceResponseLogCopyWithImpl<
-          _$_AttendeeAttendanceResponseLog>(this, _$identity);
+  _$$AttendeeAttendanceResponseLogImplCopyWith<
+          _$AttendeeAttendanceResponseLogImpl>
+      get copyWith => __$$AttendeeAttendanceResponseLogImplCopyWithImpl<
+          _$AttendeeAttendanceResponseLogImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AttendeeAttendanceResponseLogToJson(
+    return _$$AttendeeAttendanceResponseLogImplToJson(
       this,
     );
   }
@@ -266,10 +267,10 @@ abstract class _AttendeeAttendanceResponseLog
       final String? tenantId,
       final int time,
       final String? type,
-      final String status}) = _$_AttendeeAttendanceResponseLog;
+      final String status}) = _$AttendeeAttendanceResponseLogImpl;
 
   factory _AttendeeAttendanceResponseLog.fromJson(Map<String, dynamic> json) =
-      _$_AttendeeAttendanceResponseLog.fromJson;
+      _$AttendeeAttendanceResponseLogImpl.fromJson;
 
   @override
   String? get id;
@@ -287,6 +288,7 @@ abstract class _AttendeeAttendanceResponseLog
   String get status;
   @override
   @JsonKey(ignore: true)
-  _$$_AttendeeAttendanceResponseLogCopyWith<_$_AttendeeAttendanceResponseLog>
+  _$$AttendeeAttendanceResponseLogImplCopyWith<
+          _$AttendeeAttendanceResponseLogImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

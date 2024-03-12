@@ -5,10 +5,11 @@ import 'package:drift/drift.dart';
 import '../data_model.dart';
 import '../../data/local_store/sql_store/sql_store.dart';
 
-@MappableClass(ignoreNull: true)
-class FacilitySearchModel extends EntitySearchModel {
+part 'facility.mapper.dart';
+
+@MappableClass(ignoreNull: true, discriminatorValue: MappableClass.useAsDefault)
+class FacilitySearchModel extends EntitySearchModel with FacilitySearchModelMappable {
   final List<String>? id;
-  final String? name;
   final bool? isPermanent;
   final String? usage;
   final int? storageCapacity;
@@ -16,7 +17,6 @@ class FacilitySearchModel extends EntitySearchModel {
   
   FacilitySearchModel({
     this.id,
-    this.name,
     this.isPermanent,
     this.usage,
     this.storageCapacity,
@@ -28,24 +28,20 @@ class FacilitySearchModel extends EntitySearchModel {
   @MappableConstructor()
   FacilitySearchModel.ignoreDeleted({
     this.id,
-    this.name,
     this.isPermanent,
     this.usage,
     this.storageCapacity,
     this.tenantId,
     super.boundaryCode,
-    super.additionalFields,
-    super.auditDetails,
   }):  super(isDeleted: false);
 }
 
-@MappableClass(ignoreNull: true)
-class FacilityModel extends EntityModel {
+@MappableClass(ignoreNull: true, discriminatorValue: MappableClass.useAsDefault)
+class FacilityModel extends EntityModel with FacilityModelMappable {
 
   static const schemaName = 'Facility';
 
   final String id;
-  final String? name;
   final bool? isPermanent;
   final String? usage;
   final int? storageCapacity;
@@ -58,7 +54,6 @@ class FacilityModel extends EntityModel {
   FacilityModel({
     this.additionalFields,
     required this.id,
-    this.name,
     this.isPermanent,
     this.usage,
     this.storageCapacity,
@@ -83,7 +78,6 @@ class FacilityModel extends EntityModel {
       additionalFields: Value(additionalFields?.toJson()),
       isDeleted: Value(isDeleted),
       id: Value(id),
-      name: Value(name),
       isPermanent: Value(isPermanent),
       usage: Value(usage),
       storageCapacity: Value(storageCapacity),
@@ -94,11 +88,12 @@ class FacilityModel extends EntityModel {
   }
 }
 
-@MappableClass(ignoreNull: true)
-class FacilityAdditionalFields extends AdditionalFields {
+@MappableClass(ignoreNull: true, discriminatorValue: MappableClass.useAsDefault)
+class FacilityAdditionalFields extends AdditionalFields with FacilityAdditionalFieldsMappable {
   FacilityAdditionalFields({
     super.schema = 'Facility',
     required super.version,
     super.fields,
   });
 }
+

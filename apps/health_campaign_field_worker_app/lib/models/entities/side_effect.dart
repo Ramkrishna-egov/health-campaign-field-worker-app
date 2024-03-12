@@ -5,8 +5,10 @@ import 'package:drift/drift.dart';
 import '../data_model.dart';
 import '../../data/local_store/sql_store/sql_store.dart';
 
-@MappableClass(ignoreNull: true)
-class SideEffectSearchModel extends EntitySearchModel {
+part 'side_effect.mapper.dart';
+
+@MappableClass(ignoreNull: true, discriminatorValue: MappableClass.useAsDefault)
+class SideEffectSearchModel extends EntitySearchModel with SideEffectSearchModelMappable {
   final String? id;
   final List<String>? taskClientReferenceId;
   final String? projectId;
@@ -37,13 +39,11 @@ class SideEffectSearchModel extends EntitySearchModel {
     this.clientReferenceId,
     this.tenantId,
     super.boundaryCode,
-        super.additionalFields,
-    super.auditDetails,
   }):  super(isDeleted: false);
 }
 
-@MappableClass(ignoreNull: true)
-class SideEffectModel extends EntityModel {
+@MappableClass(ignoreNull: true, discriminatorValue: MappableClass.useAsDefault)
+class SideEffectModel extends EntityModel with SideEffectModelMappable {
 
   static const schemaName = 'SideEffect';
 
@@ -98,11 +98,12 @@ class SideEffectModel extends EntityModel {
   }
 }
 
-@MappableClass(ignoreNull: true)
-class SideEffectAdditionalFields extends AdditionalFields {
+@MappableClass(ignoreNull: true, discriminatorValue: MappableClass.useAsDefault)
+class SideEffectAdditionalFields extends AdditionalFields with SideEffectAdditionalFieldsMappable {
   SideEffectAdditionalFields({
     super.schema = 'SideEffect',
     required super.version,
     super.fields,
   });
 }
+

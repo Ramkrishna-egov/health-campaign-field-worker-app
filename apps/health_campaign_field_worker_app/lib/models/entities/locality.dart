@@ -5,8 +5,10 @@ import 'package:drift/drift.dart';
 import '../data_model.dart';
 import '../../data/local_store/sql_store/sql_store.dart';
 
-@MappableClass(ignoreNull: true)
-class LocalitySearchModel extends EntitySearchModel {
+part 'locality.mapper.dart';
+
+@MappableClass(ignoreNull: true, discriminatorValue: MappableClass.useAsDefault)
+class LocalitySearchModel extends EntitySearchModel with LocalitySearchModelMappable {
   final String? code;
   final String? name;
   final String? tenantId;
@@ -25,13 +27,11 @@ class LocalitySearchModel extends EntitySearchModel {
     this.name,
     this.tenantId,
     super.boundaryCode,
-        super.additionalFields,
-    super.auditDetails,
   }):  super(isDeleted: false);
 }
 
-@MappableClass(ignoreNull: true)
-class LocalityModel extends EntityModel {
+@MappableClass(ignoreNull: true, discriminatorValue: MappableClass.useAsDefault)
+class LocalityModel extends EntityModel with LocalityModelMappable {
 
   static const schemaName = 'Locality';
 
@@ -74,11 +74,12 @@ class LocalityModel extends EntityModel {
   }
 }
 
-@MappableClass(ignoreNull: true)
-class LocalityAdditionalFields extends AdditionalFields {
+@MappableClass(ignoreNull: true, discriminatorValue: MappableClass.useAsDefault)
+class LocalityAdditionalFields extends AdditionalFields with LocalityAdditionalFieldsMappable {
   LocalityAdditionalFields({
     super.schema = 'Locality',
     required super.version,
     super.fields,
   });
 }
+

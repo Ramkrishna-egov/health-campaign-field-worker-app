@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'attendance_collection_attendee.dart';
 
@@ -12,7 +12,7 @@ part of 'attendance_collection_attendee.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 AttendeeCollectionModel _$AttendeeCollectionModelFromJson(
     Map<String, dynamic> json) {
@@ -156,11 +156,12 @@ class _$AttendeeCollectionModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_AttendeeCollectionModelCopyWith<$Res>
+abstract class _$$AttendeeCollectionModelImplCopyWith<$Res>
     implements $AttendeeCollectionModelCopyWith<$Res> {
-  factory _$$_AttendeeCollectionModelCopyWith(_$_AttendeeCollectionModel value,
-          $Res Function(_$_AttendeeCollectionModel) then) =
-      __$$_AttendeeCollectionModelCopyWithImpl<$Res>;
+  factory _$$AttendeeCollectionModelImplCopyWith(
+          _$AttendeeCollectionModelImpl value,
+          $Res Function(_$AttendeeCollectionModelImpl) then) =
+      __$$AttendeeCollectionModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -181,12 +182,13 @@ abstract class _$$_AttendeeCollectionModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AttendeeCollectionModelCopyWithImpl<$Res>
+class __$$AttendeeCollectionModelImplCopyWithImpl<$Res>
     extends _$AttendeeCollectionModelCopyWithImpl<$Res,
-        _$_AttendeeCollectionModel>
-    implements _$$_AttendeeCollectionModelCopyWith<$Res> {
-  __$$_AttendeeCollectionModelCopyWithImpl(_$_AttendeeCollectionModel _value,
-      $Res Function(_$_AttendeeCollectionModel) _then)
+        _$AttendeeCollectionModelImpl>
+    implements _$$AttendeeCollectionModelImplCopyWith<$Res> {
+  __$$AttendeeCollectionModelImplCopyWithImpl(
+      _$AttendeeCollectionModelImpl _value,
+      $Res Function(_$AttendeeCollectionModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -207,7 +209,7 @@ class __$$_AttendeeCollectionModelCopyWithImpl<$Res>
     Object? status = null,
     Object? uploadToServer = null,
   }) {
-    return _then(_$_AttendeeCollectionModel(
+    return _then(_$AttendeeCollectionModelImpl(
       userName: freezed == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
@@ -270,8 +272,8 @@ class __$$_AttendeeCollectionModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AttendeeCollectionModel implements _AttendeeCollectionModel {
-  _$_AttendeeCollectionModel(
+class _$AttendeeCollectionModelImpl implements _AttendeeCollectionModel {
+  _$AttendeeCollectionModelImpl(
       {this.userName,
       this.name,
       this.lastName,
@@ -287,8 +289,8 @@ class _$_AttendeeCollectionModel implements _AttendeeCollectionModel {
       this.status = -1,
       required this.uploadToServer});
 
-  factory _$_AttendeeCollectionModel.fromJson(Map<String, dynamic> json) =>
-      _$$_AttendeeCollectionModelFromJson(json);
+  factory _$AttendeeCollectionModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AttendeeCollectionModelImplFromJson(json);
 
   @override
   final String? userName;
@@ -330,10 +332,10 @@ class _$_AttendeeCollectionModel implements _AttendeeCollectionModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AttendeeCollectionModel &&
+            other is _$AttendeeCollectionModelImpl &&
             (identical(other.userName, userName) ||
                 other.userName == userName) &&
             (identical(other.name, name) || other.name == name) &&
@@ -382,14 +384,13 @@ class _$_AttendeeCollectionModel implements _AttendeeCollectionModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AttendeeCollectionModelCopyWith<_$_AttendeeCollectionModel>
-      get copyWith =>
-          __$$_AttendeeCollectionModelCopyWithImpl<_$_AttendeeCollectionModel>(
-              this, _$identity);
+  _$$AttendeeCollectionModelImplCopyWith<_$AttendeeCollectionModelImpl>
+      get copyWith => __$$AttendeeCollectionModelImplCopyWithImpl<
+          _$AttendeeCollectionModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AttendeeCollectionModelToJson(
+    return _$$AttendeeCollectionModelImplToJson(
       this,
     );
   }
@@ -410,10 +411,10 @@ abstract class _AttendeeCollectionModel implements AttendeeCollectionModel {
       final int eventEndDate,
       final String? type,
       final int status,
-      required final bool uploadToServer}) = _$_AttendeeCollectionModel;
+      required final bool uploadToServer}) = _$AttendeeCollectionModelImpl;
 
   factory _AttendeeCollectionModel.fromJson(Map<String, dynamic> json) =
-      _$_AttendeeCollectionModel.fromJson;
+      _$AttendeeCollectionModelImpl.fromJson;
 
   @override
   String? get userName;
@@ -445,6 +446,6 @@ abstract class _AttendeeCollectionModel implements AttendeeCollectionModel {
   bool get uploadToServer;
   @override
   @JsonKey(ignore: true)
-  _$$_AttendeeCollectionModelCopyWith<_$_AttendeeCollectionModel>
+  _$$AttendeeCollectionModelImplCopyWith<_$AttendeeCollectionModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

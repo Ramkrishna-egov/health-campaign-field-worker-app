@@ -6,24 +6,24 @@ part of 'attendee_indv_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AttendanceMarkIndividualModel _$$_AttendanceMarkIndividualModelFromJson(
-        Map<String, dynamic> json) =>
-    _$_AttendanceMarkIndividualModel(
-      attendanceRegister: (json['Individual'] as List<dynamic>?)
-          ?.map((e) =>
-              AttendanceMarkIndividual.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
+_$AttendanceMarkIndividualModelImpl
+    _$$AttendanceMarkIndividualModelImplFromJson(Map<String, dynamic> json) =>
+        _$AttendanceMarkIndividualModelImpl(
+          attendanceRegister: (json['Individual'] as List<dynamic>?)
+              ?.map((e) =>
+                  AttendanceMarkIndividual.fromJson(e as Map<String, dynamic>))
+              .toList(),
+        );
 
-Map<String, dynamic> _$$_AttendanceMarkIndividualModelToJson(
-        _$_AttendanceMarkIndividualModel instance) =>
+Map<String, dynamic> _$$AttendanceMarkIndividualModelImplToJson(
+        _$AttendanceMarkIndividualModelImpl instance) =>
     <String, dynamic>{
       'Individual': instance.attendanceRegister,
     };
 
-_$_AttendanceMarkIndividual _$$_AttendanceMarkIndividualFromJson(
+_$AttendanceMarkIndividualImpl _$$AttendanceMarkIndividualImplFromJson(
         Map<String, dynamic> json) =>
-    _$_AttendanceMarkIndividual(
+    _$AttendanceMarkIndividualImpl(
       id: json['id'] as String?,
       individualId: json['individualId'] as String?,
       tenantId: json['tenantId'] as String?,
@@ -36,8 +36,8 @@ _$_AttendanceMarkIndividual _$$_AttendanceMarkIndividualFromJson(
           : UserDetails.fromJson(json['userDetails'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_AttendanceMarkIndividualToJson(
-        _$_AttendanceMarkIndividual instance) =>
+Map<String, dynamic> _$$AttendanceMarkIndividualImplToJson(
+        _$AttendanceMarkIndividualImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'individualId': instance.individualId,
@@ -47,21 +47,22 @@ Map<String, dynamic> _$$_AttendanceMarkIndividualToJson(
       'userDetails': instance.userDetails,
     };
 
-_$_NameData _$$_NameDataFromJson(Map<String, dynamic> json) => _$_NameData(
+_$NameDataImpl _$$NameDataImplFromJson(Map<String, dynamic> json) =>
+    _$NameDataImpl(
       givenName: json['givenName'] as String?,
       familyName: json['familyName'] as String?,
       otherNames: json['otherNames'] as String?,
     );
 
-Map<String, dynamic> _$$_NameDataToJson(_$_NameData instance) =>
+Map<String, dynamic> _$$NameDataImplToJson(_$NameDataImpl instance) =>
     <String, dynamic>{
       'givenName': instance.givenName,
       'familyName': instance.familyName,
       'otherNames': instance.otherNames,
     };
 
-_$_UserDetails _$$_UserDetailsFromJson(Map<String, dynamic> json) =>
-    _$_UserDetails(
+_$UserDetailsImpl _$$UserDetailsImplFromJson(Map<String, dynamic> json) =>
+    _$UserDetailsImpl(
       username: json['username'] as String?,
       tenantId: json['tenantId'] as String?,
       type: json['type'] as String?,
@@ -70,7 +71,7 @@ _$_UserDetails _$$_UserDetailsFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$$_UserDetailsToJson(_$_UserDetails instance) =>
+Map<String, dynamic> _$$UserDetailsImplToJson(_$UserDetailsImpl instance) =>
     <String, dynamic>{
       'username': instance.username,
       'tenantId': instance.tenantId,
@@ -78,13 +79,14 @@ Map<String, dynamic> _$$_UserDetailsToJson(_$_UserDetails instance) =>
       'roles': instance.role,
     };
 
-_$_Role _$$_RoleFromJson(Map<String, dynamic> json) => _$_Role(
+_$RoleImpl _$$RoleImplFromJson(Map<String, dynamic> json) => _$RoleImpl(
       name: json['name'] as String?,
       code: json['code'] as String?,
       description: json['description'] as String?,
     );
 
-Map<String, dynamic> _$$_RoleToJson(_$_Role instance) => <String, dynamic>{
+Map<String, dynamic> _$$RoleImplToJson(_$RoleImpl instance) =>
+    <String, dynamic>{
       'name': instance.name,
       'code': instance.code,
       'description': instance.description,

@@ -6,9 +6,9 @@ part of 'attendance_collection_attendee.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AttendeeCollectionModel _$$_AttendeeCollectionModelFromJson(
+_$AttendeeCollectionModelImpl _$$AttendeeCollectionModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_AttendeeCollectionModel(
+    _$AttendeeCollectionModelImpl(
       userName: json['userName'] as String?,
       name: json['name'] as String?,
       lastName: json['lastName'] as String?,
@@ -25,8 +25,8 @@ _$_AttendeeCollectionModel _$$_AttendeeCollectionModelFromJson(
       uploadToServer: json['uploadToServer'] as bool,
     );
 
-Map<String, dynamic> _$$_AttendeeCollectionModelToJson(
-        _$_AttendeeCollectionModel instance) =>
+Map<String, dynamic> _$$AttendeeCollectionModelImplToJson(
+        _$AttendeeCollectionModelImpl instance) =>
     <String, dynamic>{
       'userName': instance.userName,
       'name': instance.name,

@@ -6,9 +6,9 @@ part of 'attendance_row_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AttendanceRowModel _$$_AttendanceRowModelFromJson(
+_$AttendanceRowModelImpl _$$AttendanceRowModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_AttendanceRowModel(
+    _$AttendanceRowModelImpl(
       name: json['name'] as String?,
       individualId: json['individualId'] as String?,
       entryDate: json['entryDate'] as int?,
@@ -17,8 +17,8 @@ _$_AttendanceRowModel _$$_AttendanceRowModelFromJson(
       status: json['status'] as int? ?? -1,
     );
 
-Map<String, dynamic> _$$_AttendanceRowModelToJson(
-        _$_AttendanceRowModel instance) =>
+Map<String, dynamic> _$$AttendanceRowModelImplToJson(
+        _$AttendanceRowModelImpl instance) =>
     <String, dynamic>{
       'name': instance.name,
       'individualId': instance.individualId,

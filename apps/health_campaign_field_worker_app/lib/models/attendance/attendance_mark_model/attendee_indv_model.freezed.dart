@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'attendee_indv_model.dart';
 
@@ -12,7 +12,7 @@ part of 'attendee_indv_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 AttendanceMarkIndividualModel _$AttendanceMarkIndividualModelFromJson(
     Map<String, dynamic> json) {
@@ -41,7 +41,7 @@ abstract class $AttendanceMarkIndividualModelCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'Individual')
-          List<AttendanceMarkIndividual>? attendanceRegister});
+      List<AttendanceMarkIndividual>? attendanceRegister});
 }
 
 /// @nodoc
@@ -70,27 +70,27 @@ class _$AttendanceMarkIndividualModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_AttendanceMarkIndividualModelCopyWith<$Res>
+abstract class _$$AttendanceMarkIndividualModelImplCopyWith<$Res>
     implements $AttendanceMarkIndividualModelCopyWith<$Res> {
-  factory _$$_AttendanceMarkIndividualModelCopyWith(
-          _$_AttendanceMarkIndividualModel value,
-          $Res Function(_$_AttendanceMarkIndividualModel) then) =
-      __$$_AttendanceMarkIndividualModelCopyWithImpl<$Res>;
+  factory _$$AttendanceMarkIndividualModelImplCopyWith(
+          _$AttendanceMarkIndividualModelImpl value,
+          $Res Function(_$AttendanceMarkIndividualModelImpl) then) =
+      __$$AttendanceMarkIndividualModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {@JsonKey(name: 'Individual')
-          List<AttendanceMarkIndividual>? attendanceRegister});
+      List<AttendanceMarkIndividual>? attendanceRegister});
 }
 
 /// @nodoc
-class __$$_AttendanceMarkIndividualModelCopyWithImpl<$Res>
+class __$$AttendanceMarkIndividualModelImplCopyWithImpl<$Res>
     extends _$AttendanceMarkIndividualModelCopyWithImpl<$Res,
-        _$_AttendanceMarkIndividualModel>
-    implements _$$_AttendanceMarkIndividualModelCopyWith<$Res> {
-  __$$_AttendanceMarkIndividualModelCopyWithImpl(
-      _$_AttendanceMarkIndividualModel _value,
-      $Res Function(_$_AttendanceMarkIndividualModel) _then)
+        _$AttendanceMarkIndividualModelImpl>
+    implements _$$AttendanceMarkIndividualModelImplCopyWith<$Res> {
+  __$$AttendanceMarkIndividualModelImplCopyWithImpl(
+      _$AttendanceMarkIndividualModelImpl _value,
+      $Res Function(_$AttendanceMarkIndividualModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -98,7 +98,7 @@ class __$$_AttendanceMarkIndividualModelCopyWithImpl<$Res>
   $Res call({
     Object? attendanceRegister = freezed,
   }) {
-    return _then(_$_AttendanceMarkIndividualModel(
+    return _then(_$AttendanceMarkIndividualModelImpl(
       attendanceRegister: freezed == attendanceRegister
           ? _value._attendanceRegister
           : attendanceRegister // ignore: cast_nullable_to_non_nullable
@@ -109,16 +109,16 @@ class __$$_AttendanceMarkIndividualModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AttendanceMarkIndividualModel
+class _$AttendanceMarkIndividualModelImpl
     implements _AttendanceMarkIndividualModel {
-  _$_AttendanceMarkIndividualModel(
+  _$AttendanceMarkIndividualModelImpl(
       {@JsonKey(name: 'Individual')
-          final List<AttendanceMarkIndividual>? attendanceRegister})
+      final List<AttendanceMarkIndividual>? attendanceRegister})
       : _attendanceRegister = attendanceRegister;
 
-  factory _$_AttendanceMarkIndividualModel.fromJson(
+  factory _$AttendanceMarkIndividualModelImpl.fromJson(
           Map<String, dynamic> json) =>
-      _$$_AttendanceMarkIndividualModelFromJson(json);
+      _$$AttendanceMarkIndividualModelImplFromJson(json);
 
   final List<AttendanceMarkIndividual>? _attendanceRegister;
   @override
@@ -126,6 +126,8 @@ class _$_AttendanceMarkIndividualModel
   List<AttendanceMarkIndividual>? get attendanceRegister {
     final value = _attendanceRegister;
     if (value == null) return null;
+    if (_attendanceRegister is EqualUnmodifiableListView)
+      return _attendanceRegister;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -136,10 +138,10 @@ class _$_AttendanceMarkIndividualModel
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AttendanceMarkIndividualModel &&
+            other is _$AttendanceMarkIndividualModelImpl &&
             const DeepCollectionEquality()
                 .equals(other._attendanceRegister, _attendanceRegister));
   }
@@ -152,13 +154,14 @@ class _$_AttendanceMarkIndividualModel
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AttendanceMarkIndividualModelCopyWith<_$_AttendanceMarkIndividualModel>
-      get copyWith => __$$_AttendanceMarkIndividualModelCopyWithImpl<
-          _$_AttendanceMarkIndividualModel>(this, _$identity);
+  _$$AttendanceMarkIndividualModelImplCopyWith<
+          _$AttendanceMarkIndividualModelImpl>
+      get copyWith => __$$AttendanceMarkIndividualModelImplCopyWithImpl<
+          _$AttendanceMarkIndividualModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AttendanceMarkIndividualModelToJson(
+    return _$$AttendanceMarkIndividualModelImplToJson(
       this,
     );
   }
@@ -168,18 +171,19 @@ abstract class _AttendanceMarkIndividualModel
     implements AttendanceMarkIndividualModel {
   factory _AttendanceMarkIndividualModel(
           {@JsonKey(name: 'Individual')
-              final List<AttendanceMarkIndividual>? attendanceRegister}) =
-      _$_AttendanceMarkIndividualModel;
+          final List<AttendanceMarkIndividual>? attendanceRegister}) =
+      _$AttendanceMarkIndividualModelImpl;
 
   factory _AttendanceMarkIndividualModel.fromJson(Map<String, dynamic> json) =
-      _$_AttendanceMarkIndividualModel.fromJson;
+      _$AttendanceMarkIndividualModelImpl.fromJson;
 
   @override
   @JsonKey(name: 'Individual')
   List<AttendanceMarkIndividual>? get attendanceRegister;
   @override
   @JsonKey(ignore: true)
-  _$$_AttendanceMarkIndividualModelCopyWith<_$_AttendanceMarkIndividualModel>
+  _$$AttendanceMarkIndividualModelImplCopyWith<
+          _$AttendanceMarkIndividualModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -298,12 +302,12 @@ class _$AttendanceMarkIndividualCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_AttendanceMarkIndividualCopyWith<$Res>
+abstract class _$$AttendanceMarkIndividualImplCopyWith<$Res>
     implements $AttendanceMarkIndividualCopyWith<$Res> {
-  factory _$$_AttendanceMarkIndividualCopyWith(
-          _$_AttendanceMarkIndividual value,
-          $Res Function(_$_AttendanceMarkIndividual) then) =
-      __$$_AttendanceMarkIndividualCopyWithImpl<$Res>;
+  factory _$$AttendanceMarkIndividualImplCopyWith(
+          _$AttendanceMarkIndividualImpl value,
+          $Res Function(_$AttendanceMarkIndividualImpl) then) =
+      __$$AttendanceMarkIndividualImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -321,12 +325,13 @@ abstract class _$$_AttendanceMarkIndividualCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AttendanceMarkIndividualCopyWithImpl<$Res>
+class __$$AttendanceMarkIndividualImplCopyWithImpl<$Res>
     extends _$AttendanceMarkIndividualCopyWithImpl<$Res,
-        _$_AttendanceMarkIndividual>
-    implements _$$_AttendanceMarkIndividualCopyWith<$Res> {
-  __$$_AttendanceMarkIndividualCopyWithImpl(_$_AttendanceMarkIndividual _value,
-      $Res Function(_$_AttendanceMarkIndividual) _then)
+        _$AttendanceMarkIndividualImpl>
+    implements _$$AttendanceMarkIndividualImplCopyWith<$Res> {
+  __$$AttendanceMarkIndividualImplCopyWithImpl(
+      _$AttendanceMarkIndividualImpl _value,
+      $Res Function(_$AttendanceMarkIndividualImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -339,7 +344,7 @@ class __$$_AttendanceMarkIndividualCopyWithImpl<$Res>
     Object? name = freezed,
     Object? userDetails = freezed,
   }) {
-    return _then(_$_AttendanceMarkIndividual(
+    return _then(_$AttendanceMarkIndividualImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -370,8 +375,8 @@ class __$$_AttendanceMarkIndividualCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AttendanceMarkIndividual implements _AttendanceMarkIndividual {
-  _$_AttendanceMarkIndividual(
+class _$AttendanceMarkIndividualImpl implements _AttendanceMarkIndividual {
+  _$AttendanceMarkIndividualImpl(
       {this.id,
       this.individualId,
       this.tenantId,
@@ -379,8 +384,8 @@ class _$_AttendanceMarkIndividual implements _AttendanceMarkIndividual {
       @JsonKey(name: 'name') this.name,
       @JsonKey(name: 'userDetails') this.userDetails});
 
-  factory _$_AttendanceMarkIndividual.fromJson(Map<String, dynamic> json) =>
-      _$$_AttendanceMarkIndividualFromJson(json);
+  factory _$AttendanceMarkIndividualImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AttendanceMarkIndividualImplFromJson(json);
 
   @override
   final String? id;
@@ -403,10 +408,10 @@ class _$_AttendanceMarkIndividual implements _AttendanceMarkIndividual {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AttendanceMarkIndividual &&
+            other is _$AttendanceMarkIndividualImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.individualId, individualId) ||
                 other.individualId == individualId) &&
@@ -427,13 +432,13 @@ class _$_AttendanceMarkIndividual implements _AttendanceMarkIndividual {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AttendanceMarkIndividualCopyWith<_$_AttendanceMarkIndividual>
-      get copyWith => __$$_AttendanceMarkIndividualCopyWithImpl<
-          _$_AttendanceMarkIndividual>(this, _$identity);
+  _$$AttendanceMarkIndividualImplCopyWith<_$AttendanceMarkIndividualImpl>
+      get copyWith => __$$AttendanceMarkIndividualImplCopyWithImpl<
+          _$AttendanceMarkIndividualImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AttendanceMarkIndividualToJson(
+    return _$$AttendanceMarkIndividualImplToJson(
       this,
     );
   }
@@ -447,10 +452,10 @@ abstract class _AttendanceMarkIndividual implements AttendanceMarkIndividual {
           final String? clientReferenceId,
           @JsonKey(name: 'name') final NameData? name,
           @JsonKey(name: 'userDetails') final UserDetails? userDetails}) =
-      _$_AttendanceMarkIndividual;
+      _$AttendanceMarkIndividualImpl;
 
   factory _AttendanceMarkIndividual.fromJson(Map<String, dynamic> json) =
-      _$_AttendanceMarkIndividual.fromJson;
+      _$AttendanceMarkIndividualImpl.fromJson;
 
   @override
   String? get id;
@@ -468,7 +473,7 @@ abstract class _AttendanceMarkIndividual implements AttendanceMarkIndividual {
   UserDetails? get userDetails;
   @override
   @JsonKey(ignore: true)
-  _$$_AttendanceMarkIndividualCopyWith<_$_AttendanceMarkIndividual>
+  _$$AttendanceMarkIndividualImplCopyWith<_$AttendanceMarkIndividualImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -531,21 +536,22 @@ class _$NameDataCopyWithImpl<$Res, $Val extends NameData>
 }
 
 /// @nodoc
-abstract class _$$_NameDataCopyWith<$Res> implements $NameDataCopyWith<$Res> {
-  factory _$$_NameDataCopyWith(
-          _$_NameData value, $Res Function(_$_NameData) then) =
-      __$$_NameDataCopyWithImpl<$Res>;
+abstract class _$$NameDataImplCopyWith<$Res>
+    implements $NameDataCopyWith<$Res> {
+  factory _$$NameDataImplCopyWith(
+          _$NameDataImpl value, $Res Function(_$NameDataImpl) then) =
+      __$$NameDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String? givenName, String? familyName, String? otherNames});
 }
 
 /// @nodoc
-class __$$_NameDataCopyWithImpl<$Res>
-    extends _$NameDataCopyWithImpl<$Res, _$_NameData>
-    implements _$$_NameDataCopyWith<$Res> {
-  __$$_NameDataCopyWithImpl(
-      _$_NameData _value, $Res Function(_$_NameData) _then)
+class __$$NameDataImplCopyWithImpl<$Res>
+    extends _$NameDataCopyWithImpl<$Res, _$NameDataImpl>
+    implements _$$NameDataImplCopyWith<$Res> {
+  __$$NameDataImplCopyWithImpl(
+      _$NameDataImpl _value, $Res Function(_$NameDataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -555,7 +561,7 @@ class __$$_NameDataCopyWithImpl<$Res>
     Object? familyName = freezed,
     Object? otherNames = freezed,
   }) {
-    return _then(_$_NameData(
+    return _then(_$NameDataImpl(
       givenName: freezed == givenName
           ? _value.givenName
           : givenName // ignore: cast_nullable_to_non_nullable
@@ -574,11 +580,11 @@ class __$$_NameDataCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_NameData implements _NameData {
-  _$_NameData({this.givenName, this.familyName, this.otherNames});
+class _$NameDataImpl implements _NameData {
+  _$NameDataImpl({this.givenName, this.familyName, this.otherNames});
 
-  factory _$_NameData.fromJson(Map<String, dynamic> json) =>
-      _$$_NameDataFromJson(json);
+  factory _$NameDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$NameDataImplFromJson(json);
 
   @override
   final String? givenName;
@@ -593,10 +599,10 @@ class _$_NameData implements _NameData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_NameData &&
+            other is _$NameDataImpl &&
             (identical(other.givenName, givenName) ||
                 other.givenName == givenName) &&
             (identical(other.familyName, familyName) ||
@@ -613,12 +619,12 @@ class _$_NameData implements _NameData {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_NameDataCopyWith<_$_NameData> get copyWith =>
-      __$$_NameDataCopyWithImpl<_$_NameData>(this, _$identity);
+  _$$NameDataImplCopyWith<_$NameDataImpl> get copyWith =>
+      __$$NameDataImplCopyWithImpl<_$NameDataImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_NameDataToJson(
+    return _$$NameDataImplToJson(
       this,
     );
   }
@@ -628,9 +634,10 @@ abstract class _NameData implements NameData {
   factory _NameData(
       {final String? givenName,
       final String? familyName,
-      final String? otherNames}) = _$_NameData;
+      final String? otherNames}) = _$NameDataImpl;
 
-  factory _NameData.fromJson(Map<String, dynamic> json) = _$_NameData.fromJson;
+  factory _NameData.fromJson(Map<String, dynamic> json) =
+      _$NameDataImpl.fromJson;
 
   @override
   String? get givenName;
@@ -640,7 +647,7 @@ abstract class _NameData implements NameData {
   String? get otherNames;
   @override
   @JsonKey(ignore: true)
-  _$$_NameDataCopyWith<_$_NameData> get copyWith =>
+  _$$NameDataImplCopyWith<_$NameDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -715,11 +722,11 @@ class _$UserDetailsCopyWithImpl<$Res, $Val extends UserDetails>
 }
 
 /// @nodoc
-abstract class _$$_UserDetailsCopyWith<$Res>
+abstract class _$$UserDetailsImplCopyWith<$Res>
     implements $UserDetailsCopyWith<$Res> {
-  factory _$$_UserDetailsCopyWith(
-          _$_UserDetails value, $Res Function(_$_UserDetails) then) =
-      __$$_UserDetailsCopyWithImpl<$Res>;
+  factory _$$UserDetailsImplCopyWith(
+          _$UserDetailsImpl value, $Res Function(_$UserDetailsImpl) then) =
+      __$$UserDetailsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -730,11 +737,11 @@ abstract class _$$_UserDetailsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_UserDetailsCopyWithImpl<$Res>
-    extends _$UserDetailsCopyWithImpl<$Res, _$_UserDetails>
-    implements _$$_UserDetailsCopyWith<$Res> {
-  __$$_UserDetailsCopyWithImpl(
-      _$_UserDetails _value, $Res Function(_$_UserDetails) _then)
+class __$$UserDetailsImplCopyWithImpl<$Res>
+    extends _$UserDetailsCopyWithImpl<$Res, _$UserDetailsImpl>
+    implements _$$UserDetailsImplCopyWith<$Res> {
+  __$$UserDetailsImplCopyWithImpl(
+      _$UserDetailsImpl _value, $Res Function(_$UserDetailsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -745,7 +752,7 @@ class __$$_UserDetailsCopyWithImpl<$Res>
     Object? type = freezed,
     Object? role = freezed,
   }) {
-    return _then(_$_UserDetails(
+    return _then(_$UserDetailsImpl(
       username: freezed == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
@@ -768,16 +775,16 @@ class __$$_UserDetailsCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UserDetails implements _UserDetails {
-  _$_UserDetails(
+class _$UserDetailsImpl implements _UserDetails {
+  _$UserDetailsImpl(
       {this.username,
       this.tenantId,
       this.type,
       @JsonKey(name: 'roles') final List<Role>? role})
       : _role = role;
 
-  factory _$_UserDetails.fromJson(Map<String, dynamic> json) =>
-      _$$_UserDetailsFromJson(json);
+  factory _$UserDetailsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UserDetailsImplFromJson(json);
 
   @override
   final String? username;
@@ -791,6 +798,7 @@ class _$_UserDetails implements _UserDetails {
   List<Role>? get role {
     final value = _role;
     if (value == null) return null;
+    if (_role is EqualUnmodifiableListView) return _role;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -801,10 +809,10 @@ class _$_UserDetails implements _UserDetails {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UserDetails &&
+            other is _$UserDetailsImpl &&
             (identical(other.username, username) ||
                 other.username == username) &&
             (identical(other.tenantId, tenantId) ||
@@ -821,12 +829,12 @@ class _$_UserDetails implements _UserDetails {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UserDetailsCopyWith<_$_UserDetails> get copyWith =>
-      __$$_UserDetailsCopyWithImpl<_$_UserDetails>(this, _$identity);
+  _$$UserDetailsImplCopyWith<_$UserDetailsImpl> get copyWith =>
+      __$$UserDetailsImplCopyWithImpl<_$UserDetailsImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserDetailsToJson(
+    return _$$UserDetailsImplToJson(
       this,
     );
   }
@@ -837,10 +845,10 @@ abstract class _UserDetails implements UserDetails {
       {final String? username,
       final String? tenantId,
       final String? type,
-      @JsonKey(name: 'roles') final List<Role>? role}) = _$_UserDetails;
+      @JsonKey(name: 'roles') final List<Role>? role}) = _$UserDetailsImpl;
 
   factory _UserDetails.fromJson(Map<String, dynamic> json) =
-      _$_UserDetails.fromJson;
+      _$UserDetailsImpl.fromJson;
 
   @override
   String? get username;
@@ -853,7 +861,7 @@ abstract class _UserDetails implements UserDetails {
   List<Role>? get role;
   @override
   @JsonKey(ignore: true)
-  _$$_UserDetailsCopyWith<_$_UserDetails> get copyWith =>
+  _$$UserDetailsImplCopyWith<_$UserDetailsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -915,18 +923,20 @@ class _$RoleCopyWithImpl<$Res, $Val extends Role>
 }
 
 /// @nodoc
-abstract class _$$_RoleCopyWith<$Res> implements $RoleCopyWith<$Res> {
-  factory _$$_RoleCopyWith(_$_Role value, $Res Function(_$_Role) then) =
-      __$$_RoleCopyWithImpl<$Res>;
+abstract class _$$RoleImplCopyWith<$Res> implements $RoleCopyWith<$Res> {
+  factory _$$RoleImplCopyWith(
+          _$RoleImpl value, $Res Function(_$RoleImpl) then) =
+      __$$RoleImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String? name, String? code, String? description});
 }
 
 /// @nodoc
-class __$$_RoleCopyWithImpl<$Res> extends _$RoleCopyWithImpl<$Res, _$_Role>
-    implements _$$_RoleCopyWith<$Res> {
-  __$$_RoleCopyWithImpl(_$_Role _value, $Res Function(_$_Role) _then)
+class __$$RoleImplCopyWithImpl<$Res>
+    extends _$RoleCopyWithImpl<$Res, _$RoleImpl>
+    implements _$$RoleImplCopyWith<$Res> {
+  __$$RoleImplCopyWithImpl(_$RoleImpl _value, $Res Function(_$RoleImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -936,7 +946,7 @@ class __$$_RoleCopyWithImpl<$Res> extends _$RoleCopyWithImpl<$Res, _$_Role>
     Object? code = freezed,
     Object? description = freezed,
   }) {
-    return _then(_$_Role(
+    return _then(_$RoleImpl(
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -955,10 +965,11 @@ class __$$_RoleCopyWithImpl<$Res> extends _$RoleCopyWithImpl<$Res, _$_Role>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Role implements _Role {
-  _$_Role({this.name, this.code, this.description});
+class _$RoleImpl implements _Role {
+  _$RoleImpl({this.name, this.code, this.description});
 
-  factory _$_Role.fromJson(Map<String, dynamic> json) => _$$_RoleFromJson(json);
+  factory _$RoleImpl.fromJson(Map<String, dynamic> json) =>
+      _$$RoleImplFromJson(json);
 
   @override
   final String? name;
@@ -973,10 +984,10 @@ class _$_Role implements _Role {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Role &&
+            other is _$RoleImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.code, code) || other.code == code) &&
             (identical(other.description, description) ||
@@ -990,12 +1001,12 @@ class _$_Role implements _Role {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RoleCopyWith<_$_Role> get copyWith =>
-      __$$_RoleCopyWithImpl<_$_Role>(this, _$identity);
+  _$$RoleImplCopyWith<_$RoleImpl> get copyWith =>
+      __$$RoleImplCopyWithImpl<_$RoleImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_RoleToJson(
+    return _$$RoleImplToJson(
       this,
     );
   }
@@ -1005,9 +1016,9 @@ abstract class _Role implements Role {
   factory _Role(
       {final String? name,
       final String? code,
-      final String? description}) = _$_Role;
+      final String? description}) = _$RoleImpl;
 
-  factory _Role.fromJson(Map<String, dynamic> json) = _$_Role.fromJson;
+  factory _Role.fromJson(Map<String, dynamic> json) = _$RoleImpl.fromJson;
 
   @override
   String? get name;
@@ -1017,5 +1028,6 @@ abstract class _Role implements Role {
   String? get description;
   @override
   @JsonKey(ignore: true)
-  _$$_RoleCopyWith<_$_Role> get copyWith => throw _privateConstructorUsedError;
+  _$$RoleImplCopyWith<_$RoleImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

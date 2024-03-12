@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'attendance_row_model.dart';
 
@@ -12,7 +12,7 @@ part of 'attendance_row_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 AttendanceRowModel _$AttendanceRowModelFromJson(Map<String, dynamic> json) {
   return _AttendanceRowModel.fromJson(json);
@@ -98,11 +98,11 @@ class _$AttendanceRowModelCopyWithImpl<$Res, $Val extends AttendanceRowModel>
 }
 
 /// @nodoc
-abstract class _$$_AttendanceRowModelCopyWith<$Res>
+abstract class _$$AttendanceRowModelImplCopyWith<$Res>
     implements $AttendanceRowModelCopyWith<$Res> {
-  factory _$$_AttendanceRowModelCopyWith(_$_AttendanceRowModel value,
-          $Res Function(_$_AttendanceRowModel) then) =
-      __$$_AttendanceRowModelCopyWithImpl<$Res>;
+  factory _$$AttendanceRowModelImplCopyWith(_$AttendanceRowModelImpl value,
+          $Res Function(_$AttendanceRowModelImpl) then) =
+      __$$AttendanceRowModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -115,11 +115,11 @@ abstract class _$$_AttendanceRowModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AttendanceRowModelCopyWithImpl<$Res>
-    extends _$AttendanceRowModelCopyWithImpl<$Res, _$_AttendanceRowModel>
-    implements _$$_AttendanceRowModelCopyWith<$Res> {
-  __$$_AttendanceRowModelCopyWithImpl(
-      _$_AttendanceRowModel _value, $Res Function(_$_AttendanceRowModel) _then)
+class __$$AttendanceRowModelImplCopyWithImpl<$Res>
+    extends _$AttendanceRowModelCopyWithImpl<$Res, _$AttendanceRowModelImpl>
+    implements _$$AttendanceRowModelImplCopyWith<$Res> {
+  __$$AttendanceRowModelImplCopyWithImpl(_$AttendanceRowModelImpl _value,
+      $Res Function(_$AttendanceRowModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -132,7 +132,7 @@ class __$$_AttendanceRowModelCopyWithImpl<$Res>
     Object? type = freezed,
     Object? status = freezed,
   }) {
-    return _then(_$_AttendanceRowModel(
+    return _then(_$AttendanceRowModelImpl(
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -163,8 +163,8 @@ class __$$_AttendanceRowModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AttendanceRowModel implements _AttendanceRowModel {
-  _$_AttendanceRowModel(
+class _$AttendanceRowModelImpl implements _AttendanceRowModel {
+  _$AttendanceRowModelImpl(
       {this.name,
       this.individualId,
       this.entryDate,
@@ -172,8 +172,8 @@ class _$_AttendanceRowModel implements _AttendanceRowModel {
       this.type,
       this.status = -1});
 
-  factory _$_AttendanceRowModel.fromJson(Map<String, dynamic> json) =>
-      _$$_AttendanceRowModelFromJson(json);
+  factory _$AttendanceRowModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AttendanceRowModelImplFromJson(json);
 
   @override
   final String? name;
@@ -195,10 +195,10 @@ class _$_AttendanceRowModel implements _AttendanceRowModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AttendanceRowModel &&
+            other is _$AttendanceRowModelImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.individualId, individualId) ||
                 other.individualId == individualId) &&
@@ -218,13 +218,13 @@ class _$_AttendanceRowModel implements _AttendanceRowModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AttendanceRowModelCopyWith<_$_AttendanceRowModel> get copyWith =>
-      __$$_AttendanceRowModelCopyWithImpl<_$_AttendanceRowModel>(
+  _$$AttendanceRowModelImplCopyWith<_$AttendanceRowModelImpl> get copyWith =>
+      __$$AttendanceRowModelImplCopyWithImpl<_$AttendanceRowModelImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AttendanceRowModelToJson(
+    return _$$AttendanceRowModelImplToJson(
       this,
     );
   }
@@ -237,10 +237,10 @@ abstract class _AttendanceRowModel implements AttendanceRowModel {
       final int? entryDate,
       final int? existDate,
       final String? type,
-      final int? status}) = _$_AttendanceRowModel;
+      final int? status}) = _$AttendanceRowModelImpl;
 
   factory _AttendanceRowModel.fromJson(Map<String, dynamic> json) =
-      _$_AttendanceRowModel.fromJson;
+      _$AttendanceRowModelImpl.fromJson;
 
   @override
   String? get name;
@@ -256,6 +256,6 @@ abstract class _AttendanceRowModel implements AttendanceRowModel {
   int? get status;
   @override
   @JsonKey(ignore: true)
-  _$$_AttendanceRowModelCopyWith<_$_AttendanceRowModel> get copyWith =>
+  _$$AttendanceRowModelImplCopyWith<_$AttendanceRowModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

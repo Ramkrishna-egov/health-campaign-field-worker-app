@@ -6,25 +6,25 @@ part of 'register_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AttendanceMarkRegisterModelResponse
-    _$$_AttendanceMarkRegisterModelResponseFromJson(
+_$AttendanceMarkRegisterModelResponseImpl
+    _$$AttendanceMarkRegisterModelResponseImplFromJson(
             Map<String, dynamic> json) =>
-        _$_AttendanceMarkRegisterModelResponse(
+        _$AttendanceMarkRegisterModelResponseImpl(
           attendanceRegister: (json['attendanceRegister'] as List<dynamic>?)
               ?.map((e) => AttendanceMarkRegisterModel.fromJson(
                   e as Map<String, dynamic>))
               .toList(),
         );
 
-Map<String, dynamic> _$$_AttendanceMarkRegisterModelResponseToJson(
-        _$_AttendanceMarkRegisterModelResponse instance) =>
+Map<String, dynamic> _$$AttendanceMarkRegisterModelResponseImplToJson(
+        _$AttendanceMarkRegisterModelResponseImpl instance) =>
     <String, dynamic>{
       'attendanceRegister': instance.attendanceRegister,
     };
 
-_$_AttendanceMarkRegisterModel _$$_AttendanceMarkRegisterModelFromJson(
+_$AttendanceMarkRegisterModelImpl _$$AttendanceMarkRegisterModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_AttendanceMarkRegisterModel(
+    _$AttendanceMarkRegisterModelImpl(
       id: json['id'] as String?,
       tenantId: json['tenantId'] as String?,
       registerNumber: json['registerNumber'] as String?,
@@ -47,8 +47,8 @@ _$_AttendanceMarkRegisterModel _$$_AttendanceMarkRegisterModelFromJson(
               json['additionalDetails'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_AttendanceMarkRegisterModelToJson(
-        _$_AttendanceMarkRegisterModel instance) =>
+Map<String, dynamic> _$$AttendanceMarkRegisterModelImplToJson(
+        _$AttendanceMarkRegisterModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'tenantId': instance.tenantId,
@@ -64,10 +64,10 @@ Map<String, dynamic> _$$_AttendanceMarkRegisterModelToJson(
       'additionalDetails': instance.additionalDetails,
     };
 
-_$_AttendanceMarkIndividualModelAttendee
-    _$$_AttendanceMarkIndividualModelAttendeeFromJson(
+_$AttendanceMarkIndividualModelAttendeeImpl
+    _$$AttendanceMarkIndividualModelAttendeeImplFromJson(
             Map<String, dynamic> json) =>
-        _$_AttendanceMarkIndividualModelAttendee(
+        _$AttendanceMarkIndividualModelAttendeeImpl(
           id: json['id'] as String?,
           tenantId: json['tenantId'] as String?,
           registerId: json['registerId'] as String?,
@@ -76,8 +76,8 @@ _$_AttendanceMarkIndividualModelAttendee
           denrollmentDate: json['denrollmentDate'] as int?,
         );
 
-Map<String, dynamic> _$$_AttendanceMarkIndividualModelAttendeeToJson(
-        _$_AttendanceMarkIndividualModelAttendee instance) =>
+Map<String, dynamic> _$$AttendanceMarkIndividualModelAttendeeImplToJson(
+        _$AttendanceMarkIndividualModelAttendeeImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'tenantId': instance.tenantId,
@@ -87,15 +87,15 @@ Map<String, dynamic> _$$_AttendanceMarkIndividualModelAttendeeToJson(
       'denrollmentDate': instance.denrollmentDate,
     };
 
-_$_AuditDetails _$$_AuditDetailsFromJson(Map<String, dynamic> json) =>
-    _$_AuditDetails(
+_$AuditDetailsImpl _$$AuditDetailsImplFromJson(Map<String, dynamic> json) =>
+    _$AuditDetailsImpl(
       createdBy: json['createdBy'] as String?,
       lastModifiedBy: json['lastModifiedBy'] as String?,
       createdTime: json['createdTime'] as int?,
       lastModifiedTime: json['lastModifiedTime'] as int?,
     );
 
-Map<String, dynamic> _$$_AuditDetailsToJson(_$_AuditDetails instance) =>
+Map<String, dynamic> _$$AuditDetailsImplToJson(_$AuditDetailsImpl instance) =>
     <String, dynamic>{
       'createdBy': instance.createdBy,
       'lastModifiedBy': instance.lastModifiedBy,
@@ -103,14 +103,15 @@ Map<String, dynamic> _$$_AuditDetailsToJson(_$_AuditDetails instance) =>
       'lastModifiedTime': instance.lastModifiedTime,
     };
 
-_$_AdditionalDetails _$$_AdditionalDetailsFromJson(Map<String, dynamic> json) =>
-    _$_AdditionalDetails(
+_$AdditionalDetailsImpl _$$AdditionalDetailsImplFromJson(
+        Map<String, dynamic> json) =>
+    _$AdditionalDetailsImpl(
       description: json['description'] as String?,
       boundary: json['boundary'] as String?,
     );
 
-Map<String, dynamic> _$$_AdditionalDetailsToJson(
-        _$_AdditionalDetails instance) =>
+Map<String, dynamic> _$$AdditionalDetailsImplToJson(
+        _$AdditionalDetailsImpl instance) =>
     <String, dynamic>{
       'description': instance.description,
       'boundary': instance.boundary,

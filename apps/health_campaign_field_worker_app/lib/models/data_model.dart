@@ -2,8 +2,7 @@
 library models;
 
 import 'package:dart_mappable/dart_mappable.dart';
-
-export 'data_model.mapper.g.dart';
+import 'data_model.dart';
 export 'entities/additional_fields_type.dart';
 export 'entities/address.dart';
 export 'entities/address_type.dart';
@@ -63,7 +62,10 @@ abstract class DataModel {
 }
 
 @MappableClass(includeSubClasses: [
-  BoundaryModel
+  BoundaryModel,
+  HouseholdModel,
+  IndividualModel,
+  NameModel,
 ])
 abstract class EntityModel extends DataModel with EntityModelMappable {
   final AuditDetails? auditDetails;
@@ -76,7 +78,7 @@ abstract class EntityModel extends DataModel with EntityModelMappable {
 }
 
 @MappableClass(ignoreNull: true, includeSubClasses: [
-  AddressSearchModel,
+  AddressSearchModel
 
 ])
 abstract class EntitySearchModel extends DataModel
@@ -113,8 +115,8 @@ abstract class AdditionalFields with AdditionalFieldsMappable {
   });
 }
 
-@MappableClass()
-class AdditionalField {
+@MappableClass(includeSubClasses: [])
+class AdditionalField with AdditionalFieldMappable{
   final String key;
   final dynamic value;
 
@@ -122,7 +124,7 @@ class AdditionalField {
 }
 
 @MappableClass()
-class ClientAuditDetails {
+class ClientAuditDetails with ClientAuditDetailsMappable {
   final int createdTime;
   final int? lastModifiedTime;
   final String createdBy;
@@ -138,7 +140,7 @@ class ClientAuditDetails {
 }
 
 @MappableClass()
-class AuditDetails {
+class AuditDetails with AuditDetailsMappable {
   final String createdBy;
   final String lastModifiedBy;
   final int createdTime;

@@ -5,8 +5,10 @@ import 'package:drift/drift.dart';
 import '../data_model.dart';
 import '../../data/local_store/sql_store/sql_store.dart';
 
-@MappableClass(ignoreNull: true)
-class ServiceDefinitionSearchModel extends EntitySearchModel {
+part 'service_definition.mapper.dart';
+
+@MappableClass(ignoreNull: true, discriminatorValue: MappableClass.useAsDefault)
+class ServiceDefinitionSearchModel extends EntitySearchModel with ServiceDefinitionSearchModelMappable {
   final String? id;
   final String? tenantId;
   final List<String>? code;
@@ -28,13 +30,11 @@ class ServiceDefinitionSearchModel extends EntitySearchModel {
     this.code,
     this.isActive,
     super.boundaryCode,
-        super.additionalFields,
-    super.auditDetails,
   }):  super(isDeleted: false);
 }
 
-@MappableClass(ignoreNull: true)
-class ServiceDefinitionModel extends EntityModel {
+@MappableClass(ignoreNull: true, discriminatorValue: MappableClass.useAsDefault)
+class ServiceDefinitionModel extends EntityModel with ServiceDefinitionModelMappable {
 
   static const schemaName = 'ServiceDefinition';
 
@@ -82,11 +82,12 @@ class ServiceDefinitionModel extends EntityModel {
   }
 }
 
-@MappableClass(ignoreNull: true)
-class ServiceDefinitionAdditionalFields extends AdditionalFields {
+@MappableClass(ignoreNull: true, discriminatorValue: MappableClass.useAsDefault)
+class ServiceDefinitionAdditionalFields extends AdditionalFields with ServiceDefinitionAdditionalFieldsMappable {
   ServiceDefinitionAdditionalFields({
     super.schema = 'ServiceDefinition',
     required super.version,
     super.fields,
   });
 }
+

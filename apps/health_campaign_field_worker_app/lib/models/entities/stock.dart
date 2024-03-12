@@ -5,8 +5,10 @@ import 'package:drift/drift.dart';
 import '../data_model.dart';
 import '../../data/local_store/sql_store/sql_store.dart';
 
-@MappableClass(ignoreNull: true)
-class StockSearchModel extends EntitySearchModel {
+part 'stock.mapper.dart';
+
+@MappableClass(ignoreNull: true, discriminatorValue: MappableClass.useAsDefault)
+class StockSearchModel extends EntitySearchModel with StockSearchModelMappable {
   final String? id;
   final String? tenantId;
   final String? facilityId;
@@ -15,10 +17,13 @@ class StockSearchModel extends EntitySearchModel {
   final String? referenceIdType;
   final String? transactingPartyId;
   final String? transactingPartyType;
+  final String? receiverId;
+  final String? receiverType;
+  final String? senderId;
+  final String? senderType;
   final List<String>? clientReferenceId;
   final List<TransactionType>? transactionType;
   final List<TransactionReason>? transactionReason;
-  final DateTime? dateOfEntryTime;
   
   StockSearchModel({
     this.id,
@@ -29,16 +34,16 @@ class StockSearchModel extends EntitySearchModel {
     this.referenceIdType,
     this.transactingPartyId,
     this.transactingPartyType,
+    this.receiverId,
+    this.receiverType,
+    this.senderId,
+    this.senderType,
     this.clientReferenceId,
     this.transactionType,
     this.transactionReason,
-    int? dateOfEntry,
     super.boundaryCode,
     super.isDeleted,
-  }): dateOfEntryTime = dateOfEntry == null
-      ? null
-      : DateTime.fromMillisecondsSinceEpoch(dateOfEntry),
-   super();
+  }):  super();
 
   @MappableConstructor()
   StockSearchModel.ignoreDeleted({
@@ -50,22 +55,19 @@ class StockSearchModel extends EntitySearchModel {
     this.referenceIdType,
     this.transactingPartyId,
     this.transactingPartyType,
+    this.receiverId,
+    this.receiverType,
+    this.senderId,
+    this.senderType,
     this.clientReferenceId,
     this.transactionType,
     this.transactionReason,
-    int? dateOfEntry,
     super.boundaryCode,
-  }): dateOfEntryTime = dateOfEntry == null
-  ? null
-      : DateTime.fromMillisecondsSinceEpoch(dateOfEntry),
-   super(isDeleted: false);
-
-  int? get dateOfEntry => dateOfEntryTime?.millisecondsSinceEpoch;
-  
+  }):  super(isDeleted: false);
 }
 
-@MappableClass(ignoreNull: true)
-class StockModel extends EntityModel {
+@MappableClass(ignoreNull: true, discriminatorValue: MappableClass.useAsDefault)
+class StockModel extends EntityModel with StockModelMappable {
 
   static const schemaName = 'Stock';
 
@@ -79,12 +81,15 @@ class StockModel extends EntityModel {
   final String? transactingPartyType;
   final String? quantity;
   final String? waybillNumber;
+  final String? receiverId;
+  final String? receiverType;
+  final String? senderId;
+  final String? senderType;
   final bool? nonRecoverableError;
   final String clientReferenceId;
   final int? rowVersion;
   final TransactionType? transactionType;
   final TransactionReason? transactionReason;
-  final DateTime? dateOfEntryTime;
   final StockAdditionalFields? additionalFields;
 
   StockModel({
@@ -99,21 +104,18 @@ class StockModel extends EntityModel {
     this.transactingPartyType,
     this.quantity,
     this.waybillNumber,
+    this.receiverId,
+    this.receiverType,
+    this.senderId,
+    this.senderType,
     this.nonRecoverableError = false,
     required this.clientReferenceId,
     this.rowVersion,
     this.transactionType,
     this.transactionReason,
-    int? dateOfEntry,
     super.auditDetails,super.clientAuditDetails,
     super.isDeleted = false,
-  }): dateOfEntryTime = dateOfEntry == null
-          ? null
-          : DateTime.fromMillisecondsSinceEpoch(dateOfEntry),
-      super();
-
-  int?  get dateOfEntry => dateOfEntryTime?.millisecondsSinceEpoch;
-  
+  }): super();
 
   StockCompanion get companion {
     return StockCompanion(
@@ -140,18 +142,18 @@ class StockModel extends EntityModel {
       nonRecoverableError: Value(nonRecoverableError),
       clientReferenceId: Value(clientReferenceId),
       rowVersion: Value(rowVersion),
-      dateOfEntry: Value(dateOfEntry),
       transactionType: Value(transactionType),
       transactionReason: Value(transactionReason),
       );
   }
 }
 
-@MappableClass(ignoreNull: true)
-class StockAdditionalFields extends AdditionalFields {
+@MappableClass(ignoreNull: true, discriminatorValue: MappableClass.useAsDefault)
+class StockAdditionalFields extends AdditionalFields with StockAdditionalFieldsMappable {
   StockAdditionalFields({
     super.schema = 'Stock',
     required super.version,
     super.fields,
   });
 }
+

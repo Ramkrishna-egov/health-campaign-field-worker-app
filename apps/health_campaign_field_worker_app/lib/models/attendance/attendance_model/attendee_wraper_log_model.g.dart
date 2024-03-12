@@ -6,9 +6,9 @@ part of 'attendee_wraper_log_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AttendeeLogWrappperResponse _$$_AttendeeLogWrappperResponseFromJson(
+_$AttendeeLogWrappperResponseImpl _$$AttendeeLogWrappperResponseImplFromJson(
         Map<String, dynamic> json) =>
-    _$_AttendeeLogWrappperResponse(
+    _$AttendeeLogWrappperResponseImpl(
       count: json['count'] as int? ?? 0,
       attendanceAttendeLog: (json['attendance'] as List<dynamic>?)
           ?.map((e) =>
@@ -16,8 +16,8 @@ _$_AttendeeLogWrappperResponse _$$_AttendeeLogWrappperResponseFromJson(
           .toList(),
     );
 
-Map<String, dynamic> _$$_AttendeeLogWrappperResponseToJson(
-        _$_AttendeeLogWrappperResponse instance) =>
+Map<String, dynamic> _$$AttendeeLogWrappperResponseImplToJson(
+        _$AttendeeLogWrappperResponseImpl instance) =>
     <String, dynamic>{
       'count': instance.count,
       'attendance': instance.attendanceAttendeLog,
