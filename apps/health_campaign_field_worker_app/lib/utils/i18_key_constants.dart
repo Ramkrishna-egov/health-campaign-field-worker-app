@@ -183,6 +183,9 @@ class Checklist {
 
   String get checklistDetailLabel => 'CHECKLIST_DETAILS_LABEL';
 
+  String get communityDistributorChecklistDetailLabel =>
+      'COMMUNITY_DISTRIBUTOR_CHECKLIST_DETAILS_LABEL';
+
   String get checklistDialogLabel => 'CHECKLIST_DIALOG_LABEL';
 
   String get checklistDialogDescription => 'CHECKLIST_DIALOG_DESCRITPTION';
