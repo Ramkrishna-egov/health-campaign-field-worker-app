@@ -171,7 +171,10 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
                                                 .trim()
                                                 .isNotEmpty
                                             ? controller[i].text.toString()
-                                            : null
+                                            : (attribute?[i].dataType !=
+                                                    'Number'
+                                                ? ''
+                                                : '0')
                                         : visibleChecklistIndexes.contains(i)
                                             ? controller[i].text.toString()
                                             : i18.checklist.notSelectedKey,
