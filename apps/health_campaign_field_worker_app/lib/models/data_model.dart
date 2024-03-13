@@ -1,4 +1,6 @@
-@MappableLib(generateInitializerForScope: InitializerScope.package,)
+@MappableLib(
+  generateInitializerForScope: InitializerScope.package,
+)
 library models;
 
 import 'package:dart_mappable/dart_mappable.dart';
@@ -33,6 +35,8 @@ export 'entities/project_resource.dart';
 export 'entities/project_staff.dart';
 export 'entities/project_type.dart';
 export 'entities/referral.dart';
+export 'entities/roles.dart';
+export 'entities/roles_type.dart';
 export 'entities/service.dart';
 export 'entities/service_attributes.dart';
 export 'entities/service_definition.dart';
@@ -51,7 +55,6 @@ export 'pgr_complaints/pgr_address.dart';
 export 'pgr_complaints/pgr_complaints.dart';
 export 'pgr_complaints/pgr_complaints_response.dart';
 export 'package:attendance_management/models/attendance_log.dart';
-
 
 part 'data_model.mapper.dart';
 
@@ -110,7 +113,8 @@ abstract class EntitySearchModel extends DataModel
 }
 
 @MappableClass(
-    includeSubClasses: [AddressAdditionalFields, HCMAttendanceAdditionalModel],)
+  includeSubClasses: [AddressAdditionalFields, HCMAttendanceAdditionalModel],
+)
 abstract class AdditionalFields with AdditionalFieldsMappable {
   final String schema;
   final int version;
@@ -124,7 +128,7 @@ abstract class AdditionalFields with AdditionalFieldsMappable {
 }
 
 @MappableClass(includeSubClasses: [])
-class AdditionalField with AdditionalFieldMappable{
+class AdditionalField with AdditionalFieldMappable {
   final String key;
   final dynamic value;
 
