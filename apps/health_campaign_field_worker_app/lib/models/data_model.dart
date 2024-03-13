@@ -15,7 +15,6 @@ export 'entities/document.dart';
 export 'entities/downsync.dart';
 export 'entities/facility.dart';
 export 'entities/gender.dart';
-export 'entities/h_f_referral.dart';
 export 'entities/hcm_attendance_log_model.dart';
 export 'entities/hcm_attendance_model.dart';
 export 'entities/household.dart';
@@ -86,7 +85,6 @@ abstract class EntityModel extends DataModel with EntityModelMappable {
 
 @MappableClass(ignoreNull: true, includeSubClasses: [
   AddressSearchModel,
-  HFReferralSearchModel,
   HCMAttendanceLogSearchModel,
   HCMAttendanceSearchModel,
 

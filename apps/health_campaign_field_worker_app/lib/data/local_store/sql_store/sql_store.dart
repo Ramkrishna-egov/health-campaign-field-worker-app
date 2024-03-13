@@ -10,12 +10,13 @@ import '../../../models/entities/address_type.dart';
 import '../../../models/entities/beneficiary_type.dart';
 import '../../../models/entities/blood_group.dart';
 import '../../../models/entities/gender.dart';
+import '../../../models/pgr_complaints/pgr_complaints.dart';
 import '../../../models/entities/transaction_reason.dart';
 import '../../../models/entities/transaction_type.dart';
-import '../../../models/pgr_complaints/pgr_complaints.dart';
 import 'tables/address.dart' as at;
 import 'tables/attendance_logs.dart';
 import 'tables/attendance_register.dart';
+import 'tables/attendee.dart';
 import 'tables/attributes.dart';
 import 'tables/boundary.dart';
 import 'tables/document.dart';
@@ -43,6 +44,7 @@ import 'tables/service.dart';
 import 'tables/service_attributes.dart';
 import 'tables/service_definition.dart';
 import 'tables/side_effect.dart';
+import 'tables/staff.dart';
 import 'tables/stock.dart';
 import 'tables/stock_reconciliation.dart';
 import 'tables/target.dart';
@@ -56,7 +58,7 @@ part 'sql_store.g.dart';
   AttendanceRegister,
   Attendance,
   Attendee,
-  at.Address,
+  at.Address, // TODO: address same in sql_store.g.dart and rename the address class created in the same file to avoid conflict
   Name,
   Boundary,
   Document,
@@ -84,6 +86,7 @@ part 'sql_store.g.dart';
   Service,
   ServiceAttributes,
   ServiceDefinition,
+  Staff,
   Attributes,
   Locality,
   PgrService,
