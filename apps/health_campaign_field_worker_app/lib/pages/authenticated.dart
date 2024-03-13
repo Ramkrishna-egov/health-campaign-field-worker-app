@@ -167,6 +167,7 @@ class AuthenticatedPageWrapper extends StatelessWidget {
                                   case DataModelType.complaints:
                                   case DataModelType.sideEffect:
                                   case DataModelType.referral:
+                                  case DataModelType.attendance:
                                     return true;
                                   default:
                                     return false;
@@ -202,6 +203,7 @@ class AuthenticatedPageWrapper extends StatelessWidget {
                                   case DataModelType.sideEffect:
                                   case DataModelType.referral:
                                   case DataModelType.householdMember:
+                                  case DataModelType.attendance:
                                     return true;
                                   default:
                                     return false;
