@@ -301,7 +301,7 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
                               '${localizations.translate(
                                 value.selectedServiceDefinition!.code
                                     .toString(),
-                              )} ${localizations.translate(i18.checklist.checklist)}',
+                              )} ${localizations.translate(context.isDistributor ? i18.checklist.communityDistributorChecklist : i18.checklist.checklist)}',
                               style: theme.textTheme.displayMedium,
                               textAlign: TextAlign.left,
                             ),

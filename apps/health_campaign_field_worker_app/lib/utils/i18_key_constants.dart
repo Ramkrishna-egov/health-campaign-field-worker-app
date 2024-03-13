@@ -172,6 +172,8 @@ class Checklist {
 
   String get checklist => 'CHECKLIST';
 
+  String get communityDistributorChecklist => 'COMMUNITY_DISTRIBUTOR_CHECKLIST';
+
   String get checklistlabel => 'CHECKLIST_LABEL';
 
   String get communityDistributorChecklistlabel =>
