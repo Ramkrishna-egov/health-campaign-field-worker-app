@@ -82,6 +82,7 @@ class TaskLocalRepository extends TaskLocalBaseRepository {
     TaskSearchModel query, [
     String? userId,
   ]) async {
+         final stopwatch1 = Stopwatch()..start();
     final selectQuery = sql.select(sql.task).join([
       leftOuterJoin(
         sql.address,
@@ -276,7 +277,8 @@ class TaskLocalRepository extends TaskLocalBaseRepository {
 
     // Convert the map values to a list of tasks
     final uniqueTasks = tasksMap.values.toList();
-
+      print('Query() executed in ${stopwatch1.elapsed}');
+      
     return uniqueTasks.where((element) => element.isDeleted != true).toList();
   }
 

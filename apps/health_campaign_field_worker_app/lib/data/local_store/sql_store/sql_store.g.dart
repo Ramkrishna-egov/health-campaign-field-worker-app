@@ -33963,10 +33963,8 @@ abstract class _$LocalSqlDataStore extends GeneratedDatabase {
   late final $DownsyncCriteriaTable downsyncCriteria =
       $DownsyncCriteriaTable(this);
   late final $HFReferralTable hFReferral = $HFReferralTable(this);
-  @override
-  Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
 
-  late final Index addressclientref = Index('addressclientref',
+ late final Index addressclientref = Index('addressclientref',
       'CREATE INDEX addressclientref ON address (related_client_reference_id)');
   late final Index householdclientref = Index('householdclientref',
       'CREATE INDEX householdclientref ON household (client_reference_id)');
@@ -33988,6 +33986,11 @@ abstract class _$LocalSqlDataStore extends GeneratedDatabase {
 
   late final Index familynameclientref = Index('familynameclientref',
       'CREATE INDEX familynameclientref ON name (family_name)');
+
+  @override
+  Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
+
+
 
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities => [
@@ -34027,7 +34030,7 @@ abstract class _$LocalSqlDataStore extends GeneratedDatabase {
         downsync,
         downsyncCriteria,
         hFReferral,
-        addressclientref,
+         addressclientref,
         familynameclientref,
         givennameclientref,
         householdclientref,

@@ -155,7 +155,9 @@ class _SearchBeneficiaryPageState
                                               ));
                                             } else {
                                               bloc.add(
-                                                const SearchHouseholdsClearEvent(),
+                                                const SearchHouseholdsClearEvent(
+                                                  
+                                                ),
                                               );
                                               bloc.add(
                                                 SearchHouseholdsSearchByHouseholdHeadEvent(

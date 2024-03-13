@@ -606,6 +606,8 @@ class SearchHouseholdsBloc
     emit(state.copyWith(
       searchQuery: null,
       householdMembers: [],
+      offset: 0,
+      limit: 10,
     ));
   }
 
@@ -691,7 +693,7 @@ class SearchHouseholdsState with _$SearchHouseholdsState {
     @Default(false) bool loading,
     String? searchQuery,
     @Default(0) int offset,
-    @Default(10) int limit,
+    @Default(3) int limit,
     @Default([]) List<HouseholdMemberWrapper> householdMembers,
     @Default(0) int registeredHouseholds,
     @Default(0) int deliveredInterventions,

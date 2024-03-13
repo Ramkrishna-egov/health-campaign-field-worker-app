@@ -462,7 +462,20 @@ class _HomePageState extends LocalizedState<HomePage> {
 
     final List<Widget> widgetList =
         filteredLabels.map((label) => homeItemsMap[label]!).toList();
-
+widgetList.add(HomeItemCard(
+        icon: Icons.table_chart,
+        label: 'DB',
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => DriftDbViewer(
+                context.read<LocalSqlDataStore>(),
+              ),
+            ),
+          );
+        },
+      ));
+      
     return widgetList;
   }
 

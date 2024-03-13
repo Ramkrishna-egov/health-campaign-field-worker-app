@@ -38,52 +38,52 @@ class _BeneficiaryProgressBarState extends State<BeneficiaryProgressBar> {
         context.read<LocalRepository<TaskModel, TaskSearchModel>>()
             as TaskLocalRepository;
 
-    taskRepository.listenToChanges(
-      query: TaskSearchModel(
-        projectId: context.projectId,
-        createdBy: context.loggedInUserUuid,
-        limit: 1,
-        offset: 0,
-      ),
-      listener: (taskData) async {
-        if (mounted) {
-          final now = DateTime.now();
-          final gte = DateTime(
-            now.year,
-            now.month,
-            now.day,
-          );
-          final lte = DateTime(
-            now.year,
-            now.month,
-            now.day,
-            23,
-            59,
-            59,
-            999,
-          );
+    // taskRepository.listenToChanges(
+    //   query: TaskSearchModel(
+    //     projectId: context.projectId,
+    //     createdBy: context.loggedInUserUuid,
+    //     limit: 1,
+    //     offset: 0,
+    //   ),
+    //   listener: (taskData) async {
+    //     if (mounted) {
+    //       final now = DateTime.now();
+    //       final gte = DateTime(
+    //         now.year,
+    //         now.month,
+    //         now.day,
+    //       );
+    //       final lte = DateTime(
+    //         now.year,
+    //         now.month,
+    //         now.day,
+    //         23,
+    //         59,
+    //         59,
+    //         999,
+    //       );
 
-          TaskSearchModel taskSearchQuery = TaskSearchModel(
-            status: Status.administeredSuccess.toValue(),
-            createdBy: context.loggedInUserUuid,
-            plannedEndDate: lte.millisecondsSinceEpoch,
-            plannedStartDate: gte.millisecondsSinceEpoch,
-          );
-          List<TaskModel> results =
-              await taskRepository.search(taskSearchQuery);
+    //       TaskSearchModel taskSearchQuery = TaskSearchModel(
+    //         status: Status.administeredSuccess.toValue(),
+    //         createdBy: context.loggedInUserUuid,
+    //         plannedEndDate: lte.millisecondsSinceEpoch,
+    //         plannedStartDate: gte.millisecondsSinceEpoch,
+    //       );
+    //       List<TaskModel> results =
+    //           await taskRepository.search(taskSearchQuery);
 
-          final groupedEntries = results.groupListsBy(
-            (element) => element.projectBeneficiaryClientReferenceId,
-          );
+    //       final groupedEntries = results.groupListsBy(
+    //         (element) => element.projectBeneficiaryClientReferenceId,
+    //       );
 
-          setState(() {
-            if (mounted) {
-              current = groupedEntries.entries.length;
-            }
-          });
-        }
-      },
-    );
+    //       setState(() {
+    //         if (mounted) {
+    //           current = groupedEntries.entries.length;
+    //         }
+    //       });
+    //     }
+    //   },
+    // );
     super.didChangeDependencies();
   }
 
