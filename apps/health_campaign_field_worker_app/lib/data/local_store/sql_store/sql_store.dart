@@ -14,6 +14,8 @@ import '../../../models/entities/transaction_reason.dart';
 import '../../../models/entities/transaction_type.dart';
 import '../../../models/pgr_complaints/pgr_complaints.dart';
 import 'tables/address.dart' as at;
+import 'tables/attendance_logs.dart';
+import 'tables/attendance_register.dart';
 import 'tables/attributes.dart';
 import 'tables/boundary.dart';
 import 'tables/document.dart';
@@ -51,6 +53,9 @@ import 'tables/user.dart';
 part 'sql_store.g.dart';
 
 @DriftDatabase(tables: [
+  AttendanceRegister,
+  Attendance,
+  Attendee,
   at.Address,
   Name,
   Boundary,

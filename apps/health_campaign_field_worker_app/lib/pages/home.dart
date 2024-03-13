@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:attendance_management/pages/manage_attendance.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:digit_components/digit_components.dart';
 import 'package:digit_components/widgets/atoms/digit_toaster.dart';
@@ -17,6 +18,7 @@ import '../../data/local_store/no_sql/schema/app_configuration.dart'
     as app_config;
 import '../blocs/app_initialization/app_initialization.dart';
 import '../blocs/auth/auth.dart';
+import '../blocs/hcm_attendance_bloc.dart';
 import '../blocs/search_households/search_households.dart';
 import '../blocs/sync/sync.dart';
 import '../data/data_repository.dart';
@@ -493,6 +495,11 @@ class _HomePageState extends LocalizedState<HomePage> {
                       StockReconciliationSearchModel>>(),
               context.read<
                   LocalRepository<PgrServiceModel, PgrServiceSearchModel>>(),
+              context.read<
+                    LocalRepository<HFReferralModel, HFReferralSearchModel>>(),
+              context.read<
+                    LocalRepository<HCMAttendanceLogModel,
+                        HCMAttendanceLogSearchModel>>(),
             ],
             remoteRepositories: [
               context.read<
