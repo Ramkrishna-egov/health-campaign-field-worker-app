@@ -322,11 +322,12 @@ class MemberCard extends StatelessWidget {
                                             const Duration(milliseconds: 100),
                                             () {
                                               bloc.add(
-                                                  HouseholdOverviewReloadEvent(
-                                                projectId: context.projectId,
-                                                projectBeneficiaryType:
-                                                    context.beneficiaryType,
-                                              ));
+                                                HouseholdOverviewReloadEvent(
+                                                  projectId: context.projectId,
+                                                  projectBeneficiaryType:
+                                                      context.beneficiaryType,
+                                                ),
+                                              );
                                             },
                                           );
 

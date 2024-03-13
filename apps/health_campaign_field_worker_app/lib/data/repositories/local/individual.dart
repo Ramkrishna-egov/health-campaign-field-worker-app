@@ -93,13 +93,12 @@ class IndividualLocalRepository extends IndividualLocalBaseRepository {
                 ),
             ]),
           )
-        // ..orderBy([
-        //   OrderingTerm(
-        //     expression: sql.individual.clientCreatedTime,
-        //     mode: OrderingMode.asc,
-        //   ),
-        // ])
-        )
+          ..orderBy([
+            OrderingTerm(
+              expression: sql.individual.clientCreatedTime,
+              mode: OrderingMode.asc,
+            ),
+          ]))
         .get();
 
     return results
