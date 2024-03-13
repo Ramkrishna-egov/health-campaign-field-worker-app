@@ -2,7 +2,6 @@ import 'package:digit_components/digit_components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import 'package:location/location.dart';
 
 import '../blocs/app_initialization/app_initialization.dart';
 import '../blocs/beneficiary_registration/beneficiary_registration.dart';
@@ -29,18 +28,12 @@ class _SearchBeneficiaryPageState
     extends LocalizedState<SearchBeneficiaryPage> {
   final TextEditingController searchController = TextEditingController();
   bool isProximityEnabled = false;
-  int offset = 0;
-  int limit = 10;
 
   double lat = 0.0;
   double long = 0.0;
 
   @override
   void initState() {
-    setState(() {
-      offset = 0;
-      limit = 10;
-    });
     super.initState();
   }
 
@@ -72,12 +65,9 @@ class _SearchBeneficiaryPageState
                       longititude: long,
                       projectId: context.projectId,
                       maxRadius: appConfig.maxRadius!,
-                      offset: offset + limit,
-                      limit: limit,
+                      offset: bloc.state.offset,
+                      limit: bloc.state.limit,
                     ));
-                    setState(() {
-                      offset = (offset + limit);
-                    });
                   } else if (metrics.atEdge &&
                       searchController.text != '' &&
                       metrics.pixels != 0) {
@@ -86,12 +76,9 @@ class _SearchBeneficiaryPageState
                       searchText: searchController.text,
                       projectId: context.projectId,
                       isProximityEnabled: isProximityEnabled,
-                      offset: offset + limit,
-                      limit: limit,
+                      offset: bloc.state.offset,
+                      limit: bloc.state.limit,
                     ));
-                    setState(() {
-                      offset = (offset + limit);
-                    });
                   }
                 }
                 // Return true to allow the notification to continue to be dispatched to further ancestors.
@@ -110,24 +97,25 @@ class _SearchBeneficiaryPageState
                           padding: const EdgeInsets.all(kPadding),
                           child: Column(
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.all(kPadding),
-                                child: Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Text(
-                                    localizations.translate(
-                                      context.beneficiaryType !=
-                                              BeneficiaryType.individual
-                                          ? i18.searchBeneficiary
-                                              .statisticsLabelText
-                                          : i18.searchBeneficiary
-                                              .searchIndividualLabelText,
+                              if (!isKeyboardVisible)
+                                Padding(
+                                  padding: const EdgeInsets.all(kPadding),
+                                  child: Align(
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      localizations.translate(
+                                        context.beneficiaryType !=
+                                                BeneficiaryType.individual
+                                            ? i18.searchBeneficiary
+                                                .statisticsLabelText
+                                            : i18.searchBeneficiary
+                                                .searchIndividualLabelText,
+                                      ),
+                                      style: theme.textTheme.displayMedium,
+                                      textAlign: TextAlign.left,
                                     ),
-                                    style: theme.textTheme.displayMedium,
-                                    textAlign: TextAlign.left,
                                   ),
                                 ),
-                              ),
                               BlocBuilder<LocationBloc, LocationState>(
                                 builder: (context, locationState) {
                                   return Column(
@@ -162,14 +150,10 @@ class _SearchBeneficiaryPageState
                                                     locationState.longitude!,
                                                 projectId: context.projectId,
                                                 maxRadius: appConfig.maxRadius!,
-                                                limit: limit,
-                                                offset: offset,
+                                                limit: bloc.state.limit,
+                                                offset: bloc.state.offset,
                                               ));
                                             } else {
-                                              setState(() {
-                                                offset = 0;
-                                                limit = limit;
-                                              });
                                               bloc.add(
                                                 const SearchHouseholdsClearEvent(),
                                               );
@@ -185,8 +169,8 @@ class _SearchBeneficiaryPageState
                                                       isProximityEnabled,
                                                   maxRadius:
                                                       appConfig.maxRadius,
-                                                  limit: limit,
-                                                  offset: offset,
+                                                  limit: bloc.state.limit,
+                                                  offset: 0,
                                                 ),
                                               );
                                             }
@@ -209,7 +193,7 @@ class _SearchBeneficiaryPageState
                                                     setState(() {
                                                       isProximityEnabled =
                                                           value;
-                                                      offset = 0;
+                                                      // offset = 0;
                                                       lat = locationState
                                                           .latitude!;
                                                       long = locationState
@@ -243,8 +227,9 @@ class _SearchBeneficiaryPageState
                                                               context.projectId,
                                                           maxRadius: appConfig
                                                               .maxRadius!,
-                                                          limit: limit,
-                                                          offset: offset,
+                                                          limit:
+                                                              bloc.state.limit,
+                                                          offset: 0,
                                                         ),
                                                       );
                                                     } else {
@@ -342,43 +327,48 @@ class _SearchBeneficiaryPageState
                 },
               ),
             ),
-            bottomNavigationBar: SizedBox(
-              height: 85,
-              child: DigitCard(
-                margin: const EdgeInsets.only(left: 0, right: 0, top: 10),
-                child: BlocBuilder<SearchHouseholdsBloc, SearchHouseholdsState>(
-                  builder: (context, state) {
-                    final router = context.router;
+            bottomNavigationBar: isKeyboardVisible
+                ? null
+                : SizedBox(
+                    height: 85,
+                    child: DigitCard(
+                      margin: const EdgeInsets.only(left: 0, right: 0, top: 10),
+                      child: BlocBuilder<SearchHouseholdsBloc,
+                          SearchHouseholdsState>(
+                        builder: (context, state) {
+                          final router = context.router;
 
-                    final searchQuery = state.searchQuery;
-                    VoidCallback? onPressed;
+                          final searchQuery = state.searchQuery;
+                          VoidCallback? onPressed;
 
-                    onPressed = state.loading ||
-                            searchQuery == null ||
-                            searchQuery.isEmpty
-                        ? null
-                        : () {
-                            FocusManager.instance.primaryFocus?.unfocus();
+                          onPressed = state.loading ||
+                                  searchQuery == null ||
+                                  searchQuery.isEmpty
+                              ? null
+                              : () {
+                                  FocusManager.instance.primaryFocus?.unfocus();
 
-                            router.push(BeneficiaryRegistrationWrapperRoute(
-                              initialState: BeneficiaryRegistrationCreateState(
-                                searchQuery: state.searchQuery,
-                              ),
-                            ));
-                          };
+                                  router
+                                      .push(BeneficiaryRegistrationWrapperRoute(
+                                    initialState:
+                                        BeneficiaryRegistrationCreateState(
+                                      searchQuery: state.searchQuery,
+                                    ),
+                                  ));
+                                };
 
-                    return DigitElevatedButton(
-                      onPressed: onPressed,
-                      child: Center(
-                        child: Text(localizations.translate(
-                          i18.searchBeneficiary.beneficiaryAddActionLabel,
-                        )),
+                          return DigitElevatedButton(
+                            onPressed: onPressed,
+                            child: Center(
+                              child: Text(localizations.translate(
+                                i18.searchBeneficiary.beneficiaryAddActionLabel,
+                              )),
+                            ),
+                          );
+                        },
                       ),
-                    );
-                  },
-                ),
-              ),
-            ),
+                    ),
+                  ),
           );
         },
       ),

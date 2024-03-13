@@ -5,8 +5,8 @@ import 'package:collection/collection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:stream_transform/stream_transform.dart';
+
 import '../../data/repositories/local/address.dart';
-import '../../data/repositories/local/side_effect.dart';
 import '../../models/data_model.dart';
 import '../../utils/typedefs.dart';
 
@@ -334,6 +334,8 @@ class SearchHouseholdsBloc
     emit(state.copyWith(
       householdMembers: containers,
       loading: false,
+      offset: event.offset + event.limit,
+      limit: event.limit,
     ));
   }
 
@@ -549,6 +551,8 @@ class SearchHouseholdsBloc
     emit(state.copyWith(
       householdMembers: [...state.householdMembers, ...containers],
       loading: false,
+      offset: event.offset + event.limit,
+      limit: event.limit,
     ));
   }
 
@@ -643,6 +647,8 @@ class SearchHouseholdsState with _$SearchHouseholdsState {
   const factory SearchHouseholdsState({
     @Default(false) bool loading,
     String? searchQuery,
+    @Default(0) int offset,
+    @Default(10) int limit,
     @Default([]) List<HouseholdMemberWrapper> householdMembers,
     @Default(0) int registeredHouseholds,
     @Default(0) int deliveredInterventions,

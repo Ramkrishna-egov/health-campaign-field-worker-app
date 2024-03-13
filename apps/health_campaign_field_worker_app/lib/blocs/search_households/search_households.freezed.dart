@@ -1446,6 +1446,8 @@ abstract class SearchHouseholdsClearEvent implements SearchHouseholdsEvent {
 mixin _$SearchHouseholdsState {
   bool get loading => throw _privateConstructorUsedError;
   String? get searchQuery => throw _privateConstructorUsedError;
+  int get offset => throw _privateConstructorUsedError;
+  int get limit => throw _privateConstructorUsedError;
   List<HouseholdMemberWrapper> get householdMembers =>
       throw _privateConstructorUsedError;
   int get registeredHouseholds => throw _privateConstructorUsedError;
@@ -1467,6 +1469,8 @@ abstract class $SearchHouseholdsStateCopyWith<$Res> {
   $Res call(
       {bool loading,
       String? searchQuery,
+      int offset,
+      int limit,
       List<HouseholdMemberWrapper> householdMembers,
       int registeredHouseholds,
       int deliveredInterventions,
@@ -1490,6 +1494,8 @@ class _$SearchHouseholdsStateCopyWithImpl<$Res,
   $Res call({
     Object? loading = null,
     Object? searchQuery = freezed,
+    Object? offset = null,
+    Object? limit = null,
     Object? householdMembers = null,
     Object? registeredHouseholds = null,
     Object? deliveredInterventions = null,
@@ -1505,6 +1511,14 @@ class _$SearchHouseholdsStateCopyWithImpl<$Res,
           ? _value.searchQuery
           : searchQuery // ignore: cast_nullable_to_non_nullable
               as String?,
+      offset: null == offset
+          ? _value.offset
+          : offset // ignore: cast_nullable_to_non_nullable
+              as int,
+      limit: null == limit
+          ? _value.limit
+          : limit // ignore: cast_nullable_to_non_nullable
+              as int,
       householdMembers: null == householdMembers
           ? _value.householdMembers
           : householdMembers // ignore: cast_nullable_to_non_nullable
@@ -1540,6 +1554,8 @@ abstract class _$$_SearchHouseholdsStateCopyWith<$Res>
   $Res call(
       {bool loading,
       String? searchQuery,
+      int offset,
+      int limit,
       List<HouseholdMemberWrapper> householdMembers,
       int registeredHouseholds,
       int deliveredInterventions,
@@ -1560,6 +1576,8 @@ class __$$_SearchHouseholdsStateCopyWithImpl<$Res>
   $Res call({
     Object? loading = null,
     Object? searchQuery = freezed,
+    Object? offset = null,
+    Object? limit = null,
     Object? householdMembers = null,
     Object? registeredHouseholds = null,
     Object? deliveredInterventions = null,
@@ -1575,6 +1593,14 @@ class __$$_SearchHouseholdsStateCopyWithImpl<$Res>
           ? _value.searchQuery
           : searchQuery // ignore: cast_nullable_to_non_nullable
               as String?,
+      offset: null == offset
+          ? _value.offset
+          : offset // ignore: cast_nullable_to_non_nullable
+              as int,
+      limit: null == limit
+          ? _value.limit
+          : limit // ignore: cast_nullable_to_non_nullable
+              as int,
       householdMembers: null == householdMembers
           ? _value._householdMembers
           : householdMembers // ignore: cast_nullable_to_non_nullable
@@ -1605,6 +1631,8 @@ class _$_SearchHouseholdsState extends _SearchHouseholdsState {
   const _$_SearchHouseholdsState(
       {this.loading = false,
       this.searchQuery,
+      this.offset = 0,
+      this.limit = 10,
       final List<HouseholdMemberWrapper> householdMembers = const [],
       this.registeredHouseholds = 0,
       this.deliveredInterventions = 0,
@@ -1618,6 +1646,12 @@ class _$_SearchHouseholdsState extends _SearchHouseholdsState {
   final bool loading;
   @override
   final String? searchQuery;
+  @override
+  @JsonKey()
+  final int offset;
+  @override
+  @JsonKey()
+  final int limit;
   final List<HouseholdMemberWrapper> _householdMembers;
   @override
   @JsonKey()
@@ -1641,7 +1675,7 @@ class _$_SearchHouseholdsState extends _SearchHouseholdsState {
 
   @override
   String toString() {
-    return 'SearchHouseholdsState(loading: $loading, searchQuery: $searchQuery, householdMembers: $householdMembers, registeredHouseholds: $registeredHouseholds, deliveredInterventions: $deliveredInterventions, sideEffectsObserved: $sideEffectsObserved, referralsDone: $referralsDone)';
+    return 'SearchHouseholdsState(loading: $loading, searchQuery: $searchQuery, offset: $offset, limit: $limit, householdMembers: $householdMembers, registeredHouseholds: $registeredHouseholds, deliveredInterventions: $deliveredInterventions, sideEffectsObserved: $sideEffectsObserved, referralsDone: $referralsDone)';
   }
 
   @override
@@ -1652,6 +1686,8 @@ class _$_SearchHouseholdsState extends _SearchHouseholdsState {
             (identical(other.loading, loading) || other.loading == loading) &&
             (identical(other.searchQuery, searchQuery) ||
                 other.searchQuery == searchQuery) &&
+            (identical(other.offset, offset) || other.offset == offset) &&
+            (identical(other.limit, limit) || other.limit == limit) &&
             const DeepCollectionEquality()
                 .equals(other._householdMembers, _householdMembers) &&
             (identical(other.registeredHouseholds, registeredHouseholds) ||
@@ -1669,6 +1705,8 @@ class _$_SearchHouseholdsState extends _SearchHouseholdsState {
       runtimeType,
       loading,
       searchQuery,
+      offset,
+      limit,
       const DeepCollectionEquality().hash(_householdMembers),
       registeredHouseholds,
       deliveredInterventions,
@@ -1687,6 +1725,8 @@ abstract class _SearchHouseholdsState extends SearchHouseholdsState {
   const factory _SearchHouseholdsState(
       {final bool loading,
       final String? searchQuery,
+      final int offset,
+      final int limit,
       final List<HouseholdMemberWrapper> householdMembers,
       final int registeredHouseholds,
       final int deliveredInterventions,
@@ -1698,6 +1738,10 @@ abstract class _SearchHouseholdsState extends SearchHouseholdsState {
   bool get loading;
   @override
   String? get searchQuery;
+  @override
+  int get offset;
+  @override
+  int get limit;
   @override
   List<HouseholdMemberWrapper> get householdMembers;
   @override
