@@ -28,16 +28,12 @@ class _SearchBeneficiaryPageState
     extends LocalizedState<SearchBeneficiaryPage> {
   final TextEditingController searchController = TextEditingController();
   bool isProximityEnabled = false;
-  int offset = 0;
-  int limit = 10;
 
   double lat = 0.0;
   double long = 0.0;
 
   @override
   void initState() {
-    offset = 0;
-    limit = 10;
     super.initState();
   }
 
@@ -154,7 +150,7 @@ class _SearchBeneficiaryPageState
                                                     locationState.longitude!,
                                                 projectId: context.projectId,
                                                 maxRadius: appConfig.maxRadius!,
-                                                limit: limit,
+                                                limit: bloc.state.limit,
                                                 offset: bloc.state.offset,
                                               ));
                                             } else {
