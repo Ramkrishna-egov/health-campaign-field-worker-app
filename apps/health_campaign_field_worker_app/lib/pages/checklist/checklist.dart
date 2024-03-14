@@ -72,10 +72,18 @@ class _ChecklistPageState extends LocalizedState<ChecklistPage> {
                                 .map((e) => e.code.snakeCase.toUpperCase())
                                 .toList();
 
+                            // TODO: temporary hack for skipping referral checklists
                             final values = value.serviceDefinitionList.where(
-                              (item) => !roles
-                                  .indexOf(item.code!.split('.').last)
-                                  .isNegative,
+                              (item) =>
+                                  !roles
+                                      .indexOf(item.code!.split('.').last)
+                                      .isNegative &&
+                                  ![
+                                    "SMCMozambique.HF_RF_SICK.HEALTH_FACILITY_SUPERVISOR",
+                                    "SMCMozambique.HF_RF_DRUG_SE_PC.HEALTH_FACILITY_SUPERVISOR",
+                                    "SMCMozambique.HF_RF_FEVER.HEALTH_FACILITY_SUPERVISOR",
+                                    "SMCMozambique.HF_RF_DRUG_SE_CC.HEALTH_FACILITY_SUPERVISOR",
+                                  ].contains(item.code!),
                             );
 
                             return Column(

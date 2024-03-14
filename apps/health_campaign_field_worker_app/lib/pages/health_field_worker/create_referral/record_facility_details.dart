@@ -311,12 +311,14 @@ class _ReferralFacilityPageState extends LocalizedState<ReferralFacilityPage> {
       create: (value) => value.viewOnly
           ? DigitDateUtils.getFormattedDateToDateTime(
               DigitDateUtils.getDateFromTimestamp(
-                value.hfReferralModel?.additionalFields?.fields
-                    .where((e) =>
-                        e.key ==
-                        AdditionalFieldsType.dateOfEvaluation.toValue())
-                    .first
-                    .value,
+                int.parse(value.hfReferralModel?.additionalFields?.fields
+                        .where((e) =>
+                            e.key ==
+                            AdditionalFieldsType.dateOfEvaluation.toValue())
+                        .first
+                        .value
+                        .toString() ??
+                    DateTime.now().millisecondsSinceEpoch.toString()),
                 dateFormat: 'dd/MM/yyyy',
               ),
             )

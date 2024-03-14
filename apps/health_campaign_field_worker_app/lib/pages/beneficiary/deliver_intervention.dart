@@ -233,25 +233,6 @@ class _DeliverInterventionPageState
                                                               .value)?[0])
                                                           .toString();
 
-                                                  if (wastedCount != 'null' &&
-                                                      wastedCount.isNotEmpty &&
-                                                      int.parse(wastedCount) >
-                                                          2) {
-                                                    await DigitToast.show(
-                                                      context,
-                                                      options:
-                                                          DigitToastOptions(
-                                                        localizations.translate(i18
-                                                            .deliverIntervention
-                                                            .wastedCountValidation),
-                                                        true,
-                                                        theme,
-                                                      ),
-                                                    );
-
-                                                    return;
-                                                  }
-
                                                   final shouldSubmit =
                                                       await DigitDialog.show<
                                                           bool>(
@@ -376,28 +357,29 @@ class _DeliverInterventionPageState
                                                                 DeliverInterventionBloc>()
                                                             .add(
                                                               DeliverInterventionSubmitEvent(
-                                                                _getTaskModel(
-                                                                  context,
-                                                                  form: form,
-                                                                  oldTask: null,
-                                                                  projectBeneficiaryClientReferenceId:
-                                                                      projectBeneficiary
-                                                                          .first
-                                                                          .clientReferenceId,
-                                                                  dose:
-                                                                      deliveryInterventionstate
-                                                                          .dose,
-                                                                  cycle:
-                                                                      deliveryInterventionstate
-                                                                          .cycle,
-                                                                  deliveryStrategy:
-                                                                      getDeliveryStrategy,
-                                                                  address: householdMemberWrapper
-                                                                      .members
-                                                                      .first
-                                                                      .address
-                                                                      ?.first,
-                                                                ),
+                                                                [
+                                                                  _getTaskModel(
+                                                                    context,
+                                                                    form: form,
+                                                                    oldTask:
+                                                                        null,
+                                                                    projectBeneficiaryClientReferenceId:
+                                                                        projectBeneficiary
+                                                                            .first
+                                                                            .clientReferenceId,
+                                                                    dose: deliveryInterventionstate
+                                                                        .dose,
+                                                                    cycle: deliveryInterventionstate
+                                                                        .cycle,
+                                                                    deliveryStrategy:
+                                                                        getDeliveryStrategy,
+                                                                    address: householdMemberWrapper
+                                                                        .members
+                                                                        .first
+                                                                        .address
+                                                                        ?.first,
+                                                                  )
+                                                                ],
                                                                 false,
                                                                 context
                                                                     .boundary,

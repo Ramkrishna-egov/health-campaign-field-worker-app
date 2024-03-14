@@ -47,10 +47,14 @@ class _ViewReferralCardState extends LocalizedState<ViewReferralCard> {
   Widget build(BuildContext context) {
     // final theme = Theme.of(context);
     // final bloc = context.read<ProjectBloc>().state;
-    final dateOfEvaluation = hfReferralModel.additionalFields?.fields
+    final rawDateOfEvaluation = hfReferralModel.additionalFields?.fields
         .where((e) => e.key == AdditionalFieldsType.dateOfEvaluation.toValue())
         .first
         .value;
+
+    final dateOfEvaluation = rawDateOfEvaluation != null
+        ? int.parse(rawDateOfEvaluation.toString())
+        : null;
 
     return DigitCard(
       child: Column(
