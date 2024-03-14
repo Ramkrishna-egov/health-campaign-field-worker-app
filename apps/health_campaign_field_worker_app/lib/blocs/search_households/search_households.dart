@@ -693,7 +693,7 @@ class SearchHouseholdsState with _$SearchHouseholdsState {
     @Default(false) bool loading,
     String? searchQuery,
     @Default(0) int offset,
-    @Default(3) int limit,
+    @Default(10) int limit,
     @Default([]) List<HouseholdMemberWrapper> householdMembers,
     @Default(0) int registeredHouseholds,
     @Default(0) int deliveredInterventions,
