@@ -95,7 +95,7 @@ class _RecordPastDeliveryDetailsPageState
                               router.pop();
                               final event =
                                   context.read<DeliverInterventionBloc>();
-
+                              List<TaskModel> completedTask = [];
                               for (int i = 0;
                                   i < (futureTaskList ?? []).length;
                                   i++) {
@@ -129,21 +129,16 @@ class _RecordPastDeliveryDetailsPageState
                                     ),
                                   );
                                 }
-
-                                // Add the updated task to the event
-                                event.add(DeliverInterventionSubmitEvent(
-                                  result,
-                                  true,
-                                  context.boundary,
-                                ));
+                                completedTask.add(result);
                               }
+                              // Add the updated task to the event
+                              event.add(DeliverInterventionSubmitEvent(
+                                completedTask,
+                                true,
+                                context.boundary,
+                              ));
                               final bloc =
                                   context.read<HouseholdOverviewBloc>();
-
-                              bloc.add(HouseholdOverviewReloadEvent(
-                                projectId: context.projectId,
-                                projectBeneficiaryType: context.beneficiaryType,
-                              ));
 
                               event.add(DeliverInterventionSearchEvent(
                                 TaskSearchModel(
@@ -155,13 +150,11 @@ class _RecordPastDeliveryDetailsPageState
                                       .toList(),
                                 ),
                               ));
+
                               context.router.popUntilRouteWithName(
                                 SearchBeneficiaryRoute.name,
                               );
-                              bloc.add(HouseholdOverviewReloadEvent(
-                                projectId: context.projectId,
-                                projectBeneficiaryType: context.beneficiaryType,
-                              ));
+
                               Navigator.of(ctx).pop();
 
                               router.push(
@@ -179,7 +172,7 @@ class _RecordPastDeliveryDetailsPageState
                                   context.read<DeliverInterventionBloc>();
                               final bloc =
                                   context.read<HouseholdOverviewBloc>();
-
+                              List<TaskModel> completedTask = [];
                               for (int i = 0;
                                   i < (futureTaskList ?? []).length;
                                   i++) {
@@ -200,14 +193,14 @@ class _RecordPastDeliveryDetailsPageState
                                 // Create a new task with the updated status
                                 final result =
                                     futureTaskList![i].copyWith(status: status);
-
+                                completedTask.add(result);
                                 // Add the updated task to the event
-                                event.add(DeliverInterventionSubmitEvent(
-                                  result,
-                                  true,
-                                  context.boundary,
-                                ));
                               }
+                              event.add(DeliverInterventionSubmitEvent(
+                                completedTask,
+                                true,
+                                context.boundary,
+                              ));
                               context.router.popUntilRouteWithName(
                                 SearchBeneficiaryRoute.name,
                               );

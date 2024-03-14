@@ -193,7 +193,6 @@ class _SearchBeneficiaryPageState
                                                     setState(() {
                                                       isProximityEnabled =
                                                           value;
-                                                      // offset = 0;
                                                       lat = locationState
                                                           .latitude!;
                                                       long = locationState
