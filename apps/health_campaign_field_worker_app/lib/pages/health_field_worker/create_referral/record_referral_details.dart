@@ -727,7 +727,14 @@ class _RecordReferralDetailsPageState
                                           i18.referBeneficiary
                                               .referralCodeLabel,
                                         ),
+                                        isRequired: true,
                                         readOnly: viewOnly,
+                                        validationMessages: {
+                                          'required': (_) =>
+                                              localizations.translate(
+                                                i18.common.corecommonRequired,
+                                              ),
+                                        },
                                       ),
                                     ]),
                                   ],
@@ -845,6 +852,9 @@ class _RecordReferralDetailsPageState
               create: (value) => value.viewOnly,
             ) ??
             false,
+        validators: [
+          Validators.required,
+        ],
       ),
       _referralReason: FormControl<KeyValue>(
         value: referralState.mapOrNull(

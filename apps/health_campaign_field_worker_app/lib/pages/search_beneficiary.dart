@@ -59,6 +59,9 @@ class _SearchBeneficiaryPageState
                       searchController.text == '' &&
                       metrics.pixels != 0) {
                     final bloc = context.read<SearchHouseholdsBloc>();
+                    bloc.add(
+                      const SearchHouseholdsLoadingEvent(),
+                    );
 
                     bloc.add(SearchHouseholdsEvent.searchByProximity(
                       latitude: lat,
@@ -72,6 +75,9 @@ class _SearchBeneficiaryPageState
                       searchController.text != '' &&
                       metrics.pixels != 0) {
                     final bloc = context.read<SearchHouseholdsBloc>();
+                    bloc.add(
+                      const SearchHouseholdsLoadingEvent(),
+                    );
                     bloc.add(SearchHouseholdsEvent.searchByHouseholdHead(
                       searchText: searchController.text,
                       projectId: context.projectId,
@@ -142,6 +148,9 @@ class _SearchBeneficiaryPageState
                                           } else {
                                             if (isProximityEnabled &&
                                                 value.trim().length < 3) {
+                                              bloc.add(
+                                                const SearchHouseholdsLoadingEvent(),
+                                              );
                                               bloc.add(SearchHouseholdsEvent
                                                   .searchByProximity(
                                                 latitude:
@@ -158,7 +167,11 @@ class _SearchBeneficiaryPageState
                                                 const SearchHouseholdsClearEvent(),
                                               );
                                               bloc.add(
-                                                SearchHouseholdsSearchByHouseholdHeadEvent(
+                                                const SearchHouseholdsLoadingEvent(),
+                                              );
+                                              bloc.add(
+                                                SearchHouseholdsEvent
+                                                    .searchByHouseholdHead(
                                                   searchText: value.trim(),
                                                   projectId: context.projectId,
                                                   latitude:
@@ -214,6 +227,9 @@ class _SearchBeneficiaryPageState
                                                       final bloc = context.read<
                                                           SearchHouseholdsBloc>();
                                                       bloc.add(
+                                                        const SearchHouseholdsLoadingEvent(),
+                                                      );
+                                                      bloc.add(
                                                         SearchHouseholdsEvent
                                                             .searchByProximity(
                                                           latitude:
@@ -268,12 +284,6 @@ class _SearchBeneficiaryPageState
                           ),
                         ),
                       ),
-                      if (searchState.loading)
-                        const SliverFillRemaining(
-                          child: Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                        ),
                       BlocBuilder<LocationBloc, LocationState>(
                         builder: (context, locationState) {
                           return SliverList(
@@ -321,6 +331,12 @@ class _SearchBeneficiaryPageState
                           );
                         },
                       ),
+                      if (searchState.loading)
+                        const SliverFillRemaining(
+                          child: Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        ),
                     ],
                   );
                 },

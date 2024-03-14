@@ -53,6 +53,7 @@ class SearchHouseholdsBloc
     );
     on(_handleSearchByProximitity);
     on(_handleClear);
+    on(_handleLoad);
     on(_handleSearchByHousehold);
     on(_handleInitialize);
   }
@@ -609,6 +610,15 @@ class SearchHouseholdsBloc
     ));
   }
 
+  FutureOr<void> _handleLoad(
+    SearchHouseholdsLoadingEvent event,
+    SearchHouseholdsEmitter emit,
+  ) async {
+    emit(state.copyWith(
+      loading: true,
+    ));
+  }
+
   // Fetch the task
   Future<List<HouseholdMemberModel>> fetchHouseholdMembersBulk(
     List<String>? individualClientReferenceIds,
@@ -681,6 +691,8 @@ class SearchHouseholdsEvent with _$SearchHouseholdsEvent {
   }) = SearchHouseholdsByProximityEvent;
 
   const factory SearchHouseholdsEvent.clear() = SearchHouseholdsClearEvent;
+
+  const factory SearchHouseholdsEvent.load() = SearchHouseholdsLoadingEvent;
 }
 
 @freezed

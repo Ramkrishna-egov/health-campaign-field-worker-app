@@ -47,6 +47,7 @@ class _ReferBeneficiaryPageState extends LocalizedState<ReferBeneficiaryPage> {
   static const _referredByKey = 'referredBy';
   static const _referredToKey = 'referredTo';
   static const _referralReason = 'referralReason';
+  static const _referralCode = 'referralCode';
   static const _referralComments = 'referralComments';
   final clickedStatus = ValueNotifier<bool>(false);
 
@@ -145,6 +146,9 @@ class _ReferBeneficiaryPageState extends LocalizedState<ReferBeneficiaryPage> {
                                       final referralComment =
                                           form.control(_referralComments).value;
 
+                                      final referralCode =
+                                          form.control(_referralCode).value;
+
                                       final event =
                                           context.read<ReferralBloc>();
                                       event.add(ReferralSubmitEvent(
@@ -194,6 +198,15 @@ class _ReferBeneficiaryPageState extends LocalizedState<ReferBeneficiaryPage> {
                                                       .referralComments
                                                       .toValue(),
                                                   referralComment,
+                                                ),
+                                              if (referralCode != null &&
+                                                  referralCode
+                                                      .toString()
+                                                      .trim()
+                                                      .isNotEmpty)
+                                                AdditionalField(
+                                                  _referralCode,
+                                                  referralCode,
                                                 ),
                                             ],
                                           ),
@@ -284,7 +297,7 @@ class _ReferBeneficiaryPageState extends LocalizedState<ReferBeneficiaryPage> {
                                                         clientReferenceId,
                                                     id: null,
                                                   ),
-                                                )
+                                                ),
                                               ],
                                               false,
                                               context.boundary,
@@ -447,6 +460,18 @@ class _ReferBeneficiaryPageState extends LocalizedState<ReferBeneficiaryPage> {
                               },
                             ),
                             DigitTextFormField(
+                              formControlName: _referralCode,
+                              isRequired: true,
+                              label: localizations.translate(
+                                i18.referBeneficiary.referralCodeLabel,
+                              ),
+                              validationMessages: {
+                                'required': (_) => localizations.translate(
+                                      i18.common.corecommonRequired,
+                                    ),
+                              },
+                            ),
+                            DigitTextFormField(
                               formControlName: _referralComments,
                               label: localizations.translate(
                                 i18.referBeneficiary.referralComments,
@@ -478,6 +503,7 @@ class _ReferBeneficiaryPageState extends LocalizedState<ReferBeneficiaryPage> {
           FormControl<FacilityModel>(validators: [Validators.required]),
       _referralReason: FormControl<KeyValue>(value: null),
       _referralComments: FormControl<String>(value: null),
+      _referralCode: FormControl<String>(validators: [Validators.required]),
     });
   }
 
