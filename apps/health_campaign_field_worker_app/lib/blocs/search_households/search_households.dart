@@ -487,9 +487,7 @@ class SearchHouseholdsBloc
     List<TaskModel> tasks = [];
     if (projectBeneficiaries.isNotEmpty) {
       // Search for tasks and side effects based on project beneficiaries.
-      final stopwatch1 = Stopwatch()..start();
       tasks = await fetchTaskbyProjectBeneficiary(projectBeneficiaries);
-      print('tasks() executed in ${stopwatch1.elapsed}');
 
       sideEffects = await sideEffectDataRepository.search(SideEffectSearchModel(
         taskClientReferenceId: tasks.map((e) => e.clientReferenceId).toList(),
