@@ -332,9 +332,15 @@ class _SearchBeneficiaryPageState
                         },
                       ),
                       if (searchState.loading)
-                        const SliverFillRemaining(
-                          child: Center(
-                            child: CircularProgressIndicator(),
+                        SliverFillRemaining(
+                          child: Container(
+                            height: 150,
+                            color: Colors.white,
+                            child: Center(
+                              child: Text(
+                                '${localizations.translate(i18.common.loading)}...',
+                              ),
+                            ),
                           ),
                         ),
                     ],
