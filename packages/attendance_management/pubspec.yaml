@@ -22,6 +22,7 @@ dependencies:
   intl: ^0.18.0
   flutter_svg: ^2.0.8
   dart_mappable: ^4.2.0
+  dart_mappable_builder: ^4.2.0
 
 dev_dependencies:
   flutter_test:
