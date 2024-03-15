@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:digit_components/digit_components.dart';
 import 'package:digit_components/utils/date_utils.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +35,7 @@ class _ReferralFacilityPageState extends LocalizedState<ReferralFacilityPage> {
   static const _evaluationFacilityKey = 'evaluationFacility';
   static const _referredByKey = 'referredBy';
   final clickedStatus = ValueNotifier<bool>(false);
+  ProjectFacilityModel? projectFacility;
 
   @override
   void dispose() {
@@ -59,6 +61,10 @@ class _ReferralFacilityPageState extends LocalizedState<ReferralFacilityPage> {
             final projectFacilities = facilities
                 .where((e) => e.id != 'N/A' && e.id != 'Delivery Team')
                 .toList();
+
+            projectFacility = projectFacilities.firstWhereOrNull((element) =>
+                ctx.loggedInUser.permanentCity ==
+                facilityMap[element.facilityId]);
 
             return Scaffold(
               body: BlocBuilder<RecordHFReferralBloc, RecordHFReferralState>(
@@ -358,7 +364,7 @@ class _ReferralFacilityPageState extends LocalizedState<ReferralFacilityPage> {
                     (e) => e.id == value.hfReferralModel?.projectFacilityId,
                   )
                   .first
-              : null,
+              : projectFacility,
         ),
         validators: [Validators.required],
       ),
