@@ -11,5 +11,7 @@ enum RolesType {
   @MappableValue("FIELD_SUPERVISOR") fieldSupervisor,
   @MappableValue("SUPERUSER") superuser,
   @MappableValue("REGISTRAR") registrar,
+  @MappableValue("SUPERVISOR") supervisor,
+  @MappableValue("NATIONAL_SUPERVISOR") nationalSupervisor,
   ;
 }

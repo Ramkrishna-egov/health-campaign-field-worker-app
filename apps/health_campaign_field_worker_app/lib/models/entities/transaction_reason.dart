@@ -10,5 +10,7 @@ enum TransactionReason {
   @MappableValue("LOST_IN_TRANSIT") lostInTransit,
   @MappableValue("DAMAGED_IN_STORAGE") damagedInStorage,
   @MappableValue("DAMAGED_IN_TRANSIT") damagedInTransit,
+  @MappableValue("GAINED_IN_STORAGE") gainedInStorage,
+  @MappableValue("GAINED_IN_TRANSIT") gainedInTransit,
   ;
 }

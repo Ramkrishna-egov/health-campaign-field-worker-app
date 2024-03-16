@@ -57,6 +57,10 @@ class TransactionReasonMapper extends EnumMapper<TransactionReason> {
         return "DAMAGED_IN_STORAGE";
       case TransactionReason.damagedInTransit:
         return "DAMAGED_IN_TRANSIT";
+      case TransactionReason.gainedInStorage:
+        // TODO: Handle this case.
+      case TransactionReason.gainedInTransit:
+        // TODO: Handle this case.
     }
   }
 }

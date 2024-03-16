@@ -496,8 +496,6 @@ class _HomePageState extends LocalizedState<HomePage> {
               context.read<
                   LocalRepository<PgrServiceModel, PgrServiceSearchModel>>(),
               context.read<
-                    LocalRepository<HFReferralModel, HFReferralSearchModel>>(),
-              context.read<
                     LocalRepository<HCMAttendanceLogModel,
                         HCMAttendanceLogSearchModel>>(),
             ],
