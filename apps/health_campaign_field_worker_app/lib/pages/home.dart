@@ -176,7 +176,7 @@ class _HomePageState extends LocalizedState<HomePage> {
                       ),
                     ),
                   ),
-              ]),
+              ],),
               footer: PoweredByDigit(
                 version: Constants().version,
               ),
