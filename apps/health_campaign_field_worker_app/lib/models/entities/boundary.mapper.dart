@@ -21,6 +21,9 @@ class BoundarySearchModelMapper
   @override
   final String id = 'BoundarySearchModel';
 
+  static bool? _$isDeleted(BoundarySearchModel v) => v.isDeleted;
+  static const Field<BoundarySearchModel, bool> _f$isDeleted =
+      Field('isDeleted', _$isDeleted);
   static String? _$boundaryType(BoundarySearchModel v) => v.boundaryType;
   static const Field<BoundarySearchModel, String> _f$boundaryType =
       Field('boundaryType', _$boundaryType, opt: true);
@@ -41,19 +44,16 @@ class BoundarySearchModelMapper
   static AuditDetails? _$auditDetails(BoundarySearchModel v) => v.auditDetails;
   static const Field<BoundarySearchModel, AuditDetails> _f$auditDetails =
       Field('auditDetails', _$auditDetails, opt: true);
-  static bool? _$isDeleted(BoundarySearchModel v) => v.isDeleted;
-  static const Field<BoundarySearchModel, bool> _f$isDeleted =
-      Field('isDeleted', _$isDeleted, mode: FieldMode.member);
 
   @override
   final MappableFields<BoundarySearchModel> fields = const {
+    #isDeleted: _f$isDeleted,
     #boundaryType: _f$boundaryType,
     #tenantId: _f$tenantId,
     #code: _f$code,
     #boundaryCode: _f$boundaryCode,
     #additionalFields: _f$additionalFields,
     #auditDetails: _f$auditDetails,
-    #isDeleted: _f$isDeleted,
   };
   @override
   final bool ignoreNull = true;
@@ -67,7 +67,7 @@ class BoundarySearchModelMapper
       EntitySearchModelMapper.ensureInitialized();
 
   static BoundarySearchModel _instantiate(DecodingData data) {
-    return BoundarySearchModel.ignoreDeleted(
+    return BoundarySearchModel.ignoreDeleted(data.dec(_f$isDeleted),
         boundaryType: data.dec(_f$boundaryType),
         tenantId: data.dec(_f$tenantId),
         code: data.dec(_f$code),
@@ -140,7 +140,8 @@ abstract class BoundarySearchModelCopyWith<$R, $In extends BoundarySearchModel,
   AuditDetailsCopyWith<$R, AuditDetails, AuditDetails>? get auditDetails;
   @override
   $R call(
-      {String? boundaryType,
+      {bool? isDeleted,
+      String? boundaryType,
       String? tenantId,
       String? code,
       String? boundaryCode,
@@ -167,13 +168,15 @@ class _BoundarySearchModelCopyWithImpl<$R, $Out>
       $value.auditDetails?.copyWith.$chain((v) => call(auditDetails: v));
   @override
   $R call(
-          {Object? boundaryType = $none,
+          {Object? isDeleted = $none,
+          Object? boundaryType = $none,
           Object? tenantId = $none,
           Object? code = $none,
           Object? boundaryCode = $none,
           Object? additionalFields = $none,
           Object? auditDetails = $none}) =>
       $apply(FieldCopyWithData({
+        if (isDeleted != $none) #isDeleted: isDeleted,
         if (boundaryType != $none) #boundaryType: boundaryType,
         if (tenantId != $none) #tenantId: tenantId,
         if (code != $none) #code: code,
@@ -185,6 +188,7 @@ class _BoundarySearchModelCopyWithImpl<$R, $Out>
   BoundarySearchModel $make(
           CopyWithData data) =>
       BoundarySearchModel.ignoreDeleted(
+          data.get(#isDeleted, or: $value.isDeleted),
           boundaryType: data.get(#boundaryType, or: $value.boundaryType),
           tenantId: data.get(#tenantId, or: $value.tenantId),
           code: data.get(#code, or: $value.code),

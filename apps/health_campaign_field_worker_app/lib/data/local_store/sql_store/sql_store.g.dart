@@ -3,7 +3,7 @@
 part of 'sql_store.dart';
 
 // ignore_for_file: type=lint
-class $AddressTable extends Address with TableInfo<$AddressTable, Address> {
+class $AddressTable extends at.Address with TableInfo<$AddressTable, Address> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
