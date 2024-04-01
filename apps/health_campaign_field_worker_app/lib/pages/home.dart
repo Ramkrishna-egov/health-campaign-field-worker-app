@@ -294,8 +294,7 @@ class _HomePageState extends LocalizedState<HomePage> {
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 
   void _showSyncFailedDialog(
