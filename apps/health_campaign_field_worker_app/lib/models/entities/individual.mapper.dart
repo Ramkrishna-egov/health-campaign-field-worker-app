@@ -27,6 +27,12 @@ class IndividualSearchModelMapper
   static String? _$dateOfBirth(IndividualSearchModel v) => v.dateOfBirth;
   static const Field<IndividualSearchModel, String> _f$dateOfBirth =
       Field('dateOfBirth', _$dateOfBirth, opt: true);
+  static int? _$limit(IndividualSearchModel v) => v.limit;
+  static const Field<IndividualSearchModel, int> _f$limit =
+      Field('limit', _$limit, opt: true);
+  static int? _$offset(IndividualSearchModel v) => v.offset;
+  static const Field<IndividualSearchModel, int> _f$offset =
+      Field('offset', _$offset, opt: true);
   static List<String>? _$clientReferenceId(IndividualSearchModel v) =>
       v.clientReferenceId;
   static const Field<IndividualSearchModel, List<String>> _f$clientReferenceId =
@@ -47,28 +53,30 @@ class IndividualSearchModelMapper
   static String? _$boundaryCode(IndividualSearchModel v) => v.boundaryCode;
   static const Field<IndividualSearchModel, String> _f$boundaryCode =
       Field('boundaryCode', _$boundaryCode, opt: true);
+  static AuditDetails? _$auditDetails(IndividualSearchModel v) =>
+      v.auditDetails;
+  static const Field<IndividualSearchModel, AuditDetails> _f$auditDetails =
+      Field('auditDetails', _$auditDetails, mode: FieldMode.member);
   static AdditionalFields? _$additionalFields(IndividualSearchModel v) =>
       v.additionalFields;
   static const Field<IndividualSearchModel, AdditionalFields>
       _f$additionalFields =
-      Field('additionalFields', _$additionalFields, opt: true);
-  static AuditDetails? _$auditDetails(IndividualSearchModel v) =>
-      v.auditDetails;
-  static const Field<IndividualSearchModel, AuditDetails> _f$auditDetails =
-      Field('auditDetails', _$auditDetails, opt: true);
+      Field('additionalFields', _$additionalFields, mode: FieldMode.member);
 
   @override
   final MappableFields<IndividualSearchModel> fields = const {
     #id: _f$id,
     #dateOfBirth: _f$dateOfBirth,
+    #limit: _f$limit,
+    #offset: _f$offset,
     #clientReferenceId: _f$clientReferenceId,
     #tenantId: _f$tenantId,
     #name: _f$name,
     #gender: _f$gender,
     #identifiers: _f$identifiers,
     #boundaryCode: _f$boundaryCode,
-    #additionalFields: _f$additionalFields,
     #auditDetails: _f$auditDetails,
+    #additionalFields: _f$additionalFields,
   };
   @override
   final bool ignoreNull = true;
@@ -85,14 +93,14 @@ class IndividualSearchModelMapper
     return IndividualSearchModel.ignoreDeleted(
         id: data.dec(_f$id),
         dateOfBirth: data.dec(_f$dateOfBirth),
+        limit: data.dec(_f$limit),
+        offset: data.dec(_f$offset),
         clientReferenceId: data.dec(_f$clientReferenceId),
         tenantId: data.dec(_f$tenantId),
         name: data.dec(_f$name),
         gender: data.dec(_f$gender),
         identifiers: data.dec(_f$identifiers),
-        boundaryCode: data.dec(_f$boundaryCode),
-        additionalFields: data.dec(_f$additionalFields),
-        auditDetails: data.dec(_f$auditDetails));
+        boundaryCode: data.dec(_f$boundaryCode));
   }
 
   @override
@@ -163,22 +171,17 @@ abstract class IndividualSearchModelCopyWith<
       IdentifierSearchModelCopyWith<$R, IdentifierSearchModel,
           IdentifierSearchModel>>? get identifiers;
   @override
-  AdditionalFieldsCopyWith<$R, AdditionalFields, AdditionalFields>?
-      get additionalFields;
-  @override
-  AuditDetailsCopyWith<$R, AuditDetails, AuditDetails>? get auditDetails;
-  @override
   $R call(
       {String? id,
       String? dateOfBirth,
+      int? limit,
+      int? offset,
       List<String>? clientReferenceId,
       String? tenantId,
       NameSearchModel? name,
       Gender? gender,
       List<IdentifierSearchModel>? identifiers,
-      String? boundaryCode,
-      AdditionalFields? additionalFields,
-      AuditDetails? auditDetails});
+      String? boundaryCode});
   IndividualSearchModelCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -212,52 +215,43 @@ class _IndividualSearchModelCopyWithImpl<$R, $Out>
           (v) => call(identifiers: v))
       : null;
   @override
-  AdditionalFieldsCopyWith<$R, AdditionalFields, AdditionalFields>?
-      get additionalFields => $value.additionalFields?.copyWith
-          .$chain((v) => call(additionalFields: v));
-  @override
-  AuditDetailsCopyWith<$R, AuditDetails, AuditDetails>? get auditDetails =>
-      $value.auditDetails?.copyWith.$chain((v) => call(auditDetails: v));
-  @override
   $R call(
           {Object? id = $none,
           Object? dateOfBirth = $none,
+          Object? limit = $none,
+          Object? offset = $none,
           Object? clientReferenceId = $none,
           Object? tenantId = $none,
           Object? name = $none,
           Object? gender = $none,
           Object? identifiers = $none,
-          Object? boundaryCode = $none,
-          Object? additionalFields = $none,
-          Object? auditDetails = $none}) =>
+          Object? boundaryCode = $none}) =>
       $apply(FieldCopyWithData({
         if (id != $none) #id: id,
         if (dateOfBirth != $none) #dateOfBirth: dateOfBirth,
+        if (limit != $none) #limit: limit,
+        if (offset != $none) #offset: offset,
         if (clientReferenceId != $none) #clientReferenceId: clientReferenceId,
         if (tenantId != $none) #tenantId: tenantId,
         if (name != $none) #name: name,
         if (gender != $none) #gender: gender,
         if (identifiers != $none) #identifiers: identifiers,
-        if (boundaryCode != $none) #boundaryCode: boundaryCode,
-        if (additionalFields != $none) #additionalFields: additionalFields,
-        if (auditDetails != $none) #auditDetails: auditDetails
+        if (boundaryCode != $none) #boundaryCode: boundaryCode
       }));
   @override
-  IndividualSearchModel $make(
-          CopyWithData data) =>
+  IndividualSearchModel $make(CopyWithData data) =>
       IndividualSearchModel.ignoreDeleted(
           id: data.get(#id, or: $value.id),
           dateOfBirth: data.get(#dateOfBirth, or: $value.dateOfBirth),
+          limit: data.get(#limit, or: $value.limit),
+          offset: data.get(#offset, or: $value.offset),
           clientReferenceId:
               data.get(#clientReferenceId, or: $value.clientReferenceId),
           tenantId: data.get(#tenantId, or: $value.tenantId),
           name: data.get(#name, or: $value.name),
           gender: data.get(#gender, or: $value.gender),
           identifiers: data.get(#identifiers, or: $value.identifiers),
-          boundaryCode: data.get(#boundaryCode, or: $value.boundaryCode),
-          additionalFields:
-              data.get(#additionalFields, or: $value.additionalFields),
-          auditDetails: data.get(#auditDetails, or: $value.auditDetails));
+          boundaryCode: data.get(#boundaryCode, or: $value.boundaryCode));
 
   @override
   IndividualSearchModelCopyWith<$R2, IndividualSearchModel, $Out2>

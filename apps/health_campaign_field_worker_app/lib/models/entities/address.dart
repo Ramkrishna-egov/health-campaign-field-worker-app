@@ -5,8 +5,10 @@ import 'package:drift/drift.dart';
 import '../data_model.dart';
 import '../../data/local_store/sql_store/sql_store.dart';
 
-@MappableClass(ignoreNull: true)
-class AddressSearchModel extends EntitySearchModel {
+part 'address.mapper.dart';
+
+@MappableClass(ignoreNull: true, discriminatorValue: MappableClass.useAsDefault)
+class AddressSearchModel extends EntitySearchModel with AddressSearchModelMappable {
   final String? id;
   final double? latitude;
   final double? longitude;
@@ -37,14 +39,11 @@ class AddressSearchModel extends EntitySearchModel {
     this.maxRadius,
     this.tenantId,
     super.boundaryCode,
-    super.additionalFields,
-    super.auditDetails,
   }):  super(isDeleted: false);
-  
 }
 
-@MappableClass(ignoreNull: true)
-class AddressModel extends EntityModel {
+@MappableClass(ignoreNull: true, discriminatorValue: MappableClass.useAsDefault)
+class AddressModel extends EntityModel with AddressModelMappable {
 
   static const schemaName = 'Address';
 
@@ -93,7 +92,6 @@ class AddressModel extends EntityModel {
     this.type,
     this.locality,
     super.auditDetails,super.clientAuditDetails,
-    
     super.isDeleted = false,
   }): super();
 
@@ -134,11 +132,12 @@ class AddressModel extends EntityModel {
   }
 }
 
-@MappableClass(ignoreNull: true)
-class AddressAdditionalFields extends AdditionalFields {
+@MappableClass(ignoreNull: true, discriminatorValue: MappableClass.useAsDefault)
+class AddressAdditionalFields extends AdditionalFields with AddressAdditionalFieldsMappable {
   AddressAdditionalFields({
     super.schema = 'Address',
     required super.version,
     super.fields,
   });
 }
+

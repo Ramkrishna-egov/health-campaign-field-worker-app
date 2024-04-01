@@ -41,6 +41,9 @@ class BoundarySearchModelMapper
   static AuditDetails? _$auditDetails(BoundarySearchModel v) => v.auditDetails;
   static const Field<BoundarySearchModel, AuditDetails> _f$auditDetails =
       Field('auditDetails', _$auditDetails, opt: true);
+  static bool? _$isDeleted(BoundarySearchModel v) => v.isDeleted;
+  static const Field<BoundarySearchModel, bool> _f$isDeleted =
+      Field('isDeleted', _$isDeleted, mode: FieldMode.member);
 
   @override
   final MappableFields<BoundarySearchModel> fields = const {
@@ -50,6 +53,7 @@ class BoundarySearchModelMapper
     #boundaryCode: _f$boundaryCode,
     #additionalFields: _f$additionalFields,
     #auditDetails: _f$auditDetails,
+    #isDeleted: _f$isDeleted,
   };
   @override
   final bool ignoreNull = true;
@@ -231,6 +235,9 @@ class BoundaryModelMapper extends ClassMapperBase<BoundaryModel> {
   static String? _$tenantId(BoundaryModel v) => v.tenantId;
   static const Field<BoundaryModel, String> _f$tenantId =
       Field('tenantId', _$tenantId, opt: true);
+  static bool? _$isDeleted(BoundaryModel v) => v.isDeleted;
+  static const Field<BoundaryModel, bool> _f$isDeleted =
+      Field('isDeleted', _$isDeleted, opt: true);
   static int? _$boundaryNum(BoundaryModel v) => v.boundaryNum;
   static const Field<BoundaryModel, int> _f$boundaryNum =
       Field('boundaryNum', _$boundaryNum, opt: true);
@@ -243,9 +250,6 @@ class BoundaryModelMapper extends ClassMapperBase<BoundaryModel> {
   static AuditDetails? _$auditDetails(BoundaryModel v) => v.auditDetails;
   static const Field<BoundaryModel, AuditDetails> _f$auditDetails =
       Field('auditDetails', _$auditDetails, opt: true);
-  static bool? _$isDeleted(BoundaryModel v) => v.isDeleted;
-  static const Field<BoundaryModel, bool> _f$isDeleted =
-      Field('isDeleted', _$isDeleted, opt: true, def: false);
   static ClientAuditDetails? _$clientAuditDetails(BoundaryModel v) =>
       v.clientAuditDetails;
   static const Field<BoundaryModel, ClientAuditDetails> _f$clientAuditDetails =
@@ -260,11 +264,11 @@ class BoundaryModelMapper extends ClassMapperBase<BoundaryModel> {
     #longitude: _f$longitude,
     #materializedPath: _f$materializedPath,
     #tenantId: _f$tenantId,
+    #isDeleted: _f$isDeleted,
     #boundaryNum: _f$boundaryNum,
     #rowVersion: _f$rowVersion,
     #children: _f$children,
     #auditDetails: _f$auditDetails,
-    #isDeleted: _f$isDeleted,
     #clientAuditDetails: _f$clientAuditDetails,
   };
   @override
@@ -279,11 +283,11 @@ class BoundaryModelMapper extends ClassMapperBase<BoundaryModel> {
         longitude: data.dec(_f$longitude),
         materializedPath: data.dec(_f$materializedPath),
         tenantId: data.dec(_f$tenantId),
+        isDeleted: data.dec(_f$isDeleted),
         boundaryNum: data.dec(_f$boundaryNum),
         rowVersion: data.dec(_f$rowVersion),
         children: data.dec(_f$children),
-        auditDetails: data.dec(_f$auditDetails),
-        isDeleted: data.dec(_f$isDeleted));
+        auditDetails: data.dec(_f$auditDetails));
   }
 
   @override
@@ -354,11 +358,11 @@ abstract class BoundaryModelCopyWith<$R, $In extends BoundaryModel, $Out>
       String? longitude,
       String? materializedPath,
       String? tenantId,
+      bool? isDeleted,
       int? boundaryNum,
       int? rowVersion,
       List<BoundaryModel>? children,
-      AuditDetails? auditDetails,
-      bool? isDeleted});
+      AuditDetails? auditDetails});
   BoundaryModelCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -387,11 +391,11 @@ class _BoundaryModelCopyWithImpl<$R, $Out>
           Object? longitude = $none,
           Object? materializedPath = $none,
           Object? tenantId = $none,
+          Object? isDeleted = $none,
           Object? boundaryNum = $none,
           Object? rowVersion = $none,
           List<BoundaryModel>? children,
-          Object? auditDetails = $none,
-          Object? isDeleted = $none}) =>
+          Object? auditDetails = $none}) =>
       $apply(FieldCopyWithData({
         if (code != $none) #code: code,
         if (name != $none) #name: name,
@@ -400,11 +404,11 @@ class _BoundaryModelCopyWithImpl<$R, $Out>
         if (longitude != $none) #longitude: longitude,
         if (materializedPath != $none) #materializedPath: materializedPath,
         if (tenantId != $none) #tenantId: tenantId,
+        if (isDeleted != $none) #isDeleted: isDeleted,
         if (boundaryNum != $none) #boundaryNum: boundaryNum,
         if (rowVersion != $none) #rowVersion: rowVersion,
         if (children != null) #children: children,
-        if (auditDetails != $none) #auditDetails: auditDetails,
-        if (isDeleted != $none) #isDeleted: isDeleted
+        if (auditDetails != $none) #auditDetails: auditDetails
       }));
   @override
   BoundaryModel $make(CopyWithData data) => BoundaryModel(
@@ -416,11 +420,11 @@ class _BoundaryModelCopyWithImpl<$R, $Out>
       materializedPath:
           data.get(#materializedPath, or: $value.materializedPath),
       tenantId: data.get(#tenantId, or: $value.tenantId),
+      isDeleted: data.get(#isDeleted, or: $value.isDeleted),
       boundaryNum: data.get(#boundaryNum, or: $value.boundaryNum),
       rowVersion: data.get(#rowVersion, or: $value.rowVersion),
       children: data.get(#children, or: $value.children),
-      auditDetails: data.get(#auditDetails, or: $value.auditDetails),
-      isDeleted: data.get(#isDeleted, or: $value.isDeleted));
+      auditDetails: data.get(#auditDetails, or: $value.auditDetails));
 
   @override
   BoundaryModelCopyWith<$R2, BoundaryModel, $Out2> $chain<$R2, $Out2>(

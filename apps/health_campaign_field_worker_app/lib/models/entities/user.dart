@@ -5,8 +5,10 @@ import 'package:drift/drift.dart';
 import '../data_model.dart';
 import '../../data/local_store/sql_store/sql_store.dart';
 
-@MappableClass(ignoreNull: true)
-class UserSearchModel extends EntitySearchModel {
+part 'user.mapper.dart';
+
+@MappableClass(ignoreNull: true, discriminatorValue: MappableClass.useAsDefault)
+class UserSearchModel extends EntitySearchModel with UserSearchModelMappable {
   final String? id;
   final String? userName;
   final List<String>? uuid;
@@ -25,13 +27,11 @@ class UserSearchModel extends EntitySearchModel {
     this.userName,
     this.uuid,
     super.boundaryCode,
-        super.additionalFields,
-    super.auditDetails,
   }):  super(isDeleted: false);
 }
 
-@MappableClass(ignoreNull: true)
-class UserModel extends EntityModel {
+@MappableClass(ignoreNull: true, discriminatorValue: MappableClass.useAsDefault)
+class UserModel extends EntityModel with UserModelMappable {
 
   static const schemaName = 'User';
 
@@ -164,11 +164,12 @@ class UserModel extends EntityModel {
   }
 }
 
-@MappableClass(ignoreNull: true)
-class UserAdditionalFields extends AdditionalFields {
+@MappableClass(ignoreNull: true, discriminatorValue: MappableClass.useAsDefault)
+class UserAdditionalFields extends AdditionalFields with UserAdditionalFieldsMappable {
   UserAdditionalFields({
     super.schema = 'User',
     required super.version,
     super.fields,
   });
 }
+

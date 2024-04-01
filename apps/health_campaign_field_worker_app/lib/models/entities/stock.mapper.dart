@@ -46,18 +46,6 @@ class StockSearchModelMapper extends SubClassMapperBase<StockSearchModel> {
       v.transactingPartyType;
   static const Field<StockSearchModel, String> _f$transactingPartyType =
       Field('transactingPartyType', _$transactingPartyType, opt: true);
-  static String? _$receiverId(StockSearchModel v) => v.receiverId;
-  static const Field<StockSearchModel, String> _f$receiverId =
-      Field('receiverId', _$receiverId, opt: true);
-  static String? _$receiverType(StockSearchModel v) => v.receiverType;
-  static const Field<StockSearchModel, String> _f$receiverType =
-      Field('receiverType', _$receiverType, opt: true);
-  static String? _$senderId(StockSearchModel v) => v.senderId;
-  static const Field<StockSearchModel, String> _f$senderId =
-      Field('senderId', _$senderId, opt: true);
-  static String? _$senderType(StockSearchModel v) => v.senderType;
-  static const Field<StockSearchModel, String> _f$senderType =
-      Field('senderType', _$senderType, opt: true);
   static List<String>? _$clientReferenceId(StockSearchModel v) =>
       v.clientReferenceId;
   static const Field<StockSearchModel, List<String>> _f$clientReferenceId =
@@ -72,16 +60,22 @@ class StockSearchModelMapper extends SubClassMapperBase<StockSearchModel> {
   static const Field<StockSearchModel, List<TransactionReason>>
       _f$transactionReason =
       Field('transactionReason', _$transactionReason, opt: true);
+  static int? _$dateOfEntry(StockSearchModel v) => v.dateOfEntry;
+  static const Field<StockSearchModel, int> _f$dateOfEntry =
+      Field('dateOfEntry', _$dateOfEntry, opt: true);
   static String? _$boundaryCode(StockSearchModel v) => v.boundaryCode;
   static const Field<StockSearchModel, String> _f$boundaryCode =
       Field('boundaryCode', _$boundaryCode, opt: true);
+  static AuditDetails? _$auditDetails(StockSearchModel v) => v.auditDetails;
+  static const Field<StockSearchModel, AuditDetails> _f$auditDetails =
+      Field('auditDetails', _$auditDetails, mode: FieldMode.member);
   static AdditionalFields? _$additionalFields(StockSearchModel v) =>
       v.additionalFields;
   static const Field<StockSearchModel, AdditionalFields> _f$additionalFields =
-      Field('additionalFields', _$additionalFields, opt: true);
-  static AuditDetails? _$auditDetails(StockSearchModel v) => v.auditDetails;
-  static const Field<StockSearchModel, AuditDetails> _f$auditDetails =
-      Field('auditDetails', _$auditDetails, opt: true);
+      Field('additionalFields', _$additionalFields, mode: FieldMode.member);
+  static DateTime? _$dateOfEntryTime(StockSearchModel v) => v.dateOfEntryTime;
+  static const Field<StockSearchModel, DateTime> _f$dateOfEntryTime =
+      Field('dateOfEntryTime', _$dateOfEntryTime, mode: FieldMode.member);
 
   @override
   final MappableFields<StockSearchModel> fields = const {
@@ -93,16 +87,14 @@ class StockSearchModelMapper extends SubClassMapperBase<StockSearchModel> {
     #referenceIdType: _f$referenceIdType,
     #transactingPartyId: _f$transactingPartyId,
     #transactingPartyType: _f$transactingPartyType,
-    #receiverId: _f$receiverId,
-    #receiverType: _f$receiverType,
-    #senderId: _f$senderId,
-    #senderType: _f$senderType,
     #clientReferenceId: _f$clientReferenceId,
     #transactionType: _f$transactionType,
     #transactionReason: _f$transactionReason,
+    #dateOfEntry: _f$dateOfEntry,
     #boundaryCode: _f$boundaryCode,
-    #additionalFields: _f$additionalFields,
     #auditDetails: _f$auditDetails,
+    #additionalFields: _f$additionalFields,
+    #dateOfEntryTime: _f$dateOfEntryTime,
   };
   @override
   final bool ignoreNull = true;
@@ -125,16 +117,11 @@ class StockSearchModelMapper extends SubClassMapperBase<StockSearchModel> {
         referenceIdType: data.dec(_f$referenceIdType),
         transactingPartyId: data.dec(_f$transactingPartyId),
         transactingPartyType: data.dec(_f$transactingPartyType),
-        receiverId: data.dec(_f$receiverId),
-        receiverType: data.dec(_f$receiverType),
-        senderId: data.dec(_f$senderId),
-        senderType: data.dec(_f$senderType),
         clientReferenceId: data.dec(_f$clientReferenceId),
         transactionType: data.dec(_f$transactionType),
         transactionReason: data.dec(_f$transactionReason),
-        boundaryCode: data.dec(_f$boundaryCode),
-        additionalFields: data.dec(_f$additionalFields),
-        auditDetails: data.dec(_f$auditDetails));
+        dateOfEntry: data.dec(_f$dateOfEntry),
+        boundaryCode: data.dec(_f$boundaryCode));
   }
 
   @override
@@ -202,11 +189,6 @@ abstract class StockSearchModelCopyWith<$R, $In extends StockSearchModel, $Out>
           ObjectCopyWith<$R, TransactionReason, TransactionReason>>?
       get transactionReason;
   @override
-  AdditionalFieldsCopyWith<$R, AdditionalFields, AdditionalFields>?
-      get additionalFields;
-  @override
-  AuditDetailsCopyWith<$R, AuditDetails, AuditDetails>? get auditDetails;
-  @override
   $R call(
       {String? id,
       String? tenantId,
@@ -216,16 +198,11 @@ abstract class StockSearchModelCopyWith<$R, $In extends StockSearchModel, $Out>
       String? referenceIdType,
       String? transactingPartyId,
       String? transactingPartyType,
-      String? receiverId,
-      String? receiverType,
-      String? senderId,
-      String? senderType,
       List<String>? clientReferenceId,
       List<TransactionType>? transactionType,
       List<TransactionReason>? transactionReason,
-      String? boundaryCode,
-      AdditionalFields? additionalFields,
-      AuditDetails? auditDetails});
+      int? dateOfEntry,
+      String? boundaryCode});
   StockSearchModelCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -265,13 +242,6 @@ class _StockSearchModelCopyWithImpl<$R, $Out>
               (v) => call(transactionReason: v))
           : null;
   @override
-  AdditionalFieldsCopyWith<$R, AdditionalFields, AdditionalFields>?
-      get additionalFields => $value.additionalFields?.copyWith
-          .$chain((v) => call(additionalFields: v));
-  @override
-  AuditDetailsCopyWith<$R, AuditDetails, AuditDetails>? get auditDetails =>
-      $value.auditDetails?.copyWith.$chain((v) => call(auditDetails: v));
-  @override
   $R call(
           {Object? id = $none,
           Object? tenantId = $none,
@@ -281,16 +251,11 @@ class _StockSearchModelCopyWithImpl<$R, $Out>
           Object? referenceIdType = $none,
           Object? transactingPartyId = $none,
           Object? transactingPartyType = $none,
-          Object? receiverId = $none,
-          Object? receiverType = $none,
-          Object? senderId = $none,
-          Object? senderType = $none,
           Object? clientReferenceId = $none,
           Object? transactionType = $none,
           Object? transactionReason = $none,
-          Object? boundaryCode = $none,
-          Object? additionalFields = $none,
-          Object? auditDetails = $none}) =>
+          Object? dateOfEntry = $none,
+          Object? boundaryCode = $none}) =>
       $apply(FieldCopyWithData({
         if (id != $none) #id: id,
         if (tenantId != $none) #tenantId: tenantId,
@@ -302,16 +267,11 @@ class _StockSearchModelCopyWithImpl<$R, $Out>
           #transactingPartyId: transactingPartyId,
         if (transactingPartyType != $none)
           #transactingPartyType: transactingPartyType,
-        if (receiverId != $none) #receiverId: receiverId,
-        if (receiverType != $none) #receiverType: receiverType,
-        if (senderId != $none) #senderId: senderId,
-        if (senderType != $none) #senderType: senderType,
         if (clientReferenceId != $none) #clientReferenceId: clientReferenceId,
         if (transactionType != $none) #transactionType: transactionType,
         if (transactionReason != $none) #transactionReason: transactionReason,
-        if (boundaryCode != $none) #boundaryCode: boundaryCode,
-        if (additionalFields != $none) #additionalFields: additionalFields,
-        if (auditDetails != $none) #auditDetails: auditDetails
+        if (dateOfEntry != $none) #dateOfEntry: dateOfEntry,
+        if (boundaryCode != $none) #boundaryCode: boundaryCode
       }));
   @override
   StockSearchModel $make(CopyWithData data) => StockSearchModel.ignoreDeleted(
@@ -326,19 +286,13 @@ class _StockSearchModelCopyWithImpl<$R, $Out>
           data.get(#transactingPartyId, or: $value.transactingPartyId),
       transactingPartyType:
           data.get(#transactingPartyType, or: $value.transactingPartyType),
-      receiverId: data.get(#receiverId, or: $value.receiverId),
-      receiverType: data.get(#receiverType, or: $value.receiverType),
-      senderId: data.get(#senderId, or: $value.senderId),
-      senderType: data.get(#senderType, or: $value.senderType),
       clientReferenceId:
           data.get(#clientReferenceId, or: $value.clientReferenceId),
       transactionType: data.get(#transactionType, or: $value.transactionType),
       transactionReason:
           data.get(#transactionReason, or: $value.transactionReason),
-      boundaryCode: data.get(#boundaryCode, or: $value.boundaryCode),
-      additionalFields:
-          data.get(#additionalFields, or: $value.additionalFields),
-      auditDetails: data.get(#auditDetails, or: $value.auditDetails));
+      dateOfEntry: data.get(#dateOfEntry, or: $value.dateOfEntry),
+      boundaryCode: data.get(#boundaryCode, or: $value.boundaryCode));
 
   @override
   StockSearchModelCopyWith<$R2, StockSearchModel, $Out2> $chain<$R2, $Out2>(
@@ -393,18 +347,6 @@ class StockModelMapper extends SubClassMapperBase<StockModel> {
   static String? _$waybillNumber(StockModel v) => v.waybillNumber;
   static const Field<StockModel, String> _f$waybillNumber =
       Field('waybillNumber', _$waybillNumber, opt: true);
-  static String? _$receiverId(StockModel v) => v.receiverId;
-  static const Field<StockModel, String> _f$receiverId =
-      Field('receiverId', _$receiverId, opt: true);
-  static String? _$receiverType(StockModel v) => v.receiverType;
-  static const Field<StockModel, String> _f$receiverType =
-      Field('receiverType', _$receiverType, opt: true);
-  static String? _$senderId(StockModel v) => v.senderId;
-  static const Field<StockModel, String> _f$senderId =
-      Field('senderId', _$senderId, opt: true);
-  static String? _$senderType(StockModel v) => v.senderType;
-  static const Field<StockModel, String> _f$senderType =
-      Field('senderType', _$senderType, opt: true);
   static bool? _$nonRecoverableError(StockModel v) => v.nonRecoverableError;
   static const Field<StockModel, bool> _f$nonRecoverableError = Field(
       'nonRecoverableError', _$nonRecoverableError,
@@ -422,6 +364,9 @@ class StockModelMapper extends SubClassMapperBase<StockModel> {
       v.transactionReason;
   static const Field<StockModel, TransactionReason> _f$transactionReason =
       Field('transactionReason', _$transactionReason, opt: true);
+  static int? _$dateOfEntry(StockModel v) => v.dateOfEntry;
+  static const Field<StockModel, int> _f$dateOfEntry =
+      Field('dateOfEntry', _$dateOfEntry, opt: true);
   static AuditDetails? _$auditDetails(StockModel v) => v.auditDetails;
   static const Field<StockModel, AuditDetails> _f$auditDetails =
       Field('auditDetails', _$auditDetails, opt: true);
@@ -432,6 +377,9 @@ class StockModelMapper extends SubClassMapperBase<StockModel> {
   static bool? _$isDeleted(StockModel v) => v.isDeleted;
   static const Field<StockModel, bool> _f$isDeleted =
       Field('isDeleted', _$isDeleted, opt: true, def: false);
+  static DateTime? _$dateOfEntryTime(StockModel v) => v.dateOfEntryTime;
+  static const Field<StockModel, DateTime> _f$dateOfEntryTime =
+      Field('dateOfEntryTime', _$dateOfEntryTime, mode: FieldMode.member);
 
   @override
   final MappableFields<StockModel> fields = const {
@@ -446,18 +394,16 @@ class StockModelMapper extends SubClassMapperBase<StockModel> {
     #transactingPartyType: _f$transactingPartyType,
     #quantity: _f$quantity,
     #waybillNumber: _f$waybillNumber,
-    #receiverId: _f$receiverId,
-    #receiverType: _f$receiverType,
-    #senderId: _f$senderId,
-    #senderType: _f$senderType,
     #nonRecoverableError: _f$nonRecoverableError,
     #clientReferenceId: _f$clientReferenceId,
     #rowVersion: _f$rowVersion,
     #transactionType: _f$transactionType,
     #transactionReason: _f$transactionReason,
+    #dateOfEntry: _f$dateOfEntry,
     #auditDetails: _f$auditDetails,
     #clientAuditDetails: _f$clientAuditDetails,
     #isDeleted: _f$isDeleted,
+    #dateOfEntryTime: _f$dateOfEntryTime,
   };
   @override
   final bool ignoreNull = true;
@@ -483,15 +429,12 @@ class StockModelMapper extends SubClassMapperBase<StockModel> {
         transactingPartyType: data.dec(_f$transactingPartyType),
         quantity: data.dec(_f$quantity),
         waybillNumber: data.dec(_f$waybillNumber),
-        receiverId: data.dec(_f$receiverId),
-        receiverType: data.dec(_f$receiverType),
-        senderId: data.dec(_f$senderId),
-        senderType: data.dec(_f$senderType),
         nonRecoverableError: data.dec(_f$nonRecoverableError),
         clientReferenceId: data.dec(_f$clientReferenceId),
         rowVersion: data.dec(_f$rowVersion),
         transactionType: data.dec(_f$transactionType),
         transactionReason: data.dec(_f$transactionReason),
+        dateOfEntry: data.dec(_f$dateOfEntry),
         auditDetails: data.dec(_f$auditDetails),
         clientAuditDetails: data.dec(_f$clientAuditDetails),
         isDeleted: data.dec(_f$isDeleted));
@@ -570,15 +513,12 @@ abstract class StockModelCopyWith<$R, $In extends StockModel, $Out>
       String? transactingPartyType,
       String? quantity,
       String? waybillNumber,
-      String? receiverId,
-      String? receiverType,
-      String? senderId,
-      String? senderType,
       bool? nonRecoverableError,
       String? clientReferenceId,
       int? rowVersion,
       TransactionType? transactionType,
       TransactionReason? transactionReason,
+      int? dateOfEntry,
       AuditDetails? auditDetails,
       ClientAuditDetails? clientAuditDetails,
       bool? isDeleted});
@@ -618,15 +558,12 @@ class _StockModelCopyWithImpl<$R, $Out>
           Object? transactingPartyType = $none,
           Object? quantity = $none,
           Object? waybillNumber = $none,
-          Object? receiverId = $none,
-          Object? receiverType = $none,
-          Object? senderId = $none,
-          Object? senderType = $none,
           Object? nonRecoverableError = $none,
           String? clientReferenceId,
           Object? rowVersion = $none,
           Object? transactionType = $none,
           Object? transactionReason = $none,
+          Object? dateOfEntry = $none,
           Object? auditDetails = $none,
           Object? clientAuditDetails = $none,
           Object? isDeleted = $none}) =>
@@ -644,16 +581,13 @@ class _StockModelCopyWithImpl<$R, $Out>
           #transactingPartyType: transactingPartyType,
         if (quantity != $none) #quantity: quantity,
         if (waybillNumber != $none) #waybillNumber: waybillNumber,
-        if (receiverId != $none) #receiverId: receiverId,
-        if (receiverType != $none) #receiverType: receiverType,
-        if (senderId != $none) #senderId: senderId,
-        if (senderType != $none) #senderType: senderType,
         if (nonRecoverableError != $none)
           #nonRecoverableError: nonRecoverableError,
         if (clientReferenceId != null) #clientReferenceId: clientReferenceId,
         if (rowVersion != $none) #rowVersion: rowVersion,
         if (transactionType != $none) #transactionType: transactionType,
         if (transactionReason != $none) #transactionReason: transactionReason,
+        if (dateOfEntry != $none) #dateOfEntry: dateOfEntry,
         if (auditDetails != $none) #auditDetails: auditDetails,
         if (clientAuditDetails != $none)
           #clientAuditDetails: clientAuditDetails,
@@ -676,10 +610,6 @@ class _StockModelCopyWithImpl<$R, $Out>
           data.get(#transactingPartyType, or: $value.transactingPartyType),
       quantity: data.get(#quantity, or: $value.quantity),
       waybillNumber: data.get(#waybillNumber, or: $value.waybillNumber),
-      receiverId: data.get(#receiverId, or: $value.receiverId),
-      receiverType: data.get(#receiverType, or: $value.receiverType),
-      senderId: data.get(#senderId, or: $value.senderId),
-      senderType: data.get(#senderType, or: $value.senderType),
       nonRecoverableError:
           data.get(#nonRecoverableError, or: $value.nonRecoverableError),
       clientReferenceId:
@@ -688,6 +618,7 @@ class _StockModelCopyWithImpl<$R, $Out>
       transactionType: data.get(#transactionType, or: $value.transactionType),
       transactionReason:
           data.get(#transactionReason, or: $value.transactionReason),
+      dateOfEntry: data.get(#dateOfEntry, or: $value.dateOfEntry),
       auditDetails: data.get(#auditDetails, or: $value.auditDetails),
       clientAuditDetails:
           data.get(#clientAuditDetails, or: $value.clientAuditDetails),

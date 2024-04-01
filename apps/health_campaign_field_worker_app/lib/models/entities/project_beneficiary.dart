@@ -5,8 +5,10 @@ import 'package:drift/drift.dart';
 import '../data_model.dart';
 import '../../data/local_store/sql_store/sql_store.dart';
 
-@MappableClass(ignoreNull: true)
-class ProjectBeneficiarySearchModel extends EntitySearchModel {
+part 'project_beneficiary.mapper.dart';
+
+@MappableClass(ignoreNull: true, discriminatorValue: MappableClass.useAsDefault)
+class ProjectBeneficiarySearchModel extends EntitySearchModel with ProjectBeneficiarySearchModelMappable {
   final String? id;
   final String? projectId;
   final String? beneficiaryId;
@@ -52,8 +54,6 @@ class ProjectBeneficiarySearchModel extends EntitySearchModel {
     this.tenantId,
     int? dateOfRegistration,
     super.boundaryCode,
-        super.additionalFields,
-    super.auditDetails,
   }): dateOfRegistrationTime = dateOfRegistration == null
   ? null
       : DateTime.fromMillisecondsSinceEpoch(dateOfRegistration),
@@ -63,8 +63,8 @@ class ProjectBeneficiarySearchModel extends EntitySearchModel {
   
 }
 
-@MappableClass(ignoreNull: true)
-class ProjectBeneficiaryModel extends EntityModel {
+@MappableClass(ignoreNull: true, discriminatorValue: MappableClass.useAsDefault)
+class ProjectBeneficiaryModel extends EntityModel with ProjectBeneficiaryModelMappable {
 
   static const schemaName = 'ProjectBeneficiary';
 
@@ -123,11 +123,12 @@ class ProjectBeneficiaryModel extends EntityModel {
   }
 }
 
-@MappableClass(ignoreNull: true)
-class ProjectBeneficiaryAdditionalFields extends AdditionalFields {
+@MappableClass(ignoreNull: true, discriminatorValue: MappableClass.useAsDefault)
+class ProjectBeneficiaryAdditionalFields extends AdditionalFields with ProjectBeneficiaryAdditionalFieldsMappable {
   ProjectBeneficiaryAdditionalFields({
     super.schema = 'ProjectBeneficiary',
     required super.version,
     super.fields,
   });
 }
+

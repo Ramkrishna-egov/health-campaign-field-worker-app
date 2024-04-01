@@ -5,8 +5,10 @@ import 'package:drift/drift.dart';
 import '../data_model.dart';
 import '../../data/local_store/sql_store/sql_store.dart';
 
-@MappableClass(ignoreNull: true)
-class ProjectFacilitySearchModel extends EntitySearchModel {
+part 'project_facility.mapper.dart';
+
+@MappableClass(ignoreNull: true, discriminatorValue: MappableClass.useAsDefault)
+class ProjectFacilitySearchModel extends EntitySearchModel with ProjectFacilitySearchModelMappable {
   final String? id;
   final List<String>? facilityId;
   final List<String>? projectId;
@@ -28,13 +30,11 @@ class ProjectFacilitySearchModel extends EntitySearchModel {
     this.projectId,
     this.tenantId,
     super.boundaryCode,
-        super.additionalFields,
-    super.auditDetails,
   }):  super(isDeleted: false);
 }
 
-@MappableClass(ignoreNull: true)
-class ProjectFacilityModel extends EntityModel {
+@MappableClass(ignoreNull: true, discriminatorValue: MappableClass.useAsDefault)
+class ProjectFacilityModel extends EntityModel with ProjectFacilityModelMappable {
 
   static const schemaName = 'ProjectFacility';
 
@@ -80,11 +80,12 @@ class ProjectFacilityModel extends EntityModel {
   }
 }
 
-@MappableClass(ignoreNull: true)
-class ProjectFacilityAdditionalFields extends AdditionalFields {
+@MappableClass(ignoreNull: true, discriminatorValue: MappableClass.useAsDefault)
+class ProjectFacilityAdditionalFields extends AdditionalFields with ProjectFacilityAdditionalFieldsMappable {
   ProjectFacilityAdditionalFields({
     super.schema = 'ProjectFacility',
     required super.version,
     super.fields,
   });
 }
+

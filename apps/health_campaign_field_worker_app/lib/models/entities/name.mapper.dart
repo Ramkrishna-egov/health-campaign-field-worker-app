@@ -32,19 +32,25 @@ class NameSearchModelMapper extends SubClassMapperBase<NameSearchModel> {
   static String? _$otherNames(NameSearchModel v) => v.otherNames;
   static const Field<NameSearchModel, String> _f$otherNames =
       Field('otherNames', _$otherNames, opt: true);
+  static int? _$limit(NameSearchModel v) => v.limit;
+  static const Field<NameSearchModel, int> _f$limit =
+      Field('limit', _$limit, opt: true);
+  static int? _$offset(NameSearchModel v) => v.offset;
+  static const Field<NameSearchModel, int> _f$offset =
+      Field('offset', _$offset, opt: true);
   static String? _$tenantId(NameSearchModel v) => v.tenantId;
   static const Field<NameSearchModel, String> _f$tenantId =
       Field('tenantId', _$tenantId, opt: true);
   static String? _$boundaryCode(NameSearchModel v) => v.boundaryCode;
   static const Field<NameSearchModel, String> _f$boundaryCode =
       Field('boundaryCode', _$boundaryCode, opt: true);
+  static AuditDetails? _$auditDetails(NameSearchModel v) => v.auditDetails;
+  static const Field<NameSearchModel, AuditDetails> _f$auditDetails =
+      Field('auditDetails', _$auditDetails, mode: FieldMode.member);
   static AdditionalFields? _$additionalFields(NameSearchModel v) =>
       v.additionalFields;
   static const Field<NameSearchModel, AdditionalFields> _f$additionalFields =
-      Field('additionalFields', _$additionalFields, opt: true);
-  static AuditDetails? _$auditDetails(NameSearchModel v) => v.auditDetails;
-  static const Field<NameSearchModel, AuditDetails> _f$auditDetails =
-      Field('auditDetails', _$auditDetails, opt: true);
+      Field('additionalFields', _$additionalFields, mode: FieldMode.member);
 
   @override
   final MappableFields<NameSearchModel> fields = const {
@@ -52,10 +58,12 @@ class NameSearchModelMapper extends SubClassMapperBase<NameSearchModel> {
     #givenName: _f$givenName,
     #familyName: _f$familyName,
     #otherNames: _f$otherNames,
+    #limit: _f$limit,
+    #offset: _f$offset,
     #tenantId: _f$tenantId,
     #boundaryCode: _f$boundaryCode,
-    #additionalFields: _f$additionalFields,
     #auditDetails: _f$auditDetails,
+    #additionalFields: _f$additionalFields,
   };
   @override
   final bool ignoreNull = true;
@@ -74,10 +82,10 @@ class NameSearchModelMapper extends SubClassMapperBase<NameSearchModel> {
         givenName: data.dec(_f$givenName),
         familyName: data.dec(_f$familyName),
         otherNames: data.dec(_f$otherNames),
+        limit: data.dec(_f$limit),
+        offset: data.dec(_f$offset),
         tenantId: data.dec(_f$tenantId),
-        boundaryCode: data.dec(_f$boundaryCode),
-        additionalFields: data.dec(_f$additionalFields),
-        auditDetails: data.dec(_f$auditDetails));
+        boundaryCode: data.dec(_f$boundaryCode));
   }
 
   @override
@@ -136,20 +144,15 @@ extension NameSearchModelValueCopy<$R, $Out>
 abstract class NameSearchModelCopyWith<$R, $In extends NameSearchModel, $Out>
     implements EntitySearchModelCopyWith<$R, $In, $Out> {
   @override
-  AdditionalFieldsCopyWith<$R, AdditionalFields, AdditionalFields>?
-      get additionalFields;
-  @override
-  AuditDetailsCopyWith<$R, AuditDetails, AuditDetails>? get auditDetails;
-  @override
   $R call(
       {String? id,
       String? givenName,
       String? familyName,
       String? otherNames,
+      int? limit,
+      int? offset,
       String? tenantId,
-      String? boundaryCode,
-      AdditionalFields? additionalFields,
-      AuditDetails? auditDetails});
+      String? boundaryCode});
   NameSearchModelCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -163,31 +166,24 @@ class _NameSearchModelCopyWithImpl<$R, $Out>
   late final ClassMapperBase<NameSearchModel> $mapper =
       NameSearchModelMapper.ensureInitialized();
   @override
-  AdditionalFieldsCopyWith<$R, AdditionalFields, AdditionalFields>?
-      get additionalFields => $value.additionalFields?.copyWith
-          .$chain((v) => call(additionalFields: v));
-  @override
-  AuditDetailsCopyWith<$R, AuditDetails, AuditDetails>? get auditDetails =>
-      $value.auditDetails?.copyWith.$chain((v) => call(auditDetails: v));
-  @override
   $R call(
           {Object? id = $none,
           Object? givenName = $none,
           Object? familyName = $none,
           Object? otherNames = $none,
+          Object? limit = $none,
+          Object? offset = $none,
           Object? tenantId = $none,
-          Object? boundaryCode = $none,
-          Object? additionalFields = $none,
-          Object? auditDetails = $none}) =>
+          Object? boundaryCode = $none}) =>
       $apply(FieldCopyWithData({
         if (id != $none) #id: id,
         if (givenName != $none) #givenName: givenName,
         if (familyName != $none) #familyName: familyName,
         if (otherNames != $none) #otherNames: otherNames,
+        if (limit != $none) #limit: limit,
+        if (offset != $none) #offset: offset,
         if (tenantId != $none) #tenantId: tenantId,
-        if (boundaryCode != $none) #boundaryCode: boundaryCode,
-        if (additionalFields != $none) #additionalFields: additionalFields,
-        if (auditDetails != $none) #auditDetails: auditDetails
+        if (boundaryCode != $none) #boundaryCode: boundaryCode
       }));
   @override
   NameSearchModel $make(CopyWithData data) => NameSearchModel.ignoreDeleted(
@@ -195,11 +191,10 @@ class _NameSearchModelCopyWithImpl<$R, $Out>
       givenName: data.get(#givenName, or: $value.givenName),
       familyName: data.get(#familyName, or: $value.familyName),
       otherNames: data.get(#otherNames, or: $value.otherNames),
+      limit: data.get(#limit, or: $value.limit),
+      offset: data.get(#offset, or: $value.offset),
       tenantId: data.get(#tenantId, or: $value.tenantId),
-      boundaryCode: data.get(#boundaryCode, or: $value.boundaryCode),
-      additionalFields:
-          data.get(#additionalFields, or: $value.additionalFields),
-      auditDetails: data.get(#auditDetails, or: $value.auditDetails));
+      boundaryCode: data.get(#boundaryCode, or: $value.boundaryCode));
 
   @override
   NameSearchModelCopyWith<$R2, NameSearchModel, $Out2> $chain<$R2, $Out2>(

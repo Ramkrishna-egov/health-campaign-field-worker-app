@@ -5,8 +5,10 @@ import 'package:drift/drift.dart';
 import '../data_model.dart';
 import '../../data/local_store/sql_store/sql_store.dart';
 
-@MappableClass(ignoreNull: true)
-class ProjectSearchModel extends EntitySearchModel {
+part 'project.mapper.dart';
+
+@MappableClass(ignoreNull: true, discriminatorValue: MappableClass.useAsDefault)
+class ProjectSearchModel extends EntitySearchModel with ProjectSearchModelMappable {
   final String? id;
   final String? projectTypeId;
   final String? projectNumber;
@@ -55,8 +57,6 @@ class ProjectSearchModel extends EntitySearchModel {
     int? startDate,
     int? endDate,
     super.boundaryCode,
-        super.additionalFields,
-    super.auditDetails,
   }): startDateTime = startDate == null
   ? null
       : DateTime.fromMillisecondsSinceEpoch(startDate),
@@ -72,8 +72,8 @@ class ProjectSearchModel extends EntitySearchModel {
   
 }
 
-@MappableClass(ignoreNull: true)
-class ProjectModel extends EntityModel {
+@MappableClass(ignoreNull: true, discriminatorValue: MappableClass.useAsDefault)
+class ProjectModel extends EntityModel with ProjectModelMappable {
 
   static const schemaName = 'Project';
 
@@ -167,11 +167,12 @@ class ProjectModel extends EntityModel {
   }
 }
 
-@MappableClass(ignoreNull: true)
-class ProjectAdditionalFields extends AdditionalFields {
+@MappableClass(ignoreNull: true, discriminatorValue: MappableClass.useAsDefault)
+class ProjectAdditionalFields extends AdditionalFields with ProjectAdditionalFieldsMappable {
   ProjectAdditionalFields({
     super.schema = 'Project',
     required super.version,
     super.fields,
   });
 }
+

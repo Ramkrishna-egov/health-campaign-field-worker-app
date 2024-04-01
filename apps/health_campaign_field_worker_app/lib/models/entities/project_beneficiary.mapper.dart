@@ -32,9 +32,6 @@ class ProjectBeneficiarySearchModelMapper
       v.beneficiaryId;
   static const Field<ProjectBeneficiarySearchModel, String> _f$beneficiaryId =
       Field('beneficiaryId', _$beneficiaryId, opt: true);
-  static String? _$tag(ProjectBeneficiarySearchModel v) => v.tag;
-  static const Field<ProjectBeneficiarySearchModel, String> _f$tag =
-      Field('tag', _$tag, opt: true);
   static List<String>? _$beneficiaryClientReferenceId(
           ProjectBeneficiarySearchModel v) =>
       v.beneficiaryClientReferenceId;
@@ -56,6 +53,12 @@ class ProjectBeneficiarySearchModelMapper
       _f$beneficiaryRegistrationDateGte = Field(
           'beneficiaryRegistrationDateGte', _$beneficiaryRegistrationDateGte,
           opt: true);
+  static int? _$limit(ProjectBeneficiarySearchModel v) => v.limit;
+  static const Field<ProjectBeneficiarySearchModel, int> _f$limit =
+      Field('limit', _$limit, opt: true);
+  static int? _$offset(ProjectBeneficiarySearchModel v) => v.offset;
+  static const Field<ProjectBeneficiarySearchModel, int> _f$offset =
+      Field('offset', _$offset, opt: true);
   static List<String>? _$clientReferenceId(ProjectBeneficiarySearchModel v) =>
       v.clientReferenceId;
   static const Field<ProjectBeneficiarySearchModel, List<String>>
@@ -72,16 +75,17 @@ class ProjectBeneficiarySearchModelMapper
       v.boundaryCode;
   static const Field<ProjectBeneficiarySearchModel, String> _f$boundaryCode =
       Field('boundaryCode', _$boundaryCode, opt: true);
+  static AuditDetails? _$auditDetails(ProjectBeneficiarySearchModel v) =>
+      v.auditDetails;
+  static const Field<ProjectBeneficiarySearchModel, AuditDetails>
+      _f$auditDetails =
+      Field('auditDetails', _$auditDetails, mode: FieldMode.member);
   static AdditionalFields? _$additionalFields(
           ProjectBeneficiarySearchModel v) =>
       v.additionalFields;
   static const Field<ProjectBeneficiarySearchModel, AdditionalFields>
       _f$additionalFields =
-      Field('additionalFields', _$additionalFields, opt: true);
-  static AuditDetails? _$auditDetails(ProjectBeneficiarySearchModel v) =>
-      v.auditDetails;
-  static const Field<ProjectBeneficiarySearchModel, AuditDetails>
-      _f$auditDetails = Field('auditDetails', _$auditDetails, opt: true);
+      Field('additionalFields', _$additionalFields, mode: FieldMode.member);
   static DateTime? _$dateOfRegistrationTime(ProjectBeneficiarySearchModel v) =>
       v.dateOfRegistrationTime;
   static const Field<ProjectBeneficiarySearchModel, DateTime>
@@ -94,16 +98,17 @@ class ProjectBeneficiarySearchModelMapper
     #id: _f$id,
     #projectId: _f$projectId,
     #beneficiaryId: _f$beneficiaryId,
-    #tag: _f$tag,
     #beneficiaryClientReferenceId: _f$beneficiaryClientReferenceId,
     #beneficiaryRegistrationDateLte: _f$beneficiaryRegistrationDateLte,
     #beneficiaryRegistrationDateGte: _f$beneficiaryRegistrationDateGte,
+    #limit: _f$limit,
+    #offset: _f$offset,
     #clientReferenceId: _f$clientReferenceId,
     #tenantId: _f$tenantId,
     #dateOfRegistration: _f$dateOfRegistration,
     #boundaryCode: _f$boundaryCode,
-    #additionalFields: _f$additionalFields,
     #auditDetails: _f$auditDetails,
+    #additionalFields: _f$additionalFields,
     #dateOfRegistrationTime: _f$dateOfRegistrationTime,
   };
   @override
@@ -122,18 +127,17 @@ class ProjectBeneficiarySearchModelMapper
         id: data.dec(_f$id),
         projectId: data.dec(_f$projectId),
         beneficiaryId: data.dec(_f$beneficiaryId),
-        tag: data.dec(_f$tag),
         beneficiaryClientReferenceId: data.dec(_f$beneficiaryClientReferenceId),
         beneficiaryRegistrationDateLte:
             data.dec(_f$beneficiaryRegistrationDateLte),
         beneficiaryRegistrationDateGte:
             data.dec(_f$beneficiaryRegistrationDateGte),
+        limit: data.dec(_f$limit),
+        offset: data.dec(_f$offset),
         clientReferenceId: data.dec(_f$clientReferenceId),
         tenantId: data.dec(_f$tenantId),
         dateOfRegistration: data.dec(_f$dateOfRegistration),
-        boundaryCode: data.dec(_f$boundaryCode),
-        additionalFields: data.dec(_f$additionalFields),
-        auditDetails: data.dec(_f$auditDetails));
+        boundaryCode: data.dec(_f$boundaryCode));
   }
 
   @override
@@ -202,25 +206,19 @@ abstract class ProjectBeneficiarySearchModelCopyWith<
   ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>>?
       get clientReferenceId;
   @override
-  AdditionalFieldsCopyWith<$R, AdditionalFields, AdditionalFields>?
-      get additionalFields;
-  @override
-  AuditDetailsCopyWith<$R, AuditDetails, AuditDetails>? get auditDetails;
-  @override
   $R call(
       {String? id,
       String? projectId,
       String? beneficiaryId,
-      String? tag,
       List<String>? beneficiaryClientReferenceId,
       DateTime? beneficiaryRegistrationDateLte,
       DateTime? beneficiaryRegistrationDateGte,
+      int? limit,
+      int? offset,
       List<String>? clientReferenceId,
       String? tenantId,
       int? dateOfRegistration,
-      String? boundaryCode,
-      AdditionalFields? additionalFields,
-      AuditDetails? auditDetails});
+      String? boundaryCode});
   ProjectBeneficiarySearchModelCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -254,54 +252,43 @@ class _ProjectBeneficiarySearchModelCopyWithImpl<$R, $Out>
               (v) => call(clientReferenceId: v))
           : null;
   @override
-  AdditionalFieldsCopyWith<$R, AdditionalFields, AdditionalFields>?
-      get additionalFields => $value.additionalFields?.copyWith
-          .$chain((v) => call(additionalFields: v));
-  @override
-  AuditDetailsCopyWith<$R, AuditDetails, AuditDetails>? get auditDetails =>
-      $value.auditDetails?.copyWith.$chain((v) => call(auditDetails: v));
-  @override
   $R call(
           {Object? id = $none,
           Object? projectId = $none,
           Object? beneficiaryId = $none,
-          Object? tag = $none,
           Object? beneficiaryClientReferenceId = $none,
           Object? beneficiaryRegistrationDateLte = $none,
           Object? beneficiaryRegistrationDateGte = $none,
+          Object? limit = $none,
+          Object? offset = $none,
           Object? clientReferenceId = $none,
           Object? tenantId = $none,
           Object? dateOfRegistration = $none,
-          Object? boundaryCode = $none,
-          Object? additionalFields = $none,
-          Object? auditDetails = $none}) =>
+          Object? boundaryCode = $none}) =>
       $apply(FieldCopyWithData({
         if (id != $none) #id: id,
         if (projectId != $none) #projectId: projectId,
         if (beneficiaryId != $none) #beneficiaryId: beneficiaryId,
-        if (tag != $none) #tag: tag,
         if (beneficiaryClientReferenceId != $none)
           #beneficiaryClientReferenceId: beneficiaryClientReferenceId,
         if (beneficiaryRegistrationDateLte != $none)
           #beneficiaryRegistrationDateLte: beneficiaryRegistrationDateLte,
         if (beneficiaryRegistrationDateGte != $none)
           #beneficiaryRegistrationDateGte: beneficiaryRegistrationDateGte,
+        if (limit != $none) #limit: limit,
+        if (offset != $none) #offset: offset,
         if (clientReferenceId != $none) #clientReferenceId: clientReferenceId,
         if (tenantId != $none) #tenantId: tenantId,
         if (dateOfRegistration != $none)
           #dateOfRegistration: dateOfRegistration,
-        if (boundaryCode != $none) #boundaryCode: boundaryCode,
-        if (additionalFields != $none) #additionalFields: additionalFields,
-        if (auditDetails != $none) #auditDetails: auditDetails
+        if (boundaryCode != $none) #boundaryCode: boundaryCode
       }));
   @override
-  ProjectBeneficiarySearchModel $make(
-          CopyWithData data) =>
+  ProjectBeneficiarySearchModel $make(CopyWithData data) =>
       ProjectBeneficiarySearchModel.ignoreDeleted(
           id: data.get(#id, or: $value.id),
           projectId: data.get(#projectId, or: $value.projectId),
           beneficiaryId: data.get(#beneficiaryId, or: $value.beneficiaryId),
-          tag: data.get(#tag, or: $value.tag),
           beneficiaryClientReferenceId: data.get(#beneficiaryClientReferenceId,
               or: $value.beneficiaryClientReferenceId),
           beneficiaryRegistrationDateLte: data.get(
@@ -310,15 +297,14 @@ class _ProjectBeneficiarySearchModelCopyWithImpl<$R, $Out>
           beneficiaryRegistrationDateGte: data.get(
               #beneficiaryRegistrationDateGte,
               or: $value.beneficiaryRegistrationDateGte),
+          limit: data.get(#limit, or: $value.limit),
+          offset: data.get(#offset, or: $value.offset),
           clientReferenceId:
               data.get(#clientReferenceId, or: $value.clientReferenceId),
           tenantId: data.get(#tenantId, or: $value.tenantId),
           dateOfRegistration:
               data.get(#dateOfRegistration, or: $value.dateOfRegistration),
-          boundaryCode: data.get(#boundaryCode, or: $value.boundaryCode),
-          additionalFields:
-              data.get(#additionalFields, or: $value.additionalFields),
-          auditDetails: data.get(#auditDetails, or: $value.auditDetails));
+          boundaryCode: data.get(#boundaryCode, or: $value.boundaryCode));
 
   @override
   ProjectBeneficiarySearchModelCopyWith<$R2, ProjectBeneficiarySearchModel,
@@ -358,9 +344,6 @@ class ProjectBeneficiaryModelMapper
   static String? _$beneficiaryId(ProjectBeneficiaryModel v) => v.beneficiaryId;
   static const Field<ProjectBeneficiaryModel, String> _f$beneficiaryId =
       Field('beneficiaryId', _$beneficiaryId, opt: true);
-  static String? _$tag(ProjectBeneficiaryModel v) => v.tag;
-  static const Field<ProjectBeneficiaryModel, String> _f$tag =
-      Field('tag', _$tag, opt: true);
   static String? _$beneficiaryClientReferenceId(ProjectBeneficiaryModel v) =>
       v.beneficiaryClientReferenceId;
   static const Field<ProjectBeneficiaryModel, String>
@@ -411,7 +394,6 @@ class ProjectBeneficiaryModelMapper
     #id: _f$id,
     #projectId: _f$projectId,
     #beneficiaryId: _f$beneficiaryId,
-    #tag: _f$tag,
     #beneficiaryClientReferenceId: _f$beneficiaryClientReferenceId,
     #nonRecoverableError: _f$nonRecoverableError,
     #clientReferenceId: _f$clientReferenceId,
@@ -440,7 +422,6 @@ class ProjectBeneficiaryModelMapper
         id: data.dec(_f$id),
         projectId: data.dec(_f$projectId),
         beneficiaryId: data.dec(_f$beneficiaryId),
-        tag: data.dec(_f$tag),
         beneficiaryClientReferenceId: data.dec(_f$beneficiaryClientReferenceId),
         nonRecoverableError: data.dec(_f$nonRecoverableError),
         clientReferenceId: data.dec(_f$clientReferenceId),
@@ -526,7 +507,6 @@ abstract class ProjectBeneficiaryModelCopyWith<
       String? id,
       String? projectId,
       String? beneficiaryId,
-      String? tag,
       String? beneficiaryClientReferenceId,
       bool? nonRecoverableError,
       String? clientReferenceId,
@@ -569,7 +549,6 @@ class _ProjectBeneficiaryModelCopyWithImpl<$R, $Out>
           Object? id = $none,
           Object? projectId = $none,
           Object? beneficiaryId = $none,
-          Object? tag = $none,
           Object? beneficiaryClientReferenceId = $none,
           Object? nonRecoverableError = $none,
           String? clientReferenceId,
@@ -584,7 +563,6 @@ class _ProjectBeneficiaryModelCopyWithImpl<$R, $Out>
         if (id != $none) #id: id,
         if (projectId != $none) #projectId: projectId,
         if (beneficiaryId != $none) #beneficiaryId: beneficiaryId,
-        if (tag != $none) #tag: tag,
         if (beneficiaryClientReferenceId != $none)
           #beneficiaryClientReferenceId: beneficiaryClientReferenceId,
         if (nonRecoverableError != $none)
@@ -605,7 +583,6 @@ class _ProjectBeneficiaryModelCopyWithImpl<$R, $Out>
       id: data.get(#id, or: $value.id),
       projectId: data.get(#projectId, or: $value.projectId),
       beneficiaryId: data.get(#beneficiaryId, or: $value.beneficiaryId),
-      tag: data.get(#tag, or: $value.tag),
       beneficiaryClientReferenceId: data.get(#beneficiaryClientReferenceId,
           or: $value.beneficiaryClientReferenceId),
       nonRecoverableError:

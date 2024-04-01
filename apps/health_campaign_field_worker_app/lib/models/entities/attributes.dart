@@ -5,8 +5,10 @@ import 'package:drift/drift.dart';
 import '../data_model.dart';
 import '../../data/local_store/sql_store/sql_store.dart';
 
-@MappableClass(ignoreNull: true)
-class AttributesSearchModel extends EntitySearchModel {
+part 'attributes.mapper.dart';
+
+@MappableClass(ignoreNull: true, discriminatorValue: MappableClass.useAsDefault)
+class AttributesSearchModel extends EntitySearchModel with AttributesSearchModelMappable {
   final String? id;
   final String? dataType;
   final String? referenceId;
@@ -29,7 +31,6 @@ class AttributesSearchModel extends EntitySearchModel {
     this.order,
     super.boundaryCode,
     super.isDeleted,
-    super.additionalFields,
   }):  super();
 
   @MappableConstructor()
@@ -44,13 +45,11 @@ class AttributesSearchModel extends EntitySearchModel {
     this.regex,
     this.order,
     super.boundaryCode,
-    super.additionalFields,
-    super.auditDetails,
   }):  super(isDeleted: false);
 }
 
-@MappableClass(ignoreNull: true)
-class AttributesModel extends EntityModel {
+@MappableClass(ignoreNull: true, discriminatorValue: MappableClass.useAsDefault)
+class AttributesModel extends EntityModel with AttributesModelMappable {
 
   static const schemaName = 'Attributes';
 
@@ -114,11 +113,12 @@ class AttributesModel extends EntityModel {
   }
 }
 
-@MappableClass(ignoreNull: true)
-class AttributesAdditionalFields extends AdditionalFields {
+@MappableClass(ignoreNull: true, discriminatorValue: MappableClass.useAsDefault)
+class AttributesAdditionalFields extends AdditionalFields with AttributesAdditionalFieldsMappable {
   AttributesAdditionalFields({
     super.schema = 'Attributes',
     required super.version,
     super.fields,
   });
 }
+
