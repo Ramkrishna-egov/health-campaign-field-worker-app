@@ -366,7 +366,14 @@ class IndividualLocalRepository extends IndividualLocalBaseRepository {
   }) async {
     final individualCompanion = entity.companion;
 
-    final nameCompanion = entity.name?.companion;
+    final nameCompanion = entity.name
+        ?.copyWith(
+          individualClientReferenceId: entity.clientReferenceId,
+          auditDetails: entity.auditDetails,
+          clientAuditDetails: entity.clientAuditDetails,
+        )
+        .companion;
+        
     final addressCompanions = entity.address?.map((e) {
           return e
               .copyWith(
@@ -388,7 +395,7 @@ class IndividualLocalRepository extends IndividualLocalBaseRepository {
           sql.name,
           nameCompanion,
           where: (table) => table.individualClientReferenceId.equals(
-            nameCompanion.individualClientReferenceId.value!,
+            nameCompanion.individualClientReferenceId.value,
           ),
         );
       }
