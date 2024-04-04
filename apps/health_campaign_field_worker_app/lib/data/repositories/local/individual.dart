@@ -395,7 +395,7 @@ class IndividualLocalRepository extends IndividualLocalBaseRepository {
           sql.name,
           nameCompanion,
           where: (table) => table.individualClientReferenceId.equals(
-            nameCompanion.individualClientReferenceId.value,
+            nameCompanion.individualClientReferenceId.value!,
           ),
         );
       }
