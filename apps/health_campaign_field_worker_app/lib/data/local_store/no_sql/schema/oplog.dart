@@ -56,6 +56,10 @@ class OpLog {
         final entity = PgrServiceModelMapper.fromJson(entityString);
         return entity;
 
+      case "hFReferral":
+        final entity = HFReferralModelMapper.fromJson(entityString);
+        return entity;
+
       default:
         final entity = EntityModelMapper.fromJson(entityString);
         return entity;
