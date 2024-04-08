@@ -77,8 +77,8 @@ class _ComplaintsInboxSearchPageState
                 footer: SizedBox(
                   height: 85,
                   child: DigitCard(
-                    margin: const EdgeInsets.only(left: 0, right: 0, top: 10),
-                    child: Row(
+                    margin: const EdgeInsets.fromLTRB(0, kPadding, 0, 0),
+                    padding: const EdgeInsets.fromLTRB(kPadding, 0, kPadding, 0),                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -127,7 +127,7 @@ class _ComplaintsInboxSearchPageState
                       BlocBuilder<ComplaintsInboxBloc, ComplaintInboxState>(
                         builder: (context, state) {
                           return Padding(
-                            padding: const EdgeInsets.all(22),
+                            padding: const EdgeInsets.all(kPadding * 2),
                             child: Column(
                               children: [
                                 DigitTextFormField(

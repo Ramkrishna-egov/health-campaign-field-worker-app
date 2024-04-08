@@ -14,6 +14,7 @@ import '../../utils/i18_key_constants.dart' as i18;
 import '../../utils/utils.dart';
 import '../../widgets/header/back_navigation_help_header.dart';
 import '../../widgets/localized.dart';
+import '../../widgets/showcase/showcase_button.dart';
 
 class HouseHoldDetailsPage extends LocalizedStatefulWidget {
   const HouseHoldDetailsPage({
@@ -43,16 +44,18 @@ class _HouseHoldDetailsPageState extends LocalizedState<HouseHoldDetailsPage> {
           builder: (context, registrationState) {
             return ScrollableContent(
               header: const Column(children: [
-                BackNavigationHelpHeaderWidget(),
+                BackNavigationHelpHeaderWidget(
+                  showHelp: false,
+                  showcaseButton: ShowcaseButton(),
+                ),
               ]),
-              footer: SizedBox(
-                height: 85,
-                child: DigitCard(
-                  margin: const EdgeInsets.only(left: 0, right: 0, top: 10),
-                  child: DigitElevatedButton(
-                    onPressed: () {
-                      form.markAllAsTouched();
-                      if (!form.valid) return;
+              footer: DigitCard(
+                margin: const EdgeInsets.fromLTRB(0, kPadding, 0, 0),
+                padding: const EdgeInsets.fromLTRB(kPadding, 0, kPadding, 0),
+                child: DigitElevatedButton(
+                  onPressed: () {
+                    form.markAllAsTouched();
+                    if (!form.valid) return;
 
                       final memberCount =
                           form.control(_memberCountKey).value as int;
@@ -201,7 +204,6 @@ class _HouseHoldDetailsPageState extends LocalizedState<HouseHoldDetailsPage> {
                     ),
                   ),
                 ),
-              ),
               children: [
                 DigitCard(
                   child: Column(

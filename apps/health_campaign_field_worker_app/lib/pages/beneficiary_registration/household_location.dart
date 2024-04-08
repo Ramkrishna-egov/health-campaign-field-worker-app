@@ -11,6 +11,7 @@ import '../../utils/i18_key_constants.dart' as i18;
 import '../../utils/utils.dart';
 import '../../widgets/header/back_navigation_help_header.dart';
 import '../../widgets/localized.dart';
+import '../../widgets/showcase/showcase_button.dart';
 
 class HouseholdLocationPage extends LocalizedStatefulWidget {
   const HouseholdLocationPage({
@@ -61,21 +62,24 @@ class _HouseholdLocationPageState
               BeneficiaryRegistrationState>(
             builder: (context, registrationState) {
               return ScrollableContent(
+                enableFixedButton: true,
                 header: const Column(
                   children: [
-                    BackNavigationHelpHeaderWidget(),
+                    BackNavigationHelpHeaderWidget(
+                      showcaseButton: ShowcaseButton(),
+                      showHelp: false,
+                    ),
                   ],
                 ),
-                footer: SizedBox(
-                  height: 85,
-                  child: DigitCard(
-                    margin: const EdgeInsets.only(left: 0, right: 0, top: 10),
-                    child: BlocBuilder<LocationBloc, LocationState>(
-                      builder: (context, locationState) {
-                        return DigitElevatedButton(
-                          onPressed: () {
-                            form.markAllAsTouched();
-                            if (!form.valid) return;
+                footer: DigitCard(
+                  margin: const EdgeInsets.fromLTRB(0, kPadding, 0, 0),
+                  padding: const EdgeInsets.fromLTRB(kPadding, 0, kPadding, 0),
+                  child: BlocBuilder<LocationBloc, LocationState>(
+                    builder: (context, locationState) {
+                      return DigitElevatedButton(
+                        onPressed: () {
+                          form.markAllAsTouched();
+                          if (!form.valid) return;
 
                             registrationState.maybeWhen(
                               orElse: () {
@@ -163,7 +167,6 @@ class _HouseholdLocationPageState
                       },
                     ),
                   ),
-                ),
                 children: [
                   DigitCard(
                     child: Column(

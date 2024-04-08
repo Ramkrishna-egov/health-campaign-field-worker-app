@@ -124,6 +124,7 @@ class _BeneficiaryDetailsPageState
 
                   return Scaffold(
                     body: ScrollableContent(
+                      enableFixedButton: true,
                       header: const Column(children: [
                         BackNavigationHelpHeaderWidget(),
                       ]),
@@ -203,6 +204,8 @@ class _BeneficiaryDetailsPageState
                                   : const SizedBox.shrink()
                               : DigitCard(
                                   margin: const EdgeInsets.only(top: kPadding),
+                                  padding: const EdgeInsets.fromLTRB(
+                                      kPadding, 0, kPadding, 0),
                                   child: DigitElevatedButton(
                                     child: Center(
                                       child: Text(localizations.translate(i18

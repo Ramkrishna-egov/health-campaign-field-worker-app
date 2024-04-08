@@ -68,18 +68,18 @@ class _ComplaintsLocationPageState
               ComplaintsRegistrationState>(
             builder: (context, state) {
               return ScrollableContent(
+                enableFixedButton: true,
                 header: const Column(
                   children: [
                     BackNavigationHelpHeaderWidget(),
                   ],
                 ),
-                footer: SizedBox(
-                  height: 85,
-                  child: DigitCard(
-                    margin: const EdgeInsets.only(left: 0, right: 0, top: 10),
-                    child: DigitElevatedButton(
-                      onPressed: () {
-                        form.markAllAsTouched();
+                footer: DigitCard(
+                  margin: const EdgeInsets.fromLTRB(0, kPadding, 0, 0),
+                  padding: const EdgeInsets.fromLTRB(kPadding, 0, kPadding, 0),
+                  child: DigitElevatedButton(
+                    onPressed: () {
+                      form.markAllAsTouched();
 
                         if (!form.valid) return;
                         FocusManager.instance.primaryFocus?.unfocus();
@@ -125,18 +125,20 @@ class _ComplaintsLocationPageState
                       ),
                     ),
                   ),
-                ),
                 children: [
                   DigitCard(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text(
-                          localizations.translate(
-                            i18.complaints.complaintsLocationLabel,
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: kPadding),
+                          child: Text(
+                            localizations.translate(
+                              i18.complaints.complaintsLocationLabel,
+                            ),
+                            style: theme.textTheme.displayMedium,
                           ),
-                          style: theme.textTheme.displayMedium,
                         ),
                         Column(children: [
                           DigitTextFormField(
@@ -176,6 +178,7 @@ class _ComplaintsLocationPageState
                                     i18.common.min2CharsRequired,
                                   ),
                             },
+                            padding: const EdgeInsets.only(top: kPadding / 2),
                           ),
                           DigitTextFormField(
                             keyboardType: TextInputType.text,
@@ -189,9 +192,9 @@ class _ComplaintsLocationPageState
                                     i18.common.min2CharsRequired,
                                   ),
                             },
+                            padding: const EdgeInsets.only(top: kPadding / 3.5),
                           ),
                         ]),
-                        const SizedBox(height: 16),
                       ],
                     ),
                   ),

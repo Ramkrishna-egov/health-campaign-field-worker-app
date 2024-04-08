@@ -165,6 +165,7 @@ class _DeliverInterventionPageState
                                 ),
                                 builder: (context, form, child) {
                                   return ScrollableContent(
+                                    enableFixedButton: true,
                                     footer: BlocBuilder<DeliverInterventionBloc,
                                         DeliverInterventionState>(
                                       builder: (context, state) {
@@ -492,6 +493,10 @@ class _DeliverInterventionPageState
                                                     i18.common.coreCommonCancel,
                                                   ),
                                                   isRequired: false,
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                    top: kPadding,
+                                                  ),
                                                 ),
                                               ],
                                             ),
@@ -508,7 +513,7 @@ class _DeliverInterventionPageState
                                                         .deliverInterventionResourceLabel,
                                                   ),
                                                   style: theme
-                                                      .textTheme.displayMedium,
+                                                      .textTheme.displayLarge,
                                                 ),
                                                 ..._controllers
                                                     .map((e) =>

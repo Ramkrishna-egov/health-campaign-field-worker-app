@@ -66,7 +66,8 @@ class _HouseholdOverviewPageState
                           child: SingleChildScrollView(
                             child: DigitCard(
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
                                 children: [
                                   Row(
                                     mainAxisAlignment:
@@ -343,6 +344,14 @@ class _HouseholdOverviewPageState
                                                 DigitDialog.show(
                                                   context,
                                                   options: DigitDialogOptions(
+                                                    titlePadding:
+                                                        const EdgeInsets
+                                                            .fromLTRB(
+                                                      kPadding * 2,
+                                                      kPadding * 2,
+                                                      kPadding * 2,
+                                                      kPadding / 2,
+                                                    ),
                                                     titleText: localizations
                                                         .translate(i18
                                                             .householdOverView
@@ -518,6 +527,9 @@ class _HouseholdOverviewPageState
                                       icon: Icons.add_circle,
                                     ),
                                   ),
+                                  const SizedBox(
+                                    height: kPadding,
+                                  ),
                                 ],
                               ),
                             ),
@@ -534,8 +546,8 @@ class _HouseholdOverviewPageState
               child: BlocBuilder<DeliverInterventionBloc,
                   DeliverInterventionState>(
                 builder: (ctx, state) => DigitCard(
-                  margin: const EdgeInsets.only(left: 0, right: 0, top: 10),
-                  child: state.tasks?.first.status ==
+                margin: const EdgeInsets.fromLTRB(0, kPadding, 0, 0),
+                padding: const EdgeInsets.fromLTRB(kPadding, 0, kPadding, 0),                  child: state.tasks?.first.status ==
                           Status.administeredSuccess.toValue()
                       ? DigitOutLineButton(
                           label: localizations.translate(

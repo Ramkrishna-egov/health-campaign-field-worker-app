@@ -80,6 +80,10 @@ class _SideEffectsPageState extends LocalizedState<SideEffectsPage> {
                                   footer: SizedBox(
                                     height: 100,
                                     child: DigitCard(
+                                      margin: const EdgeInsets.fromLTRB(
+                                          0, kPadding, 0, 0),
+                                      padding: const EdgeInsets.fromLTRB(
+                                          kPadding, 0, kPadding, 0,),
                                       child: DigitElevatedButton(
                                         onPressed: () async {
                                           if (symptomsValues.any((e) => e)) {

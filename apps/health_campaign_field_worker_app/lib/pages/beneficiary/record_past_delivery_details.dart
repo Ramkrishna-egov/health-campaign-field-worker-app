@@ -59,8 +59,8 @@ class _RecordPastDeliveryDetailsPageState
               footer: SizedBox(
                 height: 85,
                 child: DigitCard(
-                  margin: const EdgeInsets.only(top: kPadding),
-                  child: DigitElevatedButton(
+                margin: const EdgeInsets.fromLTRB(0, kPadding, 0, 0),
+                padding: const EdgeInsets.fromLTRB(kPadding, 0, kPadding, 0),                  child: DigitElevatedButton(
                     onPressed: () {
                       for (int i = 0; i < (futureTaskList ?? []).length; i++) {
                         if (form
@@ -85,7 +85,12 @@ class _RecordPastDeliveryDetailsPageState
                               .didYouObservePreviousAdvEventsTitle),
                           barrierDismissible: false,
                           enableRecordPast: true,
-                          dialogPadding: const EdgeInsets.all(8.0),
+                          dialogPadding: const EdgeInsets.fromLTRB(
+                          kPadding,
+                          kPadding,
+                          kPadding,
+                          0,
+                        ),
                           primaryAction: DigitDialogActions(
                             label: localizations.translate(
                               i18.common.coreCommonNo,
@@ -229,13 +234,18 @@ class _RecordPastDeliveryDetailsPageState
               ),
               children: [
                 DigitCard(
-                  child: Column(
-                    children: [
-                      Text(
-                        localizations.translate(
-                          i18.deliverIntervention.recordPastDeliveryDeatils,
-                        ),
-                        style: theme.textTheme.displayMedium,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: kPadding,
+                      vertical: kPadding,
+                    ),
+                    child: Column(
+                      children: [
+                        Text(
+                          localizations.translate(
+                            i18.deliverIntervention.recordPastDeliveryDeatils,
+                          ),
+                          style: theme.textTheme.displayMedium,
                       ),
                       ...(futureTaskList?.asMap().entries.map((entry) {
                             final int doseNumber =
@@ -290,6 +300,7 @@ class _RecordPastDeliveryDetailsPageState
                     ],
                   ),
                 ),
+               ),
               ],
             ),
           );

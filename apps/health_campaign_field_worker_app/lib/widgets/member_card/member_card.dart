@@ -73,51 +73,66 @@ class MemberCard extends StatelessWidget {
         ),
       ),
       margin: DigitTheme.instance.containerMargin,
-      padding: const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 8.0),
+      padding: const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 4.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
+          Stack(
             children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width / 2.5,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 8.0, top: 8.0),
-                  child: Text(
-                    name,
-                    style: theme.textTheme.headlineMedium,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width / 1.8,
+                    child: Padding(
+                      padding:
+                          const EdgeInsets.only(left: kPadding, top: kPadding),
+                      child: Text(
+                        name,
+                        style: theme.textTheme.headlineMedium,
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width / 3.5,
+              Positioned(
                 child: Align(
                   alignment: Alignment.topRight,
-                  child: Padding(
-                    padding: const EdgeInsets.all(0),
-                    child: DigitIconButton(
-                      onPressed: () => DigitActionDialog.show(
-                        context,
-                        widget: ActionCard(
-                          items: [
-                            ActionCardModel(
-                              icon: Icons.edit,
-                              label: localizations.translate(
-                                i18.memberCard.editIndividualDetails,
-                              ),
-                              action: editMemberAction,
+                  child: DigitIconButton(
+                    onPressed: () => DigitActionDialog.show(
+                      context,
+                      widget: ActionCard(
+                        items: [
+                          ActionCardModel(
+                            icon: Icons.person,
+                            label: localizations.translate(
+                              i18.memberCard.assignAsHouseholdhead,
                             ),
-                          ],
-                        ),
+                            action: isHead ? null : setAsHeadAction,
+                          ),
+                          ActionCardModel(
+                            icon: Icons.edit,
+                            label: localizations.translate(
+                              i18.memberCard.editIndividualDetails,
+                            ),
+                            action: editMemberAction,
+                          ),
+                          ActionCardModel(
+                            icon: Icons.delete,
+                            label: localizations.translate(
+                              i18.memberCard.deleteIndividualActionText,
+                            ),
+                            action: isHead ? null : deleteMemberAction,
+                          ),
+                        ],
                       ),
-                      iconText: localizations.translate(
-                        i18.memberCard.editDetails,
-                      ),
-                      icon: Icons.edit,
                     ),
+                    iconText: localizations.translate(
+                      i18.memberCard.editDetails,
+                    ),
+                    icon: Icons.edit,
                   ),
                 ),
               ),
@@ -148,7 +163,9 @@ class MemberCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 4.0, bottom: 4.0),
+            padding: const EdgeInsets.only(
+              left: kPadding / 2,
+            ),
             child: Offstage(
               offstage: beneficiaryType != BeneficiaryType.individual,
               child: !isDelivered ||
@@ -197,7 +214,10 @@ class MemberCard extends StatelessWidget {
             ),
           ),
           Offstage(
-            offstage: beneficiaryType != BeneficiaryType.individual,
+            offstage: beneficiaryType != BeneficiaryType.individual ||
+                isNotEligible ||
+                isBeneficiaryRefused ||
+                isBeneficiaryReferred,
             child: Padding(
               padding: const EdgeInsets.all(4.0),
               child: isHead
@@ -409,6 +429,9 @@ class MemberCard extends StatelessWidget {
                                   i18.memberCard.unableToDeliverLabel,
                                 ),
                                 buttonStyle: OutlinedButton.styleFrom(
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.zero,
+                                  ),
                                   backgroundColor: Colors.white,
                                   side: BorderSide(
                                     width: 1.0,
@@ -430,6 +453,9 @@ class MemberCard extends StatelessWidget {
                                                 .beneficiaryRefusedLabel,
                                           ),
                                           buttonStyle: OutlinedButton.styleFrom(
+                                            shape: const RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.zero,
+                                            ),
                                             backgroundColor: Colors.white,
                                             side: BorderSide(
                                               width: 1.0,
@@ -547,7 +573,7 @@ class MemberCard extends StatelessWidget {
                                                 },
                                         ),
                                         const SizedBox(
-                                          height: 10,
+                                          height: kPadding * 2,
                                         ),
                                         DigitOutLineButton(
                                           label: localizations.translate(
@@ -611,6 +637,9 @@ class MemberCard extends StatelessWidget {
                                                 .recordAdverseEventsLabel,
                                           ),
                                           buttonStyle: OutlinedButton.styleFrom(
+                                            shape: const RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.zero,
+                                            ),
                                             backgroundColor: Colors.white,
                                             side: BorderSide(
                                               width: 1.0,

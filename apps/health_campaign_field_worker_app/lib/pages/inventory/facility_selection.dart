@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:digit_components/digit_components.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -28,6 +29,7 @@ class FacilitySelectionPage extends StatelessWidget {
       form: _form,
       builder: (context, form, child) {
         return Scaffold(
+          backgroundColor: Colors.white,
           body: ReactiveFormConsumer(
             builder: (context, form, _) {
               final filteredFacilities = facilities.where((element) {
@@ -42,7 +44,10 @@ class FacilitySelectionPage extends StatelessWidget {
               });
 
               return ScrollableContent(
-                header: const BackNavigationHelpHeaderWidget(),
+                backgroundColor: Colors.white,
+                header: const BackNavigationHelpHeaderWidget(
+                  showHelp: false,
+                ),
                 slivers: [
                   SliverToBoxAdapter(
                     child: Padding(

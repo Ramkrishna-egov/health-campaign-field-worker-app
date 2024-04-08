@@ -99,6 +99,7 @@ class _ReferBeneficiaryPageState extends LocalizedState<ReferBeneficiaryPage> {
               body: ReactiveFormBuilder(
                 form: buildForm,
                 builder: (context, form, child) => ScrollableContent(
+                  enableFixedButton: true,
                   header: Column(children: [
                     widget.isReadministrationUnSuccessful
                         ? const BackNavigationHelpHeaderWidget(
