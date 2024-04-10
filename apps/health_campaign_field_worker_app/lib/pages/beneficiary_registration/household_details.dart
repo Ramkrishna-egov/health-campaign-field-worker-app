@@ -14,6 +14,8 @@ import '../../utils/i18_key_constants.dart' as i18;
 import '../../utils/utils.dart';
 import '../../widgets/header/back_navigation_help_header.dart';
 import '../../widgets/localized.dart';
+import '../../widgets/showcase/config/showcase_constants.dart';
+import '../../widgets/showcase/showcase_button.dart';
 class HouseHoldDetailsPage extends LocalizedStatefulWidget {
   const HouseHoldDetailsPage({
     super.key,
@@ -42,7 +44,10 @@ class _HouseHoldDetailsPageState extends LocalizedState<HouseHoldDetailsPage> {
           builder: (context, registrationState) {
             return ScrollableContent(
               header: const Column(children: [
-                BackNavigationHelpHeaderWidget(),
+                BackNavigationHelpHeaderWidget(
+                  showHelp: false,
+                  showcaseButton: ShowcaseButton(),
+                ),
               ]),
               footer: DigitCard(
                 margin: const EdgeInsets.fromLTRB(0, kPadding, 0, 0),
