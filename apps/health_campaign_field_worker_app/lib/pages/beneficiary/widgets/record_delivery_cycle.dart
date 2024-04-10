@@ -111,26 +111,37 @@ class _RecordDeliveryCycleState extends LocalizedState<RecordDeliveryCycle> {
                                               MainAxisAlignment.center,
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
-                                            TextButton(
-                                              onPressed: null,
-                                              child: Text(
-                                                style: TextStyle(
-                                                  fontSize: kPadding * 2,
-                                                  decoration:
-                                                      TextDecoration.underline,
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .secondary,
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                horizontal: kPadding / 2,
+                                              ),
+                                              child: TextButton(
+                                                style: TextButton.styleFrom(
+                                                  padding: const EdgeInsets.all(
+                                                    0,
+                                                  ),
                                                 ),
-                                                isExpanded
-                                                    ? localizations.translate(
-                                                        i18.deliverIntervention
-                                                            .hidePastCycles,
-                                                      )
-                                                    : localizations.translate(
-                                                        i18.deliverIntervention
-                                                            .viewPastCycles,
-                                                      ),
+                                                onPressed: null,
+                                                child: Text(
+                                                  style: TextStyle(
+                                                    fontSize: kPadding * 2,
+                                                    decoration: TextDecoration
+                                                        .underline,
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .secondary,
+                                                  ),
+                                                  isExpanded
+                                                      ? localizations.translate(
+                                                          i18.deliverIntervention
+                                                              .hidePastCycles,
+                                                        )
+                                                      : localizations.translate(
+                                                          i18.deliverIntervention
+                                                              .viewPastCycles,
+                                                        ),
+                                                ),
                                               ),
                                             ),
                                             !isExpanded
