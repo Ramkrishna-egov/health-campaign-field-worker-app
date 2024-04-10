@@ -144,6 +144,10 @@ class Common {
 class HomeShowcase {
   const HomeShowcase();
 
+    String get beneficiaryReferral {
+    return 'HF_HOME_SHOWCASE_BENEFICIARY_LABEL';
+  }
+
   String get distributorProgressBar {
     return 'DISTRIBUTOR_HOME_SHOWCASE_PROGRESS_BAR';
   }
@@ -880,6 +884,8 @@ class Home {
   String get deleteAllLabel => 'HOME_DELETE_ALL_LABEL';
   String get db => 'HOME_DB_LABEL';
   String get beneficiaryReferralLabel => 'HOME_BENEFICIARY_REFERRAL_LABEL';
+  String get manageAttendanceLabel => 'HOME_MANAGE_ATTENDANCE_LABEL';
+
 }
 
 class SearchBeneficiary {
