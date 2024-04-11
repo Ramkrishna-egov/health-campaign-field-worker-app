@@ -60,7 +60,6 @@ dependencies:
   package_info_plus: ^4.1.0
   expandable: ^5.0.1
   auto_size_text: ^3.0.0
-  digit_showcase: ^0.0.1
   qr_code_scanner: ^1.0.1
   audioplayers: ^5.2.0
   gs1_barcode_parser: ^1.0.5
