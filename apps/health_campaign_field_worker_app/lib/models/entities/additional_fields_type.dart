@@ -18,5 +18,7 @@ enum AdditionalFieldsType {
   @MappableValue("nameOfReferral") nameOfReferral,
   @MappableValue("gender") gender,
   @MappableValue("age") age,
+  @MappableValue("latitude") latitude,
+  @MappableValue("longitude") longitude,
   ;
 }
