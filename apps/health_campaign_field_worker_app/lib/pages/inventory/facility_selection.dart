@@ -56,43 +56,15 @@ class FacilitySelectionPage extends StatelessWidget {
                 ),
                 slivers: [
                   SliverToBoxAdapter(
-                    child: Container(
-                      color: Colors.white,
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                          left: kPadding * 2,
-                          right: kPadding * 2,
-                        ),
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(kPadding),
-                              child: Align(
-                                alignment: Alignment.topLeft,
-                                child: Text(
-                                  localizations.translate(
-                                    i18.common.facilitySearchHeaderLabel,
-                                  ),
-                                  style: theme.textTheme.displayMedium,
-                                  textAlign: TextAlign.left,
-                                ),
-                              ),
-                            ),
-                            DigitTextFormField(
-                              suffix: const Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Icon(Icons.search),
-                              ),
-                              label: localizations.translate(
-                                i18.common.facilitySearchHeaderLabel,
-                              ),
-                              formControlName: _facilityName,
-                            ),
-                          ],
+                   child: Padding(padding: const EdgeInsets.all(16),
+                      child: DigitTextFormField(
+                        label: localizations.translate(
+                          i18.stockReconciliationDetails.facilityNameCommunitySupervisor,
+                      ), 
+                      formControlName: _facilityName,
                         ),
                       ),
                     ),
-                  ),
                   SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
