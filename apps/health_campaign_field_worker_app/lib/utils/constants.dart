@@ -329,6 +329,9 @@ class EntityPlurals {
   }
 }
 
+const String noResultSvg = 'assets/icons/svg/no_result.svg';
+const String myChecklistSvg = 'assets/icons/svg/mychecklist.svg';
+
 enum DigitProgressDialogType {
   inProgress,
   dataFound,

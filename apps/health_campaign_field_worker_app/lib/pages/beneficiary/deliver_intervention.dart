@@ -171,12 +171,11 @@ class _DeliverInterventionPageState
                                     footer: BlocBuilder<DeliverInterventionBloc,
                                             DeliverInterventionState>(
                                           builder: (context, state) {
-                                            return SizedBox(
-                                              height: 85,
-                                              child: DigitCard(
-                                                margin: const EdgeInsets.only(
-                                                  top: 10,
-                                                ),
+                                        return DigitCard(
+                                          margin: const EdgeInsets.fromLTRB(
+                                              0, kPadding, 0, 0),
+                                          padding: const EdgeInsets.fromLTRB(
+                                              kPadding, 0, kPadding, 0),
                                                 child: DigitElevatedButton(
                                                   onPressed: () async {
                                                     if (((form.control(
@@ -434,8 +433,7 @@ class _DeliverInterventionPageState
                                                     ),
                                                   ),
                                                 ),
-                                              ),
-                                            );
+                                              );
                                           },
                                         ),
                                         header: const Column(children: [
@@ -504,9 +502,9 @@ class _DeliverInterventionPageState
                                                       ),
                                                       isRequired: false,
                                                       padding:
-                                                      const EdgeInsets.only(
-                                                    top: kPadding,
-                                                  ),
+                                                          const EdgeInsets.only(
+                                                        top: kPadding,
+                                                      ),
                                                 ),
                                                   ],
                                                 ),
@@ -523,7 +521,7 @@ class _DeliverInterventionPageState
                                                             .deliverInterventionResourceLabel,
                                                       ),
                                                       style: theme
-                                                          .textTheme.displayLarge,
+                                                      .textTheme.headlineLarge,
                                                     ),
                                                     ..._controllers
                                                         .map((e) =>
@@ -583,7 +581,7 @@ class _DeliverInterventionPageState
                                                             .deliveryCommentLabel,
                                                       ),
                                                       style: theme
-                                                          .textTheme.displayMedium,
+                                                      .textTheme.headlineLarge,
                                                     ),
                                                     BlocBuilder<
                                                         AppInitializationBloc,

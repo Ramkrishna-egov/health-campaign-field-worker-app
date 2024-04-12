@@ -58,11 +58,10 @@ class _RecordPastDeliveryDetailsPageState
                       showHelp: false,
                     ),
                   ]),
-                  footer: SizedBox(
-                    height: 85,
-                    child: DigitCard(
+                  footer:DigitCard(
                     margin: const EdgeInsets.fromLTRB(0, kPadding, 0, 0),
-                    padding: const EdgeInsets.fromLTRB(kPadding, 0, kPadding, 0),                  child: DigitElevatedButton(
+                    padding: const EdgeInsets.fromLTRB(kPadding, 0, kPadding, 0),                  
+                    child: DigitElevatedButton(
                         onPressed: () {
                           for (int i = 0; i < (futureTaskList ?? []).length; i++) {
                             if (form
@@ -237,7 +236,6 @@ class _RecordPastDeliveryDetailsPageState
                         ),
                       ),
                     ),
-                  ),
                   children: [
                     DigitCard(
                       child: Padding(
@@ -293,10 +291,15 @@ class _RecordPastDeliveryDetailsPageState
                                           errorMessage: localizations.translate(
                                             i18.common.corecommonRequired,
                                           ),
+                                        labelPadding: const EdgeInsets.only(
+                                          top: kPadding,
                                         ),
-
-                                        if (entry.key != futureTaskList.length - 1)
-                                          const Divider(), // Add Divider conditionally
+                                      ),
+                                      if (entry.key !=
+                                          futureTaskList.length - 1)
+                                        const Divider(
+                                          thickness: 1.0,
+                                        ),// Add Divider conditionally
                                       ],
                                     );
                                   },

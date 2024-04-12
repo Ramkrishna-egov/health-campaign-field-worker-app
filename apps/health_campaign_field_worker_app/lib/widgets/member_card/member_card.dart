@@ -106,25 +106,11 @@ class MemberCard extends StatelessWidget {
                       widget: ActionCard(
                         items: [
                           ActionCardModel(
-                            icon: Icons.person,
-                            label: localizations.translate(
-                              i18.memberCard.assignAsHouseholdhead,
-                            ),
-                            action: isHead ? null : setAsHeadAction,
-                          ),
-                          ActionCardModel(
                             icon: Icons.edit,
                             label: localizations.translate(
                               i18.memberCard.editIndividualDetails,
                             ),
                             action: editMemberAction,
-                          ),
-                          ActionCardModel(
-                            icon: Icons.delete,
-                            label: localizations.translate(
-                              i18.memberCard.deleteIndividualActionText,
-                            ),
-                            action: isHead ? null : deleteMemberAction,
                           ),
                         ],
                       ),
@@ -214,10 +200,7 @@ class MemberCard extends StatelessWidget {
             ),
           ),
           Offstage(
-            offstage: beneficiaryType != BeneficiaryType.individual ||
-                isNotEligible ||
-                isBeneficiaryRefused ||
-                isBeneficiaryReferred,
+            offstage: beneficiaryType != BeneficiaryType.individual,
             child: Padding(
               padding: const EdgeInsets.all(4.0),
               child: isHead
@@ -315,7 +298,7 @@ class MemberCard extends StatelessWidget {
                                                                   clientReferenceId,
                                                               id: null,
                                                             ),
-                                                          )
+                                                          ),
                                                         ],
                                                         false,
                                                         context.boundary,
@@ -556,7 +539,7 @@ class MemberCard extends StatelessWidget {
                                                                     clientReferenceId,
                                                                 id: null,
                                                               ),
-                                                            )
+                                                            ),
                                                           ],
                                                           false,
                                                           context.boundary,

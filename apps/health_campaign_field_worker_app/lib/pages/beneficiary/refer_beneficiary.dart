@@ -107,10 +107,9 @@ class _ReferBeneficiaryPageState extends LocalizedState<ReferBeneficiaryPage> {
                           )
                         : const BackNavigationHelpHeaderWidget(),
                   ]),
-                  footer: SizedBox(
-                    height: 85,
-                    child: DigitCard(
-                      margin: const EdgeInsets.only(left: 0, right: 0, top: 10),
+                  footer: DigitCard(
+                margin: const EdgeInsets.fromLTRB(0, kPadding, 0, 0),
+                padding: const EdgeInsets.fromLTRB(kPadding, 0, kPadding, 0),
                       child: ValueListenableBuilder(
                         valueListenable: clickedStatus,
                         builder: (context, bool isClicked, _) {
@@ -337,7 +336,6 @@ class _ReferBeneficiaryPageState extends LocalizedState<ReferBeneficiaryPage> {
                         },
                       ),
                     ),
-                  ),
                   children: [
                     DigitCard(
                       child: Column(

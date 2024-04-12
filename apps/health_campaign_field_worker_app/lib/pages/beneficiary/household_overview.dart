@@ -131,7 +131,24 @@ class _HouseholdOverviewPageState
                                       ),
                                     ),
                                   ),
-                                  DigitTableCard(
+                              Padding(
+                                    padding: const EdgeInsets.only(
+                                      left: kPadding,
+                                      right: kPadding,
+                                    ),
+                                    child: Text(
+                                      localizations.translate(i18
+                                          .householdOverView
+                                          .householdOverViewLabel),
+                                      style: theme.textTheme.displayMedium,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                      left: kPadding,
+                                      right: kPadding,
+                                    ),
+                                    child: DigitTableCard(
                                     element: {
                                       localizations.translate(i18
                                           .householdOverView
@@ -152,6 +169,7 @@ class _HouseholdOverviewPageState
                                           .memberCount,
                                     },
                                   ),
+                                ),
                                   Column(
                                     children: state
                                         .householdMemberWrapper.members
@@ -541,13 +559,12 @@ class _HouseholdOverviewPageState
                 ),
           bottomNavigationBar: Offstage(
             offstage: beneficiaryType == BeneficiaryType.individual,
-            child: SizedBox(
-              height: 85,
-              child: BlocBuilder<DeliverInterventionBloc,
+            child: BlocBuilder<DeliverInterventionBloc,
                   DeliverInterventionState>(
                 builder: (ctx, state) => DigitCard(
                 margin: const EdgeInsets.fromLTRB(0, kPadding, 0, 0),
-                padding: const EdgeInsets.fromLTRB(kPadding, 0, kPadding, 0),                  child: state.tasks?.first.status ==
+                padding: const EdgeInsets.fromLTRB(kPadding, 0, kPadding, 0),                  
+                child: state.tasks?.first.status ==
                           Status.administeredSuccess.toValue()
                       ? DigitOutLineButton(
                           label: localizations.translate(
@@ -585,7 +602,6 @@ class _HouseholdOverviewPageState
                         ),
                 ),
               ),
-            ),
           ),
         );
       },

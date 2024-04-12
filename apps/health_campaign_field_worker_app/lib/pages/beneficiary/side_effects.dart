@@ -77,9 +77,7 @@ class _SideEffectsPageState extends LocalizedState<SideEffectsPage> {
                                     showBackNavigation:
                                         widget.fromSurvey ? false : true,
                                   ),
-                                  footer: SizedBox(
-                                    height: 100,
-                                    child: DigitCard(
+                                  footer: DigitCard(
                                       margin: const EdgeInsets.fromLTRB(
                                           0, kPadding, 0, 0),
                                       padding: const EdgeInsets.fromLTRB(
@@ -251,7 +249,6 @@ class _SideEffectsPageState extends LocalizedState<SideEffectsPage> {
                                         ),
                                       ),
                                     ),
-                                  ),
                                   children: [
                                     DigitCard(
                                       child: Column(
