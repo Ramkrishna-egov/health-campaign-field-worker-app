@@ -447,8 +447,9 @@ class _StockDetailsPageState extends LocalizedState<StockDetailsPage> {
                                       },
                                       menuItems: productVariants,
                                       validationMessages: {
-                                        'required': (object) =>
+                                        'required': (object) => localizations.translate(
                                             '${module.selectProductLabel}_IS_REQUIRED',
+                                        ),   
                                       },
                                     );
                                   },

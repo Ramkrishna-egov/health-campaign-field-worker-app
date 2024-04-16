@@ -51,14 +51,9 @@ class _ComplaintTypePageState extends LocalizedState<ComplaintTypePage> {
                 BackNavigationHelpHeaderWidget(),
               ]),
               footer: SizedBox(
-                height: 85,
                 child: DigitCard(
                 margin: const EdgeInsets.fromLTRB(0, kPadding, 0, 0),
                 padding: const EdgeInsets.fromLTRB(kPadding, 0, kPadding, 0),                 
-                child: Padding(
-                    padding: const EdgeInsets.only(
-                          bottom: kPadding * 2,
-                    ),
                   child : DigitElevatedButton(
                     onPressed: () async {
                       var complaintType = form.control(_complaintType).value;
@@ -109,7 +104,6 @@ class _ComplaintTypePageState extends LocalizedState<ComplaintTypePage> {
                       ),
                     ),
                   ),
-                ),
               ),
             ),
               children: [

@@ -156,15 +156,10 @@ class _ComplaintsInboxPageState extends LocalizedState<ComplaintsInboxPage> {
                 ),
               ),
               SizedBox(
-                height: 85,
                 child: DigitCard(
                   margin: const EdgeInsets.fromLTRB(0, kPadding, 0, 0),
                   padding: const EdgeInsets.fromLTRB(kPadding, 0, kPadding, 0),                  
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                          bottom: kPadding * 2,
-                    ),
-                    child : DigitElevatedButton(
+                  child: DigitElevatedButton(
                     onPressed: () async {
                       var loggedInUserUuid = context.loggedInUserUuid;
                       final bloc = context.read<ComplaintsInboxBloc>();
@@ -196,7 +191,6 @@ class _ComplaintsInboxPageState extends LocalizedState<ComplaintsInboxPage> {
                   ),
                 ),
                 ),
-              ),
             ],
           );
         },
