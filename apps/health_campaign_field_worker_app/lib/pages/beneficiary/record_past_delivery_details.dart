@@ -58,258 +58,271 @@ class _RecordPastDeliveryDetailsPageState
                       showHelp: false,
                     ),
                   ]),
-                  footer:DigitCard(
+                  footer: DigitCard(
                     margin: const EdgeInsets.fromLTRB(0, kPadding, 0, 0),
-                    padding: const EdgeInsets.fromLTRB(kPadding, 0, kPadding, 0),                  
+                    padding:
+                        const EdgeInsets.fromLTRB(kPadding, 0, kPadding, 0),
                     child: DigitElevatedButton(
-                        onPressed: () {
-                          for (int i = 0; i < (futureTaskList ?? []).length; i++) {
-                            if (form
-                                    .control("$_recordDoseAdministeredKey.$i")
-                                    .value ==
-                                null) {
-                              form
+                      onPressed: () {
+                        for (int i = 0;
+                            i < (futureTaskList ?? []).length;
+                            i++) {
+                          if (form
                                   .control("$_recordDoseAdministeredKey.$i")
-                                  .setErrors({'': true});
-                            }
+                                  .value ==
+                              null) {
+                            form
+                                .control("$_recordDoseAdministeredKey.$i")
+                                .setErrors({'': true});
                           }
+                        }
 
-                          form.markAllAsTouched();
+                        form.markAllAsTouched();
 
-                          if (!form.valid) return;
+                        if (!form.valid) return;
 
-                          DigitDialog.show<bool>(
-                            context,
-                            options: DigitDialogOptions(
-                              titleText: localizations.translate(i18
-                                  .deliverIntervention
-                                  .didYouObservePreviousAdvEventsTitle),
-                              barrierDismissible: false,
-                              enableRecordPast: true,
-                              dialogPadding: const EdgeInsets.fromLTRB(
-                          kPadding,
-                          kPadding,
-                          kPadding,
-                          0,
-                        ),
-                              primaryAction: DigitDialogActions(
-                                label: localizations.translate(
-                                  i18.common.coreCommonNo,
-                                ),
-                                action: (ctx) {
-                                  router.pop();
-                                  final event =
-                                      context.read<DeliverInterventionBloc>();
-                                  List<TaskModel> completedTask = [];
-                                  for (int i = 0;
-                                      i < (futureTaskList ?? []).length;
-                                      i++) {
-                                    // Get the value of the form control for each task
-
-                                    final formControllValue = (form
-                                            .control(
-                                              "$_recordDoseAdministeredKey.$i",
-                                            )
-                                            .value as KeyValue)
-                                        .key;
-
-                                    // Determine the status based on the form control value
-                                    final status = formControllValue
-                                        ? Status.administeredSuccess.toValue()
-                                        : Status.administeredFailed.toValue();
-
-                                    // Create a new task with the updated status
-                                    TaskModel result =
-                                        futureTaskList![i].copyWith(status: status);
-
-                                    if (result.auditDetails != null) {
-                                      result = result.copyWith(
-                                        auditDetails: AuditDetails(
-                                          createdBy: result.auditDetails!.createdBy,
-                                          createdTime:
-                                              result.auditDetails!.createdTime,
-                                          lastModifiedBy: context.loggedInUserUuid,
-                                          lastModifiedTime:
-                                              DateTime.now().millisecondsSinceEpoch,
-                                        ),
-                                        address: result.address?.copyWith(
-                                          latitude:locationState.latitude ?? result.address!.latitude,
-                                          longitude: locationState.longitude ?? result.address!.longitude,
-                                        ),
-                                      );
-                                    }
-                                    completedTask.add(result);
-                                  }
-                                  // Add the updated task to the event
-                                  event.add(DeliverInterventionSubmitEvent(
-                                    completedTask,
-                                    true,
-                                    context.boundary,
-                                  ));
-                                  final bloc =
-                                      context.read<HouseholdOverviewBloc>();
-
-                                  event.add(DeliverInterventionSearchEvent(
-                                    TaskSearchModel(
-                                      projectBeneficiaryClientReferenceId: bloc
-                                          .state
-                                          .householdMemberWrapper
-                                          .projectBeneficiaries
-                                          .map((e) => e.clientReferenceId)
-                                          .toList(),
-                                    ),
-                                  ));
-
-                                  context.router.popUntilRouteWithName(
-                                    SearchBeneficiaryRoute.name,
-                                  );
-
-                                  Navigator.of(ctx).pop();
-
-                                  router.push(
-                                    BeneficiaryDetailsRoute(),
-                                  );
-                                },
-                              ),
-                              secondaryAction: DigitDialogActions(
-                                label: localizations.translate(
-                                  i18.common.coreCommonYes,
-                                ),
-                                action: (ctx) {
-                                  router.pop();
-                                  final event =
-                                      context.read<DeliverInterventionBloc>();
-                                  final bloc =
-                                      context.read<HouseholdOverviewBloc>();
-                                  List<TaskModel> completedTask = [];
-                                  for (int i = 0;
-                                      i < (futureTaskList ?? []).length;
-                                      i++) {
-                                    // Get the value of the form control for each task
-
-                                    final formControllValue = (form
-                                            .control(
-                                              "$_recordDoseAdministeredKey.$i",
-                                            )
-                                            .value as KeyValue)
-                                        .key;
-
-                                    // Determine the status based on the form control value
-                                    final status = formControllValue
-                                        ? Status.administeredSuccess.toValue()
-                                        : Status.administeredFailed.toValue();
-
-                                    // Create a new task with the updated status
-                                    final result =
-                                        futureTaskList![i].copyWith(status: status);
-                                    completedTask.add(result);
-                                    // Add the updated task to the event
-                                  }
-                                  event.add(DeliverInterventionSubmitEvent(
-                                    completedTask,
-                                    true,
-                                    context.boundary,
-                                  ));
-                                  context.router.popUntilRouteWithName(
-                                    SearchBeneficiaryRoute.name,
-                                  );
-                                  bloc.add(HouseholdOverviewReloadEvent(
-                                    projectId: context.projectId,
-                                    projectBeneficiaryType: context.beneficiaryType,
-                                  ));
-                                  Navigator.of(ctx).pop();
-                                  router.push(
-                                    SideEffectsRoute(
-                                      tasks: [(futureTaskList ?? []).last],
-                                      fromSurvey: true,
-                                    ),
-                                  );
-                                },
-                              ),
+                        DigitDialog.show<bool>(
+                          context,
+                          options: DigitDialogOptions(
+                            titleText: localizations.translate(i18
+                                .deliverIntervention
+                                .didYouObservePreviousAdvEventsTitle),
+                            barrierDismissible: false,
+                            enableRecordPast: true,
+                            dialogPadding: const EdgeInsets.fromLTRB(
+                              kPadding,
+                              kPadding,
+                              kPadding,
+                              0,
                             ),
-                          );
-                        },
-                        child: Center(
-                          child: Text(
-                            localizations.translate(i18.common.coreCommonNext),
+                            primaryAction: DigitDialogActions(
+                              label: localizations.translate(
+                                i18.common.coreCommonNo,
+                              ),
+                              action: (ctx) {
+                                router.pop();
+                                final event =
+                                    context.read<DeliverInterventionBloc>();
+                                List<TaskModel> completedTask = [];
+                                for (int i = 0;
+                                    i < (futureTaskList ?? []).length;
+                                    i++) {
+                                  // Get the value of the form control for each task
+
+                                  final formControllValue = (form
+                                          .control(
+                                            "$_recordDoseAdministeredKey.$i",
+                                          )
+                                          .value as KeyValue)
+                                      .key;
+
+                                  // Determine the status based on the form control value
+                                  final status = formControllValue
+                                      ? Status.administeredSuccess.toValue()
+                                      : Status.administeredFailed.toValue();
+
+                                  // Create a new task with the updated status
+                                  TaskModel result = futureTaskList![i]
+                                      .copyWith(status: status);
+
+                                  if (result.auditDetails != null) {
+                                    result = result.copyWith(
+                                      auditDetails: AuditDetails(
+                                        createdBy:
+                                            result.auditDetails!.createdBy,
+                                        createdTime:
+                                            result.auditDetails!.createdTime,
+                                        lastModifiedBy:
+                                            context.loggedInUserUuid,
+                                        lastModifiedTime: DateTime.now()
+                                            .millisecondsSinceEpoch,
+                                      ),
+                                      address: result.address?.copyWith(
+                                        latitude: locationState.latitude ??
+                                            result.address!.latitude,
+                                        longitude: locationState.longitude ??
+                                            result.address!.longitude,
+                                      ),
+                                    );
+                                  }
+                                  completedTask.add(result);
+                                }
+                                // Add the updated task to the event
+                                event.add(DeliverInterventionSubmitEvent(
+                                  completedTask,
+                                  true,
+                                  context.boundary,
+                                ));
+                                final bloc =
+                                    context.read<HouseholdOverviewBloc>();
+
+                                event.add(DeliverInterventionSearchEvent(
+                                  TaskSearchModel(
+                                    projectBeneficiaryClientReferenceId: bloc
+                                        .state
+                                        .householdMemberWrapper
+                                        .projectBeneficiaries
+                                        .map((e) => e.clientReferenceId)
+                                        .toList(),
+                                  ),
+                                ));
+
+                                context.router.popUntilRouteWithName(
+                                  SearchBeneficiaryRoute.name,
+                                );
+
+                                Navigator.of(ctx).pop();
+
+                                router.push(
+                                  BeneficiaryDetailsRoute(),
+                                );
+                              },
+                            ),
+                            secondaryAction: DigitDialogActions(
+                              label: localizations.translate(
+                                i18.common.coreCommonYes,
+                              ),
+                              action: (ctx) {
+                                router.pop();
+                                final event =
+                                    context.read<DeliverInterventionBloc>();
+                                final bloc =
+                                    context.read<HouseholdOverviewBloc>();
+                                List<TaskModel> completedTask = [];
+                                for (int i = 0;
+                                    i < (futureTaskList ?? []).length;
+                                    i++) {
+                                  // Get the value of the form control for each task
+
+                                  final formControllValue = (form
+                                          .control(
+                                            "$_recordDoseAdministeredKey.$i",
+                                          )
+                                          .value as KeyValue)
+                                      .key;
+
+                                  // Determine the status based on the form control value
+                                  final status = formControllValue
+                                      ? Status.administeredSuccess.toValue()
+                                      : Status.administeredFailed.toValue();
+
+                                  // Create a new task with the updated status
+                                  final result = futureTaskList![i]
+                                      .copyWith(status: status);
+                                  completedTask.add(result);
+                                  // Add the updated task to the event
+                                }
+                                event.add(DeliverInterventionSubmitEvent(
+                                  completedTask,
+                                  true,
+                                  context.boundary,
+                                ));
+                                context.router.popUntilRouteWithName(
+                                  SearchBeneficiaryRoute.name,
+                                );
+                                bloc.add(HouseholdOverviewReloadEvent(
+                                  projectId: context.projectId,
+                                  projectBeneficiaryType:
+                                      context.beneficiaryType,
+                                ));
+                                Navigator.of(ctx).pop();
+                                router.push(
+                                  SideEffectsRoute(
+                                    tasks: [(futureTaskList ?? []).last],
+                                    fromSurvey: true,
+                                  ),
+                                );
+                              },
+                            ),
                           ),
+                        );
+                      },
+                      child: Center(
+                        child: Text(
+                          localizations.translate(i18.common.coreCommonNext),
                         ),
                       ),
                     ),
+                  ),
                   children: [
                     DigitCard(
                       child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: kPadding,
-                      vertical: kPadding,
-                    ),
-                    child: Column(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: kPadding,
+                          vertical: kPadding,
+                        ),
+                        child: Column(
                           children: [
                             Text(
                               localizations.translate(
-                                i18.deliverIntervention.recordPastDeliveryDeatils,
+                                i18.deliverIntervention
+                                    .recordPastDeliveryDeatils,
                               ),
                               style: theme.textTheme.displayMedium,
-                          ),
-                          ...(futureTaskList?.asMap().entries.map((entry) {
-                                final int doseNumber =
-                                    int.parse(entry.value.additionalFields?.fields
-                                        .firstWhereOrNull(
-                                          (ele) =>
-                                              ele.key ==
-                                              AdditionalFieldsType.doseIndex
-                                                  .toValue(),
-                                        )
-                                        ?.value);
+                            ),
+                            ...(futureTaskList?.asMap().entries.map((entry) {
+                                  final int doseNumber = int.parse(
+                                      entry.value.additionalFields?.fields
+                                          .firstWhereOrNull(
+                                            (ele) =>
+                                                ele.key ==
+                                                AdditionalFieldsType.doseIndex
+                                                    .toValue(),
+                                          )
+                                          ?.value);
 
-                                return StatefulBuilder(
-                                  builder: (context, setState) {
-                                    return Column(
-                                      children: [
-                                        DigitRadioButtonList(
-                                          labelText: localizations.translate(
-                                            doseNumber == 2
-                                                ? i18.deliverIntervention
-                                                    .wasDosePastDeliveryDetailPart2
-                                                : i18.deliverIntervention
-                                                    .wasDosePastDeliveryDetailPart3,
+                                  return StatefulBuilder(
+                                    builder: (context, setState) {
+                                      return Column(
+                                        children: [
+                                          DigitRadioButtonList(
+                                            labelText: localizations.translate(
+                                              doseNumber == 2
+                                                  ? i18.deliverIntervention
+                                                      .wasDosePastDeliveryDetailPart2
+                                                  : i18.deliverIntervention
+                                                      .wasDosePastDeliveryDetailPart3,
+                                            ),
+                                            labelStyle: DigitTheme
+                                                .instance
+                                                .mobileTheme
+                                                .textTheme
+                                                .headlineSmall,
+                                            formControlName:
+                                                "$_recordDoseAdministeredKey.${futureTaskList.indexOf(entry.value)}",
+                                            valueMapper: (val) => localizations
+                                                .translate(val.label),
+                                            options: Constants.yesNo,
+                                            onValueChange: (val) {
+                                              form
+                                                  .control(
+                                                    "$_recordDoseAdministeredKey.${futureTaskList.indexOf(entry.value)}",
+                                                  )
+                                                  .value = val;
+                                            },
+                                            errorMessage:
+                                                localizations.translate(
+                                              i18.common.corecommonRequired,
+                                            ),
+                                            labelPadding: const EdgeInsets.only(
+                                              top: kPadding,
+                                            ),
                                           ),
-                                          labelStyle: DigitTheme.instance
-                                              .mobileTheme.textTheme.headlineSmall,
-                                          formControlName:
-                                              "$_recordDoseAdministeredKey.${futureTaskList.indexOf(entry.value)}",
-                                          valueMapper: (val) =>
-                                              localizations.translate(val.label),
-                                          options: Constants.yesNo,
-                                          onValueChange: (val) {
-                                            form
-                                                .control(
-                                                  "$_recordDoseAdministeredKey.${futureTaskList.indexOf(entry.value)}",
-                                                )
-                                                .value = val;
-                                          },
-                                          errorMessage: localizations.translate(
-                                            i18.common.corecommonRequired,
-                                          ),
-                                        labelPadding: const EdgeInsets.only(
-                                          top: kPadding,
-                                        ),
-                                      ),
-                                      if (entry.key !=
-                                          futureTaskList.length - 1)
-                                        const Divider(
-                                          thickness: 1.0,
-                                        ),// Add Divider conditionally
-                                      ],
-                                    );
-                                  },
-                                );
-                              }).toList() ??
-                              []),
-                        ],
+                                          if (entry.key !=
+                                              futureTaskList.length - 1)
+                                            const Divider(
+                                              thickness: 1.0,
+                                            ), // Add Divider conditionally
+                                        ],
+                                      );
+                                    },
+                                  );
+                                }).toList() ??
+                                []),
+                          ],
+                        ),
                       ),
-                ),
-                   ),
+                    ),
                   ],
                 ),
               );

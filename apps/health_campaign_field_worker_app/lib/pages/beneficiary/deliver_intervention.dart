@@ -107,26 +107,28 @@ class _DeliverInterventionPageState
                     : BlocBuilder<DeliverInterventionBloc,
                         DeliverInterventionState>(
                         builder: (context, deliveryInterventionstate) {
-                          List<ProductVariantsModel>? productVariants = projectState
-                                      .projectType?.cycles?.isNotEmpty ==
-                                  true
-                              ? (fetchProductVariant(
-                                  projectState
-                                      .projectType!
-                                      .cycles![deliveryInterventionstate.cycle - 1]
-                                      .deliveries?[deliveryInterventionstate
-                                          .dose -
-                                      1],
-                                  state.selectedIndividual,
-                                )?.productVariants)
-                              : projectState.projectType?.resources;
+                          List<ProductVariantsModel>? productVariants =
+                              projectState.projectType?.cycles?.isNotEmpty ==
+                                      true
+                                  ? (fetchProductVariant(
+                                      projectState
+                                              .projectType!
+                                              .cycles![deliveryInterventionstate
+                                                      .cycle -
+                                                  1]
+                                              .deliveries?[
+                                          deliveryInterventionstate.dose - 1],
+                                      state.selectedIndividual,
+                                    )?.productVariants)
+                                  : projectState.projectType?.resources;
 
                           final int numberOfDoses = (projectState
                                       .projectType?.cycles?.isNotEmpty ==
                                   true)
                               ? (projectState
                                       .projectType
-                                      ?.cycles?[deliveryInterventionstate.cycle - 1]
+                                      ?.cycles?[
+                                          deliveryInterventionstate.cycle - 1]
                                       .deliveries
                                       ?.length) ??
                                   0
@@ -141,7 +143,8 @@ class _DeliverInterventionPageState
                                   ?.cycles?[deliveryInterventionstate.cycle == 0
                                       ? deliveryInterventionstate.cycle
                                       : deliveryInterventionstate.cycle - 1]
-                                  .deliveries?[deliveryInterventionstate.dose - 1]
+                                  .deliveries?[
+                                      deliveryInterventionstate.dose - 1]
                                   .deliveryStrategy)
                               : DeliverStrategyType.direct.toValue();
 
@@ -168,272 +171,280 @@ class _DeliverInterventionPageState
                                     builder: (context, form, child) {
                                       return ScrollableContent(
                                         enableFixedButton: true,
-                                    footer: BlocBuilder<DeliverInterventionBloc,
+                                        footer: BlocBuilder<
+                                            DeliverInterventionBloc,
                                             DeliverInterventionState>(
                                           builder: (context, state) {
-                                        return DigitCard(
-                                          margin: const EdgeInsets.fromLTRB(
-                                              0, kPadding, 0, 0),
-                                          padding: const EdgeInsets.fromLTRB(
-                                              kPadding, 0, kPadding, 0),
-                                                child: DigitElevatedButton(
-                                                  onPressed: () async {
-                                                    if (((form.control(
-                                                      _resourceDeliveredKey,
-                                                    ) as FormArray)
-                                                                .value
-                                                            as List<
-                                                                ProductVariantModel?>)
-                                                        .any((ele) =>
-                                                            ele?.productId ==
-                                                            null)) {
-                                                      await DigitToast.show(
-                                                        context,
-                                                        options: DigitToastOptions(
-                                                          localizations.translate(i18
-                                                              .deliverIntervention
-                                                              .resourceDeliveredValidation),
-                                                          true,
-                                                          theme,
-                                                        ),
-                                                      );
-                                                    } else if (doseAdministered &&
+                                            return DigitCard(
+                                              margin: const EdgeInsets.fromLTRB(
+                                                  0, kPadding, 0, 0),
+                                              padding:
+                                                  const EdgeInsets.fromLTRB(
+                                                      kPadding, 0, kPadding, 0),
+                                              child: DigitElevatedButton(
+                                                onPressed: () async {
+                                                  if (((form.control(
+                                                    _resourceDeliveredKey,
+                                                  ) as FormArray)
+                                                              .value
+                                                          as List<
+                                                              ProductVariantModel?>)
+                                                      .any((ele) =>
+                                                          ele?.productId ==
+                                                          null)) {
+                                                    await DigitToast.show(
+                                                      context,
+                                                      options:
+                                                          DigitToastOptions(
+                                                        localizations.translate(i18
+                                                            .deliverIntervention
+                                                            .resourceDeliveredValidation),
+                                                        true,
+                                                        theme,
+                                                      ),
+                                                    );
+                                                  } else if (doseAdministered &&
+                                                      form
+                                                              .control(
+                                                                _deliveryCommentKey,
+                                                              )
+                                                              .value ==
+                                                          null) {
+                                                    await DigitToast.show(
+                                                      context,
+                                                      options:
+                                                          DigitToastOptions(
+                                                        localizations.translate(i18
+                                                            .deliverIntervention
+                                                            .deliveryCommentRequired),
+                                                        true,
+                                                        theme,
+                                                      ),
+                                                    );
+                                                  } else {
+                                                    final lat =
+                                                        locationState.latitude;
+                                                    final long =
+                                                        locationState.longitude;
+                                                    bool isReferral = form
+                                                                .control(
+                                                                  _deliveryCommentKey,
+                                                                )
+                                                                .value !=
+                                                            null &&
                                                         form
                                                                 .control(
                                                                   _deliveryCommentKey,
                                                                 )
                                                                 .value ==
-                                                            null) {
-                                                      await DigitToast.show(
-                                                        context,
-                                                        options: DigitToastOptions(
-                                                          localizations.translate(i18
-                                                              .deliverIntervention
-                                                              .deliveryCommentRequired),
-                                                          true,
-                                                          theme,
-                                                        ),
-                                                      );
-                                                    } else {
-                                                        final lat =
-                                                            locationState
-                                                                      .latitude;
-                                                        final long =
-                                                              locationState
-                                                                      .longitude;
-                                                      bool isReferral = form
-                                                                  .control(
-                                                                    _deliveryCommentKey,
-                                                                  )
-                                                                  .value !=
-                                                              null &&
-                                                          form
-                                                                  .control(
-                                                                    _deliveryCommentKey,
-                                                                  )
-                                                                  .value ==
-                                                              "ADMINISTRATION_NOT_SUCCESSFUL" &&
-                                                          doseAdministered;
+                                                            "ADMINISTRATION_NOT_SUCCESSFUL" &&
+                                                        doseAdministered;
 
-                                                      String? wastedCount =
-                                                          (((form.control(_quantityWastedKey)
-                                                                      as FormArray)
-                                                                  .value)?[0])
-                                                              .toString();
+                                                    String? wastedCount =
+                                                        (((form.control(_quantityWastedKey)
+                                                                    as FormArray)
+                                                                .value)?[0])
+                                                            .toString();
 
-                                                      final shouldSubmit =
-                                                          await DigitDialog.show<
-                                                              bool>(
-                                                        context,
-                                                        options: DigitDialogOptions(
-                                                          titleText: localizations
-                                                              .translate(
-                                                            isReferral
-                                                                ? i18
-                                                                    .deliverIntervention
-                                                                    .referDialogTitle
-                                                                : (doseAdministered &&
-                                                                        wastedCount
-                                                                            .isNotEmpty &&
-                                                                        wastedCount !=
-                                                                            'null')
-                                                                    ? i18
-                                                                        .deliverIntervention
-                                                                        .wastedDialogTitle
-                                                                    : i18
-                                                                        .deliverIntervention
-                                                                        .dialogTitle,
-                                                          ),
-                                                          contentText: localizations
-                                                              .translate(
-                                                            isReferral
-                                                                ? i18
-                                                                    .deliverIntervention
-                                                                    .referDialogContent
-                                                                : (doseAdministered &&
-                                                                        wastedCount
-                                                                            .isNotEmpty &&
-                                                                        wastedCount !=
-                                                                            'null')
-                                                                    ? i18
-                                                                        .deliverIntervention
-                                                                        .wastedDialogContent
-                                                                    : i18
-                                                                        .deliverIntervention
-                                                                        .dialogContent,
-                                                          ),
-                                                          primaryAction:
-                                                              DigitDialogActions(
-                                                            label: localizations
-                                                                .translate(
-                                                              isReferral
+                                                    final shouldSubmit =
+                                                        await DigitDialog.show<
+                                                            bool>(
+                                                      context,
+                                                      options:
+                                                          DigitDialogOptions(
+                                                        titleText: localizations
+                                                            .translate(
+                                                          isReferral
+                                                              ? i18
+                                                                  .deliverIntervention
+                                                                  .referDialogTitle
+                                                              : (doseAdministered &&
+                                                                      wastedCount
+                                                                          .isNotEmpty &&
+                                                                      wastedCount !=
+                                                                          'null')
                                                                   ? i18
                                                                       .deliverIntervention
-                                                                      .referDialogSubmit
-                                                                  : i18.common
-                                                                      .coreCommonSubmit,
-                                                            ),
-                                                            action: (ctx) {
-                                                              Navigator.of(
-                                                                context,
-                                                                rootNavigator: true,
-                                                              ).pop(true);
-                                                            },
-                                                          ),
-                                                          secondaryAction:
-                                                              DigitDialogActions(
-                                                            label: localizations
-                                                                .translate(
-                                                              i18.common
-                                                                  .coreCommonCancel,
-                                                            ),
-                                                            action: (context) =>
-                                                                Navigator.of(
-                                                              context,
-                                                              rootNavigator: true,
-                                                            ).pop(false),
-                                                          ),
+                                                                      .wastedDialogTitle
+                                                                  : i18
+                                                                      .deliverIntervention
+                                                                      .dialogTitle,
                                                         ),
-                                                      );
-
-                                                      if (shouldSubmit ?? false) {
-                                                        if (context.mounted) {
-                                                          context.router
-                                                              .popUntilRouteWithName(
-                                                            BeneficiaryWrapperRoute
-                                                                .name,
-                                                          );
-
-                                                          if (isReferral) {
-                                                            if (Navigator.canPop(
+                                                        contentText:
+                                                            localizations
+                                                                .translate(
+                                                          isReferral
+                                                              ? i18
+                                                                  .deliverIntervention
+                                                                  .referDialogContent
+                                                              : (doseAdministered &&
+                                                                      wastedCount
+                                                                          .isNotEmpty &&
+                                                                      wastedCount !=
+                                                                          'null')
+                                                                  ? i18
+                                                                      .deliverIntervention
+                                                                      .wastedDialogContent
+                                                                  : i18
+                                                                      .deliverIntervention
+                                                                      .dialogContent,
+                                                        ),
+                                                        primaryAction:
+                                                            DigitDialogActions(
+                                                          label: localizations
+                                                              .translate(
+                                                            isReferral
+                                                                ? i18
+                                                                    .deliverIntervention
+                                                                    .referDialogSubmit
+                                                                : i18.common
+                                                                    .coreCommonSubmit,
+                                                          ),
+                                                          action: (ctx) {
+                                                            Navigator.of(
                                                               context,
-                                                            )) {
+                                                              rootNavigator:
+                                                                  true,
+                                                            ).pop(true);
+                                                          },
+                                                        ),
+                                                        secondaryAction:
+                                                            DigitDialogActions(
+                                                          label: localizations
+                                                              .translate(
+                                                            i18.common
+                                                                .coreCommonCancel,
+                                                          ),
+                                                          action: (context) =>
                                                               Navigator.of(
-                                                                context,
-                                                                rootNavigator: true,
-                                                              ).pop(false);
-                                                            }
+                                                            context,
+                                                            rootNavigator: true,
+                                                          ).pop(false),
+                                                        ),
+                                                      ),
+                                                    );
 
-                                                            await context.router
-                                                                .push(
-                                                              ReferBeneficiaryRoute(
-                                                                projectBeneficiaryClientRefId:
-                                                                    projectBeneficiaryClientReferenceId ??
-                                                                        '',
-                                                                individual:
-                                                                    selectedIndividual!,
-                                                                isReadministrationUnSuccessful:
-                                                                    true,
-                                                                quantityWasted:
-                                                                    (((form.control(_quantityWastedKey)
-                                                                                as FormArray)
-                                                                            .value)?[0])
-                                                                        .toString(),
-                                                                productVariantId:
-                                                                    ((form.control(_resourceDeliveredKey)
-                                                                                    as FormArray)
-                                                                                .value
-                                                                            as List<
-                                                                                ProductVariantModel?>)
-                                                                        .first
-                                                                        ?.id,
+                                                    if (shouldSubmit ?? false) {
+                                                      if (context.mounted) {
+                                                        context.router
+                                                            .popUntilRouteWithName(
+                                                          BeneficiaryWrapperRoute
+                                                              .name,
+                                                        );
+
+                                                        if (isReferral) {
+                                                          if (Navigator.canPop(
+                                                            context,
+                                                          )) {
+                                                            Navigator.of(
+                                                              context,
+                                                              rootNavigator:
+                                                                  true,
+                                                            ).pop(false);
+                                                          }
+
+                                                          await context.router
+                                                              .push(
+                                                            ReferBeneficiaryRoute(
+                                                              projectBeneficiaryClientRefId:
+                                                                  projectBeneficiaryClientReferenceId ??
+                                                                      '',
+                                                              individual:
+                                                                  selectedIndividual!,
+                                                              isReadministrationUnSuccessful:
+                                                                  true,
+                                                              quantityWasted:
+                                                                  (((form.control(_quantityWastedKey)
+                                                                              as FormArray)
+                                                                          .value)?[0])
+                                                                      .toString(),
+                                                              productVariantId:
+                                                                  ((form.control(_resourceDeliveredKey) as FormArray)
+                                                                              .value
+                                                                          as List<
+                                                                              ProductVariantModel?>)
+                                                                      .first
+                                                                      ?.id,
+                                                            ),
+                                                          );
+                                                        } else {
+                                                          context
+                                                              .read<
+                                                                  DeliverInterventionBloc>()
+                                                              .add(
+                                                                DeliverInterventionSubmitEvent(
+                                                                  [
+                                                                    _getTaskModel(
+                                                                      context,
+                                                                      form:
+                                                                          form,
+                                                                      oldTask:
+                                                                          null,
+                                                                      projectBeneficiaryClientReferenceId: projectBeneficiary
+                                                                          .first
+                                                                          .clientReferenceId,
+                                                                      dose: deliveryInterventionstate
+                                                                          .dose,
+                                                                      cycle: deliveryInterventionstate
+                                                                          .cycle,
+                                                                      deliveryStrategy:
+                                                                          getDeliveryStrategy,
+                                                                      address: householdMemberWrapper
+                                                                          .members
+                                                                          .first
+                                                                          .address
+                                                                          ?.first,
+                                                                      latitude:
+                                                                          lat,
+                                                                      longitude:
+                                                                          long,
+                                                                    ),
+                                                                  ],
+                                                                  false,
+                                                                  context
+                                                                      .boundary,
+                                                                ),
+                                                              );
+
+                                                          if (state.futureDeliveries !=
+                                                                  null &&
+                                                              state
+                                                                  .futureDeliveries!
+                                                                  .isNotEmpty &&
+                                                              projectState
+                                                                      .projectType
+                                                                      ?.cycles
+                                                                      ?.isNotEmpty ==
+                                                                  true) {
+                                                            context.router.push(
+                                                              SplashAcknowledgementRoute(
+                                                                enableBackToSearch:
+                                                                    false,
                                                               ),
                                                             );
                                                           } else {
-                                                            context
-                                                                .read<
-                                                                    DeliverInterventionBloc>()
-                                                                .add(
-                                                                  DeliverInterventionSubmitEvent(
-                                                                    [
-                                                                      _getTaskModel(
-                                                                        context,
-                                                                        form: form,
-                                                                        oldTask:
-                                                                            null,
-                                                                        projectBeneficiaryClientReferenceId:
-                                                                            projectBeneficiary
-                                                                                .first
-                                                                                .clientReferenceId,
-                                                                        dose: deliveryInterventionstate
-                                                                            .dose,
-                                                                        cycle: deliveryInterventionstate
-                                                                            .cycle,
-                                                                        deliveryStrategy:
-                                                                            getDeliveryStrategy,
-                                                                        address: householdMemberWrapper
-                                                                            .members
-                                                                            .first
-                                                                            .address
-                                                                            ?.first,
-                                                                        latitude: lat,
-                                                                        longitude : long,
-                                                                      ),
-                                                                    ],
-                                                                    false,
-                                                                    context
-                                                                        .boundary,
-                                                                  ),
-                                                                );
-
-                                                            if (state.futureDeliveries !=
-                                                                    null &&
-                                                                state
-                                                                    .futureDeliveries!
-                                                                    .isNotEmpty &&
-                                                                projectState
-                                                                        .projectType
-                                                                        ?.cycles
-                                                                        ?.isNotEmpty ==
-                                                                    true) {
-                                                              context.router.push(
-                                                                SplashAcknowledgementRoute(
-                                                                  enableBackToSearch:
-                                                                      false,
-                                                                ),
-                                                              );
-                                                            } else {
-                                                              context.router.push(
-                                                                SplashAcknowledgementRoute(
-                                                                  enableBackToSearch:
-                                                                      true,
-                                                                ),
-                                                              );
-                                                            }
+                                                            context.router.push(
+                                                              SplashAcknowledgementRoute(
+                                                                enableBackToSearch:
+                                                                    true,
+                                                              ),
+                                                            );
                                                           }
                                                         }
                                                       }
                                                     }
-                                                  },
-                                                  child: Center(
-                                                    child: Text(
-                                                      localizations.translate(
-                                                        i18.common.coreCommonSubmit,
-                                                      ),
+                                                  }
+                                                },
+                                                child: Center(
+                                                  child: Text(
+                                                    localizations.translate(
+                                                      i18.common
+                                                          .coreCommonSubmit,
                                                     ),
                                                   ),
                                                 ),
-                                              );
+                                              ),
+                                            );
                                           },
                                         ),
                                         header: const Column(children: [
@@ -448,15 +459,16 @@ class _DeliverInterventionPageState
                                                 child: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
-                                                  mainAxisSize: MainAxisSize.min,
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
                                                   children: [
                                                     Text(
                                                       localizations.translate(
                                                         i18.deliverIntervention
                                                             .deliverInterventionLabel,
                                                       ),
-                                                      style: theme
-                                                          .textTheme.displayMedium,
+                                                      style: theme.textTheme
+                                                          .displayMedium,
                                                     ),
                                                     DigitTextFormField(
                                                       readOnly: true,
@@ -487,25 +499,26 @@ class _DeliverInterventionPageState
                                                       isEnabled: false,
                                                       formControlName:
                                                           _dateOfAdministrationKey,
-                                                      label:
-                                                          localizations.translate(
+                                                      label: localizations
+                                                          .translate(
                                                         i18.householdDetails
                                                             .dateOfRegistrationLabel,
                                                       ),
-                                                      confirmText:
-                                                          localizations.translate(
+                                                      confirmText: localizations
+                                                          .translate(
                                                         i18.common.coreCommonOk,
                                                       ),
-                                                      cancelText:
-                                                          localizations.translate(
-                                                        i18.common.coreCommonCancel,
+                                                      cancelText: localizations
+                                                          .translate(
+                                                        i18.common
+                                                            .coreCommonCancel,
                                                       ),
                                                       isRequired: false,
                                                       padding:
                                                           const EdgeInsets.only(
                                                         top: kPadding,
                                                       ),
-                                                ),
+                                                    ),
                                                   ],
                                                 ),
                                               ),
@@ -513,15 +526,16 @@ class _DeliverInterventionPageState
                                                 child: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
-                                                  mainAxisSize: MainAxisSize.min,
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
                                                   children: [
                                                     Text(
                                                       localizations.translate(
                                                         i18.deliverIntervention
                                                             .deliverInterventionResourceLabel,
                                                       ),
-                                                      style: theme
-                                                      .textTheme.headlineLarge,
+                                                      style: theme.textTheme
+                                                          .headlineLarge,
                                                     ),
                                                     ..._controllers
                                                         .map((e) =>
@@ -529,7 +543,8 @@ class _DeliverInterventionPageState
                                                               form: form,
                                                               cardIndex:
                                                                   _controllers
-                                                                      .indexOf(e),
+                                                                      .indexOf(
+                                                                          e),
                                                               totalItems:
                                                                   _controllers
                                                                       .length,
@@ -537,7 +552,8 @@ class _DeliverInterventionPageState
                                                                   doseAdministered,
                                                               checkDoseAdministration:
                                                                   checkDoseAdministration,
-                                                              onDelete: (index) {
+                                                              onDelete:
+                                                                  (index) {
                                                                 (form.control(
                                                                   _resourceDeliveredKey,
                                                                 ) as FormArray)
@@ -573,20 +589,22 @@ class _DeliverInterventionPageState
                                                 child: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
-                                                  mainAxisSize: MainAxisSize.min,
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
                                                   children: [
                                                     Text(
                                                       localizations.translate(
                                                         i18.deliverIntervention
                                                             .deliveryCommentLabel,
                                                       ),
-                                                      style: theme
-                                                      .textTheme.headlineLarge,
+                                                      style: theme.textTheme
+                                                          .headlineLarge,
                                                     ),
                                                     BlocBuilder<
                                                         AppInitializationBloc,
                                                         AppInitializationState>(
-                                                      builder: (context, state) {
+                                                      builder:
+                                                          (context, state) {
                                                         if (state
                                                             is! AppInitialized) {
                                                           return const Offstage();
@@ -608,7 +626,8 @@ class _DeliverInterventionPageState
                                                               !doseAdministered,
                                                           valueMapper: (value) =>
                                                               localizations
-                                                                  .translate(value),
+                                                                  .translate(
+                                                                      value),
                                                           initialValue:
                                                               deliveryCommentOptions
                                                                   .firstOrNull
@@ -760,14 +779,14 @@ class _DeliverInterventionPageState
             AdditionalFieldsType.deliveryStrategy.toValue(),
             deliveryStrategy,
           ),
-          if(latitude != null)
+          if (latitude != null)
             AdditionalField(
               AdditionalFieldsType.latitude.toValue(),
               latitude,
             ),
-          if(longitude != null)
+          if (longitude != null)
             AdditionalField(
-              AdditionalFieldsType.longitude.toValue(), 
+              AdditionalFieldsType.longitude.toValue(),
               longitude,
             ),
         ],

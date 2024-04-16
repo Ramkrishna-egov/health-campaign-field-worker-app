@@ -23,7 +23,6 @@ class FacilitySelectionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final theme = Theme.of(context);
     final BorderSide borderSide = BorderSide(
       color: theme.colorScheme.outline,
@@ -56,15 +55,17 @@ class FacilitySelectionPage extends StatelessWidget {
                 ),
                 slivers: [
                   SliverToBoxAdapter(
-                   child: Padding(padding: const EdgeInsets.all(16),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
                       child: DigitTextFormField(
                         label: localizations.translate(
-                          i18.stockReconciliationDetails.facilityNameCommunitySupervisor,
-                      ), 
-                      formControlName: _facilityName,
+                          i18.stockReconciliationDetails
+                              .facilityNameCommunitySupervisor,
                         ),
+                        formControlName: _facilityName,
                       ),
                     ),
+                  ),
                   SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {

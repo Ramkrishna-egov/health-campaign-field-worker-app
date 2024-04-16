@@ -81,50 +81,50 @@ class _ComplaintsLocationPageState
                     onPressed: () {
                       form.markAllAsTouched();
 
-                        if (!form.valid) return;
-                        FocusManager.instance.primaryFocus?.unfocus();
+                      if (!form.valid) return;
+                      FocusManager.instance.primaryFocus?.unfocus();
 
-                        final addressLine1 =
-                            form.control(_addressLine1Key).value as String?;
-                        final addressLine2 =
-                            form.control(_addressLine2Key).value as String?;
-                        final landmark =
-                            form.control(_landmarkKey).value as String?;
-                        final postalCode =
-                            form.control(_postalCodeKey).value as String?;
+                      final addressLine1 =
+                          form.control(_addressLine1Key).value as String?;
+                      final addressLine2 =
+                          form.control(_addressLine2Key).value as String?;
+                      final landmark =
+                          form.control(_landmarkKey).value as String?;
+                      final postalCode =
+                          form.control(_postalCodeKey).value as String?;
 
-                        state.whenOrNull(
-                          create: (
-                            loading,
-                            complaintType,
-                            _,
-                            addressModel,
-                            complaintsDetailsModel,
-                          ) {
-                            bloc.add(ComplaintsRegistrationEvent.saveAddress(
-                              addressModel: PgrAddressModel(
-                                buildingName: addressLine1,
-                                street: addressLine2,
-                                landmark: landmark,
-                                pincode: postalCode,
-                                geoLocation: GeoLocation(
-                                  latitude: form.control(_latKey).value,
-                                  longitude: form.control(_lngKey).value,
-                                ),
+                      state.whenOrNull(
+                        create: (
+                          loading,
+                          complaintType,
+                          _,
+                          addressModel,
+                          complaintsDetailsModel,
+                        ) {
+                          bloc.add(ComplaintsRegistrationEvent.saveAddress(
+                            addressModel: PgrAddressModel(
+                              buildingName: addressLine1,
+                              street: addressLine2,
+                              landmark: landmark,
+                              pincode: postalCode,
+                              geoLocation: GeoLocation(
+                                latitude: form.control(_latKey).value,
+                                longitude: form.control(_lngKey).value,
                               ),
-                            ));
-                          },
-                        );
+                            ),
+                          ));
+                        },
+                      );
 
-                        router.push(ComplaintsDetailsRoute());
-                      },
-                      child: Center(
-                        child: Text(
-                          localizations.translate(i18.complaints.actionLabel),
-                        ),
+                      router.push(ComplaintsDetailsRoute());
+                    },
+                    child: Center(
+                      child: Text(
+                        localizations.translate(i18.complaints.actionLabel),
                       ),
                     ),
                   ),
+                ),
                 children: [
                   DigitCard(
                     child: Column(

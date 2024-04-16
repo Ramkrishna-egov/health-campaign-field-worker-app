@@ -81,180 +81,177 @@ class _DoseAdministeredPageState extends LocalizedState<DoseAdministeredPage> {
               footer: DigitCard(
                 margin: const EdgeInsets.fromLTRB(0, kPadding, 0, 0),
                 padding: const EdgeInsets.fromLTRB(kPadding, 0, kPadding, 0),
-                  child: ValueListenableBuilder(
-                    valueListenable: clickedStatus,
-                    builder: (context, bool isClicked, _) {
-                      return DigitElevatedButton(
-                        onPressed: isClicked
-                            ? null
-                            : () {
-                                form.markAllAsTouched();
+                child: ValueListenableBuilder(
+                  valueListenable: clickedStatus,
+                  builder: (context, bool isClicked, _) {
+                    return DigitElevatedButton(
+                      onPressed: isClicked
+                          ? null
+                          : () {
+                              form.markAllAsTouched();
 
-                                if (!form.valid)
-                                  return;
-                                else {
-                                  clickedStatus.value = true;
-                                  final bloc = context
-                                      .read<DeliverInterventionBloc>()
-                                      .state;
-                                  final event =
-                                      context.read<DeliverInterventionBloc>();
+                              if (!form.valid)
+                                return;
+                              else {
+                                clickedStatus.value = true;
+                                final bloc = context
+                                    .read<DeliverInterventionBloc>()
+                                    .state;
+                                final event =
+                                    context.read<DeliverInterventionBloc>();
 
-                                  if (doseAdministered && context.mounted) {
-                                    // Iterate through future deliveries
-                                    List<TaskModel> completedTask = [];
-                                    for (var e in bloc.futureDeliveries!) {
-                                      int doseIndex = e.id;
-                                      final clientReferenceId =
-                                          IdGen.i.identifier;
-                                      final address = bloc.oldTask?.address;
-                                      // Create and dispatch a DeliverInterventionSubmitEvent with a new TaskModel
-                                      completedTask.add(
-                                        TaskModel(
-                                          projectId: context.projectId,
-                                          address: address?.copyWith(
-                                            relatedClientReferenceId:
-                                                clientReferenceId,
-                                            id: null,
-                                          ),
-                                          status: Status.delivered.toValue(),
-                                          clientReferenceId: clientReferenceId,
-                                          projectBeneficiaryClientReferenceId: bloc
-                                              .oldTask
-                                              ?.projectBeneficiaryClientReferenceId,
-                                          tenantId:
-                                              envConfig.variables.tenantId,
-                                          rowVersion: 1,
-                                          auditDetails: AuditDetails(
-                                            createdBy: context.loggedInUserUuid,
-                                            createdTime: context
-                                                .millisecondsSinceEpoch(),
-                                          ),
-                                          clientAuditDetails:
-                                              ClientAuditDetails(
-                                            createdBy: context.loggedInUserUuid,
-                                            createdTime: context
-                                                .millisecondsSinceEpoch(),
-                                          ),
-                                          resources: fetchProductVariant(
-                                            e,
-                                            overViewBloc.selectedIndividual,
-                                          )
-                                              ?.productVariants
-                                              ?.map((variant) =>
-                                                  TaskResourceModel(
-                                                    clientReferenceId:
-                                                        IdGen.i.identifier,
-                                                    tenantId: envConfig
-                                                        .variables.tenantId,
-                                                    taskclientReferenceId:
-                                                        clientReferenceId,
-                                                    quantity: variant.quantity
-                                                        .toString(),
-                                                    productVariantId: variant
-                                                        .productVariantId,
-                                                    isDelivered: true,
-                                                    auditDetails: AuditDetails(
-                                                      createdBy: context
-                                                          .loggedInUserUuid,
-                                                      createdTime: context
-                                                          .millisecondsSinceEpoch(),
-                                                    ),
-                                                    clientAuditDetails:
-                                                        ClientAuditDetails(
-                                                      createdBy: context
-                                                          .loggedInUserUuid,
-                                                      createdTime: context
-                                                          .millisecondsSinceEpoch(),
-                                                    ),
-                                                  ))
-                                              .toList(),
-                                          additionalFields:
-                                              TaskAdditionalFields(
-                                            version: 1,
-                                            fields: [
-                                              AdditionalField(
-                                                AdditionalFieldsType
-                                                    .dateOfDelivery
-                                                    .toValue(),
-                                                DateTime.now()
-                                                    .millisecondsSinceEpoch
-                                                    .toString(),
-                                              ),
-                                              AdditionalField(
-                                                AdditionalFieldsType
-                                                    .dateOfAdministration
-                                                    .toValue(),
-                                                DateTime.now()
-                                                    .millisecondsSinceEpoch
-                                                    .toString(),
-                                              ),
-                                              AdditionalField(
-                                                AdditionalFieldsType
-                                                    .dateOfVerification
-                                                    .toValue(),
-                                                DateTime.now()
-                                                    .millisecondsSinceEpoch
-                                                    .toString(),
-                                              ),
-                                              AdditionalField(
-                                                AdditionalFieldsType.cycleIndex
-                                                    .toValue(),
-                                                "0${bloc.cycle}",
-                                              ),
-                                              AdditionalField(
-                                                AdditionalFieldsType.doseIndex
-                                                    .toValue(),
-                                                "0$doseIndex",
-                                              ),
-                                              AdditionalField(
-                                                AdditionalFieldsType
-                                                    .deliveryStrategy
-                                                    .toValue(),
-                                                e.deliveryStrategy,
-                                              ),
-                                            ],
-                                          ),
+                                if (doseAdministered && context.mounted) {
+                                  // Iterate through future deliveries
+                                  List<TaskModel> completedTask = [];
+                                  for (var e in bloc.futureDeliveries!) {
+                                    int doseIndex = e.id;
+                                    final clientReferenceId =
+                                        IdGen.i.identifier;
+                                    final address = bloc.oldTask?.address;
+                                    // Create and dispatch a DeliverInterventionSubmitEvent with a new TaskModel
+                                    completedTask.add(
+                                      TaskModel(
+                                        projectId: context.projectId,
+                                        address: address?.copyWith(
+                                          relatedClientReferenceId:
+                                              clientReferenceId,
+                                          id: null,
                                         ),
-                                      );
-                                    }
-
-                                    event.add(DeliverInterventionSubmitEvent(
-                                      completedTask,
-                                      false,
-                                      context.boundary,
-                                    ));
+                                        status: Status.delivered.toValue(),
+                                        clientReferenceId: clientReferenceId,
+                                        projectBeneficiaryClientReferenceId: bloc
+                                            .oldTask
+                                            ?.projectBeneficiaryClientReferenceId,
+                                        tenantId: envConfig.variables.tenantId,
+                                        rowVersion: 1,
+                                        auditDetails: AuditDetails(
+                                          createdBy: context.loggedInUserUuid,
+                                          createdTime:
+                                              context.millisecondsSinceEpoch(),
+                                        ),
+                                        clientAuditDetails: ClientAuditDetails(
+                                          createdBy: context.loggedInUserUuid,
+                                          createdTime:
+                                              context.millisecondsSinceEpoch(),
+                                        ),
+                                        resources: fetchProductVariant(
+                                          e,
+                                          overViewBloc.selectedIndividual,
+                                        )
+                                            ?.productVariants
+                                            ?.map((variant) =>
+                                                TaskResourceModel(
+                                                  clientReferenceId:
+                                                      IdGen.i.identifier,
+                                                  tenantId: envConfig
+                                                      .variables.tenantId,
+                                                  taskclientReferenceId:
+                                                      clientReferenceId,
+                                                  quantity: variant.quantity
+                                                      .toString(),
+                                                  productVariantId:
+                                                      variant.productVariantId,
+                                                  isDelivered: true,
+                                                  auditDetails: AuditDetails(
+                                                    createdBy: context
+                                                        .loggedInUserUuid,
+                                                    createdTime: context
+                                                        .millisecondsSinceEpoch(),
+                                                  ),
+                                                  clientAuditDetails:
+                                                      ClientAuditDetails(
+                                                    createdBy: context
+                                                        .loggedInUserUuid,
+                                                    createdTime: context
+                                                        .millisecondsSinceEpoch(),
+                                                  ),
+                                                ))
+                                            .toList(),
+                                        additionalFields: TaskAdditionalFields(
+                                          version: 1,
+                                          fields: [
+                                            AdditionalField(
+                                              AdditionalFieldsType
+                                                  .dateOfDelivery
+                                                  .toValue(),
+                                              DateTime.now()
+                                                  .millisecondsSinceEpoch
+                                                  .toString(),
+                                            ),
+                                            AdditionalField(
+                                              AdditionalFieldsType
+                                                  .dateOfAdministration
+                                                  .toValue(),
+                                              DateTime.now()
+                                                  .millisecondsSinceEpoch
+                                                  .toString(),
+                                            ),
+                                            AdditionalField(
+                                              AdditionalFieldsType
+                                                  .dateOfVerification
+                                                  .toValue(),
+                                              DateTime.now()
+                                                  .millisecondsSinceEpoch
+                                                  .toString(),
+                                            ),
+                                            AdditionalField(
+                                              AdditionalFieldsType.cycleIndex
+                                                  .toValue(),
+                                              "0${bloc.cycle}",
+                                            ),
+                                            AdditionalField(
+                                              AdditionalFieldsType.doseIndex
+                                                  .toValue(),
+                                              "0$doseIndex",
+                                            ),
+                                            AdditionalField(
+                                              AdditionalFieldsType
+                                                  .deliveryStrategy
+                                                  .toValue(),
+                                              e.deliveryStrategy,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    );
                                   }
 
-                                  final reloadState =
-                                      context.read<HouseholdOverviewBloc>();
-
-                                  Future.delayed(
-                                    const Duration(milliseconds: 1000),
-                                    () {
-                                      reloadState
-                                          .add(HouseholdOverviewReloadEvent(
-                                        projectId: context.projectId,
-                                        projectBeneficiaryType:
-                                            context.beneficiaryType,
-                                      ));
-                                    },
-                                  ).then((value) => context.router.popAndPush(
-                                        HouseholdAcknowledgementRoute(
-                                          enableViewHousehold: true,
-                                        ),
-                                      ));
+                                  event.add(DeliverInterventionSubmitEvent(
+                                    completedTask,
+                                    false,
+                                    context.boundary,
+                                  ));
                                 }
-                              },
-                        child: Center(
-                          child: Text(
-                            localizations.translate(i18.common.coreCommonNext),
-                          ),
+
+                                final reloadState =
+                                    context.read<HouseholdOverviewBloc>();
+
+                                Future.delayed(
+                                  const Duration(milliseconds: 1000),
+                                  () {
+                                    reloadState
+                                        .add(HouseholdOverviewReloadEvent(
+                                      projectId: context.projectId,
+                                      projectBeneficiaryType:
+                                          context.beneficiaryType,
+                                    ));
+                                  },
+                                ).then((value) => context.router.popAndPush(
+                                      HouseholdAcknowledgementRoute(
+                                        enableViewHousehold: true,
+                                      ),
+                                    ));
+                              }
+                            },
+                      child: Center(
+                        child: Text(
+                          localizations.translate(i18.common.coreCommonNext),
                         ),
-                      );
-                    },
-                  ),
+                      ),
+                    );
+                  },
                 ),
+              ),
               children: [
                 DigitCard(
                   child: Column(
@@ -318,12 +315,12 @@ class _DoseAdministeredPageState extends LocalizedState<DoseAdministeredPage> {
                               return Column(
                                 children: [
                                   Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(
-                                          bottom: kPadding * 2,
-                                        ),
-                                        child: Text(
+                                    alignment: Alignment.centerLeft,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                        bottom: kPadding * 2,
+                                      ),
+                                      child: Text(
                                         localizations.translate(
                                           i18.beneficiaryDetails
                                               .resourcesTobeProvided,
@@ -349,7 +346,7 @@ class _DoseAdministeredPageState extends LocalizedState<DoseAdministeredPage> {
                                     //[TODO:: Need to parse <=age< as an Expression
                                   ),
                                   const Divider(
-                                        thickness: 2.0,
+                                    thickness: 2.0,
                                   ),
                                   DigitTable(
                                     headerList: headerListResource,

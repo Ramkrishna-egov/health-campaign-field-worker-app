@@ -52,9 +52,9 @@ class _ComplaintTypePageState extends LocalizedState<ComplaintTypePage> {
               ]),
               footer: SizedBox(
                 child: DigitCard(
-                margin: const EdgeInsets.fromLTRB(0, kPadding, 0, 0),
-                padding: const EdgeInsets.fromLTRB(kPadding, 0, kPadding, 0),                 
-                  child : DigitElevatedButton(
+                  margin: const EdgeInsets.fromLTRB(0, kPadding, 0, 0),
+                  padding: const EdgeInsets.fromLTRB(kPadding, 0, kPadding, 0),
+                  child: DigitElevatedButton(
                     onPressed: () async {
                       var complaintType = form.control(_complaintType).value;
                       var otherComplaintTypeValue =
@@ -104,8 +104,8 @@ class _ComplaintTypePageState extends LocalizedState<ComplaintTypePage> {
                       ),
                     ),
                   ),
+                ),
               ),
-            ),
               children: [
                 DigitCard(
                   child: Column(
@@ -118,7 +118,7 @@ class _ComplaintTypePageState extends LocalizedState<ComplaintTypePage> {
                           localizations.translate(
                             i18.complaints.complaintsTypeHeading,
                           ),
-                        style: theme.textTheme.displayMedium,
+                          style: theme.textTheme.displayMedium,
                         ),
                       ),
                       LabeledField(

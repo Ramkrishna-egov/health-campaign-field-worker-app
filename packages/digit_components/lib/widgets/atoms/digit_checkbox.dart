@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:digit_components/widgets/atoms/checkbox_icon.dart';
 
-
 /*A single checkbox component */
 class DigitCheckbox extends StatelessWidget {
   final bool value;
   final String label;
   final ValueChanged<bool?>? onChanged;
   final EdgeInsetsGeometry padding;
-
 
   // Constructor for the DigitCheckbox widget with required parameters
   const DigitCheckbox({

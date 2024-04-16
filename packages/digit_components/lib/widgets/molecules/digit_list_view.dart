@@ -23,7 +23,7 @@ class DigitListView extends StatelessWidget {
     return DigitCard(
       margin: const EdgeInsets.symmetric(
         vertical: kPadding,
-        horizontal: kPadding*2,
+        horizontal: kPadding * 2,
       ),
       onPressed: onPressed,
       child: Row(
@@ -39,7 +39,7 @@ class DigitListView extends StatelessWidget {
                     Icon(
                       prefixIcon,
                       color: theme.colorScheme.secondary,
-                      size: kPadding*3,
+                      size: kPadding * 3,
                     ),
                     const SizedBox(width: 12),
                     Expanded(

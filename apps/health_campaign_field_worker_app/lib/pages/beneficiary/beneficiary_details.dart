@@ -136,11 +136,19 @@ class _BeneficiaryDetailsPageState
 
                           return cycles != null && cycles.isNotEmpty
                               ? deliverState.hasCycleArrived
-                                ? DigitCard(
+                                  ? DigitCard(
                                       margin: const EdgeInsets.fromLTRB(
-                                          0, kPadding, 0, 0,),
+                                        0,
+                                        kPadding,
+                                        0,
+                                        0,
+                                      ),
                                       padding: const EdgeInsets.fromLTRB(
-                                          kPadding, 0, kPadding, 0,),
+                                        kPadding,
+                                        0,
+                                        kPadding,
+                                        0,
+                                      ),
                                       child: DigitElevatedButton(
                                         onPressed: () async {
                                           final selectedCycle =
@@ -199,7 +207,7 @@ class _BeneficiaryDetailsPageState
                                         },
                                         child: Center(
                                           child: Text(
-                                              '${localizations.translate(i18.deliverIntervention.recordCycle)} ${(deliverState.cycle == 0 ? (deliverState.cycle + 1) : deliverState.cycle).toString()} ${localizations.translate(i18.beneficiaryDetails.beneficiaryDeliveryText)} ${(deliverState.dose).toString()}',
+                                            '${localizations.translate(i18.deliverIntervention.recordCycle)} ${(deliverState.cycle == 0 ? (deliverState.cycle + 1) : deliverState.cycle).toString()} ${localizations.translate(i18.beneficiaryDetails.beneficiaryDeliveryText)} ${(deliverState.dose).toString()}',
                                           ),
                                         ),
                                       ),
@@ -208,7 +216,11 @@ class _BeneficiaryDetailsPageState
                               : DigitCard(
                                   margin: const EdgeInsets.only(top: kPadding),
                                   padding: const EdgeInsets.fromLTRB(
-                                      kPadding, 0, kPadding, 0,),
+                                    kPadding,
+                                    0,
+                                    kPadding,
+                                    0,
+                                  ),
                                   child: DigitElevatedButton(
                                     child: Center(
                                       child: Text(localizations.translate(i18
