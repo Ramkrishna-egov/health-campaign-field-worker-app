@@ -110,7 +110,7 @@ class MainApplicationState extends State<MainApplication>
             ],
             child: BlocBuilder<AppInitializationBloc, AppInitializationState>(
               builder: (context, appConfigState) {
-                const defaultLocale = Locale('pt', 'MZ');
+                const defaultLocale = Locale('en', 'NG');
 
                 return BlocBuilder<AuthBloc, AuthState>(
                   builder: (context, authState) {
@@ -118,7 +118,7 @@ class MainApplicationState extends State<MainApplication>
                       return const MaterialApp(
                         home: Scaffold(
                           body: Center(
-                            child: Text('Carregando'),
+                            child: Text('Loading'),
                           ),
                         ),
                       );

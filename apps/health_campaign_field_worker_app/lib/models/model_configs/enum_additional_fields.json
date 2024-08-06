@@ -63,7 +63,7 @@
     },
     {
       "name": "Latitude",
-      "value": "longitutde"
+      "value": "latitude"
     }
   ],
   "isEnum": true
