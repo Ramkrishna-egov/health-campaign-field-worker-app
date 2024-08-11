@@ -125,7 +125,8 @@ extension ContextUtilityExtensions on BuildContext {
           )
           .toList()
           .isNotEmpty;
-
+      // TODO remove this when downsync is required
+      return false;
       return isDownSyncEnabled;
     } catch (_) {
       return false;
