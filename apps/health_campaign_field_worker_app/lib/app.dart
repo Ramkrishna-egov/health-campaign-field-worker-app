@@ -127,7 +127,7 @@ class MainApplicationState extends State<MainApplication>
                     final appConfig = appConfigState.appConfiguration;
 
                     final localizationModulesList = appConfig.backendInterface;
-                    final firstLanguage = appConfig.languages?.first.value;
+                    final firstLanguage = 'en_NG';
                     final languages = appConfig.languages;
 
                     return MultiBlocProvider(

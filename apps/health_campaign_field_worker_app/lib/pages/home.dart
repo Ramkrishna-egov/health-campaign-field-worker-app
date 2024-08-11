@@ -369,9 +369,7 @@ class _HomePageState extends LocalizedState<HomePage> {
       ),
       i18.home.myCheckList: HomeItemCard(
         icon: Icons.menu_book,
-        label: context.isDistributor
-            ? i18.home.communityDistributorChecklist
-            : i18.home.myCheckList,
+        label: i18.home.myCheckList,
         onPressed: () => context.router.push(ChecklistWrapperRoute()),
       ),
       i18.home.fileComplaint: HomeItemCard(
