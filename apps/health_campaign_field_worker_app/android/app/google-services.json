@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:397617237644:android:7b211b726b058468f6b5a9",
+        "mobilesdk_app_id": "1:397617237644:android:3faa1b851b138a75f6b5a9",
         "android_client_info": {
-          "package_name": "org.egov.qa.smc"
+          "package_name": "org.egov.qa.ng"
         }
       },
       "oauth_client": [
@@ -43,9 +43,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:397617237644:android:6aedcd1aef3d8565f6b5a9",
+        "mobilesdk_app_id": "1:397617237644:android:0eed182f5d966127f6b5a9",
         "android_client_info": {
-          "package_name": "org.egov.training.smc"
+          "package_name": "org.egov.training.ng"
         }
       },
       "oauth_client": [
@@ -79,9 +79,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:397617237644:android:816d126813b37b48f6b5a9",
+        "mobilesdk_app_id": "1:397617237644:android:c07e9af3e599533ff6b5a9",
         "android_client_info": {
-          "package_name": "org.egov.salama.smc"
+          "package_name": "org.egov.ng"
         }
       },
       "oauth_client": [
