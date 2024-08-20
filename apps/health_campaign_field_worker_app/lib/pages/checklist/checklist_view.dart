@@ -131,6 +131,17 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
                           }
                         }
 
+                        // Request location from LocationBloc
+                        context
+                            .read<LocationBloc>()
+                            .add(const LocationEvent.load());
+
+                        // Wait for the location to be obtained
+                        final locationState =
+                            context.read<LocationBloc>().state;
+                        double? latitude = locationState.latitude;
+                        double? longitude = locationState.longitude;
+
                         final shouldSubmit = await DigitDialog.show(
                           context,
                           options: DigitDialogOptions(
@@ -149,64 +160,81 @@ class _ChecklistViewPageState extends LocalizedState<ChecklistViewPage> {
                                 List<ServiceAttributesModel> attributes = [];
                                 for (int i = 0; i < controller.length; i++) {
                                   final attribute = initialAttributes;
-                                  attributes.add(ServiceAttributesModel(
-                                    auditDetails: AuditDetails(
-                                      createdBy: context.loggedInUserUuid,
-                                      createdTime:
-                                          context.millisecondsSinceEpoch(),
+                                  attributes.add(
+                                    ServiceAttributesModel(
+                                      auditDetails: AuditDetails(
+                                        createdBy: context.loggedInUserUuid,
+                                        createdTime:
+                                            context.millisecondsSinceEpoch(),
+                                      ),
+                                      attributeCode: '${attribute?[i].code}',
+                                      dataType: attribute?[i].dataType,
+                                      clientReferenceId: IdGen.i.identifier,
+                                      referenceId: context
+                                                  .isHealthFacilitySupervisor &&
+                                              widget.referralClientRefId != null
+                                          ? widget.referralClientRefId
+                                          : referenceId,
+                                      value: attribute?[i].dataType !=
+                                              'SingleValueList'
+                                          ? controller[i]
+                                                  .text
+                                                  .toString()
+                                                  .trim()
+                                                  .isNotEmpty
+                                              ? controller[i].text.toString()
+                                              : (attribute?[i].dataType !=
+                                                      'Number'
+                                                  ? ''
+                                                  : '0')
+                                          : visibleChecklistIndexes.contains(i)
+                                              ? controller[i].text.toString()
+                                              : i18.checklist.notSelectedKey,
+                                      rowVersion: 1,
+                                      tenantId: attribute?[i].tenantId,
+                                      additionalDetails: context
+                                                  .isHealthFacilitySupervisor &&
+                                              widget.referralClientRefId != null
+                                          ? null
+                                          : ((attribute?[i].values?.length ==
+                                                          2 ||
+                                                      attribute?[i]
+                                                              .values
+                                                              ?.length ==
+                                                          3 ||
+                                                      attribute?[i]
+                                                              .values
+                                                              ?.length ==
+                                                          4) &&
+                                                  controller[i].text ==
+                                                      attribute?[i]
+                                                          .values?[1]
+                                                          .trim())
+                                              ? additionalController[i]
+                                                      .text
+                                                      .toString()
+                                                      .isEmpty
+                                                  ? null
+                                                  : additionalController[i]
+                                                      .text
+                                                      .toString()
+                                              : null,
+                                      additionalFields:
+                                          ServiceAttributesAdditionalFields(
+                                        version: 1,
+                                        fields: [
+                                          AdditionalField(
+                                            'latitude',
+                                            latitude,
+                                          ),
+                                          AdditionalField(
+                                            'longitude',
+                                            longitude,
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                    attributeCode: '${attribute?[i].code}',
-                                    dataType: attribute?[i].dataType,
-                                    clientReferenceId: IdGen.i.identifier,
-                                    referenceId: context
-                                                .isHealthFacilitySupervisor &&
-                                            widget.referralClientRefId != null
-                                        ? widget.referralClientRefId
-                                        : referenceId,
-                                    value: attribute?[i].dataType !=
-                                            'SingleValueList'
-                                        ? controller[i]
-                                                .text
-                                                .toString()
-                                                .trim()
-                                                .isNotEmpty
-                                            ? controller[i].text.toString()
-                                            : (attribute?[i].dataType !=
-                                                    'Number'
-                                                ? ''
-                                                : '0')
-                                        : visibleChecklistIndexes.contains(i)
-                                            ? controller[i].text.toString()
-                                            : i18.checklist.notSelectedKey,
-                                    rowVersion: 1,
-                                    tenantId: attribute?[i].tenantId,
-                                    additionalDetails: context
-                                                .isHealthFacilitySupervisor &&
-                                            widget.referralClientRefId != null
-                                        ? null
-                                        : ((attribute?[i].values?.length == 2 ||
-                                                    attribute?[i]
-                                                            .values
-                                                            ?.length ==
-                                                        3 ||
-                                                    attribute?[i]
-                                                            .values
-                                                            ?.length ==
-                                                        4) &&
-                                                controller[i].text ==
-                                                    attribute?[i]
-                                                        .values?[1]
-                                                        .trim())
-                                            ? additionalController[i]
-                                                    .text
-                                                    .toString()
-                                                    .isEmpty
-                                                ? null
-                                                : additionalController[i]
-                                                    .text
-                                                    .toString()
-                                            : null,
-                                  ));
+                                  );
                                 }
 
                                 context.read<ServiceBloc>().add(
